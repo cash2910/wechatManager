@@ -18,7 +18,7 @@
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "kartik-v/yii2-widget-select2": "^2.0",
+        "kartik-v/yii2-widget-select2": "2.0",
         "linslin/yii2-curl": "dev-master"
     },
     "require-dev": {

@@ -4,8 +4,8 @@ namespace backend\modules\Wechat\controllers;
 
 use yii;
 use yii\web\Controller;
-use yii\base\Module;
-use yii\base\Event;
+use common\models\WechatUsers;
+use yii\helpers\ArrayHelper;
 
 /**
  * Default controller for the `WeChat` module
@@ -68,37 +68,8 @@ class DefaultController extends Controller
             ]
         ]); */
       //  var_dump($ret);die();
-        $s = new myTest( "test" );
-        $s->init();
-        $eve = new Event();
-        $eve->sender = ( $vvv = new Wechat() );
-        $s->trigger("ttt",$eve)  ;
-        var_dump($vvv);
+
     }
 }
 
-class myTest extends Module{
-    
-    public function init(){
-        $this->on("ttt",[
-            new Hello(),'say'   
-        ]);
-    }
-    
-}
 
-class Hello{
-    
-    function say( $eve ){
-        var_dump( $eve->sender );
-        $eve->sender->setA("sdsadsadsa");
-     //   return "hello world!";
-    }
-}
-
-class Wechat{
-    public $sss = "ffff";
-    public function setA( $str ){
-        $this->sss = $str;
-    }
-}

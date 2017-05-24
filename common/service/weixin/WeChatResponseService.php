@@ -3,6 +3,7 @@ namespace common\service\weixin;
 
 use yii\base\Module;
 use yii\base\Exception;
+use service\users\UserService;
 /**
  * 回复微信消息方法
  * @author zaixing.jiang
@@ -18,7 +19,10 @@ class WeChatResponseService extends Module{
         $eventObj = $this->getEvent( $params );
         $event = new Event();
         $event->sender = $eventObj;
-        $this->trigger( $eventObj->MsgType , $event );
+        $eventName = $eventObj->MsgType;
+        if( $eventObj->MsgType == 'event' )
+            $eventName = $eventObj->Event;
+        $this->trigger( $eventName , $event );
         return $eventObj;
         
     }
@@ -29,30 +33,41 @@ class WeChatResponseService extends Module{
             return "aaa";
         });
         
-        //接收事件推送
-        $this->on('event', function( $event ){
-            $res = "";
-            switch ( $event->sender->Event ){
-                //用户扫码行为
-                case 'subscribe':
-                    break;
-                case 'SCAN':
-                    break;
-                //上报地理位置事件
-                case 'LOCATION':
-                    break;
-                //自定义菜单事件(点击菜单拉取消息时的事件推送)
-                case 'CLICK':
-                    break;
-                //自定义菜单事件(点击菜单跳转链接时的事件推送)
-                case 'VIEW':
-                    break;
-                default:
-                    break;
-            }
-            $event->sender->setResp( $res );
-            return true;
-            
+        //用户订阅 ...
+        $this->on('subscribe', function( $event ){
+            $entity = $event->sender;
+            $ret = UserService::getInstance()->createUser([
+                'add_time'=> $entity->CreateTime,
+                'event_key'=>$entity->EventKey,
+                'open_id' => $entity->FromUserName,
+                'ticket' => $entity->Ticket
+            ]);
+                        
+        });
+        
+        //接收普通消息  text image ...
+        $this->on('unsubscribe', function( $event ){
+            return "aaa";
+        });
+        
+        //已关注用户扫码行为
+        $this->on('SCAN', function( $event ){
+            return "aaa";
+        });
+        
+         //上报地理位置事件
+        $this->on('LOCATION', function( $event ){
+            return "aaa";
+        });
+        
+        //自定义菜单事件(点击菜单拉取消息时的事件推送)
+        $this->on('CLICK', function( $event ){
+            return "aaa";
+        });
+        
+        //自定义菜单事件(点击菜单跳转链接时的事件推送)
+        $this->on('VIEW', function( $event ){
+            return "aaa";
         });
     }
     
@@ -71,7 +86,7 @@ class WeChatResponseService extends Module{
 
 class ProxyXml{
     private $xml = null;
-    private $response = '';
+    private $response = ' ';
     function __construct( $xmlObj = null ){
         $this->xml = $xmlObj;
     }
