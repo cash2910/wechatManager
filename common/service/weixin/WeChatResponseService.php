@@ -24,7 +24,7 @@ class WeChatResponseService extends Module{
         $eventName = $eventObj->MsgType;
         if( $eventObj->MsgType == 'event' )
             $eventName = $eventObj->Event;
-        yii::trace("eventName: {$eventName}");
+        var_dump( $eventName );
         $this->trigger( $eventName , $event );
         return $eventObj;
         
