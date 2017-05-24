@@ -92,7 +92,7 @@ class ProxyXml{
         $this->xml = $xmlObj;
     }
     function __get( $attr ){
-        return isset( $this->xml[$arr] ) ? trim( $this->xml[$arr] ) : "";
+        return isset( $this->xml[$attr] ) ? trim( $this->xml[$attr] ) : "";
     }
     
     function setResp( $str ){
