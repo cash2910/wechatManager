@@ -6,6 +6,7 @@ use yii\web\Controller;
 use common\service\weixin\WeChatResponseService;
 use yii\helpers\ArrayHelper;
 use yii\base\Exception;
+use yii;
 
 /**
  * Default controller for the `Wechat` module
