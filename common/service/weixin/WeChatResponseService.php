@@ -5,6 +5,7 @@ use yii\base\Module;
 use yii\base\Exception;
 use service\users\UserService;
 use yii\base\Event;
+use yii;
 /**
  * 回复微信消息方法
  * @author zaixing.jiang
@@ -23,6 +24,7 @@ class WeChatResponseService extends Module{
         $eventName = $eventObj->MsgType;
         if( $eventObj->MsgType == 'event' )
             $eventName = $eventObj->Event;
+        yii::trace("eventName: {$eventName}");
         $this->trigger( $eventName , $event );
         return $eventObj;
         
