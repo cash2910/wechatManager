@@ -4,6 +4,7 @@ namespace common\service\weixin;
 use yii\base\Module;
 use yii\base\Exception;
 use service\users\UserService;
+use yii\base\Event;
 /**
  * 回复微信消息方法
  * @author zaixing.jiang
