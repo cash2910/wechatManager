@@ -60,10 +60,17 @@ interface WeixinInterface{
     
     
     /**
-     * 生成带参数的二维码
+     * 生成带参数的二维码链接
      * @param unknown $params
      */
     public function createQrcode( $params );
+    
+    
+    /**
+     * 生成短链接url
+     * @param unknown $params
+     */
+    public function genShortUrl( $params );
   
     
 }

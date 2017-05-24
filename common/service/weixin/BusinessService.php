@@ -7,7 +7,10 @@ use common\models\WechatUsers;
 use common\models\WechatUserId;
 use common\components\WeixinConfig;
 use yii\helpers\ArrayHelper;
-class BusinessService {
+use common\service\BaseService;
+use yii\base\Exception;
+use common\service\users\UserService;
+class BusinessService extends BaseService{
         
     /**
      * @param unknown $tags
@@ -106,6 +109,59 @@ class BusinessService {
         ],$oids)->execute();     
      }
      
+     public function getUserShareCode( $id, $entity ){
+         
+         $url = $this->getQrcode($id);
+         $uInfo = UserService::getInstance()->getUserInfo([
+             'id'=> $id
+         ]);
+         $entity->setResp([
+             'ToUserName'=> $uInfo->open_id,
+             'MsgType'=>'image',
+             'Image'=>[
+                 'MediaId'=>'xxx',
+             ]
+         ]);
+         
+     }
+     
+     /**
+      * 根据用户id 生成推广二维码
+      * @param unknown $entity
+      * @return string
+      */
+     public function getQrcode( $entity ,
+         $eternal = false //是否生成永久二维码
+     ){
+         $id = $entity['id'];
+         $key = sprintf("mg_user_shareqrcode_url_%s", $id);
+         if( !( $url = yii::$app->redis->get( $key ) ) ){
+             $ret = WeChatService::getIns()->createQrcode([
+                 'expire_seconds'=> WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME,
+                 'action_name' => 'QR_SCENE',
+                 'action_info' =>[
+                     'scene_id'=> str_pad( decbin( $id ), 32 , 0, STR_PAD_LEFT ),
+                 ]
+             ]);
+             if( !isset( $ret['ticket'] ) )
+                 throw new Exception('failed to get qrcode');
+             $url = WeixinConfig::WX_QRCODE_URL. $ret['ticket'] ;
+             $url = $this->getShortUrl( $url );
+             if( empty( $url ) )
+                 throw new Exception('failed to get short url');
+             yii::$app->redis->set( $key, $url , 'EX', time()+WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
+         }
+         return $url;
+     }
+     
+     //通过微信获取短链接
+     public function getShortUrl( $url ){
+         $ret = WeChatService::getIns()->genShortUrl([
+             'action'=>'long2short',
+             'long_url'=>$url
+         ]);
+         return ArrayHelper::getValue($ret, 'short_url', '');
+     }
      
 
     

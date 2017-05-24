@@ -49,12 +49,18 @@ class WeixinConfig{
         'createQrcode'=>[
             'url'=>'https://api.weixin.qq.com/cgi-bin/qrcode/create',
             'isPost'=>1
+        ],
+        'genShortUrl'=>[
+            'url'=>'https://api.weixin.qq.com/cgi-bin/shorturl',
+            'isPost'=>1
         ]
     ];
     
     const WEIXIN_USER_INFO = ['openid','nickname','sex','language','city','province','country','headimgurl','subscribe_time','unionid','remark','tagid_list'];
     //根据ticket换取微信二维码地址
     const WX_QRCODE_URL = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=';
+    //微信创建的二维码默认有效时间  604800 最大
+    const WX_QRCODE_DEFAULT_EXPIRED_TIME = 604700;
     
     static function getConf( $key ) {
         return ArrayHelper::getValue( self::WeiXinUrl, $key );

@@ -3,10 +3,12 @@ namespace common\service\weixin;
 
 use yii\base\Module;
 use yii\base\Exception;
-use service\users\UserService;
+use common\service\users\UserService;
 use yii\base\Event;
+use yii\db\ActiveRecord;
+use common\models\MgUserRel;
 use yii;
-use yii\helpers\StringHelper;
+use common\components\WeixinMenuConfig;
 /**
  * 回复微信消息方法
  * @author zaixing.jiang
@@ -36,21 +38,36 @@ class WeChatResponseService extends Module{
             return "aaa";
         });
         
-        //用户订阅 ...
+        /**
+         * 用户订阅 ...
+         * 获取推广id, 创建用户 并绑定关系
+         */
         $this->on('subscribe', function( $event ){
             $entity = $event->sender;
-/*             $ret = UserService::getInstance()->createUser([
+            $id  = $entity->EventKey; //上级id
+            $ret = UserService::getInstance()->createUser([
                 'add_time'=> $entity->CreateTime,
-                'event_key'=>$entity->EventKey,
-                'open_id' => $entity->FromUserName,
+                'open_id' =>  $entity->FromUserName,
                 'ticket' => $entity->Ticket
-            ]); */
+            ],function( $model ) use ( $id ){
+                $uInfo = UserService::getInstance()->getUserInfo([
+                    'id'=> $id
+                ]);
+                $rel = $uInfo->user_rels;
+                $model->user_rels = $rel."-".$uInfo->id;
+                $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
+                    $rel = new MgUserRel();
+                    $rel->user_id = $id;
+                    $rel->sub_user_id = $ent->sender->id;
+                    $rel->save();
+                });
+            });
             $entity->setResp("aaaa");
         });
         
         //接收普通消息  text image ...
         $this->on('unsubscribe', function( $event ){
-            return "aaa";
+            //return "aaa";
         });
         
         //已关注用户扫码行为
@@ -65,7 +82,14 @@ class WeChatResponseService extends Module{
         
         //自定义菜单事件(点击菜单拉取消息时的事件推送)
         $this->on('click', function( $event ){
-            return "aaa";
+            $ret = '';
+            $entity = $event->sender;
+            $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
+            if( empty($conf) ){
+                return $entity;
+            }
+            $ret = call_user_func_array([new $conf['class'], $conf['method']], [$entity->EventKey] );
+            $entity->setResp( $ret );
         });
         
         //自定义菜单事件(点击菜单跳转链接时的事件推送)

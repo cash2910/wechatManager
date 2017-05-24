@@ -1,35 +1,46 @@
 <?php
-namespace service\users;
+namespace common\service\users;
 
 use common\service\UserInterface;
 use common\service\BaseService;
 use common\models\MgUsers;
+use yii\base\Exception;
+use yii;
 
 class UserService extends BaseService implements UserInterface
 {
 
     //创建用户
-    public function createUser( $params ){
-        
-        $uObj = new MgUsers();
-        $uObj->open_id = $params['open_id'];
-        $uObj->register_time = $params['add_time'];
-        $uObj->is_bd = 1;
-        if( !empty($params['event_key']) ){
-            
+    public function createUser( $params, \Closure $callback = null ){
+ 
+        $res = ['isOk'=>1,'msg'=>'创建用户成功'];
+        $transaction = Yii::$app->db->beginTransaction();
+        try{
+            $uObj = new MgUsers();
+            $uObj->setAttributes( $params );
+            if( $callback != null ){
+                $res['data']  = call_user_func( $callback, $uObj );
+            }
+            $ret = $uObj->save();
+            if( !$ret )
+                 throw new Exception( $uObj->getErrors() );
+            $transaction->commit();
+        }catch (Exception $e){
+            $res['isOk'] = 0;
+            $res['msg'] = $e->getMessage();
+            $transaction->rollBack();
         }
-        $uObj->save();
+        return $res;
+    
     }
     
     //获取用户信息
     public function getUserInfo( $params = [] ){
-        
         $query = MgUsers::find();
         if( !empty( $params ) ){
             $query->where( $params );
         }
-        
-        return $res;
+        return $query->one();
     }
 }
 

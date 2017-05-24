@@ -76,6 +76,10 @@ class WeChatService implements WeixinInterface
         return call_user_func([ $this->proxy, $method ],$params);
     }
 
+    public function genShortUrl( $params ){
+        list( $nsp, $method ) = explode('::', __METHOD__ );
+        return call_user_func([ $this->proxy, $method ],$params);
+    }
 }
 
 ?>

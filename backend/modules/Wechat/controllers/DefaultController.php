@@ -4,8 +4,8 @@ namespace backend\modules\Wechat\controllers;
 
 use yii;
 use yii\web\Controller;
-use common\models\WechatUsers;
-use yii\helpers\ArrayHelper;
+use common\components\WeixinMenuConfig;
+
 
 /**
  * Default controller for the `WeChat` module
@@ -68,7 +68,31 @@ class DefaultController extends Controller
             ]
         ]); */
       //  var_dump($ret);die();
-
+/*         $id = 18; //'event_key'=>$entity->EventKey,
+        $ret = UserService::getInstance()->createUser([
+            'add_time'=> time(),
+            'open_id' => '4546464646aaa',
+            'ticket' => 'dsadsa'
+        ],function( $model ) use ( $id ){
+            $uInfo = UserService::getInstance()->getUserInfo([
+                'id'=> $id
+            ]);
+            $rel = $uInfo->user_rels;
+            $model->user_rels = $rel."-".$uInfo->id;
+            $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
+                $rel = new MgUserRel();
+                $rel->user_id = $id;
+                $rel->sub_user_id = $ent->sender->id;
+                $rel->save();
+            });
+        }); */
+        
+        $conf  = WeixinMenuConfig::getConf( 'GET_SHARE_QRCODE' );
+        if( empty($conf) ){
+            die('...');
+        }
+        $ret = call_user_func_array([new $conf['class'], $conf['method']], [16]);
+        var_dump( $ret );
     }
 }
 
