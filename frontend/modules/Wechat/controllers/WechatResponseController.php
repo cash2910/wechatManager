@@ -25,7 +25,7 @@ class WechatResponseController extends Controller
             $response = ( new WeChatResponseService("wechat") )->run( ArrayHelper::getValue( $GLOBALS, "HTTP_RAW_POST_DATA", "" ) );
             echo $response->getResp();
         }catch ( Exception $e){
-            
+            yii::error($e->getMessage(),"errors");
         }
         //logmsg
         
