@@ -13,6 +13,7 @@ use yii;
  */
 class WechatResponseController extends Controller
 {
+    public $enableCsrfValidation = false;
     /**
      * http://client.me.com/Wechat/wechat-response
      * Renders the index view for the module
