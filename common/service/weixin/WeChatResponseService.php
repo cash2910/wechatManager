@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use common\models\MgUserRel;
 use yii;
 use common\components\WeixinMenuConfig;
+use yii\helpers\ArrayHelper;
 /**
  * 回复微信消息方法
  * @author zaixing.jiang
@@ -49,7 +50,7 @@ class WeChatResponseService extends Module{
                 'add_time'=> $entity->CreateTime,
                 'open_id' =>  $entity->FromUserName,
                 'ticket' => $entity->Ticket
-            ],function( $model ) use ( $id ){
+            ],function( $model ) use ( $id, $entity ){
                 $uInfo = UserService::getInstance()->getUserInfo([
                     'id'=> $id
                 ]);
@@ -61,8 +62,12 @@ class WeChatResponseService extends Module{
                     $rel->sub_user_id = $ent->sender->id;
                     $rel->save();
                 });
+                $entity->setResp([
+                    'ToUserName'=>$uInfo->open_id,
+                    'Content'=>"{$uInfo->open_id} 好！！",
+                    'MsgType' =>'text'
+                ]);
             });
-            $entity->setResp("aaaa");
         });
         
         //接收普通消息  text image ...
@@ -121,12 +126,28 @@ class ProxyXml{
         return isset( $this->xml->$attr ) ? trim( $this->xml->$attr ) : "";
     }
     
-    function setResp( $str ){
-        $this->response = $str;
+    function setResp( $data ){
+        $default = [
+            'CreateTime'=>ArrayHelper::getValue($_SERVER, 'REQUEST_TIME', time()),
+            'FromUserName'=>Yii::$app->params['AppId']
+        ];
+        $this->response = $this->buildXml( array_merge($default,$data) ); 
     }
     
     function getResp() {
         return $this->response;
+    }
+    
+    function buildXml( $data, $wrap= 'xml' ){
+        $str = "<{$wrap}>";
+        foreach ($data as $k=>$v){
+            if( is_array($v) )
+                $str .= buildXml( $v, $k );
+            else
+                $str .= "<{$k}>{$v}</{$k}>";
+        }
+        $str .= "</{$wrap}>";
+        return $str;
     }
 }
 
