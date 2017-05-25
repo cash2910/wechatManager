@@ -36,9 +36,13 @@ class WeChatResponseService extends Module{
     public function init(){
         //接收普通消息  text image ...
         $this->on('text', function( $event ){
-            return "aaa";
+            $entity = $event->sender;
+            $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
+            if( empty($conf) ){
+                return $entity;
+            }
+            call_user_func_array([new $conf['class'], $conf['method']], [$entity] );
         });
-        
         /**
          * 用户订阅 ...
          * 获取推广id, 创建用户 并绑定关系
@@ -68,16 +72,22 @@ class WeChatResponseService extends Module{
                     'MsgType' =>'text'
                 ]);
             });
+            
+            yii::trace( json_encode( $ret ) );
         });
         
         //接收普通消息  text image ...
         $this->on('unsubscribe', function( $event ){
-            //return "aaa";
+            $entity = $event->sender;
+            $ret = UserService::getInstance()->modifyUser([
+                'status'=> 2
+            ]);
+            yii::trace( json_encode( $ret ) );
         });
         
         //已关注用户扫码行为
         $this->on('scan', function( $event ){
-            return "aaa";
+            //暂无行为;
         });
         
          //上报地理位置事件
@@ -87,14 +97,12 @@ class WeChatResponseService extends Module{
         
         //自定义菜单事件(点击菜单拉取消息时的事件推送)
         $this->on('click', function( $event ){
-            $ret = '';
             $entity = $event->sender;
             $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
             if( empty($conf) ){
                 return $entity;
             }
-            $ret = call_user_func_array([new $conf['class'], $conf['method']], [$entity->EventKey] );
-            $entity->setResp( $ret );
+            call_user_func_array([new $conf['class'], $conf['method']], [$entity] );
         });
         
         //自定义菜单事件(点击菜单跳转链接时的事件推送)
@@ -144,7 +152,7 @@ class ProxyXml{
             if( is_array($v) )
                 $str .= buildXml( $v, $k );
             else
-                $str .= "<{$k}>{$v}</{$k}>";
+              $str .= "<{$k}>{$v}</{$k}>";
         }
         $str .= "</{$wrap}>";
         return $str;

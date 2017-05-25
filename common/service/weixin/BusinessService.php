@@ -13,6 +13,7 @@ use common\service\users\UserService;
 class BusinessService extends BaseService{
         
     /**
+     * 获取微信用户标签并保存到数据库
      * @param unknown $tags
      */
     public function initTag( $tags ){
@@ -109,8 +110,14 @@ class BusinessService extends BaseService{
         ],$oids)->execute();     
      }
      
+     /**
+      * 获取二维码信息
+      * @param unknown $id
+      * @param unknown $entity
+      */
      public function getUserShareCode( $id, $entity ){
          
+         $id = $entity->EventKey;
          $url = $this->getQrcode($id);
          $uInfo = UserService::getInstance()->getUserInfo([
              'id'=> $id
