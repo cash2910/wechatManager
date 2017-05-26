@@ -42,7 +42,6 @@ class WeChatResponseService extends Module{
                 return $entity;
             }
             call_user_func_array([new $conf['class'], $conf['method']], [$entity] ); */
-            $entity = $event->sender;
   /*           $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
@@ -219,7 +218,7 @@ class ProxyXml{
         $str = "<{$wrap}>";
         foreach ($data as $k=>$v){
             if( is_array($v) )
-                $str .= buildXml( $v, $k );
+                $str .= $this->buildXml( $v, $k );
             else{
                 $str .= $this->wrap( $k ,$v );
                 //$str .= "<{$k}>{$v}</{$k}>";
