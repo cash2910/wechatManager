@@ -125,11 +125,21 @@ class WeChatResponseService extends Module{
         //自定义菜单事件(点击菜单拉取消息时的事件推送)
         $this->on('click', function( $event ){
             $entity = $event->sender;
-            $entity->setResp([
+   /*          $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
                 'MsgType'=>'text',
                 'Content'=>'【你好】'
+            ]); */
+            
+            $entity->setResp([
+                'FromUserName'=>$entity->ToUserName,
+                'ToUserName'=>$entity->FromUserName,
+                'MsgType'=>'link',
+                'Title'=>'你的专属链接',
+                'Description'=>'你的专属链接',
+                'Url'=> 'www.qq.com',
+                'MsgId'=>$_SERVER['REQUEST_TIME']
             ]);
            /*  $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
             if( empty($conf) ){
