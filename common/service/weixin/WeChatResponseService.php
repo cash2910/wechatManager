@@ -132,6 +132,9 @@ class WeChatResponseService extends Module{
 class ProxyXml{
     private $xml = null;
     private $response = ' ';
+    //需要添加<![CDATA[url]]> 元素列表
+    const WRAP_LIST = ['ToUserName','FromUserName','MsgType','Content','MediaId',
+        'Title','Description','MusicUrl','HQMusicUrl','ThumbMediaId','PicUrl','Url'];
     function __construct( $xmlObj = null ){
         $this->xml = $xmlObj;
     }
@@ -156,11 +159,20 @@ class ProxyXml{
         foreach ($data as $k=>$v){
             if( is_array($v) )
                 $str .= buildXml( $v, $k );
-            else
-              $str .= "<{$k}>{$v}</{$k}>";
+            else{
+                $str .= $this->wrap( $k ,$v );
+                //$str .= "<{$k}>{$v}</{$k}>";
+            }
         }
         $str .= "</{$wrap}>";
         return $str;
+    }
+    
+    function wrap( $k, $v ){
+        $formate = '<%s>%s</%s>';
+        if( in_array( $k, ProxyXml::WRAP_LIST) )
+            $formate = '<%s><![CDATA[%s]]></%s>';
+        return sprintf( $formate, $k, $v, $k );
     }
 }
 
