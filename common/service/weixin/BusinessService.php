@@ -124,7 +124,7 @@ class BusinessService extends BaseService{
          ]);
 /*          $entity->setResp([
              'FromUserName'=>$entity->ToUserName,
-             'ToUserName'=> $entity->FromUserName,
+             'ToUserName'=>$entity->FromUserName,
              'MsgType'=>'link',
              'Title'=>'你的专属链接',
              'Description'=>'你的专属链接',
