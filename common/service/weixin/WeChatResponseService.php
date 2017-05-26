@@ -67,11 +67,10 @@ class WeChatResponseService extends Module{
                     return false;
                 list( $p, $id ) = explode("_",$id);
                 yii::error("id： $id");
-               // var_dump($id);
                 $uInfo = \common\service\users\UserService::getInstance()->getUserInfo([
                     'id'=> $id
                 ]);
-               /*  $rel = $uInfo->user_rels;
+                $rel = $uInfo->user_rels;
                 $model->user_rels = $rel."-".$uInfo->id;
                 $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
                     $rel = new MgUserRel();
@@ -84,7 +83,7 @@ class WeChatResponseService extends Module{
                     'ToUserName'=>$uInfo->open_id,
                     'Content'=>"{$uInfo->open_id} 好！！",
                     'MsgType' =>'text'
-                ]); */
+                ]);
             });
             yii::trace( json_encode( $ret ) );
         });
@@ -101,6 +100,9 @@ class WeChatResponseService extends Module{
         
         //已关注用户扫码行为
         $this->on('scan', function( $event ){
+            $entity = $event->sender;
+            $id  = $entity->EventKey; 
+            yii::error("myid: {$id}");
             //暂无行为;
         });
         
