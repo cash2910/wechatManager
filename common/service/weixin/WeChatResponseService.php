@@ -65,8 +65,9 @@ class WeChatResponseService extends Module{
                 //若不存在招募关系 则不进行关系绑定
                 if( empty( $id ) )
                     return false;
-                list( $p, $id ) = explode("_",$id);
-                yii::error("id： $id");
+               // list( $p, $id ) = explode("_",$id);
+                yii::error("id： $id"); 
+                die();
                 $uInfo = \common\service\users\UserService::getInstance()->getUserInfo([
                     'id'=> $id
                 ]);
