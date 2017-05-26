@@ -74,6 +74,7 @@ class WeChatResponseService extends Module{
                     $rel->save();
                 });
                 $entity->setResp([
+                    'FromUserName'=> $entity->ToUserName,
                     'ToUserName'=>$uInfo->open_id,
                     'Content'=>"{$uInfo->open_id} 好！！",
                     'MsgType' =>'text'
