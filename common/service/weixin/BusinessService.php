@@ -118,6 +118,7 @@ class BusinessService extends BaseService{
      public function getUserShareCode( $entity ){
          
          $id = $entity->EventKey;
+        // $id = 26;
          $url = $this->getQrcode($id);
          $uInfo = UserService::getInstance()->getUserInfo([
              'id'=> $id
@@ -137,10 +138,9 @@ class BusinessService extends BaseService{
       * @param unknown $entity
       * @return string
       */
-     public function getQrcode( $entity ,
+     public function getQrcode( $id ,
          $eternal = false //是否生成永久二维码
      ){
-         $id = $entity['id'];
          $key = sprintf("mg_user_shareqrcode_url_%s", $id);
          if( !( $url = yii::$app->redis->get( $key ) ) ){
              $ret = WeChatService::getIns()->createQrcode([

@@ -1,13 +1,13 @@
 <?php
 namespace common\service\weixin;
 
+use yii;
 use yii\base\Module;
 use yii\base\Exception;
 use common\service\users\UserService;
 use yii\base\Event;
 use yii\db\ActiveRecord;
 use common\models\MgUserRel;
-use yii;
 use common\components\WeixinMenuConfig;
 use yii\helpers\ArrayHelper;
 /**
@@ -62,26 +62,26 @@ class WeChatResponseService extends Module{
                 'open_id' =>  $entity->FromUserName,
                 'ticket' => $entity->Ticket
             ],function( $model ) use ( $id, $entity ){
-                if( !empty( $id ) ){
-                    $uInfo = UserService::getInstance()->getUserInfo([
-                        'id'=> $id
-                    ]);
-                    $rel = $uInfo->user_rels;
-                    $model->user_rels = $rel."-".$uInfo->id;
-                }
+                //若不存在招募关系 则不进行关系绑定
+                if( empty( $id ) )
+                    return false;
+                $uInfo = common\service\users\UserService::getInstance()->getUserInfo([
+                    'id'=> $id
+                ]);
+                $rel = $uInfo->user_rels;
+                $model->user_rels = $rel."-".$uInfo->id;
                 $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
                     $rel = new MgUserRel();
                     $rel->user_id = $id;
                     $rel->sub_user_id = $ent->sender->id;
                     $rel->save();
                 });
-                if( !empty( $id ) )
-                    $entity->setResp([
-                        'FromUserName'=> $entity->ToUserName,
-                        'ToUserName'=>$uInfo->open_id,
-                        'Content'=>"{$uInfo->open_id} 好！！",
-                        'MsgType' =>'text'
-                    ]);
+                $entity->setResp([
+                    'FromUserName'=> $entity->ToUserName,
+                    'ToUserName'=>$uInfo->open_id,
+                    'Content'=>"{$uInfo->open_id} 好！！",
+                    'MsgType' =>'text'
+                ]);
             });
             yii::trace( json_encode( $ret ) );
         });
@@ -90,7 +90,8 @@ class WeChatResponseService extends Module{
         $this->on('unsubscribe', function( $event ){
             $entity = $event->sender;
             $ret = UserService::getInstance()->modifyUser([
-                'status'=> 2
+                'status'=> 2,
+                'update_time'=> $entity->CreateTime
             ]);
             yii::trace( json_encode( $ret ) );
         });
