@@ -75,12 +75,13 @@ class WeChatResponseService extends Module{
                     $rel->sub_user_id = $ent->sender->id;
                     $rel->save();
                 });
-                $entity->setResp([
-                    'FromUserName'=> $entity->ToUserName,
-                    'ToUserName'=>$uInfo->open_id,
-                    'Content'=>"{$uInfo->open_id} 好！！",
-                    'MsgType' =>'text'
-                ]);
+                if( !empty( $id ) )
+                    $entity->setResp([
+                        'FromUserName'=> $entity->ToUserName,
+                        'ToUserName'=>$uInfo->open_id,
+                        'Content'=>"{$uInfo->open_id} 好！！",
+                        'MsgType' =>'text'
+                    ]);
             });
             yii::trace( json_encode( $ret ) );
         });
