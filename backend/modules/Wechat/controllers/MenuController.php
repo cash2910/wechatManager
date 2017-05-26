@@ -119,8 +119,8 @@ class MenuController extends Controller
                     'name'=>'代理信息',
                     'sub_button'=>[[
                         'name'=>'我的推广链接',
-                        'type'=>'view',
-                        'url' =>'http://www.soso.com/'
+                        'type'=>'click',
+                        'key'=>'MY_SHARE_LINK',
                     ],[
                         'name'=>'我的好友',
                         'type'=>'view',

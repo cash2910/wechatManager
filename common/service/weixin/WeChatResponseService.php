@@ -70,6 +70,8 @@ class WeChatResponseService extends Module{
                     $uInfo = \common\service\users\UserService::getInstance()->getUserInfo([
                         'id'=> $id
                     ]);
+                    if( empty($uInfo)  )
+                        throw new Exception(" invalid scran ID");
                     $rel = $uInfo->user_rels;
                     $model->user_rels = $rel."-".$uInfo->id;
                     $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){

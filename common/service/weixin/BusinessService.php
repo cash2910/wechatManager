@@ -120,14 +120,16 @@ class BusinessService extends BaseService{
          $id = $entity->EventKey;
          $url = $this->getQrcode($id);
          $uInfo = UserService::getInstance()->getUserInfo([
-             'id'=> $id
+             'open_id'=> $entity->FromUserName
          ]);
          $entity->setResp([
-             'ToUserName'=> $uInfo->open_id,
-             'MsgType'=>'image',
-             'Image'=>[
-                 'MediaId'=>'xxx',
-             ]
+             'FromUserName'=>$entity->ToUserName,
+             'ToUserName'=> $entity->FromUserName,
+             'MsgType'=>'link',
+             'Title'=>'你的专属链接',
+             'Description'=>'你的专属链接',
+             'Url'=> 'http://www.baidu.com',
+             'MsgId'=>base64_encode( $entity->FromUserName.$_SERVER['REQUEST_TIME'] )
          ]);
      }
      
