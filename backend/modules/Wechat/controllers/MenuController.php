@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\service\weixin\WeChatService;
 
 /**
  * MeunController implements the CRUD actions for WechatMenu model.
@@ -102,6 +103,36 @@ class MenuController extends Controller
     {
         $this->findModel($id)->delete();
 
+        return $this->redirect(['index']);
+    }
+    
+    
+    public function actionInit()
+    {
+        $ret = WeChatService::getIns()->createMenu([
+            'button'=>[
+                [
+                   'type'=>'click',
+                   'name'=>'下载游戏',
+                   'key'=>'MY_GAME'
+                ],[
+                    'name'=>'代理信息',
+                    'sub_button'=>[[
+                        'name'=>'我的推广链接',
+                        'type'=>'view',
+                        'url' =>'http://www.soso.com/'
+                    ],[
+                        'name'=>'我的好友',
+                        'type'=>'view',
+                        'url' =>'http://www.soso.com/'
+                    ]]              
+                ],[
+                    'type'=>'click',
+                    'name'=>'我的信息',
+                    'key'=>'GET_MY_INFO'
+                ]
+            ]
+        ]);
         return $this->redirect(['index']);
     }
 

@@ -23,6 +23,10 @@ class WeixinConfig{
         'getMenu' =>[
             'url'=> 'https://api.weixin.qq.com/cgi-bin/menu/get'
         ],
+        'createMenu' =>[
+            'url'=> 'https://api.weixin.qq.com/cgi-bin/menu/create',
+            'isPost'=>1
+        ],
         'getUserTag'=>[
             'url' =>'https://api.weixin.qq.com/cgi-bin/tags/get',
         ],

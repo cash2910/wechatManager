@@ -25,7 +25,7 @@ class WeChatProxyService{
         $curl = new Curl();
         $curl->setOptions([ CURLOPT_SSL_VERIFYPEER=> false,  CURLOPT_SSL_VERIFYHOST => 0 ]);
         if( ArrayHelper::getValue($conf, 'isPost', false) ){
-            $res =  $curl->setOption(CURLOPT_POSTFIELDS, json_encode($params) )->post( $finalUrl );
+            $res =  $curl->setOption(CURLOPT_POSTFIELDS, json_encode($params, JSON_UNESCAPED_UNICODE) )->post( $finalUrl );
         }else{
             $res = $curl->get( $finalUrl );
         }

@@ -24,6 +24,12 @@ interface WeixinInterface{
     public function getMenu();
     
     /**
+     * 创建菜单
+     * @param unknown $params
+     */
+    public function createMenu( $params );
+    
+    /**
      * 查询用户标签接口
      */
     public function getUserTag();

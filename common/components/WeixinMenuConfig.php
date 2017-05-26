@@ -17,6 +17,13 @@ class WeixinMenuConfig{
                 'class'=> 'common\service\weixin\BusinessService',
                 'method'=>'getUserShareCode',
             ]
+        ],
+        'MY_GAME'=>[
+            'title'=>'我的游戏',
+            'handle'=>[
+                'class'=> 'common\service\weixin\BusinessService',
+                'method'=> 'getGames'
+            ]
         ]
     ];
     

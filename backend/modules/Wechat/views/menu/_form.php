@@ -20,18 +20,30 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    
-     <?= $form->field($model, 'type')->radioList([1=>'默认菜单',2=>'自定义菜单'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
-    
-
-    <?= $form->field($model, 'add_time')->textInput(['onfocus'=>'WdatePicker({dateFmt:"yyyy-MM-dd HH:mm:ss"})']) ?>
-
-    <?= $form->field($model, 'update_time')->textInput(['onfocus'=>'WdatePicker({dateFmt:"yyyy-MM-dd HH:mm:ss"})']) ?>
+    <?= $form->field($model, 'type')->radioList([1=>'默认菜单',2=>'自定义菜单'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
     
     <?= $form->field($model, 'status')->radioList([0=>'未启用',1=>'已启用'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?php //echo $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
+    <div class="form-group field">
+        <div class="col-xs-3 col-sm-2 text-right">
+            <label class="control-label" for="eqesc">菜单设置</label>
+        </div>
+        <div class="col-xs-9 col-sm-10">
+            <div class="col-xs-12 col-sm-12">
+                <div class="col-lg-2" style="width: 110px; padding: 0px 10px 0px 0px;"> 
+                </div>
+                <div class="col-lg-2" style="width: 100px; padding: 0px 10px 0px 0px;"> 
+                </div>
+                 <div class="col-lg-2" style="width: 110px; padding: 0px 10px 0px 0px;"> 
+                </div>
+                <div class="col-lg-2" style="width: 100px; padding: 0px;">
+                </div>
+            </div>
+        </div>
+   </div>
+    
     <div class="form-group">
         <div class="col-sm-offset-2">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

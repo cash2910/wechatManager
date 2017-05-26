@@ -13,13 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('Create Wechat Menu', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建菜单', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('初始化菜单', ['init'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
             'type',
@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'update_time',
             // 'status',
             // 'content:ntext',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

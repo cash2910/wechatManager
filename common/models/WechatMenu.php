@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "wechat_menu".
@@ -17,6 +18,17 @@ use Yii;
  */
 class WechatMenu extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'add_time',
+                'updatedAtAttribute' => 'update_time',
+                'value'   => function(){return date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME']);},
+                ],
+         ];
+    }
     /**
      * @inheritdoc
      */
@@ -45,11 +57,11 @@ class WechatMenu extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'type' => 'Type',
-            'add_time' => 'Add Time',
-            'update_time' => 'Update Time',
-            'status' => 'Status',
+            'title' => '名称',
+            'type' => '类型',
+            'add_time' => '添加时间',
+            'update_time' => '更新时间',
+            'status' => '状态',
             'content' => 'Content',
         ];
     }

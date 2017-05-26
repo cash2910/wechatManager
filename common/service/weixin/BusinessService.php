@@ -115,7 +115,7 @@ class BusinessService extends BaseService{
       * @param unknown $id
       * @param unknown $entity
       */
-     public function getUserShareCode( $id, $entity ){
+     public function getUserShareCode( $entity ){
          
          $id = $entity->EventKey;
          $url = $this->getQrcode($id);
@@ -170,6 +170,23 @@ class BusinessService extends BaseService{
          return ArrayHelper::getValue($ret, 'short_url', '');
      }
      
+     
+     //微信获取游戏信息
+     public function getGames( ProxyXml $entity ){
+         $entity->setResp([
+             'FromUserName'=>$entity->openid,
+             'MsgType'=>'news',
+             'ArticleCount'=>1,
+             'Articles'=>[
+                 'item'=>[
+                     'Title'=>'王者农药',
+                     'Description'=>'王者农药 就是干',
+                     'PicUrl'=> 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58',
+                     'Url' =>'http://www.baidu.com'
+                 ]
+              ]
+         ]);
+     }
 
     
 }

@@ -72,7 +72,6 @@ class WeChatResponseService extends Module{
                     'MsgType' =>'text'
                 ]);
             });
-            
             yii::trace( json_encode( $ret ) );
         });
         

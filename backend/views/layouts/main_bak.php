@@ -9,7 +9,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-use backend\widgets\SideNav;
 
 AppAsset::register($this);
 ?>
@@ -57,23 +56,20 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-    <div class="row" style="padding: 70px 15px 20px;">
-        <div class="col-md-2">
-            <?= SideNav::widget($this->context->module->getMenu()) ?>
-        </div>
-        <div class="col-md-9">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= Alert::widget() ?>
-            <?= $content ?>
-        </div>
-    </div>  
+
+    <div class="container">
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
+        <?= Alert::widget() ?>
+        <?= $content ?>
+    </div>
 </div>
 
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy;<?= Yii::$app->params['company_name'] ?><?= date('Y') ?></p>
+
         <p class="pull-right"><?= 'powered by '.Yii::$app->params['company_name'] ?></p>
     </div>
 </footer>
