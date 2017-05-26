@@ -38,7 +38,7 @@ class WeChatResponseService extends Module{
         $this->on('text', function( $event ){
             $entity = $event->sender;
             $entity->setResp([
-                'FromUserName'=>$entity->FromUserName,
+                'ToUserName'=>$entity->FromUserName,
                 'MsgType'=>'text',
                 'Content'=>'【你好】'
             ]);
