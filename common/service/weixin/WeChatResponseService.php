@@ -38,7 +38,8 @@ class WeChatResponseService extends Module{
         $this->on('text', function( $event ){
             $entity = $event->sender;
             $entity->setResp([
-                'ToUserName'=>$entity->FromUserName,
+                'FromUserName'=>$entity->FromUserName,
+                'ToUserName'=>$entity->ToUserName,
                 'MsgType'=>'text',
                 'Content'=>'【你好】'
             ]);
@@ -145,7 +146,7 @@ class ProxyXml{
     function setResp( $data ){
         $default = [
             'CreateTime'=>ArrayHelper::getValue($_SERVER, 'REQUEST_TIME', time()),
-            'FromUserName'=> 'glory_jzx'//Yii::$app->params['AppId']
+        //    'FromUserName'=> 'glory_jzx'//Yii::$app->params['AppId']
         ];
         $this->response = $this->buildXml( array_merge($default,$data) ); 
     }
