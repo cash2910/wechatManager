@@ -118,9 +118,9 @@ class BusinessService extends BaseService{
      public function getUserShareCode( $entity ){
          
         // $id = $entity->EventKey;
-        // $id = 26;
+         $id = 26;
          $url = $this->getQrcode($id);
-       //  die($url);
+         die($url);
          $uInfo = UserService::getInstance()->getUserInfo([
              'id'=> $id
          ]);
@@ -144,6 +144,7 @@ class BusinessService extends BaseService{
      ){
          $key = sprintf("mg_user_shareqrcode_url_%s", $id);
          $type = $eternal ? 'QR_LIMIT_STR_SCENE' : 'QR_SCENE';
+         //echo $type;die();
       //   if( !( $url = yii::$app->redis->get( $key ) ) ){
              $ret = WeChatService::getIns()->createQrcode([
                  'expire_seconds'=> WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME,
@@ -152,6 +153,7 @@ class BusinessService extends BaseService{
                      'scene_id'=> $id ,
                  ]
              ]);
+             var_dump( $ret );
              if( !isset( $ret['ticket'] ) )
                  throw new Exception('failed to get qrcode');
              $url = WeixinConfig::WX_QRCODE_URL. $ret['ticket'] ;
