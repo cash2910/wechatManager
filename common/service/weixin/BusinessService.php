@@ -93,7 +93,7 @@ class BusinessService extends BaseService{
               $count += $ret['count'];  //当前页面总条数
               $nextid = $ret['next_openid'];
               $this->addOpenids(  $ret['data']['openid'] );
-          }while( $total == $count );
+          }while( $total > $count );
           return $total;
      }
      
