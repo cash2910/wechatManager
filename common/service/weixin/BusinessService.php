@@ -122,7 +122,7 @@ class BusinessService extends BaseService{
          $uInfo = UserService::getInstance()->getUserInfo([
              'open_id'=> $entity->FromUserName
          ]);
-         $entity->setResp([
+/*          $entity->setResp([
              'FromUserName'=>$entity->ToUserName,
              'ToUserName'=> $entity->FromUserName,
              'MsgType'=>'link',
@@ -130,6 +130,13 @@ class BusinessService extends BaseService{
              'Description'=>'你的专属链接',
              'Url'=> 'www.qq.com',
              'MsgId'=>$_SERVER['REQUEST_TIME']
+         ]); */
+         
+         $entity->setResp([
+             'FromUserName'=>$entity->ToUserName,
+             'ToUserName'=>$entity->FromUserName,
+             'MsgType'=>'text',
+             'Content'=>'【你好】'
          ]);
      }
      
