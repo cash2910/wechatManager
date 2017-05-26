@@ -62,11 +62,13 @@ class WeChatResponseService extends Module{
                 'open_id' =>  $entity->FromUserName,
                 'ticket' => $entity->Ticket
             ],function( $model ) use ( $id, $entity ){
-                $uInfo = UserService::getInstance()->getUserInfo([
-                    'id'=> $id
-                ]);
-                $rel = $uInfo->user_rels;
-                $model->user_rels = $rel."-".$uInfo->id;
+                if( !empty( $id ) ){
+                    $uInfo = UserService::getInstance()->getUserInfo([
+                        'id'=> $id
+                    ]);
+                    $rel = $uInfo->user_rels;
+                    $model->user_rels = $rel."-".$uInfo->id;
+                }
                 $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
                     $rel = new MgUserRel();
                     $rel->user_id = $id;
