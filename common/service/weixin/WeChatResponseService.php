@@ -133,6 +133,20 @@ class WeChatResponseService extends Module{
             ]); */
             
             $entity->setResp([
+                'FromUserName'=>$entity->openid,
+                'MsgType'=>'news',
+                'ArticleCount'=>1,
+                'Articles'=>[
+                    'item'=>[
+                        'Title'=>'王者农药',
+                        'Description'=>'王者农药 就是干',
+                        'PicUrl'=> 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58',
+                        'Url' =>'http://www.baidu.com'
+                    ]
+                ]
+            ]);
+            
+           /*  $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
                 'MsgType'=>'link',
@@ -140,7 +154,7 @@ class WeChatResponseService extends Module{
                 'Description'=>'你的专属链接',
                 'Url'=> 'www.qq.com',
                 'MsgId'=>$_SERVER['REQUEST_TIME']
-            ]);
+            ]); */
            /*  $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
             if( empty($conf) ){
                 return $entity;
