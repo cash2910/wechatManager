@@ -129,7 +129,7 @@ class BusinessService extends BaseService{
              'Title'=>'你的专属链接',
              'Description'=>'你的专属链接',
              'Url'=> 'http://www.baidu.com',
-             'MsgId'=>base64_encode( $entity->FromUserName.$_SERVER['REQUEST_TIME'] )
+             'MsgId'=>$_SERVER['REQUEST_TIME']
          ]);
      }
      
