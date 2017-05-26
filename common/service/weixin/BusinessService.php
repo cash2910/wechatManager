@@ -128,7 +128,7 @@ class BusinessService extends BaseService{
              'MsgType'=>'link',
              'Title'=>'你的专属链接',
              'Description'=>'你的专属链接',
-             'Url'=> 'http://www.baidu.com',
+             'Url'=> 'www.qq.com',
              'MsgId'=>$_SERVER['REQUEST_TIME']
          ]);
      }
