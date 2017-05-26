@@ -37,11 +37,17 @@ class WeChatResponseService extends Module{
         //接收普通消息  text image ...
         $this->on('text', function( $event ){
             $entity = $event->sender;
+            $entity->setResp([
+                'FromUserName'=>$entity->FromUserName,
+                'MsgType'=>'text',
+                'Content'=>'【你好】'
+            ]);
+            /* 
             $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
             if( empty($conf) ){
                 return $entity;
             }
-            call_user_func_array([new $conf['class'], $conf['method']], [$entity] );
+            call_user_func_array([new $conf['class'], $conf['method']], [$entity] ); */
         });
         /**
          * 用户订阅 ...
