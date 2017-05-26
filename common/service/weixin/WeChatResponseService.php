@@ -142,7 +142,7 @@ class ProxyXml{
     function setResp( $data ){
         $default = [
             'CreateTime'=>ArrayHelper::getValue($_SERVER, 'REQUEST_TIME', time()),
-            'FromUserName'=>Yii::$app->params['AppId']
+            'FromUserName'=> 'glory_jzx'//Yii::$app->params['AppId']
         ];
         $this->response = $this->buildXml( array_merge($default,$data) ); 
     }
