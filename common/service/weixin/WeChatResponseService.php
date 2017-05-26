@@ -65,26 +65,28 @@ class WeChatResponseService extends Module{
                 //若不存在招募关系 则不进行关系绑定
                 if( empty( $id ) )
                     return false;
-               // list( $p, $id ) = explode("_",$id);
-                yii::error("id： $id"); 
-                die();
-                $uInfo = \common\service\users\UserService::getInstance()->getUserInfo([
-                    'id'=> $id
-                ]);
-                $rel = $uInfo->user_rels;
-                $model->user_rels = $rel."-".$uInfo->id;
-                $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
-                    $rel = new MgUserRel();
-                    $rel->user_id = $id;
-                    $rel->sub_user_id = $ent->sender->id;
-                    $rel->save();
-                });
-                $entity->setResp([
-                    'FromUserName'=> $entity->ToUserName,
-                    'ToUserName'=>$uInfo->open_id,
-                    'Content'=>"{$uInfo->open_id} 好！！",
-                    'MsgType' =>'text'
-                ]);
+                try {
+                    list( $p, $id ) = explode("_",$id);
+                    $uInfo = \common\service\users\UserService::getInstance()->getUserInfo([
+                        'id'=> $id
+                    ]);
+                    $rel = $uInfo->user_rels;
+                    $model->user_rels = $rel."-".$uInfo->id;
+                    $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
+                        $rel = new MgUserRel();
+                        $rel->user_id = $id;
+                        $rel->sub_user_id = $ent->sender->id;
+                        $rel->save();
+                    });
+                    $entity->setResp([
+                        'FromUserName'=> $entity->ToUserName,
+                        'ToUserName'=>$uInfo->open_id,
+                        'Content'=>"{$uInfo->open_id} 好！！",
+                        'MsgType' =>'text'
+                            ]);
+                } catch (Exception $e) {
+                    yii::error( $e->getMessage() );
+                }
             });
             yii::trace( json_encode( $ret ) );
         });
