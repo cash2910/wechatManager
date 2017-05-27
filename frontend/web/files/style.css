@@ -1,0 +1,77 @@
+body{
+	margin  : 0;
+	padding : 0;
+}
+body > img{
+	width : 100%;
+}
+h1{
+	display : none;
+}
+.download-app{
+	background      : #1899c0 url('http://qp.cdn.supernanogame.com/images/web/ldbg.jpg') no-repeat center top;
+	background-size : cover;
+	padding         : 40vw 0 10vw 0;
+}
+.download-app a{
+	width   : 60%;
+	display : block;
+	margin  : 0 auto 5vw auto;
+}
+.download-app a:last-child{
+	margin-bottom : 0;
+}
+.download-app img{
+	width : 100%;
+}
+.qr{
+	padding          : 10vw 0;
+	text-align       : center;
+	background-color : #30a3c6;
+}
+.qr p{
+	margin    : 0 0 3vw 0;
+	color     : #ffffff;
+	font-size : 5vw;
+	opacity   : .5;
+}
+.qr img{
+	width : 50%;
+}
+#tip{
+	width            : 100%;
+	height           : 100%;
+	background-color : #000000;
+	opacity          : .8;
+	color            : #ffffff;
+	font-size        : 1.2em;
+	position         : fixed;
+	top              : 0;
+	left             : 0;
+	transition       : .5s;
+	display          : none;
+}
+#tip p{
+	padding       : 0 20% 0 5%;
+	line-height   : 1.8em;
+	margin-bottom : 1em;
+}
+#tip p:first-child{
+	padding-top : 5%;
+}
+#tip img{
+	position : absolute;
+	top      : 5%;
+	right    : 5%;
+}
+footer{
+	width            : 100%;
+	padding          : 2% 0;
+	text-align       : center;
+	background-color : #343434;
+	color            : #b3b3b3;
+	font-size        : 3vw;
+	position         : fixed;
+	left             : 0;
+	bottom           : 0;
+}

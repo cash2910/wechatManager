@@ -119,9 +119,9 @@ class BusinessService extends BaseService{
          
          //$id = $entity->EventKey;
          //$url = $this->getQrcode($id);
-         $uInfo = UserService::getInstance()->getUserInfo([
+/*          $uInfo = UserService::getInstance()->getUserInfo([
              'open_id'=> $entity->FromUserName
-         ]);
+         ]); */
          
          $entity->setResp([
              'FromUserName'=>$entity->ToUserName,
@@ -131,9 +131,9 @@ class BusinessService extends BaseService{
              'Articles'=>[
                  ['item'=>[
                      'Title'=>'您有如下专属推广链接',
-                     'Description'=>'正版授权-颠覆西游传说，再续西游情缘。',
+                     'Description'=>'点击进入专属页面',
                      //'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
-                     'Url' =>'http://www.baidu.com'
+                     'Url' => Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-page', 'id'=>$id] )
                  ]]
              ]
          ]);

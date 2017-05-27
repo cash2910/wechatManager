@@ -17,4 +17,9 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+    
+    public function actionSharePage()
+    {
+        return $this->renderPartial('share_page');
+    }
 }
