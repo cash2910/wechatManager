@@ -105,11 +105,16 @@ class WeChatResponseService extends Module{
         //接收普通消息  text image ...
         $this->on('unsubscribe', function( $event ){
             $entity = $event->sender;
-            $ret = UserService::getInstance()->modifyUser([
-                'status'=> 2,
-                'update_time'=> $entity->CreateTime
+            
+            $ret = UserService::getInstance()->getUserInfo([
+                'open_id'=> $entity->FromUserName,
             ]);
-            yii::trace( json_encode( $ret ) );
+            if( !empty($ret) )
+                $ret = UserService::getInstance()->modifyUser([
+                    'status'=> 2,
+                    'update_time'=> $entity->CreateTime
+                ]);
+            yii::error( json_encode( $ret ) );
         });
         
         //已关注用户扫码行为
