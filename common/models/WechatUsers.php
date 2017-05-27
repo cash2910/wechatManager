@@ -23,6 +23,18 @@ use Yii;
  */
 class WechatUsers extends \yii\db\ActiveRecord
 {
+    
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'add_time',
+                'updatedAtAttribute' => 'update_time',
+                'value'   => function(){return date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME']);},
+                ],
+                ];
+    }
     /**
      * @inheritdoc
      */

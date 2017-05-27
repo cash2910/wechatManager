@@ -4,7 +4,7 @@ namespace common\service\users;
 use common\service\UserInterface;
 use common\service\BaseService;
 use common\models\MgUsers;
-use yii\base\Exception;
+
 use yii;
 
 class UserService extends BaseService implements UserInterface
@@ -25,7 +25,7 @@ class UserService extends BaseService implements UserInterface
             if( !$ret )
                  throw new Exception( $uObj->getErrors() );
             $transaction->commit();
-        }catch (Exception $e){
+        }catch ( \Exception $e){
             $res['isOk'] = 0;
             $res['msg'] = $e->getMessage();
             $transaction->rollBack();
