@@ -50,8 +50,8 @@ class WeChatResponseService extends Module{
             ]); */
             
             $entity->setResp([
-                 'FromUserName'=>'dsadsadsa',
-                 'ToUserName'=>'aaaaaa',
+                 'FromUserName'=>$entity->ToUserName,
+                 'ToUserName'=>$entity->FromUserName,
                  'MsgType'=>'news',
                  'ArticleCount'=>3,
                  'Articles'=>[
