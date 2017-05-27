@@ -50,31 +50,31 @@ class WeChatResponseService extends Module{
             ]); */
             
             $entity->setResp([
-             'FromUserName'=>'dsadsadsa',
-             'ToUserName'=>'aaaaaa',
-             'MsgType'=>'news',
-             'ArticleCount'=>1,
-             'Articles'=>[
-                 ['item'=>[
-                     'Title'=>'王者农药',
-                     'Description'=>'王者农药 就是干',
-                     'PicUrl'=> 'https://www.baidu.com',
-                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
-                 ]],
-                 ['item'=>[
-                     'Title'=>'王者农药1',
-                     'Description'=>'王者农药 就是干',
-                     'PicUrl'=> 'https://www.baidu.com',
-                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
-                 ]],
-                 ['item'=>[
-                     'Title'=>'王者农药2',
-                     'Description'=>'王者农药 就是干',
-                     'PicUrl'=> 'https://www.baidu.com',
-                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
-                 ]]
-             ]
-         ]);
+                 'FromUserName'=>'dsadsadsa',
+                 'ToUserName'=>'aaaaaa',
+                 'MsgType'=>'news',
+                 'ArticleCount'=>3,
+                 'Articles'=>[
+                     ['item'=>[
+                         'Title'=>'王者农药',
+                         'Description'=>'王者农药 就是干',
+                         'PicUrl'=> 'https://www.baidu.com',
+                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                     ]],
+                     ['item'=>[
+                         'Title'=>'王者农药1',
+                         'Description'=>'王者农药 就是干',
+                         'PicUrl'=> 'https://www.baidu.com',
+                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                     ]],
+                     ['item'=>[
+                         'Title'=>'王者农药2',
+                         'Description'=>'王者农药 就是干',
+                         'PicUrl'=> 'https://www.baidu.com',
+                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                     ]]
+                 ]
+             ]);
             
             /* 
             $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
