@@ -134,17 +134,17 @@ class BusinessService extends BaseService{
          
          $entity->setResp([
              'FromUserName'=>$entity->ToUserName,
-             'ToUserName'=>$entity->FromUserName,
-             'MsgType'=>'news',
-             'ArticleCount'=>1,
-             'Articles'=>[
-                 'item'=>[
-                     'Title'=>'王者农药',
-                     'Description'=>'王者农药 就是干',
-                     'PicUrl'=> 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58',
-                     'Url' =>'http://www.baidu.com'
+                 'ToUserName'=>$entity->FromUserName,
+                 'MsgType'=>'news',
+                 'ArticleCount'=>1,
+                 'Articles'=>[
+                     ['item'=>[
+                         'Title'=>'西游伏妖篇',
+                         'Description'=>'正版授权-颠覆西游传说，再续西游情缘。',
+                         'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
+                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                     ]]
                  ]
-             ]
          ]);
      }
      
