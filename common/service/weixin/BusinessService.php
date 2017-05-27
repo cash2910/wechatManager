@@ -115,8 +115,9 @@ class BusinessService extends BaseService{
       * @param unknown $id
       * @param unknown $entity
       */
-     public function getUserShareCode( $entity ){
+     public function getUserShareCode( ProxyXml $entity ){
          
+         yii::error("aaaaaaa");
          $id = $entity->EventKey;
          $url = $this->getQrcode($id);
          $uInfo = UserService::getInstance()->getUserInfo([
