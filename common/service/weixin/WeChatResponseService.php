@@ -111,7 +111,7 @@ class WeChatResponseService extends Module{
             ]);
             if( !empty($ret) )
                 $ret = UserService::getInstance()->modifyUser([
-                    'open_id'=> $entity->FromUserName,
+                    'id'=> $ret->id,
                     'status'=> 2,
                     'update_time'=> $entity->CreateTime
                 ]);
