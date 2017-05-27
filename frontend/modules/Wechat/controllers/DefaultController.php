@@ -22,4 +22,9 @@ class DefaultController extends Controller
     {
         return $this->renderPartial('share_page');
     }
+    
+    public function actionGamePage()
+    {
+        return $this->renderPartial('game_page');
+    }
 }

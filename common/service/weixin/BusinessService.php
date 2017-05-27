@@ -192,19 +192,19 @@ class BusinessService extends BaseService{
                          'Title'=>'西游伏妖篇',
                          'Description'=>'正版授权-颠覆西游传说，再续西游情缘。',
                          'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
-                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                         'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
                      ]],
                      ['item'=>[
                          'Title'=>'神印王座',
                          'Description'=>'「神龙战士」范冰冰代言 火爆公测！',
                          'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0502/02111015pXtoF.jpg',
-                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                         'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
                      ]],
                      ['item'=>[
                          'Title'=>'烈焰传奇',
                          'Description'=>'还原经典炫酷激情PK，兄弟齐心，热血攻沙!',
                          'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0502/02144626JFkQz.jpg',
-                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                         'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
                      ]]
                  ]
           ]);
