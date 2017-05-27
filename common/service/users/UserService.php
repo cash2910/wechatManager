@@ -28,6 +28,7 @@ class UserService extends BaseService implements UserInterface
         }catch ( \Exception $e){
             $res['isOk'] = 0;
             $res['msg'] = $e->getMessage();
+            yii::error(  $res['msg'] );
             $transaction->rollBack();
         }
         return $res;
