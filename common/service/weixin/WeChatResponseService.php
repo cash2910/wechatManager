@@ -42,39 +42,12 @@ class WeChatResponseService extends Module{
                 return $entity;
             }
             call_user_func_array([new $conf['class'], $conf['method']], [$entity] ); */
-  /*           $entity->setResp([
+            $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
                 'MsgType'=>'text',
                 'Content'=>'【你好】'
-            ]); */
-            
-            $entity->setResp([
-                 'FromUserName'=>$entity->ToUserName,
-                 'ToUserName'=>$entity->FromUserName,
-                 'MsgType'=>'news',
-                 'ArticleCount'=>3,
-                 'Articles'=>[
-                     ['item'=>[
-                         'Title'=>'王者农药',
-                         'Description'=>'王者农药 就是干',
-                         'PicUrl'=> 'https://www.baidu.com',
-                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
-                     ]],
-                     ['item'=>[
-                         'Title'=>'王者农药1',
-                         'Description'=>'王者农药 就是干',
-                         'PicUrl'=> 'https://www.baidu.com',
-                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
-                     ]],
-                     ['item'=>[
-                         'Title'=>'王者农药2',
-                         'Description'=>'王者农药 就是干',
-                         'PicUrl'=> 'https://www.baidu.com',
-                         'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
-                     ]]
-                 ]
-             ]);
+            ]);
             
             /* 
             $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
