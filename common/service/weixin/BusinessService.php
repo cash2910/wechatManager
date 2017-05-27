@@ -117,22 +117,11 @@ class BusinessService extends BaseService{
       */
      public function getUserShareCode( ProxyXml $entity ){
          
-         yii::error("aaaaaaa");
-         $id = $entity->EventKey;
-         $url = $this->getQrcode($id);
+         //$id = $entity->EventKey;
+         //$url = $this->getQrcode($id);
          $uInfo = UserService::getInstance()->getUserInfo([
              'open_id'=> $entity->FromUserName
          ]);
-         yii::error("bbbb");
-/*          $entity->setResp([
-             'FromUserName'=>$entity->ToUserName,
-             'ToUserName'=>$entity->FromUserName,
-             'MsgType'=>'link',
-             'Title'=>'你的专属链接',
-             'Description'=>'你的专属链接',
-             'Url'=> 'www.qq.com',
-             'MsgId'=>$_SERVER['REQUEST_TIME']
-         ]); */
          
          $entity->setResp([
              'FromUserName'=>$entity->ToUserName,
@@ -141,9 +130,9 @@ class BusinessService extends BaseService{
              'ArticleCount'=>1,
              'Articles'=>[
                  ['item'=>[
-                     'Title'=>'西游伏妖篇',
+                     'Title'=>'您有如下专属推广链接',
                      'Description'=>'正版授权-颠覆西游传说，再续西游情缘。',
-                     'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
+                     //'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
                      'Url' =>'http://www.baidu.com'
                  ]]
              ]
