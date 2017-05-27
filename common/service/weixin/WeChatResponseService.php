@@ -125,34 +125,11 @@ class WeChatResponseService extends Module{
         //自定义菜单事件(点击菜单拉取消息时的事件推送)
         $this->on('click', function( $event ){
             $entity = $event->sender;
-   /*          $entity->setResp([
-                'FromUserName'=>$entity->ToUserName,
-                'ToUserName'=>$entity->FromUserName,
-                'MsgType'=>'text',
-                'Content'=>'【你好】'
-            ]); */
-            
-             $entity->setResp([
-                'FromUserName'=>$entity->ToUserName,
-                'ToUserName'=>$entity->FromUserName,
-                'MsgType'=>'news',
-                'ArticleCount'=>1,
-                'Articles'=>[
-                    'item'=>[
-                        'Title'=>'王者农药',
-                        'Description'=>'王者农药 就是干',
-                        'PicUrl'=> 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58',
-                        'Url' =>'http://www.baidu.com'
-                    ]
-                ]
-            ]);
-             
-           
-           /*  $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
+              $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
             if( empty($conf) ){
                 return $entity;
             }
-            call_user_func_array([new $conf['class'], $conf['method']], [$entity] ); */
+            call_user_func_array([new $conf['class'], $conf['method']], [$entity] );
         });
         
         //自定义菜单事件(点击菜单跳转链接时的事件推送)
