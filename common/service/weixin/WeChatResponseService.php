@@ -63,6 +63,8 @@ class WeChatResponseService extends Module{
         $this->on('subscribe', function( $event ){
             $entity = $event->sender;
             $id  = $entity->EventKey; //上级id
+            //判断用户是否存在
+            
             $ret = UserService::getInstance()->createUser([
                 'add_time'=> $entity->CreateTime,
                 'open_id' =>  $entity->FromUserName,
@@ -79,19 +81,20 @@ class WeChatResponseService extends Module{
                     if( empty($uInfo)  )
                         throw new Exception(" invalid scran ID");
                     $rel = $uInfo->user_rels;
-                    $model->user_rels = $rel."-".$uInfo->id;
+                    $model->user_rels = !empty( $rel ) ? ($rel."-".$uInfo->id) : $uInfo->id ;
                     $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
                         $rel = new MgUserRel();
                         $rel->user_id = $id;
                         $rel->sub_user_id = $ent->sender->id;
                         $rel->save();
                     });
+                    //通知用户
                     $entity->setResp([
                         'FromUserName'=> $entity->ToUserName,
                         'ToUserName'=>$uInfo->open_id,
                         'Content'=>"{$uInfo->open_id} 好！！",
-                        'MsgType' =>'text'
-                            ]);
+                        'MsgType' =>'text',
+                    ]);
                 } catch (Exception $e) {
                     yii::error( $e->getMessage() );
                 }
@@ -125,7 +128,6 @@ class WeChatResponseService extends Module{
         //自定义菜单事件(点击菜单拉取消息时的事件推送)
         $this->on('click', function( $event ){
             $entity = $event->sender;
-            yii::error( $entity->EventKey);
             $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
             if( empty($conf) ){
                 return $entity;
