@@ -50,19 +50,31 @@ class WeChatResponseService extends Module{
             ]); */
             
             $entity->setResp([
-                'FromUserName'=>$entity->ToUserName,
-                'ToUserName'=>$entity->FromUserName,
-                'MsgType'=>'news',
-                'ArticleCount'=>1,
-                'Articles'=>[
-                    'item'=>[
-                        'Title'=>'王者农药',
-                        'Description'=>'王者农药 就是干',
-                        'PicUrl'=> 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58',
-                        'Url' =>'http://www.baidu.com'
-                    ]
-                ]
-            ]);
+             'FromUserName'=>'dsadsadsa',
+             'ToUserName'=>'aaaaaa',
+             'MsgType'=>'news',
+             'ArticleCount'=>1,
+             'Articles'=>[
+                 ['item'=>[
+                     'Title'=>'王者农药',
+                     'Description'=>'王者农药 就是干',
+                     'PicUrl'=> 'https://www.baidu.com',
+                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                 ]],
+                 ['item'=>[
+                     'Title'=>'王者农药1',
+                     'Description'=>'王者农药 就是干',
+                     'PicUrl'=> 'https://www.baidu.com',
+                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                 ]],
+                 ['item'=>[
+                     'Title'=>'王者农药2',
+                     'Description'=>'王者农药 就是干',
+                     'PicUrl'=> 'https://www.baidu.com',
+                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                 ]]
+             ]
+         ]);
             
             /* 
             $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
@@ -205,7 +217,7 @@ class ProxyXml{
     function setResp( $data ){
         $default = [
             'CreateTime'=>ArrayHelper::getValue($_SERVER, 'REQUEST_TIME', time()),
-        //    'FromUserName'=> 'glory_jzx'//Yii::$app->params['AppId']
+        //    'FromUserName'=> Yii::$app->params['AppId']
         ];
         $this->response = $this->buildXml( array_merge($default,$data) ); 
     }
@@ -216,23 +228,29 @@ class ProxyXml{
     
     function buildXml( $data, $wrap= 'xml' ){
         $str = "<{$wrap}>";
-        foreach ($data as $k=>$v){
-            if( is_array($v) )
-                $str .= $this->buildXml( $v, $k );
-            else{
-                $str .= $this->wrap( $k ,$v );
-                //$str .= "<{$k}>{$v}</{$k}>";
+        if( is_array( $data ) )
+            if( !ArrayHelper::isIndexed( $data,true ) ){
+                foreach( $data as $k=>$v ){
+                    $str .= $this->buildXml( $v, $k  );
+                }
+            }else{
+                foreach( $data as $v ){
+                    foreach( $v as $k1=>$v1 )
+                        $str .= $this->buildXml( $v1, $k1 );
+                }
             }
-        }
+        else
+            $str .= $this->wrap( $wrap ,$data );
         $str .= "</{$wrap}>";
         return $str;
     }
+   
     
     function wrap( $k, $v ){
-        $formate = '<%s>%s</%s>';
+         $formate = '%s';
         if( in_array( $k, ProxyXml::WRAP_LIST) )
-            $formate = '<%s><![CDATA[%s]]></%s>';
-        return sprintf( $formate, $k, $v, $k );
+            $formate = '<![CDATA[%s]]>';
+        return sprintf( $formate,  $v );
     }
 }
 

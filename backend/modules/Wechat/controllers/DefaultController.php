@@ -5,6 +5,8 @@ namespace backend\modules\Wechat\controllers;
 use yii;
 use yii\web\Controller;
 use common\components\WeixinMenuConfig;
+use common\service\weixin\WeChatResponseService;
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -87,12 +89,96 @@ class DefaultController extends Controller
             });
         }); */
         
-        $conf  = WeixinMenuConfig::getConf( 'GET_SHARE_QRCODE' );
+/*         $conf  = WeixinMenuConfig::getConf( 'GET_SHARE_QRCODE' );
         if( empty($conf) ){
             die('...');
         }
-        $ret = call_user_func_array([new $conf['class'], $conf['method']], [16]);
-        var_dump( $ret );
+        $ret = call_user_func_array([new $conf['class'], $conf['method']], [16]); */
+        $xmlObj = new ProxyXml();
+        $ret = $xmlObj->buildXml([
+             'FromUserName'=>'dsadsadsa',
+             'ToUserName'=>'aaaaaa',
+             'MsgType'=>'news',
+             'ArticleCount'=>1,
+             'Articles'=>[
+                 ['item'=>[
+                     'Title'=>'王者农药',
+                     'Description'=>'王者农药 就是干',
+                     'PicUrl'=> 'https://www.baidu.com',
+                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                 ]],
+                 ['item'=>[
+                     'Title'=>'王者农药1',
+                     'Description'=>'王者农药 就是干',
+                     'PicUrl'=> 'https://www.baidu.com',
+                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                 ]],
+                 ['item'=>[
+                     'Title'=>'王者农药2',
+                     'Description'=>'王者农药 就是干',
+                     'PicUrl'=> 'https://www.baidu.com',
+                     'Url' =>'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3365950462,3553557768&fm=58'
+                 ]]
+             ]
+         ]);
+        header("Content-type: text/xml");
+        echo '<?xml version="1.0" encoding="utf-8"?>';
+        echo $ret ;
+    }
+}
+
+
+
+class ProxyXml{
+    private $xml = null;
+    private $response = ' ';
+    //需要添加<![CDATA[url]]> 元素列表
+    const WRAP_LIST = ['ToUserName','FromUserName','MsgType','Content','MediaId',
+        'Title','Description','MusicUrl','HQMusicUrl','ThumbMediaId','PicUrl','Url'];
+    function __construct( $xmlObj = null ){
+        $this->xml = $xmlObj;
+    }
+    function __get( $attr ){
+        return isset( $this->xml->$attr ) ? trim( $this->xml->$attr ) : "";
+    }
+
+    function setResp( $data ){
+        $default = [
+            'CreateTime'=>ArrayHelper::getValue($_SERVER, 'REQUEST_TIME', time()),
+            //    'FromUserName'=> 'glory_jzx'//Yii::$app->params['AppId']
+        ];
+        $this->response = $this->buildXml( array_merge($default,$data) );
+    }
+
+    function getResp() {
+        return $this->response;
+    }
+
+    function buildXml( $data, $wrap= 'xml' ){
+        $str = "<{$wrap}>";
+        if( is_array( $data ) )
+            if( !ArrayHelper::isIndexed( $data,true ) ){
+                foreach( $data as $k=>$v ){
+                    $str .= $this->buildXml( $v, $k  );
+                }
+            }else{
+                foreach( $data as $v ){
+                    foreach( $v as $k1=>$v1 )
+                        $str .= $this->buildXml( $v1, $k1 );
+                }
+            }
+        else
+            $str .= $this->wrap($wrap, $data );
+        $str .= "</{$wrap}>";
+        return $str;
+    }
+     
+
+    function wrap( $k, $v ){
+        $formate = '%s';
+        if( in_array( $k, ProxyXml::WRAP_LIST) )
+            $formate = '<![CDATA[%s]]>';
+        return sprintf( $formate,  $v );
     }
 }
 
