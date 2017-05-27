@@ -11,7 +11,7 @@ class WeixinMenuConfig{
     
     public static $conf = [
         //获取推广链接
-        'GET_SHARE_QRCODE'=>[
+        'MY_SHARE_LINK'=>[
             'title'=>'获取推广链接',
             'handle'=>[
                 'class'=> 'common\service\weixin\BusinessService',
