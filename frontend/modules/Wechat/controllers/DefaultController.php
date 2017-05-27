@@ -3,6 +3,8 @@
 namespace frontend\modules\Wechat\controllers;
 
 use yii\web\Controller;
+use common\service\weixin\BusinessService;
+use yii;
 
 /**
  * Default controller for the `Wechat` module
@@ -26,5 +28,15 @@ class DefaultController extends Controller
     public function actionGamePage()
     {
         return $this->renderPartial('game_page');
+    }
+    
+    public function actionGetQrCode(){
+        $id = yii::$app->request->get('id', 0);
+        $url = BusinessService::getInstance()->getQrcode( $id );
+        die(json_encode([
+            'isOk'=> 1,
+            'msg' => '获取成功',
+            'pic_url'=>$url
+        ]));
     }
 }
