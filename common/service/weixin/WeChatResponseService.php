@@ -125,6 +125,7 @@ class WeChatResponseService extends Module{
         //自定义菜单事件(点击菜单拉取消息时的事件推送)
         $this->on('click', function( $event ){
             $entity = $event->sender;
+            yii::error( $entity->EventKey);
             $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
             if( empty($conf) ){
                 return $entity;
