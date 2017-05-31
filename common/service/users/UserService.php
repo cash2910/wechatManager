@@ -29,6 +29,7 @@ class UserService extends BaseService implements UserInterface
                 $res['data']  = call_user_func( $callback, $uObj );
             }
             $ret = $uObj->save();
+            yii::error(  json_encode($ret) );
             if( !$ret )
                  throw new \Exception( json_encode( $uObj->getErrors() ) );
             $transaction->commit();
