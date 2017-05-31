@@ -76,20 +76,21 @@ class WeChatResponseService extends Module{
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
                 'nickname'=> $uwInfo['nickname'],
-               // 'ticket' => $entity->Ticket
+                'ticket' => $entity->Ticket
             ],function( $model ) use ( $id, $entity ){
                 //若不存在招募关系 则不进行关系绑定
                 if( empty( $id ) )
                     return false;
                 try {
                     list( $p, $id ) = explode("_",$id);
+                    //获取招募人信息
                     $uInfo = \common\service\users\UserService::getInstance()->getUserInfo([
                         'id'=> $id
                     ]);
                     if( empty($uInfo)  )
                         throw new Exception(" invalid scran ID");
-                    $rel = $uInfo->user_rels;
-                    $model->user_rels = !empty( $rel ) ? ( $rel."-".$uInfo->id ) : $uInfo->id ;
+                    $rel = empty( $uInfo->user_rels ) ? $uInfo->id : ( $uInfo->user_rels.'-'.$uInfo->id );
+                    $model->user_rels = $rel ;
                     yii::error("rel :".$model->user_rels );
                     $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
                         $rel = new MgUserRel();
