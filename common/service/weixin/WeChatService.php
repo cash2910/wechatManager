@@ -21,7 +21,6 @@ class WeChatService implements WeixinInterface
         $this->proxy = $proxy;
     }
     
-    
     /**
      * 先获取缓存中数据。若没有则向微信端获取
      * @see \service\WeixinInterface::getAccessToken()
@@ -71,6 +70,11 @@ class WeChatService implements WeixinInterface
         return call_user_func([ $this->proxy, $method ],$params);
     }
     
+    public function getUserInfo( $params ){
+        list( $nsp, $method ) = explode('::', __METHOD__ );
+        return call_user_func([ $this->proxy, $method ],$params);
+    }
+    
     public function createQrcode( $params ){
         list( $nsp, $method ) = explode('::', __METHOD__ );
         return call_user_func([ $this->proxy, $method ],$params);
@@ -82,6 +86,16 @@ class WeChatService implements WeixinInterface
     }
     
     public function createMenu( $params ){
+        list( $nsp, $method ) = explode('::', __METHOD__ );
+        return call_user_func([ $this->proxy, $method ],$params);
+    }
+    
+    public function setIndustry( $params ){
+        list( $nsp, $method ) = explode('::', __METHOD__ );
+        return call_user_func([ $this->proxy, $method ],$params);
+    }
+    
+    public function sendMsg( $params ){
         list( $nsp, $method ) = explode('::', __METHOD__ );
         return call_user_func([ $this->proxy, $method ],$params);
     }

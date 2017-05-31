@@ -52,7 +52,7 @@ interface WeixinInterface{
     public function deleteUserTag( $params );
     
     /**
-     * 获取微信关注用户
+     * 获取微信关注用户 open_ids
      * @param unknown $params
      */
     public function getUsers( $params );
@@ -64,6 +64,10 @@ interface WeixinInterface{
      */
     public function batchGetUsersInfo( $params );
     
+    /**
+     * 获取微信用户详细信息
+     */
+    public function getUserInfo( $params );
     
     /**
      * 生成带参数的二维码链接
@@ -77,8 +81,17 @@ interface WeixinInterface{
      * @param unknown $params
      */
     public function genShortUrl( $params );
-  
     
+    /**
+     * 设置行业模板
+     * @param unknown $params
+     */
+    public function setIndustry( $params );
+  
+    /**
+     * 发送行业模板
+     */
+    public function sendMsg( $params );
 }
 
 ?>

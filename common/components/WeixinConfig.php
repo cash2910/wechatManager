@@ -50,12 +50,24 @@ class WeixinConfig{
             'url'=>'https://api.weixin.qq.com/cgi-bin/user/info/batchget',
             'isPost'=>1
         ],
+        'getUserInfo'=>[
+            'url'=>'https://api.weixin.qq.com/cgi-bin/user/info',
+        ],
         'createQrcode'=>[
             'url'=>'https://api.weixin.qq.com/cgi-bin/qrcode/create',
             'isPost'=>1
         ],
         'genShortUrl'=>[
             'url'=>'https://api.weixin.qq.com/cgi-bin/shorturl',
+            'isPost'=>1
+        ],
+        //设置行业类型
+        'setIndustry'=>[
+            'url'=>'https://api.weixin.qq.com/cgi-bin/template/api_set_industry',
+            'isPost'=>1
+        ],
+        'sendMsg'=>[
+            'url'=>'https://api.weixin.qq.com/cgi-bin/message/template/send',
             'isPost'=>1
         ]
     ];

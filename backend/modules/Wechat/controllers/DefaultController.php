@@ -8,6 +8,7 @@ use common\components\WeixinMenuConfig;
 use common\service\weixin\WeChatResponseService;
 use yii\helpers\ArrayHelper;
 use common\service\users\UserService;
+use common\service\weixin\WeChatService;
 
 
 /**
@@ -23,6 +24,17 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+    
+    //设置行业模板
+    public function actionSetTpl(){
+        
+        $ret = WeChatService::getIns()->setIndustry([
+            'industry_id1'=>1,
+            'industry_id2'=>6
+        ]);
+        //var_dump( $ret );
+    }
+    
     
     public function actionTest(){
         // $token = WeChatProxyService::getToken();
@@ -97,10 +109,40 @@ class DefaultController extends Controller
         $ret = call_user_func_array([new $conf['class'], $conf['method']], [16]); */
         //echo  Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-page', 'id'=>555] );
         //$ret = UserService::getInstance()->checkExist( '321321' );
-        $ret = UserService::getInstance()->modifyUser([
+/*         $ret = UserService::getInstance()->modifyUser([
             'id'=> 11,
             'status'=> 2,
-        ]);
+        ]); */
+        
+ /*        $ret = WeChatService::getIns()->sendMsg([
+            'touser'=>'opjR8w4dyynJRHFhL8fFY9yrYG8M',
+            'template_id'=>'8g7uVLKEUDPalyxX3nXoBAlAbKaktmdkjh8itzlbXAk',
+           // 'url'=>'',
+            'data'=>[
+                'first'=>[
+                    'value'=>'恭喜您通过分享链接成功锁定一位会员！',
+                    'color'=>'#173177'
+                ],
+                'keyword1'=>[
+                    'value'=>'刘德华',
+                    'color'=>'#173177'
+                ],
+                'keyword2'=>[
+                    'value'=>date('Y-m-d H:i:s'),
+                    'color'=>'#173177'
+                ],
+                'remark'=>[
+                    'value'=>'记得提醒他多关注平台。',
+                    'color'=>'#173177'
+                ]
+            ]
+        ]); */
+        
+       $ret = WeChatService::getIns()->getUserInfo([
+           'openid'=>'opjR8w4dyynJRHFhL8fFY9yrYG8M'
+       ]);
+        
+        
         var_dump( $ret );
     }
 }

@@ -69,10 +69,15 @@ class WeChatResponseService extends Module{
                 ]);
                 return true;
             }
+            $uwInfo = WeChatService::getIns()->getUserInfo([
+                'openid'=> $open_id 
+            ]);
+            
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
+                'nickname'=> $uwInfo['nickname'],
                 'ticket' => $entity->Ticket
-            ],function( $model ) use ( $id, $entity ){
+            ],function( $model ) use ( $id, $entity  ){
                 //若不存在招募关系 则不进行关系绑定
                 if( empty( $id ) )
                     return false;
@@ -91,13 +96,31 @@ class WeChatResponseService extends Module{
                         $rel->sub_user_id = $ent->sender->id;
                         $rel->save();
                     });
-                    //通知用户 
-                    $entity->setResp([
-                        'FromUserName'=> $entity->ToUserName,
-                        'ToUserName'=> $open_id,
-                        'Content'=>"Welcome to join us ",
-                        'MsgType' =>'text',
+                    //通知上线用户 
+                    $ret = WeChatService::getIns()->sendMsg([
+                        'touser'=> $uInfo->open_id,
+                        'template_id'=>'8g7uVLKEUDPalyxX3nXoBAlAbKaktmdkjh8itzlbXAk',
+                       // 'url'=>'',
+                        'data'=>[
+                            'first'=>[
+                                'value'=>'恭喜您通过分享链接成功锁定一位会员！',
+                                'color'=>'#173177'
+                            ],
+                            'keyword1'=>[
+                                'value'=> $model->nickname,
+                                'color'=>'#173177'
+                            ],
+                            'keyword2'=>[
+                                'value'=>date('Y-m-d H:i:s'),
+                                'color'=>'#173177'
+                            ],
+                            'remark'=>[
+                                'value'=>'记得提醒他多关注平台。',
+                                'color'=>'#173177'
+                            ]
+                        ]
                     ]);
+                    yii::error( '通知信息 :'.json_encode( $ret ) );
                 } catch (Exception $e) {
                     yii::error( $e->getMessage() );
                 }
@@ -106,7 +129,7 @@ class WeChatResponseService extends Module{
             $entity->setResp([
                 'FromUserName'=> $entity->ToUserName,
                 'ToUserName'=> $open_id,
-                'Content'=>"Welcome to join us ",
+                'Content'=>"欢迎加入MG竞技",
                 'MsgType' =>'text',
             ]);
             yii::trace( json_encode( $ret ) );
