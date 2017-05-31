@@ -75,9 +75,9 @@ class WeChatResponseService extends Module{
             
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
-                'nickname'=> $uwInfo['nickname'],
+             //   'nickname'=> $uwInfo['nickname'],
                 'ticket' => $entity->Ticket
-            ],function( $model ) use ( $id, $entity  ){
+            ],function( $model ) use ( $id, $entity ){
                 //若不存在招募关系 则不进行关系绑定
                 if( empty( $id ) )
                     return false;
@@ -141,6 +141,7 @@ class WeChatResponseService extends Module{
             $uInfo = UserService::getInstance()->getUserInfo([
                 'open_id'=> $entity->FromUserName,
             ]);
+            $ret = [];
             if( !empty( $uInfo ) )
                 $ret = UserService::getInstance()->modifyUser([
                     'id'=> $uInfo->id,
