@@ -37,24 +37,12 @@ class WeChatResponseService extends Module{
         //接收普通消息  text image ...
         $this->on('text', function( $event ){
             $entity = $event->sender;
-/*             $conf  = WeixinMenuConfig::getConf( 'GET_SHARE_QRCODE' );
-            if( empty($conf) ){
-                return $entity;
-            }
-            call_user_func_array([new $conf['class'], $conf['method']], [$entity] ); */
             $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
                 'MsgType'=>'text',
                 'Content'=>'【你好】'
             ]);
-            
-            /* 
-            $conf  = WeixinMenuConfig::getConf( $entity->EventKey );
-            if( empty($conf) ){
-                return $entity;
-            }
-            call_user_func_array([new $conf['class'], $conf['method']], [$entity] ); */
         });
         /**
          * 用户订阅 ...
@@ -71,6 +59,13 @@ class WeChatResponseService extends Module{
                 $ret = UserService::getInstance()->modifyUser([
                     'open_id'=> $open_id,
                     'status'=> 1,
+                ]);
+                //通知用户
+                $entity->setResp([
+                    'FromUserName'=> $entity->ToUserName,
+                    'ToUserName'=> $open_id,
+                    'Content'=>"欢迎回来~",
+                    'MsgType' =>'text',
                 ]);
                 return true;
             }
@@ -107,6 +102,13 @@ class WeChatResponseService extends Module{
                     yii::error( $e->getMessage() );
                 }
             });
+            //通知用户
+            $entity->setResp([
+                'FromUserName'=> $entity->ToUserName,
+                'ToUserName'=> $open_id,
+                'Content'=>"Welcome to join us ",
+                'MsgType' =>'text',
+            ]);
             yii::trace( json_encode( $ret ) );
         });
         
@@ -134,7 +136,7 @@ class WeChatResponseService extends Module{
         
          //上报地理位置事件
         $this->on('location', function( $event ){
-            return "aaa";
+            //return "aaa";
         });
         
         //自定义菜单事件(点击菜单拉取消息时的事件推送)
@@ -150,7 +152,7 @@ class WeChatResponseService extends Module{
         
         //自定义菜单事件(点击菜单跳转链接时的事件推送)
         $this->on('view', function( $event ){
-            return "aaa";
+            //return "aaa";
         });
     }
     
@@ -183,7 +185,6 @@ class ProxyXml{
     function setResp( $data ){
         $default = [
             'CreateTime'=>ArrayHelper::getValue($_SERVER, 'REQUEST_TIME', time()),
-        //    'FromUserName'=> Yii::$app->params['AppId']
         ];
         $this->response = $this->buildXml( array_merge($default,$data) ); 
     }
