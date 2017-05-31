@@ -63,7 +63,7 @@ class UserService extends BaseService implements UserInterface
         $transaction = Yii::$app->db->beginTransaction();
         try{
             if (isset($params['open_id'])) {
-                 $uObj = MgUsers::findOne( ['open_id'=>$open_id] );
+                 $uObj = MgUsers::findOne( [ 'open_id'=>$params['open_id'] ] );
             }else
                $uObj = MgUsers::findOne( $params['id'] );
             $uObj->setAttributes( $params );
