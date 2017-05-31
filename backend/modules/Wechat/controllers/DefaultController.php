@@ -7,6 +7,7 @@ use yii\web\Controller;
 use common\components\WeixinMenuConfig;
 use common\service\weixin\WeChatResponseService;
 use yii\helpers\ArrayHelper;
+use common\service\users\UserService;
 
 
 /**
@@ -94,6 +95,12 @@ class DefaultController extends Controller
             die('...');
         }
         $ret = call_user_func_array([new $conf['class'], $conf['method']], [16]); */
-        echo  Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-page', 'id'=>555] );
+        //echo  Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-page', 'id'=>555] );
+        //$ret = UserService::getInstance()->checkExist( '321321' );
+        $ret = UserService::getInstance()->modifyUser([
+            'id'=> 11,
+            'status'=> 2,
+        ]);
+        var_dump( $ret );
     }
 }

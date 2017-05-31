@@ -9,6 +9,13 @@ use yii;
 
 class UserService extends BaseService implements UserInterface
 {
+    
+    //检测用户是否存在
+    public function checkExist( $open_id ){
+        return ( MgUsers::findOne([
+            'open_id'=>$open_id
+        ]) ) !== null;
+    }
 
     //创建用户
     public function createUser( $params, \Closure $callback = null ){
@@ -49,7 +56,7 @@ class UserService extends BaseService implements UserInterface
         $res = ['isOk'=>1,'msg'=>'修改用户信息成功'];
         $transaction = Yii::$app->db->beginTransaction();
         try{
-            $uObj = new MgUsers();
+            $uObj = MgUsers::findOne( $params['id'] );
             $uObj->setAttributes( $params );
             if( $callback != null ){
                 $res['data']  = call_user_func( $callback, $uObj );

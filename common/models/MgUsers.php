@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "mg_users".
@@ -14,12 +15,23 @@ use Yii;
  * @property string $passwd
  * @property integer $is_bd
  * @property string $mobile
- * @property string $register_time
- * @property string $update_time
+ * @property integer $register_time
+ * @property integer $update_time
  * @property string $user_rels
  */
 class MgUsers extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+             [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'register_time',
+                'updatedAtAttribute' => 'update_time',
+                'value'   => function(){return $_SERVER['REQUEST_TIME'];},
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */

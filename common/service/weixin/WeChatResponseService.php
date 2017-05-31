@@ -63,11 +63,19 @@ class WeChatResponseService extends Module{
         $this->on('subscribe', function( $event ){
             $entity = $event->sender;
             $id  = $entity->EventKey; //上级id
+            $open_id =  $entity->FromUserName;
+            $uServ = UserService::getInstance();
             //判断用户是否存在
-            
-            $ret = UserService::getInstance()->createUser([
-                'add_time'=> $entity->CreateTime,
-                'open_id' =>  $entity->FromUserName,
+            if( $uServ->checkExist(  $entity->FromUserName ) ){
+                //savelog...
+                $ret = UserService::getInstance()->modifyUser([
+                    'open_id'=> $open_id,
+                    'status'=> 1,
+                ]);
+                return true;
+            }
+            $ret = $uServ->createUser([
+                'open_id' =>  $open_id,
                 'ticket' => $entity->Ticket
             ],function( $model ) use ( $id, $entity ){
                 //若不存在招募关系 则不进行关系绑定
@@ -88,11 +96,11 @@ class WeChatResponseService extends Module{
                         $rel->sub_user_id = $ent->sender->id;
                         $rel->save();
                     });
-                    //通知用户
+                    //通知用户 
                     $entity->setResp([
                         'FromUserName'=> $entity->ToUserName,
-                        'ToUserName'=>$uInfo->open_id,
-                        'Content'=>"{$uInfo->open_id} 好！！",
+                        'ToUserName'=> $open_id,
+                        'Content'=>"Welcome to join us ",
                         'MsgType' =>'text',
                     ]);
                 } catch (Exception $e) {
@@ -102,18 +110,16 @@ class WeChatResponseService extends Module{
             yii::trace( json_encode( $ret ) );
         });
         
-        //接收普通消息  text image ...
+        //用户取消订阅
         $this->on('unsubscribe', function( $event ){
             $entity = $event->sender;
-            
-            $ret = UserService::getInstance()->getUserInfo([
+            $uInfo = UserService::getInstance()->getUserInfo([
                 'open_id'=> $entity->FromUserName,
             ]);
-            if( !empty($ret) )
+            if( !empty( $uInfo ) )
                 $ret = UserService::getInstance()->modifyUser([
-                    'id'=> $ret->id,
+                    'id'=> $uInfo->id,
                     'status'=> 2,
-                    'update_time'=> $entity->CreateTime
                 ]);
             yii::error( json_encode( $ret ) );
         });
