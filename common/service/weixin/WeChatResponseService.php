@@ -90,7 +90,7 @@ class WeChatResponseService extends Module{
                     if( empty($uInfo)  )
                         throw new Exception(" invalid scran ID");
                     $rel = empty( $uInfo->user_rels ) ? $uInfo->id : ( $uInfo->user_rels.'-'.$uInfo->id );
-                    $model->user_rels = $rel ;
+                    $model->user_rels = (string)$rel;
                     yii::error("rel :".$model->user_rels );
                     $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
                         $rel = new MgUserRel();
