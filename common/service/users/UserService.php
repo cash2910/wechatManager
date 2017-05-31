@@ -50,13 +50,22 @@ class UserService extends BaseService implements UserInterface
         return $query->one();
     }
     
-    //修改用户信息
+    /**
+     * 根据open_id和id 修改用户信息
+     * @param unknown $params
+     * @param \Closure $callback
+     * @throws Exception
+     * @return multitype:number string NULL
+     */
     public function modifyUser( $params, \Closure $callback = null ){
     
         $res = ['isOk'=>1,'msg'=>'修改用户信息成功'];
         $transaction = Yii::$app->db->beginTransaction();
         try{
-            $uObj = MgUsers::findOne( $params['id'] );
+            if (isset($params['open_id'])) {
+                 $uObj = MgUsers::findOne( ['open_id'=>$open_id] );
+            }else
+               $uObj = MgUsers::findOne( $params['id'] );
             $uObj->setAttributes( $params );
             if( $callback != null ){
                 $res['data']  = call_user_func( $callback, $uObj );
