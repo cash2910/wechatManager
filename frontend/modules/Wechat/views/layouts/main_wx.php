@@ -23,9 +23,13 @@ AppAsset::register($this);
 <div class="wrap">
 <div class="weui-flex">
     <div class="weui-flex__item">
-        <article class="weui-article">
-            <h1>我的邀请码：123123</h1>
-        </article>
+        <div class="icon-box" style="padding:30px;">
+            <img style="float:left;" src="http://pic.nen.com.cn/600/15/97/18/15971842_791759.jpg" width="80" height="80"/>
+            <div style="float:left;  margin-left:15px;">
+                <h4 >汉族教父</h3>
+                <p class="icon-box__desc">加入时间：2017-05-24</p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="weui-flex">
