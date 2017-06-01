@@ -7,7 +7,7 @@
                 </div>
                 <div class="weui-cell__ft"></div>
             </a>
-            <a class="weui-cell weui-cell_access js_item" data-id="badge" href="javascript:;">
+            <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-friend">
                 <div class="weui-cell__bd">
                     <p>我的好友</p>
                 </div>
@@ -22,6 +22,3 @@
         </div>
     </div>
 </div>
-
-
-

@@ -31,10 +31,16 @@ class DefaultController extends Controller
         return $this->renderPartial('game_page');
     }
     
-    public function actionMyFriend()
+    public function actionMyIndex()
     {
         return $this->render('my_index');
     }
+    
+    public function actionMyFriend()
+    {
+        return $this->render('my_friend');
+    }
+    
     
     public function actionGetQrCode(){
         $id = yii::$app->request->get('id', 0);
