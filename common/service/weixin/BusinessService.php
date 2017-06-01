@@ -209,6 +209,23 @@ class BusinessService extends BaseService{
                  ]
           ]);
      }
+     
+     public function consultCs( ProxyXml $entity ){
+         $entity->setResp([
+             'FromUserName'=>$entity->ToUserName,
+             'ToUserName'=>$entity->FromUserName,
+             'MsgType'=>'news',
+             'ArticleCount'=>1,
+             'Articles'=>[
+                 ['item'=>[
+                     'Title'=>'回复“咨询客服” 即可在线沟通',
+                     'Description'=>'回复“咨询客服” 即可在线沟通',
+                     'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
+                     'Url' =>"https://mp.weixin.qq.com/s?__biz=MzI3OTY5NzA2Mg==&tempkey=vSsWVaIC%2FSCWE9NJZKEr295ftcvU7pgcpkhdhDBjpX701rCE4dCm3QqRpB%2Bm%2BIHS9v4yyZ%2BqyghRHjkoVpLwtiDLjqBEcREjsYMYWHPAdQdwDC6oPGwgaJy%2FzPSoNhilQP2PrMbJupA1P0XZOh3z8Q%3D%3D&chksm=6b4282c85c350bde33257163a048bd0ce112d0f72888f828a2e4d57d0a16104cc1bd0f8c3bb3#rd"
+                 ]],
+             ]
+         ]);
+     }
     
 }
 

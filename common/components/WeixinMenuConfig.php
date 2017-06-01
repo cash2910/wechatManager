@@ -24,6 +24,13 @@ class WeixinMenuConfig{
                 'class'=> 'common\service\weixin\BusinessService',
                 'method'=> 'getGames'
             ]
+        ],
+        'CONSULT_CS'=>[
+            'title'=>'咨询客服',
+            'handle'=>[
+                'class'=> 'common\service\weixin\BusinessService',
+                'method'=> 'consultCs'
+            ]
         ]
     ];
     

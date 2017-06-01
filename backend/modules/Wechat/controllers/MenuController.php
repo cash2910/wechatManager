@@ -128,8 +128,8 @@ class MenuController extends Controller
                     ]]              
                 ],[
                     'type'=>'click',
-                    'name'=>'我的信息',
-                    'key'=>'GET_MY_INFO'
+                    'name'=>'咨询客服',
+                    'key'=>'CONSULT_CS'
                 ]
             ]
         ]);
