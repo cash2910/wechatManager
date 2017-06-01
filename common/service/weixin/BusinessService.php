@@ -220,7 +220,7 @@ class BusinessService extends BaseService{
                  ['item'=>[
                      'Title'=>'回复“咨询客服” 即可在线沟通',
                      'Description'=>'回复“咨询客服” 即可在线沟通',
-                     'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
+                     'PicUrl'=> 'https://mmbiz.qlogo.cn/mmbiz_png/bOWzAibGJ912OrqyGpYBtt6fK6QCwvZ88bgZJknrJZ0rceoGt6Z2Z9lWCPRywdTVicGqaalqHba0ZdwDGohzIfcg/0?wx_fmt=png',
                      'Url' =>"https://mp.weixin.qq.com/s?__biz=MzI3OTY5NzA2Mg==&mid=100000001&idx=1&sn=39f7eb4ad4dee2b8930cc5f289a2ebb6&chksm=6b4282c85c350bde33257163a048bd0ce112d0f72888f828a2e4d57d0a16104cc1bd0f8c3bb3&scene=0&pass_ticket=6hnexhCFLQhTLCFfAZuY44AwWCS5jdCtqOZP9AN%2F29k7hDlwwWlGz1WlFlp0i2uL#rd"
                  ]],
              ]
