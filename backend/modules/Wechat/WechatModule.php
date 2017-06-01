@@ -29,10 +29,11 @@ class WechatModule extends \yii\base\Module
                        ['label'=>'用户管理','url' => ['/Wechat/wechat-user'], 'active' => 0 ],
                        ['label'=>'标签管理','url' => ['/Wechat/tag'], 'active' => 0 ]
                    ]],
-                   ['label'=>'菜单管理','url' => ['/Wechat/menu'], 'active' => 0 ],
+                   ['label'=>'菜单管理','url' => ['/Wechat/menu'], 'active' => 1 ],
                    ['label'=>'用户管理','url' => ['/Wechat/mg-user'], 'active' => 0 ],
+                   ['label'=>'客服管理','url' => ['/Wechat/cs'], 'active' => 0 ],
                    ['label'=>'后台用户管理','url' => ['/Wechat/user'], 'active' => 0 ],
               ]
-        ];   
+        ];
     }
 }

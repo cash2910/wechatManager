@@ -92,6 +92,11 @@ interface WeixinInterface{
      * 发送行业模板
      */
     public function sendMsg( $params );
+    
+    /**
+     * 添加客服账号
+     */
+    public function createCs( $params );
 }
 
 ?>

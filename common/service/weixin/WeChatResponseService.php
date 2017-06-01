@@ -21,7 +21,6 @@ class WeChatResponseService extends Module{
      * @param unknown $params
      */
     public function run( $params ){
-        
         $eventObj = $this->getEvent( $params );
         $event = new Event();
         $event->sender = $eventObj;
@@ -30,13 +29,21 @@ class WeChatResponseService extends Module{
             $eventName = strtolower( $eventObj->Event );
         $this->trigger( $eventName , $event );
         return $eventObj;
-        
     }
     
     public function init(){
         //接收普通消息  text image ...
         $this->on('text', function( $event ){
             $entity = $event->sender;
+            if( $entity->Content == '咨询客服' ){
+                $entity->setResp([
+                    'FromUserName'=>$entity->ToUserName,
+                    'ToUserName'=>$entity->FromUserName,
+                    'MsgType'=>'transfer_customer_service',
+                ]);
+                yii::error( "cs: ".$entity->FromUserName );
+                return ;
+            }
             $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
@@ -89,8 +96,8 @@ class WeChatResponseService extends Module{
                     ]);
                     if( empty($uInfo)  )
                         throw new Exception(" invalid scran ID");
-                    $rel = empty( $uInfo->user_rels ) ? $uInfo->id : ( $uInfo->user_rels.'-'.$uInfo->id );
-                    $model->user_rels = (string)$rel;
+                    $rel = empty( $uInfo->user_rels ) ? (string)$uInfo->id : ( $uInfo->user_rels.'-'.$uInfo->id );
+                    $model->user_rels = $rel;
                     yii::error("rel :".$model->user_rels );
                     $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id ){
                         $rel = new MgUserRel();

@@ -57,9 +57,14 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-    <div class="row" style="padding: 70px 15px 20px;">
+    <div class="row" style="padding: 70px 15px 20px; margin-left:0px;margin-right:0px;">
         <div class="col-md-2">
-            <?= SideNav::widget($this->context->module->getMenu()) ?>
+            <?php
+                $items = [];
+                if( method_exists( $this->context->module, 'getMenu' ) )
+                    $items = $this->context->module->getMenu();
+                echo SideNav::widget( $items ) 
+            ?>
         </div>
         <div class="col-md-9">
             <?= Breadcrumbs::widget([
@@ -68,7 +73,7 @@ AppAsset::register($this);
             <?= Alert::widget() ?>
             <?= $content ?>
         </div>
-    </div>  
+   </div>  
 </div>
 
 <footer class="footer">

@@ -138,10 +138,13 @@ class DefaultController extends Controller
             ]
         ]); */
         
-       $ret = WeChatService::getIns()->getUserInfo([
+/*        $ret = WeChatService::getIns()->getUserInfo([
            'openid'=>'opjR8w4dyynJRHFhL8fFY9yrYG8M'
-       ]);
-        
+       ]); */
+        $ret = WeChatService::getIns()->createCs([
+            'kf_account'=>"test1@test",
+            'nickname'=>'客服老王'
+        ]);
         
         var_dump( $ret );
     }

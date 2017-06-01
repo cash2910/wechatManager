@@ -3,17 +3,16 @@
 namespace backend\modules\Wechat\controllers;
 
 use Yii;
-use common\models\WechatUsers;
+use common\models\WechatCs;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\service\weixin\BusinessService;
 
 /**
- * WeChatUserController implements the CRUD actions for WechatUsers model.
+ * CsController implements the CRUD actions for WechatCs model.
  */
-class WechatUserController extends Controller
+class CsController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,13 +30,13 @@ class WechatUserController extends Controller
     }
 
     /**
-     * Lists all WechatUsers models.
+     * Lists all WechatCs models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => WechatUsers::find(),
+            'query' => WechatCs::find(),
         ]);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class WechatUserController extends Controller
     }
 
     /**
-     * Displays a single WechatUsers model.
+     * Displays a single WechatCs model.
      * @param integer $id
      * @return mixed
      */
@@ -58,13 +57,13 @@ class WechatUserController extends Controller
     }
 
     /**
-     * Creates a new WechatUsers model.
+     * Creates a new WechatCs model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new WechatUsers();
+        $model = new WechatCs();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +75,7 @@ class WechatUserController extends Controller
     }
 
     /**
-     * Updates an existing WechatUsers model.
+     * Updates an existing WechatCs model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,7 +94,7 @@ class WechatUserController extends Controller
     }
 
     /**
-     * Deletes an existing WechatUsers model.
+     * Deletes an existing WechatCs model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,24 +105,17 @@ class WechatUserController extends Controller
 
         return $this->redirect(['index']);
     }
-    
-    
-    public function actionInit()
-    {
-        $ret = ( new BusinessService() )->initUsers();
-        return $this->redirect(['index']);
-    }
 
     /**
-     * Finds the WechatUsers model based on its primary key value.
+     * Finds the WechatCs model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return WechatUsers the loaded model
+     * @return WechatCs the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = WechatUsers::findOne($id)) !== null) {
+        if (($model = WechatCs::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

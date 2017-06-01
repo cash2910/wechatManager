@@ -30,6 +30,11 @@ class DefaultController extends Controller
         return $this->renderPartial('game_page');
     }
     
+    public function actionMyFriend()
+    {
+        return $this->renderPartial('my_friend');
+    }
+    
     public function actionGetQrCode(){
         $id = yii::$app->request->get('id', 0);
         $url = BusinessService::getInstance()->getQrcode( $id );
