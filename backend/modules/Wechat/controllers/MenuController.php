@@ -124,7 +124,7 @@ class MenuController extends Controller
                     ],[
                         'name'=>'我的好友',
                         'type'=>'view',
-                        'url' =>'http://www.soso.com/'
+                        'url' => yii::$app->params['my_index']
                     ]]              
                 ],[
                     'type'=>'click',

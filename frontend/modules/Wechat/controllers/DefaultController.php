@@ -11,6 +11,7 @@ use yii;
  */
 class DefaultController extends Controller
 {
+    public $layout = "main_wx";
     /**
      * Renders the index view for the module
      * @return string
@@ -32,7 +33,7 @@ class DefaultController extends Controller
     
     public function actionMyFriend()
     {
-        return $this->renderPartial('my_friend');
+        return $this->render('my_index');
     }
     
     public function actionGetQrCode(){

@@ -38,6 +38,8 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => '首页', 'url' => ['/site/index']],
         ['label' => '微信管理', 'url' => ['/Wechat/menu']],
+        ['label' => '订单管理', 'url' => ['/Order/menu']],
+        ['label' => '推广员管理', 'url' => ['/Wechat/menu']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -62,7 +64,7 @@ AppAsset::register($this);
             <?php
                 $items = [];
                 if( method_exists( $this->context->module, 'getMenu' ) )
-                    $items = $this->context->module->getMenu();
+                    $items = $this->context->module->getMenu( yii::$app->request->pathInfo );
                 echo SideNav::widget( $items ) 
             ?>
         </div>

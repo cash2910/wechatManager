@@ -40,6 +40,9 @@ class WeChatResponseService extends Module{
                     'FromUserName'=>$entity->ToUserName,
                     'ToUserName'=>$entity->FromUserName,
                     'MsgType'=>'transfer_customer_service',
+                    'TransInfo'=>[
+                        'KfAccount'=>''
+                    ]
                 ]);
                 yii::error( "cs: ".$entity->FromUserName );
                 return ;
