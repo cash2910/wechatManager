@@ -122,7 +122,7 @@ class MenuController extends Controller
                         'type'=>'click',
                         'key'=>'MY_SHARE_LINK',
                     ],[
-                        'name'=>'我的好友',
+                        'name'=>'进入后台',
                         'type'=>'view',
                         'url' => yii::$app->params['my_index']
                     ]]              

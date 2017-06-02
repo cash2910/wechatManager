@@ -5,6 +5,7 @@ namespace frontend\modules\Wechat\controllers;
 use yii\web\Controller;
 use common\service\weixin\BusinessService;
 use yii;
+use yii\authclient\OAuth2;
 
 /**
  * Default controller for the `Wechat` module
@@ -12,12 +13,17 @@ use yii;
 class DefaultController extends Controller
 {
     public $layout = "main_wx";
+    
+//    public function 
+    
     /**
      * Renders the index view for the module
      * @return string
      */
     public function actionIndex()
     {
+       // OAuth2::
+       // $authObj = 
         return $this->render('index');
     }
     
