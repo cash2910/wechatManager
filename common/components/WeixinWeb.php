@@ -23,9 +23,7 @@ class WeixinWeb extends BaseService{
     
     public function getUserInfo(){
         if( null == $this->userInfo ){
-            $client = $this->getClient();
-            $url =  $client->buildAuthUrl(['scope'=>'snsapi_userinfo']);
-            Yii::$app->getResponse()->redirect($url);
+            
         }
         return $this->userInfo;
     }
