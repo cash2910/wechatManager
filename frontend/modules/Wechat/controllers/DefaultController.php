@@ -36,7 +36,7 @@ class DefaultController extends Controller
             die('访问受限');
         }
         $token = WeixinWeb::getInstance()->getClient()->fetchAccessToken( $code );
-        var_dump( $token );die();
+        var_dump( $this->open_id );
         return $this->render('my_index');
     }
     
