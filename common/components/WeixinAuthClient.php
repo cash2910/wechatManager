@@ -50,6 +50,14 @@ class WeixinAuthClient extends OAuth2{
     }
     
     
+    public function refreshAccessToken(OAuthToken $token)
+    {
+        $url = Yii::$app->urlManager->createAbsoluteUrl(['/Wechat'] );
+        $wbServ =  $this->setReturnUrl( $url );
+        Yii::$app->getResponse()->redirect($url);
+    }
+    
+    
     
     
     public function initUserAttributes(){}
