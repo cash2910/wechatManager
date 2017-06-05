@@ -58,6 +58,7 @@ class DefaultController extends Controller
     
     public function actionMyFriend()
     {
+        var_dump( $this->open_id );
         return $this->render('my_friend');
     }
     
