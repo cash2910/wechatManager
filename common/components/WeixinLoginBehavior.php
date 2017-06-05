@@ -18,7 +18,8 @@ class WeixinLoginBehavior extends ActionFilter{
             Yii::$app->getResponse()->redirect( $returl );
             return false;
         }
-        $this->owner->open_id = $token->getParam('open_id');
+        if( isset( $this->owner->open_id ) )
+            $this->owner->open_id = $token->getParam('open_id');
         return true;
     }
 }
