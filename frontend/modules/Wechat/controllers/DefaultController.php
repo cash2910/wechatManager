@@ -37,8 +37,7 @@ class DefaultController extends Controller
             die('访问受限');
         }
         $token = WeixinWeb::getInstance()->getClient()->fetchAccessToken( $code );
-        var_dump( $this->open_id );
-        return $this->render('my_index');
+        Yii::$app->getResponse()->redirect( Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-index'] ) );
     }
     
     public function actionSharePage()
