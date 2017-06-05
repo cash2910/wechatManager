@@ -15,7 +15,7 @@ class WeixinWeb extends BaseService{
     private $userInfo = null;
     private $clientObj = null;
     
-    private function getClient(){
+    public function getClient(){
         if( $this->clientObj == null )
             $this->clientObj = new WeixinAuthClient();
         return $this->clientObj;
@@ -24,22 +24,11 @@ class WeixinWeb extends BaseService{
     public function getUserInfo(){
         if( null == $this->userInfo ){
             $client = $this->getClient();
-             $url =  $client->buildAuthUrl(['scope'=>'snsapi_userinfo']);
-             Yii::$app->getResponse()->redirect($url);
+            $url =  $client->buildAuthUrl(['scope'=>'snsapi_userinfo']);
+            Yii::$app->getResponse()->redirect($url);
         }
         return $this->userInfo;
     }
-    
-    //设置返回链接    
-    public function setRetUrl( $url ){
-        return $this->getClient()->setReturnUrl( $url );
-    }
-    
-    public function getToken( $code  ){
-        $client = $this->getClient();
-        $accessToken = $client->fetchAccessToken( $code );
-    }
-    
     
 }
 

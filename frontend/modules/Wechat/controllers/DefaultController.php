@@ -6,6 +6,7 @@ use yii\web\Controller;
 use common\service\weixin\BusinessService;
 use yii;
 use common\components\WeixinWeb;
+use common\components\WeixinLoginBehavior;
 
 /**
  * Default controller for the `Wechat` module
@@ -14,7 +15,16 @@ class DefaultController extends Controller
 {
     public $layout = "main_wx";
     
- //   public function 
+    public function behaviors(){
+        return [
+            'access' => [
+                'class' => WeixinLoginBehavior::className(),
+                'actions' => [
+                    'my-index','my-friend'
+                ],
+            ]
+        ];
+    }
     
     /**
      * Renders the index view for the module
@@ -23,16 +33,11 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         if( !( $code = yii::$app->request->get('code') ) ){
-            $wbServ =  WeixinWeb::getInstance();
-            $wbServ->setRetUrl( Yii::$app->urlManager->createAbsoluteUrl(['/Wechat'] ) );
-            $wbServ->getUserInfo();
-        }else{
-            $wbServ =  WeixinWeb::getInstance();
-            $token = $wbServ->getToken( $code );
-            var_dump( $token );
-            die();
+            die('访问受限');
         }
-        return $this->render('index');
+        $token = WeixinWeb::getInstance()->getClient()->fetchAccessToken( $code );
+        var_dump( $token );
+        return $this->render('my_index');
     }
     
     public function actionSharePage()

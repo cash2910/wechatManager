@@ -41,7 +41,7 @@ AppAsset::register($this);
 </div>
 <script>
 $(function(){
-	alert(1);
+	//alert(1);
 })
 </script>
 <?php $this->endBody() ?>
