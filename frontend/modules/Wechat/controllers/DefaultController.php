@@ -7,6 +7,8 @@ use common\service\weixin\BusinessService;
 use yii;
 use common\components\WeixinWeb;
 use common\components\WeixinLoginBehavior;
+use common\models\MgUsers;
+use common\models\MgUserRel;
 
 /**
  * Default controller for the `Wechat` module
@@ -21,7 +23,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend'
+         //           'my-index','my-friend'
                 ],
             ]
         ];
@@ -50,15 +52,39 @@ class DefaultController extends Controller
         return $this->renderPartial('game_page');
     }
     
+    /**
+     * MG推广首页
+     * @return string
+     */
     public function actionMyIndex()
     {
-        return $this->render('my_index');
+     //   $this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
+        //判断用户是否为mg用户   
+        $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( $mgInfo == null ){
+            die('访问受限');
+        }
+        return $this->render('my_index',[
+            'user'=>$mgInfo
+        ]);
     }
     
     public function actionMyFriend()
     {
-        var_dump( $this->open_id );
-        return $this->render('my_friend');
+       // $this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
+        $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( $mgInfo == null ){
+            die('访问受限');
+        }
+        $ids = [];
+        $subObjs = MgUserRel::findAll( ['user_id'=>$mgInfo->id] );
+        foreach( $subObjs as $subObj){
+            $ids[] = $subObj->sub_user_id;
+        }
+        $subs = MgUsers::findAll( ['id'=>$ids] );
+        return $this->render('my_friend', [
+            'subs'=> $subs
+        ]);
     }
     
     
