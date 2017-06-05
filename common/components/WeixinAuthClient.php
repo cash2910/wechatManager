@@ -42,7 +42,8 @@ class WeixinAuthClient extends OAuth2{
         
         $response = $this->sendRequest($request);
         $token = $this->createToken(['params' => [
-            'oauth_token'=>$response['access_token'],
+            'access_token'=>$response['access_token'],
+            'open_id' => $response['open_id'],
             'expir'=> 7000
         ]]);
         $this->setAccessToken($token);

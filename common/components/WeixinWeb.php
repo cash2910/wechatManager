@@ -23,6 +23,7 @@ class WeixinWeb extends BaseService{
     
     public function getUserInfo(){
         if( null == $this->userInfo ){
+            $token = $this->getClient()->getAccessToken()->getToken();
             
         }
         return $this->userInfo;
