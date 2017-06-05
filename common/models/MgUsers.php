@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property integer $id
  * @property string $nickname
+ * @property string $user_logo
  * @property integer $status
  * @property string $open_id
  * @property string $passwd
@@ -48,6 +49,7 @@ class MgUsers extends \yii\db\ActiveRecord
         return [
             [['status', 'is_bd', 'register_time', 'update_time'], 'integer'],
             [['nickname', 'user_rels'], 'string', 'max' => 30],
+            [['user_logo'],'string','max'=>200],
             [['open_id'], 'string', 'max' => 60],
             [['passwd'], 'string', 'max' => 70],
             [['mobile'], 'string', 'max' => 11],

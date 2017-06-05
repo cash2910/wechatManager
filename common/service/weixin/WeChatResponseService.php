@@ -86,6 +86,7 @@ class WeChatResponseService extends Module{
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
                 'nickname'=> $uwInfo['nickname'],
+                'user_logo'=>$uwInfo['headimgurl'],
                 'ticket' => $entity->Ticket
             ],function( $model ) use ( $id, $entity ){
                 //若不存在招募关系 则不进行关系绑定
