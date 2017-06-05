@@ -8,6 +8,7 @@ class WeixinAuthClient extends OAuth2{
     
     public $authUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize';
     public $tokenUrl = 'https://api.weixin.qq.com/sns/oauth2/access_token';
+    public $scope= 'snsapi_base';
     
     public function buildAuthUrl(array $params = [])
     {
