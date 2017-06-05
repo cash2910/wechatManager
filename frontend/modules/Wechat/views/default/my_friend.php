@@ -3,7 +3,7 @@
         <?php foreach ($subs as $sub):?>
         <div class="weui-cell">
             <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                <img src="http://p.ishowx.com/uploads/allimg/161116/486-161116091255-52.jpg" style="width: 50px;display: block">
+                <img src="<?=$user['user_logo'] ?>" style="width: 50px;display: block">
                <!--  <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>  -->
             </div>
             <div class="weui-cell__bd">

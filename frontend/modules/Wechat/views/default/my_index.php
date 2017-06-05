@@ -1,7 +1,7 @@
 <div class="weui-flex">
     <div class="weui-flex__item">
         <div class="icon-box" style="padding:30px;">
-            <img style="float:left;" src="http://pic.nen.com.cn/600/15/97/18/15971842_791759.jpg" width="80" height="80"/>
+            <img style="float:left;" src="<?=$user['user_logo'] ?>" width="80" height="80"/>
             <div style="float:left;  margin-left:15px;">
                 <h4 ><?=$user['nickname'] ?></h4>
                 <p class="icon-box__desc">加入时间：<?=date("Y-m-d",$user['register_time']) ?></p>
