@@ -98,6 +98,14 @@ class DefaultController extends Controller
     }
     
     
+    //我的提现
+    public function actionMyWallet()
+    {
+        //$this->title="我的订单";
+        return $this->render('my_wallet');
+    }
+    
+    
     public function actionGetQrCode(){
         $id = yii::$app->request->get('id', 0);
         $url = BusinessService::getInstance()->getQrcode( $id );
