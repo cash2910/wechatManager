@@ -23,6 +23,7 @@ class WechatModule extends \yii\base\Module
     }
     
     public function getMenu( $path ){
+        $path = '/'.$path;
         $items =  [
              'items' => [
                    ['label'=>'微信用户', 'items'=>[
@@ -35,6 +36,17 @@ class WechatModule extends \yii\base\Module
                    ['label'=>'后台用户管理','url' => ['/Wechat/user'], 'active' => 0 ],
               ]
         ];
+        var_dump($path);die();
+        $func = function( &$items, $path ) use ( &$func ){
+            foreach( $items as &$item ){
+                if( isset( $item['items'] ) ){
+                    $func( $item['items'], $path );
+                }elseif( $item['url'] == $path ){
+                    $item['active'] = 1; 
+                }
+            }              
+        };
+        $func( $items['items'], $path );
         return $items;
     }
 }

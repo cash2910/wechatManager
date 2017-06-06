@@ -58,7 +58,7 @@ class DefaultController extends Controller
      */
     public function actionMyIndex()
     {
-     //   $this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
+        //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
         //判断用户是否为mg用户   
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
@@ -71,7 +71,7 @@ class DefaultController extends Controller
     
     public function actionMyFriend()
     {
-       // $this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
+        //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
             die('访问受限');

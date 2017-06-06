@@ -1,5 +1,6 @@
 <div style="width: 100%;">
     <div class="weui-cells">
+        <?php if( !empty( $subs ) ):?>
         <?php foreach ($subs as $sub):?>
         <div class="weui-cell">
             <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
@@ -12,5 +13,12 @@
             </div>
         </div>
         <?php endforeach;?>
+        <?php else:?>
+        <div class="weui-cell" style="height: 100%;">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        </div>
+        <?php endif;?>
     </div>
 </div>
