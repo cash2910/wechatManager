@@ -54,7 +54,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         	wx.onMenuShareTimeline({
         	    title: '快和我来玩麻将！', // 分享标题
         	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        	    imgUrl: 'https://mp.weixin.qq.com/misc/getheadimg?token=36667788&fakeid=3279697062&r=772260', // 分享图标
+        	    imgUrl: 'https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=5725121176669185814&skey=%40crypt_9fbb5421_2bc4bd2501ef6f749acd22eff51b1f26&type=slave', // 分享图标
         	    success: function () { 
         	        // 用户确认分享后执行的回调函数
         	    	alert('share ok');
@@ -69,7 +69,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         		title: '快和我来玩麻将！', // 分享标题
         	    desc: '我玩很久了，值得推荐给你，一起来玩吧~', // 分享描述
         	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        	    imgUrl: 'https://mp.weixin.qq.com/misc/getheadimg?token=36667788&fakeid=3279697062&r=772260', // 分享图标
+        	    imgUrl: 'https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=5725121176669185814&skey=%40crypt_9fbb5421_2bc4bd2501ef6f749acd22eff51b1f26&type=slave', // 分享图标
         	    success: function () { 
         	    	// 用户确认分享后执行的回调函数
         	    	alert('share ok');
