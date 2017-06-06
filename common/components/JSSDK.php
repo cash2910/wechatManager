@@ -86,6 +86,7 @@ class JSSDK extends BaseService{
         
         return $res;
     }
+    
     private function get_php_file($filename) {
         return trim(substr(file_get_contents($filename), 15));
     }

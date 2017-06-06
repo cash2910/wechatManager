@@ -23,7 +23,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order'
+                //    'my-index','my-friend','my-order'
                 ],
             ]
         ];
@@ -93,6 +93,7 @@ class DefaultController extends Controller
     //我的订单列表
     public function actionMyOrder()
     {
+        //$this->title="我的订单";
         return $this->render('my_order');
     }
     

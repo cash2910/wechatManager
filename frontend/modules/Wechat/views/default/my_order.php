@@ -1,5 +1,9 @@
-<div class="weui-flex" style="margin-bottom:60px;">
-    <div class="weui-navbar">
+<div class="weui-flex" style="margin-bottom:60px; position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999; ">
+    <div class="weui-navbar" >
         <div class="weui-navbar__item weui-bar__item_on">已支付</div>
         <div class="weui-navbar__item">待支付</div>
         <div class="weui-navbar__item">已取消</div>
