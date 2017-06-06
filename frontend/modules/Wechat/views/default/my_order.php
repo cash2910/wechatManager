@@ -9,7 +9,7 @@
         <div class="weui-navbar__item">已取消</div>
    </div>
 </div>
-<div class="weui-flex">
+<div class="weui-flex" style="margin-top:60px;margin-bottom:30px;">
     <div class=page__bd>
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">

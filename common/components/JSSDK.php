@@ -2,6 +2,7 @@
 namespace common\components;
 use yii;
 use common\service\BaseService;
+use yii\helpers\ArrayHelper;
 class JSSDK extends BaseService{
     private $appId;
     private $appSecret;
@@ -48,8 +49,9 @@ class JSSDK extends BaseService{
             // 如果是企业号用以下 URL 获取 ticket
             // $url = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=$accessToken";
             $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
-            $res = json_decode($this->httpGet($url));
-            $ticket = $res->ticket;
+            $res = json_decode($this->httpGet($url),true);
+            //$ticket = $res->ticket;
+            $ticket = ArrayHelper::getValue($res, 'ticket', '');
             if ( !$ticket ) {
                 //savelog
             }
@@ -64,8 +66,9 @@ class JSSDK extends BaseService{
             // 如果是企业号用以下URL获取access_token
             // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
-            $res = json_decode($this->httpGet($url));
-            $access_token = $res->access_token;
+            $res = json_decode($this->httpGet($url),true);
+            //$access_token = $res->access_token;
+            $access_token = ArrayHelper::getValue($res, 'access_token', '');
             if ( !$access_token) {}
             yii::$app->redis->set( self::JS_TOKEN_KEY , $access_token,  'EX', time()+ self::JS_EXPIRE );
         }
