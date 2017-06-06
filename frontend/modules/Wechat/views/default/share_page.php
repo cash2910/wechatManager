@@ -52,7 +52,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         wx.ready(function () {
         	// 分享到朋友圈
         	wx.onMenuShareTimeline({
-        	    title: '我的推广链接', // 分享标题
+        	    title: '快和我来玩麻将！', // 分享标题
         	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
         	    imgUrl: 'https://mp.weixin.qq.com/misc/getheadimg?token=36667788&fakeid=3279697062&r=772260', // 分享图标
         	    success: function () { 
@@ -66,8 +66,8 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 
         	// 分享给朋友
         	wx.onMenuShareAppMessage({
-        		title: '我的推广链接', // 分享标题
-        	    desc: '我的推广链接', // 分享描述
+        		title: '快和我来玩麻将！', // 分享标题
+        	    desc: '我玩很久了，值得推荐给你，一起来玩吧~', // 分享描述
         	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
         	    imgUrl: 'https://mp.weixin.qq.com/misc/getheadimg?token=36667788&fakeid=3279697062&r=772260', // 分享图标
         	    success: function () { 
