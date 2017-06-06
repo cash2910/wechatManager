@@ -54,7 +54,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         	wx.onMenuShareTimeline({
         	    title: '快和我来玩麻将！', // 分享标题
         	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        	    imgUrl: '<?php echo Yii::$app->urlManager->createUrl('/images/head_logo.png'); ?>', // 分享图标
+        	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/head_logo.png'); ?>', // 分享图标
         	    success: function () { 
         	        // 用户确认分享后执行的回调函数
         	    	alert('share ok');
@@ -69,7 +69,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         		title: '快和我来玩麻将！', // 分享标题
         	    desc: '我玩很久了，值得推荐给你，一起来玩吧~', // 分享描述
         	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        	    imgUrl: '<?php echo Yii::$app->urlManager->createUrl('/images/head_logo.png'); ?>', // 分享图标
+        	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/head_logo.png'); ?>', // 分享图标
         	    success: function () { 
         	    	// 用户确认分享后执行的回调函数
         	    	alert('share ok');
