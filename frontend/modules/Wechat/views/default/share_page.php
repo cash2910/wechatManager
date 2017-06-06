@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+//微信SDK
+use common\components\JSSDK;
+$signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params['AppSecret'] )->getSignPackage();
+?>
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -28,7 +33,52 @@
 			<img src="http://qp.cdn.supernanogame.com/images/web/arrow.png" />
 		</div>
 	</body>
-	<script type="text/javascript">
+	
+    <script  type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: true,
+            appId: '<?php echo $signPackage["appId"];?>',
+            timestamp: <?php echo $signPackage["timestamp"];?>,
+            nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+            signature: '<?php echo $signPackage["signature"];?>',
+            jsApiList: [
+              // 所有要调用的 API 都要加到这个列表中
+				'onMenuShareTimeline',
+				'onMenuShareAppMessage'
+            ]
+        });
+        
+        wx.ready(function () {
+        	// 分享到朋友圈
+        	wx.onMenuShareTimeline({
+        	    title: '我的推广链接', // 分享标题
+        	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        	    imgUrl: 'https://mp.weixin.qq.com/misc/getheadimg?token=36667788&fakeid=3279697062&r=772260', // 分享图标
+        	    success: function () { 
+        	        // 用户确认分享后执行的回调函数
+        	    	alert('share ok');
+            	},
+        	    cancel: function () { 
+        	        // 用户取消分享后执行的回调函数
+        	    }
+        	});
+
+        	// 分享给朋友
+        	wx.onMenuShareAppMessage({
+        		title: '我的推广链接', // 分享标题
+        	    desc: '我的推广链接', // 分享描述
+        	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        	    imgUrl: 'https://mp.weixin.qq.com/misc/getheadimg?token=36667788&fakeid=3279697062&r=772260', // 分享图标
+        	    success: function () { 
+        	    	// 用户确认分享后执行的回调函数
+        	    	alert('share ok');
+        	    },
+        	    cancel: function () { 
+        	        // 用户取消分享后执行的回调函数
+        	    }
+        	});
+        });
 	
 		var na = navigator.userAgent.toLowerCase(),
 			tip = document.getElementById('tip');

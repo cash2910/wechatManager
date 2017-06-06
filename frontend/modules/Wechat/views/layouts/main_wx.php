@@ -6,8 +6,8 @@ use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use common\components\JSSDK;
 AppAsset::register($this);
+//微信SDK
 $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params['AppSecret'] )->getSignPackage();
-var_dump( $signPackage );
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -41,7 +41,6 @@ wx.config({
     ]
 });
 wx.ready(function () {
-	alert(1);
 	// 在这里调用 API
 });
 </script>
