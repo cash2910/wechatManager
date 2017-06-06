@@ -23,7 +23,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend'
+             //       'my-index','my-friend','my-order'
                 ],
             ]
         ];
@@ -47,6 +47,8 @@ class DefaultController extends Controller
         return $this->renderPartial('share_page');
     }
     
+
+    
     public function actionGamePage()
     {
         return $this->renderPartial('game_page');
@@ -69,6 +71,7 @@ class DefaultController extends Controller
         ]);
     }
     
+    //我的下线列表
     public function actionMyFriend()
     {
         //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
@@ -85,6 +88,12 @@ class DefaultController extends Controller
         return $this->render('my_friend', [
             'subs'=> $subs
         ]);
+    }
+    
+    //我的订单列表
+    public function actionMyOrder()
+    {
+        return $this->render('my_order');
     }
     
     
