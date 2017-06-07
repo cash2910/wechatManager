@@ -13,8 +13,7 @@
              <div class="weui-cell__hd"> ￥</div>
              <div class="weui-cell__bd" style="font-size: 36px;"> <input class="weui-input" id="_total" type="number" pattern="[0-9]*" placeholder="" autofocus /> </div>
         </div>
-       
-        <div  class="weui-panel__hd">
+        <div  class="weui-flex__hd">
             <div class="">
                 <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">充值</a>
             </div>
@@ -24,3 +23,8 @@
 <script>
 $("#_total").focus();
 </script>
+<style>
+.weui-cell:before {
+	    border-top:0px;
+}
+</style>
