@@ -16,6 +16,7 @@ use common\models\MgUserRel;
 class DefaultController extends Controller
 {
     public $layout = "main_wx";
+    public $title = "";
     public $open_id = '';
     
     public function behaviors(){
@@ -60,6 +61,7 @@ class DefaultController extends Controller
      */
     public function actionMyIndex()
     {
+        $this->title = 'MG首页';
         //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
         //判断用户是否为mg用户   
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
@@ -74,6 +76,7 @@ class DefaultController extends Controller
     //我的下线列表
     public function actionMyFriend()
     {
+        $this->title = '我的下级';
         //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
@@ -93,7 +96,7 @@ class DefaultController extends Controller
     //我的订单列表
     public function actionMyOrder()
     {
-        //$this->title="我的订单";
+        $this->title="我的订单";
         return $this->render('my_order');
     }
     
@@ -101,14 +104,14 @@ class DefaultController extends Controller
     //我的提现
     public function actionMyWallet()
     {
-        //$this->title="我的订单";
+        $this->title="我的提现";
         return $this->render('my_wallet');
     }
     
     //我的提现
     public function actionMyRebates()
     {
-        //$this->title="我的订单";
+        $this->title="提现明细";
         return $this->render('my_rebates');
     }
     

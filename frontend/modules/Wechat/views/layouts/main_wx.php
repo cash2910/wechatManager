@@ -16,7 +16,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->context->title) ?></title>
     <link rel="stylesheet" href="/css/weui/weui.min.css">
     <?php $this->head() ?>
 </head>
