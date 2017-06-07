@@ -55,7 +55,7 @@ class JSSDK extends BaseService{
             if ( !$ticket ) {
                 //savelog
             }
-            yii::$app->redis->set( self::JS_TICKET_KEY ,  $ticket, 'EX', time()+ self::JS_EXPIRE );
+            yii::$app->redis->set( self::JS_TICKET_KEY ,  $ticket, 'EX', self::JS_EXPIRE );
         }
         return $ticket;
     }
@@ -70,7 +70,7 @@ class JSSDK extends BaseService{
             //$access_token = $res->access_token;
             $access_token = ArrayHelper::getValue($res, 'access_token', '');
             if ( !$access_token) {}
-            yii::$app->redis->set( self::JS_TOKEN_KEY , $access_token,  'EX', time()+ self::JS_EXPIRE );
+            yii::$app->redis->set( self::JS_TOKEN_KEY , $access_token,  'EX', self::JS_EXPIRE );
         }
         return $access_token;
     }
