@@ -36,17 +36,17 @@ class WechatModule extends \yii\base\Module
                    ['label'=>'后台用户管理','url' => ['/Wechat/user'], 'active' => 0 ],
               ]
         ];
-        var_dump($path);die();
-        $func = function( &$items, $path ) use ( &$func ){
+        $func = function( &$items ) use ( &$func, $path ){
             foreach( $items as &$item ){
                 if( isset( $item['items'] ) ){
-                    $func( $item['items'], $path );
-                }elseif( $item['url'] == $path ){
+                    $func( $item['items'] );
+                }elseif( $item['url'][0] == $path ){
                     $item['active'] = 1; 
+                    return true;
                 }
-            }              
+            }
         };
-        $func( $items['items'], $path );
+        $func( $items['items'] );
         return $items;
     }
 }

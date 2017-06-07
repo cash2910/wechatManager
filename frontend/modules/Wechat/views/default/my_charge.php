@@ -25,6 +25,6 @@ $("#_total").focus();
 </script>
 <style>
 .weui-cell:before {
-	    border-top:0px;
+    border-top:0px;
 }
 </style>
