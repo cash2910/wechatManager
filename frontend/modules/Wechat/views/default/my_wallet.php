@@ -10,7 +10,7 @@
             <p class="weui-btn-area">
                 <a href="javascript:history.back();" class="weui-btn weui-btn_primary">提现</a>
                 <br>   <!--   class="weui-btn weui-btn_default" -->
-                <a href="javascript:history.back();" href="/Wechat/default/my-rebates">查看记录</a>
+                <a  href="/Wechat/default/my-rebates">查看记录</a>
             </p>
         </div>
     </div>
