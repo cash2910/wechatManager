@@ -105,6 +105,13 @@ class DefaultController extends Controller
         return $this->render('my_wallet');
     }
     
+    //我的提现
+    public function actionMyRebates()
+    {
+        //$this->title="我的订单";
+        return $this->render('my_rebates');
+    }
+    
     
     public function actionGetQrCode(){
         $id = yii::$app->request->get('id', 0);
