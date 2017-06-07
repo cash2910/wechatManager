@@ -4,9 +4,8 @@
 /* @var $content string */
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
-use common\components\JSSDK;
 AppAsset::register($this);
-//微信SDK
+use common\components\JSSDK;
 $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params['AppSecret'] )->getSignPackage();
 ?>
 <?php $this->beginPage() ?>
@@ -31,14 +30,16 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 <script  type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
 wx.config({
-    debug: true,
-    appId: '<?php echo $signPackage["appId"];?>',
-    timestamp: <?php echo $signPackage["timestamp"];?>,
-    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-    signature: '<?php echo $signPackage["signature"];?>',
-    jsApiList: [
-      // 所有要调用的 API 都要加到这个列表中
-    ]
+	 debug: true,
+     appId: '<?php echo $signPackage["appId"];?>',
+     timestamp: <?php echo $signPackage["timestamp"];?>,
+     nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+     signature: '<?php echo $signPackage["signature"];?>',
+     jsApiList: [
+       // 所有要调用的 API 都要加到这个列表中
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage'
+     ]
 });
 wx.ready(function () {
 	// 在这里调用 API

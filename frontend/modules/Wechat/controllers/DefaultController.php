@@ -76,7 +76,7 @@ class DefaultController extends Controller
     //我的下线列表
     public function actionMyFriend()
     {
-        $this->title = '我的下级';
+        $this->title = '我的好友';
         //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
@@ -104,7 +104,7 @@ class DefaultController extends Controller
     //我的提现
     public function actionMyWallet()
     {
-        $this->title="我的提现";
+        $this->title="提现管理";
         return $this->render('my_wallet');
     }
     
