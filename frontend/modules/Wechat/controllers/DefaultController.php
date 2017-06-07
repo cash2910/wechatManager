@@ -94,6 +94,13 @@ class DefaultController extends Controller
     }
     
     //我的订单列表
+    public function actionMyCharge()
+    {
+        $this->title="游戏充值";
+        return $this->render('my_charge');
+    }
+    
+    //我的订单列表
     public function actionMyOrder()
     {
         $this->title="我的订单";

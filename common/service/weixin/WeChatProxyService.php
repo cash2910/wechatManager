@@ -36,7 +36,7 @@ class WeChatProxyService{
         $url = ArrayHelper::getValue($conf, 'url');
         //获取token 与生成二维码不需要access_token
         if( ArrayHelper::getValue($conf, 'need_token', true)  ){
-             $params['access_token'] =self::getToken( true );
+             $params['access_token'] =self::getToken();
         }
         /**
          * @todo 修改为字符串替换参数

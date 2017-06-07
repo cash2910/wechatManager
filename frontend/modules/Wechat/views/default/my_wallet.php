@@ -3,7 +3,7 @@
     <div class="weui-msg">
         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
-            <p style="font-size: 15px;">我的零钱</p>
+            <p style="font-size: 15px;">我的余额</p>
             <h2 class="weui-msg__title" style="font-size: 25px;">¥2965.65</h2>
         </div>
         <div class="weui-msg__opr-area">
