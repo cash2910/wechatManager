@@ -7,7 +7,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>MG竞技</title>
+		<title>我的推广链接</title>
 		<meta name="Keywords" content="MG竞技" />
 		<meta name="Description" content="" />
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"/>

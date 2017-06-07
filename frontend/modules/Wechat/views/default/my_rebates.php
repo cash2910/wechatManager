@@ -48,9 +48,9 @@
                 <span class="weui-form-preview__value">用户返利</span>
             </div>
         </div>
-        <!-- <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</a>
-        </div> -->
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary _back" href="javascript:" >返回</a>
+        </div>
     </div>
 </div>
 <script>
@@ -58,6 +58,10 @@ $(function(){
 	$(".rebates_list a").click(function(){
 		$(".rebates_list").hide();
 		$(".detail").show();
+	});
+	$("._back").click(function(){
+		$(".detail").hide();
+		$(".rebates_list").show();
 	});
 });
 </script>
