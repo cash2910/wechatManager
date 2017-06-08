@@ -110,9 +110,11 @@ class WechatUserController extends Controller
     
     public function actionInit()
     {
-        $ret = ( new BusinessService() )->initUsers();
+        BusinessService::getInstance()->initUsers( true );
         return $this->redirect(['index']);
     }
+    
+
 
     /**
      * Finds the WechatUsers model based on its primary key value.

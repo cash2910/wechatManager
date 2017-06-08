@@ -25,17 +25,6 @@ use yii\behaviors\TimestampBehavior;
 class WechatUsers extends \yii\db\ActiveRecord
 {
     
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'register_time',
-                'updatedAtAttribute' => 'update_time',
-                'value'   => function(){return date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME']);},
-            ],
-       ];
-    }
     /**
      * @inheritdoc
      */
@@ -67,17 +56,17 @@ class WechatUsers extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'open_id' => 'Open ID',
-            'nickname' => 'NickName',
-            'sex' => 'Sex',
+            'nickname' => '昵称',
+            'sex' => '性别',
             'language' => 'Language',
-            'city' => 'City',
-            'province' => 'Province',
+            'city' => '城市',
+            'province' => '省份',
             'country' => 'Country',
-            'headimgurl' => 'Headimgurl',
-            'subscribe_time' => 'Subscribe Time',
+            'headimgurl' => '微信头像',
+            'subscribe_time' => '订阅时间',
             'unionid' => 'Unionid',
             'remark' => 'Remark',
-            'tagid_list' => 'Tagid List',
+            'tagid_list' => '用户标签',
         ];
     }
 }

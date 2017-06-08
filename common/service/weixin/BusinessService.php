@@ -17,7 +17,6 @@ class BusinessService extends BaseService{
      * @param unknown $tags
      */
     public function initTag( $tags ){
-      
         $date = date("Y-m-d H:i:s");
         foreach ( $tags as $k => &$tag ){
             $tag['add_time'] =  $date;
@@ -36,31 +35,72 @@ class BusinessService extends BaseService{
      * 获取全部微信用户信息
      * 1、获取用户全部用户的openId
      * 2、根据openId获取用户详细信息并保存
+     * 3、当isupdate为false为重新同步数据 ，默认为同步新增用户到本地
      */
-     public function initUsers(){
+     public function initUsers( $isUpdate = true ){
          
          ignore_user_abort(true);
          set_time_limit(0);
-         WechatUsers::deleteAll();
-         $total = $this->initOpenids();
-         if( 0 == $total )
-             return true; 
-         $total = 9999;
+         if( !$isUpdate )
+            WechatUsers::deleteAll();
+         $hasNew = $this->initOpenids( $isUpdate );
+         if( !$hasNew )
+             return false;
+         $cur_id = 0;
+         $last = WechatUsers::find()->orderBy('id desc')->one();
+         if( $last ){
+              $info  = WechatUserId::findOne(['open_id'=>$last->open_id]);
+              $cur_id = $info->id;
+         }
+         //$psize最大值为100，此为微信一次最大拉取数量
          $psize = 100; $cur = 0;
          do{
-             $ret = WechatUserId::find()->offset( ($cur++)*$psize )->limit( $psize )->all();
-             $total -= $psize;
+             $ret = WechatUserId::find()->where("id > $cur_id")->offset( ($cur++)*$psize )->limit( $psize )->all();
+             if( empty($ret) )
+                 break;
              $arr = array_map( function( $v ){
                  return [ 'openid'=>$v->open_id ];
              }, $ret );
              $res = WeChatService::getIns()->batchGetUsersInfo([
                  'user_list'=>$arr
              ]);
-             if( 0 !== ArrayHelper::getValue($res, 'errcode', 0 ) )
-                 return false;
              $this->addWeChatUsers( $res['user_info_list'] );
-         }while( $total > 0 );
+         }while( true );
          return true;
+     }
+     
+     /**
+      * 从微信获取全部用户openids 并添加到数据库
+      * @return unknown
+      */
+     public function initOpenids( $isUpdate = true ){
+         if( !$isUpdate )
+             $this->clearOpenids();
+         $hasNew = false;
+         $last = WechatUserId::find()->orderBy('id desc')->limit(1)->one();
+         if( $last )
+            $nextid = $last->open_id;
+         do{
+             $arg = empty( $nextid ) ? [] : ['next_openid'=>$nextid];
+             $ret = WeChatService::getIns()->getUsers($arg);
+             if( !ArrayHelper::getValue( $ret, 'next_openid' ) )
+                 break;
+             $hasNew = true;
+             $nextid = $ret['next_openid'];
+             $this->addOpenids(  $ret['data']['openid'] );
+         }while( true );
+         return $hasNew;
+     }
+     
+     /**
+      * 从微信出获取新增的用户信息并保存到本地
+      */
+     public function getNewUsers( $from_openid = '' ){
+         if( empty($from_openid) ){
+             $res = WechatUserId::find()->orderBy('id desc')->limit(1);
+             $from_openid = $res->open_id;
+         }
+         
      }
      
      private function addWeChatUsers( $uList ){
@@ -76,25 +116,6 @@ class BusinessService extends BaseService{
          $cols = WeixinConfig::WEIXIN_USER_INFO;
          $cols[0] = 'open_id';
          $ret = yii::$app->db->createCommand()->batchInsert( WechatUsers::tableName(), $cols, $infos )->execute();
-     }
-     
-     /**
-      * 从微信获取全部用户openids 并添加到数据库
-      * @return unknown
-      */
-     public function initOpenids(){
-          $this->clearOpenids();
-          $nextid = '';
-          $count = 0; $total = 0;
-          do{
-              $arg = empty( $nextid ) ? [] : ['next_openid'=>$nextid,];
-              $ret = WeChatService::getIns()->getUsers($arg);
-              $total = $ret['total'];
-              $count += $ret['count'];  //当前页面总条数
-              $nextid = $ret['next_openid'];
-              $this->addOpenids(  $ret['data']['openid'] );
-          }while( $total > $count );
-          return $total;
      }
      
      private function clearOpenids( $condition = [] ){
@@ -116,9 +137,7 @@ class BusinessService extends BaseService{
       * @param unknown $entity
       */
      public function getUserShareCode( ProxyXml $entity ){
-         
-         //$id = $entity->EventKey;
-         //$url = $this->getQrcode($id);
+   
          $uInfo = UserService::getInstance()->getUserInfo([
              'open_id'=> $entity->FromUserName
          ]);
@@ -147,6 +166,9 @@ class BusinessService extends BaseService{
      public function getQrcode( $id ,
          $eternal = false //是否生成永久二维码
      ){
+         if( $eternal && $id > 100000 ){
+             throw new Exception('exceed max limit 10000');
+         }
          $key = sprintf("mg_user_shareqrcode_url_%s", $id);
          $type = $eternal ? 'QR_LIMIT_STR_SCENE' : 'QR_SCENE';
          if( !( $url = yii::$app->redis->get( $key ) ) ){
@@ -183,30 +205,30 @@ class BusinessService extends BaseService{
      //微信获取游戏信息
      public function getGames( ProxyXml $entity ){
          $entity->setResp([
-                 'FromUserName'=>$entity->ToUserName,
-                 'ToUserName'=>$entity->FromUserName,
-                 'MsgType'=>'news',
-                 'ArticleCount'=>3,
-                 'Articles'=>[
-                     ['item'=>[
-                         'Title'=>'西游伏妖篇',
-                         'Description'=>'正版授权-颠覆西游传说，再续西游情缘。',
-                         'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
-                         'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
-                     ]],
-                     ['item'=>[
-                         'Title'=>'神印王座',
-                         'Description'=>'「神龙战士」范冰冰代言 火爆公测！',
-                         'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0502/02111015pXtoF.jpg',
-                         'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
-                     ]],
-                     ['item'=>[
-                         'Title'=>'烈焰传奇',
-                         'Description'=>'还原经典炫酷激情PK，兄弟齐心，热血攻沙!',
-                         'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0502/02144626JFkQz.jpg',
-                         'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
-                     ]]
-                 ]
+             'FromUserName'=>$entity->ToUserName,
+             'ToUserName'=>$entity->FromUserName,
+             'MsgType'=>'news',
+             'ArticleCount'=>3,
+             'Articles'=>[
+                 ['item'=>[
+                     'Title'=>'西游伏妖篇',
+                     'Description'=>'正版授权-颠覆西游传说，再续西游情缘。',
+                     'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0508/081112549ctt7.jpg',
+                     'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
+                 ]],
+                 ['item'=>[
+                     'Title'=>'神印王座',
+                     'Description'=>'「神龙战士」范冰冰代言 火爆公测！',
+                     'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0502/02111015pXtoF.jpg',
+                     'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
+                 ]],
+                 ['item'=>[
+                     'Title'=>'烈焰传奇',
+                     'Description'=>'还原经典炫酷激情PK，兄弟齐心，热血攻沙!',
+                     'PicUrl'=> 'http://imgtg.37wan.com/u/2017/0502/02144626JFkQz.jpg',
+                     'Url' =>Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page'] )
+                 ]]
+             ]
           ]);
      }
      

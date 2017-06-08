@@ -9,6 +9,7 @@ use common\service\weixin\WeChatResponseService;
 use yii\helpers\ArrayHelper;
 use common\service\users\UserService;
 use common\service\weixin\WeChatService;
+use common\service\weixin\BusinessService;
 
 
 /**
@@ -141,11 +142,12 @@ class DefaultController extends Controller
 /*        $ret = WeChatService::getIns()->getUserInfo([
            'openid'=>'opjR8w4dyynJRHFhL8fFY9yrYG8M'
        ]); */
-        $ret = WeChatService::getIns()->createCs([
+/*         $ret = WeChatService::getIns()->createCs([
             'kf_account'=>"test1@test",
             'nickname'=>'客服老王'
         ]);
-        
+ */        
+   //     $ret = BusinessService::getInstance()->initUsers();
         var_dump( $ret );
     }
 }
