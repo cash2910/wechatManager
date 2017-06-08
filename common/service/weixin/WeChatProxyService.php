@@ -54,7 +54,6 @@ class WeChatProxyService{
          $token = '';
          if( !$force )
              $token = yii::$app->redis->get( WeixinConfig::TOKEN_KEY );
-         $ret = yii::$app->redis->ttl(WeixinConfig::TOKEN_KEY);
          if( empty($token) ){
              $res = WeChatService::getIns()->getAccessToken([
                 'grant_type'=>'client_credential',
