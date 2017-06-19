@@ -86,7 +86,7 @@ class WeChatResponseService extends Module{
             
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
-                'union_id' =>  $uwInfo['union_id'],
+                'union_id' =>  $uwInfo['unionid'],
                 'nickname'=> $uwInfo['nickname'],
                 'user_logo'=>$uwInfo['headimgurl'],
                 'ticket' => $entity->Ticket
