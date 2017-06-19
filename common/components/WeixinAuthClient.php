@@ -44,6 +44,7 @@ class WeixinAuthClient extends OAuth2{
         
         $response = $this->sendRequest($request);
         
+        yii::error( json_encode( $response ) );
         if( !isset( $response['access_token'] ) ){
             //log...
         }
