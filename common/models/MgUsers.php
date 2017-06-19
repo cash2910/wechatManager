@@ -50,7 +50,7 @@ class MgUsers extends \yii\db\ActiveRecord
             [['status', 'is_bd', 'register_time', 'update_time'], 'integer'],
             [['nickname', 'user_rels'], 'string', 'max' => 30],
             [['user_logo'],'string','max'=>200],
-            [['open_id'], 'string', 'max' => 60],
+            [['open_id','union_id'], 'string', 'max' => 60],
             [['passwd'], 'string', 'max' => 70],
             [['mobile'], 'string', 'max' => 11],
         ];
