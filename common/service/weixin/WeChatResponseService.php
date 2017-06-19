@@ -79,12 +79,14 @@ class WeChatResponseService extends Module{
                 ]);
                 return true;
             }
+            //获取用户微信信息
             $uwInfo = WeChatService::getIns()->getUserInfo([
                 'openid'=> $open_id 
             ]);
             
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
+                'union_id' =>  $uwInfo['union_id'],
                 'nickname'=> $uwInfo['nickname'],
                 'user_logo'=>$uwInfo['headimgurl'],
                 'ticket' => $entity->Ticket

@@ -8,7 +8,9 @@ class WeixinAuthClient extends OAuth2{
     
     public $authUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize';
     public $tokenUrl = 'https://api.weixin.qq.com/sns/oauth2/access_token';
-    public $scope= 'snsapi_base';
+    public $getUserUrl = 'https://api.weixin.qq.com/sns/userinfo';
+    
+    public $scope= 'snsapi_userinfo';  //获取用户的union_id
     
     public function buildAuthUrl(array $params = [])
     {
@@ -48,6 +50,7 @@ class WeixinAuthClient extends OAuth2{
         $token = $this->createToken(['params' => [
             'access_token'=>$response['access_token'],
             'open_id' => $response['openid'],
+            'union_id' => $response['union_id'],
             'expir'=> 7000
         ]]);
         $this->setAccessToken($token);
@@ -65,9 +68,38 @@ class WeixinAuthClient extends OAuth2{
     }
     
     
+    public function getUserInfo( $token, $open_id ){
+        
+        $url = $this->getUserUrl."?".http_build_query([
+            ''
+        ]);
+
+        $request = $this->createRequest()
+        ->setMethod('GET')
+        ->setUrl( $this->tokenUrl )
+        ->setData(array_merge($defaultParams, $params));
+        
+        $response = $this->sendRequest($request);
+        
+        if( isset( $response['errcode'] ) ){
+            //log...
+            
+        }
+        $token = $this->createToken(['params' => [
+            'access_token'=>$response['access_token'],
+            'open_id' => $response['openid'],
+            'union_id' => $response['union_id'],
+            'expir'=> 7000
+        ]]);
+        
+    }
     
     
-    public function initUserAttributes(){}
+    public function initUserAttributes(){
+        
+        
+        
+    }
     
 }
 
