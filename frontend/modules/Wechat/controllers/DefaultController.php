@@ -18,7 +18,6 @@ class DefaultController extends Controller
     public $layout = "main_wx";
     public $title ;
     public $open_id = '';
-    public $union_id ;
     
     public function behaviors(){
         return [
