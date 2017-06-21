@@ -10,6 +10,8 @@ use yii\helpers\ArrayHelper;
 use common\service\users\UserService;
 use common\service\weixin\WeChatService;
 use common\service\weixin\BusinessService;
+use common\service\weixin\GameService;
+use common\service\weixin\ProxyXml;
 
 
 /**
@@ -148,6 +150,8 @@ class DefaultController extends Controller
         ]);
  */        
    //     $ret = BusinessService::getInstance()->initUsers();
+   
+        $ret = BusinessService::getInstance()->getGames( );
         var_dump( $ret );
     }
 }

@@ -7,7 +7,9 @@ use common\service\BaseService;
 class GameService extends BaseService{
         
     //获取游戏数据
-    public function getGames(){
+    public function getGames( $cond ){
+        
+        
         
     }
 

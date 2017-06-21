@@ -15,6 +15,9 @@ return [
         'Wechat' => [
             'class' => 'backend\modules\Wechat\WechatModule',
         ],
+        'Game' => [
+            'class' => 'backend\modules\Game\GameModule',
+        ]
     ],
     'components' => [
         'request' => [

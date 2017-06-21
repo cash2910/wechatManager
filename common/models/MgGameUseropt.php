@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "mg_game_useropt".
@@ -15,20 +14,10 @@ use yii\behaviors\TimestampBehavior;
  * @property string $data
  * @property string $ip
  * @property string $add_time
+ * @property string $update_time
  */
 class MgGameUseropt extends \yii\db\ActiveRecord
 {
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'add_time',
-                'updatedAtAttribute' => 'update_time',
-                'value'   => function(){return $_SERVER['REQUEST_TIME'];},
-            ]
-         ];
-    }
     /**
      * @inheritdoc
      */
@@ -43,8 +32,7 @@ class MgGameUseropt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'opt_code', 'game_id','ip'], 'required','message'=>'不能为空'],
-            [['game_id', 'add_time','update_time'], 'integer'],
+            [['game_id', 'add_time', 'update_time'], 'integer'],
             [['union_id'], 'string', 'max' => 50],
             [['opt_code', 'ip'], 'string', 'max' => 20],
             [['data'], 'string', 'max' => 200],
@@ -58,12 +46,13 @@ class MgGameUseropt extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'union_id' => 'union_id',
-            'opt_code' => '行为类型',
-            'game_id' => '游戏id',
+            'union_id' => 'Union ID',
+            'opt_code' => 'Opt Code',
+            'game_id' => 'Game ID',
             'data' => 'Data',
-            'ip' => 'Ip地址',
+            'ip' => 'Ip',
             'add_time' => 'Add Time',
+            'update_time' => 'Update Time',
         ];
     }
 }
