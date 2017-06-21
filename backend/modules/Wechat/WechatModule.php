@@ -40,7 +40,7 @@ class WechatModule extends \yii\base\Module
             foreach( $items as &$item ){
                 if( isset( $item['items'] ) ){
                     $func( $item['items'] );
-                }elseif( $item['url'][0] == $path ){
+                }elseif( strpos( $path, $item['url'][0] ) !== false ){
                     $item['active'] = 1; 
                     return true;
                 }
