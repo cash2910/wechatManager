@@ -43,7 +43,7 @@ class MgGameUseropt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'opt_code', 'game_id','ip'], 'required'],
+            [[ 'opt_code', 'game_id','ip'], 'required','message'=>'不能为空'],
             [['game_id', 'add_time','update_time'], 'integer'],
             [['union_id'], 'string', 'max' => 50],
             [['opt_code', 'ip'], 'string', 'max' => 20],
