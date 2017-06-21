@@ -30,7 +30,6 @@ class MgOrderList extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'add_time',
-                'updatedAtAttribute' => 'update_time',
                 'value'   => function(){return $_SERVER['REQUEST_TIME'];},
             ],
         ];
