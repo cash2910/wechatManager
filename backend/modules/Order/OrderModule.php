@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\modules\Game;
+namespace backend\modules\Order;
 
 /**
- * Game module definition class
+ * Order module definition class
  */
-class GameModule extends \yii\base\Module
+class OrderModule extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'backend\modules\Game\controllers';
+    public $controllerNamespace = 'backend\modules\Order\controllers';
 
     /**
      * @inheritdoc
@@ -27,8 +27,7 @@ class GameModule extends \yii\base\Module
         $path = '/'.$path;
         $items =  [
             'items' => [
-                ['label'=>'游戏管理','url' => ['/Game/game'], 'active' => 0 ],
-                ['label'=>'商品管理','url' => ['/Game/goods'], 'active' => 0 ],
+                ['label'=>'订单管理','url' => ['/Order/order'], 'active' => 0 ],
             ]
         ];
         $func = function( &$items ) use ( &$func, $path ){
@@ -44,5 +43,4 @@ class GameModule extends \yii\base\Module
         $func( $items['items'] );
         return $items;
     }
-    
 }

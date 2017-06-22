@@ -17,6 +17,9 @@ return [
         ],
         'Game' => [
             'class' => 'backend\modules\Game\GameModule',
+        ],
+        'Order' => [
+            'class' => 'backend\modules\Order\OrderModule',
         ]
     ],
     'components' => [

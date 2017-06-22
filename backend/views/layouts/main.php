@@ -38,9 +38,9 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => '首页', 'url' => ['/site/index']],
         ['label' => '游戏管理', 'url' => ['/Game/game/index']],
-        ['label' => '微信管理', 'url' => ['/Wechat/menu']],
-        ['label' => '订单管理', 'url' => ['/Order/menu']],
-        ['label' => '推广员管理', 'url' => ['/Wechat/menu']],
+        ['label' => '微信管理', 'url' => ['/Wechat/wechat-user']],
+        ['label' => '订单管理', 'url' => ['/Order/order']],
+       // ['label' => '推广员管理', 'url' => ['/Wechat/menu']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
