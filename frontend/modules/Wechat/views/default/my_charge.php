@@ -38,11 +38,11 @@
 	margin: 0.1em;
 }
 .sp_total{
-	font-size: 19px;
+	font-size: 25px;
     margin-right: 3px;
     color: coral;
 }
 .sp_discount{
-	font-size: 4px;
+	font-size: 8px;
 }
 </style>
