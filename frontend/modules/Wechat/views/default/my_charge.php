@@ -35,6 +35,6 @@ $("#_total").focus();
 </script>
 <style>
 .weui-flex .weui-flex__item {
-    margin-right: 0.2em;
+	margin: 0.1em;
 }
 </style>
