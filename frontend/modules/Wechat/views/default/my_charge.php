@@ -43,6 +43,6 @@
     color: coral;
 }
 .sp_discount{
-	font-size: 2px;
+	font-size: 4px;
 }
 </style>
