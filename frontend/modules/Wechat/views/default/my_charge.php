@@ -19,22 +19,30 @@
                 <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 17px;">5000</a></div>
                 <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 17px;">10000</a></div>
             </div>
-            <div class="weui-flex" >
-                 <p >50.6元（95折）</p>
+            <div class="weui-flex" style="margin-top: 10px;">
+                 <p ><span class="sp_total">50.6</span>元<span class="sp_discount">（95折）</span></p>
             </div>
         </div>
     </div>
      <div class="weui-flex">
         <div class="weui-flex__item">
-            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">充值</a>
+            <a class="weui-btn weui-btn_primary" href="javascript:" id="weixin_pay">充值</a>
         </div>
      </div>
 </div>
 <script>
-$("#_total").focus();
+
 </script>
 <style>
 .weui-flex .weui-flex__item {
 	margin: 0.1em;
+}
+.sp_total{
+	font-size: 19px;
+    margin-right: 3px;
+    color: coral;
+}
+.sp_discount{
+	font-size: 2px;
 }
 </style>
