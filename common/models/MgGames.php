@@ -54,7 +54,7 @@ class MgGames extends \yii\db\ActiveRecord
     {
         return [
             [['status', 'type', 'add_time', 'update_time'], 'integer'],
-            [['title'], 'string', 'max' => 30],
+            [['title','game_code'], 'string', 'max' => 30],
             [['desc','pic_url','url'], 'string', 'max' => 200],
             [['remark'], 'string', 'max' => 100],
         ];
@@ -70,6 +70,7 @@ class MgGames extends \yii\db\ActiveRecord
             'title' => '游戏名称',
             'desc' => '游戏简介',
             'status' => '游戏状态',
+            'game_code'=>'游戏别名',
             'type' => '游戏类型',
             'pic_url'=>'banner图片链接',
             'url' =>'游戏链接',

@@ -9,6 +9,7 @@ use common\components\WeixinWeb;
 use common\components\WeixinLoginBehavior;
 use common\models\MgUsers;
 use common\models\MgUserRel;
+use common\service\game\GameService;
 
 /**
  * Default controller for the `Wechat` module
@@ -24,7 +25,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order'
+              //      'my-index','my-friend','my-order','my-charge'
                 ],
             ]
         ];
@@ -98,7 +99,12 @@ class DefaultController extends Controller
     public function actionMyCharge()
     {
         $this->title="游戏充值";
-        return $this->render('my_charge');
+        $this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
+        $gid = yii::$app->request->get('game_id',1);
+        $goods = GameService::getInstance()->getGameGoods( $gid );
+        return $this->render('my_charge',[
+            'goods'=>$goods
+        ]);
     }
     
     //我的订单列表
