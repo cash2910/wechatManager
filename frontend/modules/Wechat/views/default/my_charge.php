@@ -8,10 +8,17 @@
         <div class="weui-panel__hd" >
             <div style="color: #333;">充值游戏</div>
         </div>
-        <div class="weui-cells__tips" style="margin-top: 10px;">充值金额</div>
-        <div class="weui-cell weui-cells_form">
-             <div class="weui-cell__hd"> ￥</div>
-             <div class="weui-cell__bd" style="font-size: 36px;"> <input class="weui-input" id="_total" type="number" pattern="[0-9]*" placeholder="" autofocus /> </div>
+       <div class="weui-flex">
+           <div class="weui-cells__tips" style="margin-top: 10px;">充值数量</div>
+       </div>
+       <div class="weui-flex" style="margin:10px; 0px,10px,0px;">
+            <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini  weui-btn_primary" style="font-size: 17px;">1000</a></div>
+            <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 17px;">2000</a></div>
+            <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 17px;">5000</a></div>
+            <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 17px;">10000</a></div>
+        </div>
+        <div class="weui-flex" >
+             <p >50.6元（95折）</p>
         </div>
         <div  class="weui-flex__hd">
             <div class="">
@@ -24,7 +31,7 @@
 $("#_total").focus();
 </script>
 <style>
-.weui-cell:before {
-    border-top:0px;
+.weui-flex.weui-flex__item a {
+    font-size: 17px;
 }
 </style>

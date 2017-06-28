@@ -21,6 +21,12 @@ class MgGameGoods extends \yii\db\ActiveRecord
 {
     const ON_SALE  = 1;
     const OFF_SALE = 2;
+    
+    static $statDesc = [
+        self::ON_SALE=> '上架',
+        self::OFF_SALE=> '下架'
+    ];
+    
     /**
      * @inheritdoc
      */
@@ -47,7 +53,7 @@ class MgGameGoods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['game_id', 'status', 'type', 'add_time', 'update_time'], 'integer'],
+            [['game_id', 'status', 'type', 'add_time', 'update_time','score'], 'integer'],
             [['price'], 'number'],
             [['title'], 'string', 'max' => 20],
             [['content'], 'string', 'max' => 200],
@@ -66,6 +72,7 @@ class MgGameGoods extends \yii\db\ActiveRecord
             'price' => '价格',
             'status' => '状态',
             'type' => '类型',
+            'score'=> '宝石数',
             'content' => '详细信息',
             'add_time' => '添加时间',
             'update_time' => '更新时间',

@@ -21,7 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'desc',
-            'status',
+            ['label' => '游戏状态','value' => function($data) {
+                return \common\models\MgGames::$statDesc[$data->status];
+            }],
             'type',
             // 'add_time',
             // 'update_time',

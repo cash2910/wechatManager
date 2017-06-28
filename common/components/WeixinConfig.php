@@ -73,6 +73,10 @@ class WeixinConfig{
         'createCs'=>[
             'url'=>'https://api.weixin.qq.com/customservice/kfaccount/add',
             'isPost'=>1
+        ],
+        'sendCsMsg'=>[
+            'url'=>'https://api.weixin.qq.com/cgi-bin/message/custom/send',
+            'isPost'=>1
         ]
     ];
     

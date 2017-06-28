@@ -16,7 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'name' => 'id',
+                'headerOptions' => ['style' => 'width: 40px;'],
+            ],
             'id',
             [
                 'attribute' => 'headimgurl',

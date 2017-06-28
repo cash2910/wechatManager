@@ -68,7 +68,7 @@ class MgOrderList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status', 'channel', 'pay_type', 'entity_id'], 'integer'],
+            [['user_id', 'status', 'channel', 'pay_type', 'entity_id','game_id','region_id'], 'integer'],
             [['order_num'], 'number'],
             //[['add_time', 'update_time'], 'required'],
             [['add_time', 'update_time'], 'safe'],
@@ -88,6 +88,7 @@ class MgOrderList extends \yii\db\ActiveRecord
             'order_sn' => '订单编号',
             'user_id' => '用户id',
             'nick_name' => '用户昵称',
+            'game_id' => '充值游戏',
             'mobile' => '用户手机号',
             'order_num' => '订单金额',
             'status' => '订单状态',

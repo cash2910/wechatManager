@@ -28,6 +28,8 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'score')->textInput(['maxlength' => true,]) ?>
 
     <?= $form->field($model, 'status')->radioList([1=>'上架',2=>'下架'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
 

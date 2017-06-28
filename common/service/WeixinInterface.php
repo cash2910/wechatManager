@@ -97,6 +97,11 @@ interface WeixinInterface{
      * 添加客服账号
      */
     public function createCs( $params );
+    
+    /**
+     * 发送客服消息
+     */
+    public function sendCsMsg( $params );
 }
 
 ?>

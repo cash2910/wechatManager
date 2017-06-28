@@ -20,6 +20,13 @@ use yii\behaviors\TimestampBehavior;
  */
 class MgGames extends \yii\db\ActiveRecord
 {
+    const IS_ONLINE = 0;
+    const IS_OFFLINE =1;
+    
+    static $statDesc = [
+        self::IS_ONLINE=>'上线',
+        self::IS_OFFLINE=>'下线'
+    ];
     /**
      * @inheritdoc
      */
