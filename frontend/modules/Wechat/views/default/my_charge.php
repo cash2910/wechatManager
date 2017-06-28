@@ -11,7 +11,7 @@
        <div class="weui-flex">
            <div class="weui-cells__tips" style="margin-top: 10px;">充值数量</div>
        </div>
-       <div class="weui-flex" style="margin:10px; 0px,10px,0px;">
+       <div class="weui-flex" style="">
             <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini  weui-btn_primary" style="font-size: 17px;">1000</a></div>
             <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 17px;">2000</a></div>
             <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 17px;">5000</a></div>
