@@ -16,7 +16,7 @@
            <div class="weui-flex game_goods" >
                 <?php foreach($goods as $id => $good):?>
                 <!--  weui-btn_primary  -->
-               <a href="javascript:;" class="weui-btn weui-btn_mini " ><?php echo $good->title?></a>
+                <a href="javascript:;" class="weui-btn weui-btn_mini " ><?php echo $good->title?></a>
                 <a href="javascript:;" class="weui-btn weui-btn_mini " ><?php echo $good->title?></a>
                 <?php endforeach;?>
             </div>
