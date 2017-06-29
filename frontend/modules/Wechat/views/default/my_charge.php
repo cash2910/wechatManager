@@ -101,7 +101,7 @@ function callpay()
       display: flex;
       flex-wrap: wrap;
       padding: 10px;
-      justify-content: space-around;
+      justify-content: space-between;
     }
    
     .btn-group{
