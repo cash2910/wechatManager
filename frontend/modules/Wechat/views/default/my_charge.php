@@ -1,3 +1,8 @@
+<?php 
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use common\models\MgGames;
+?>
 <div  style="position: absolute;
     top: 0;
     background-color: #f8f8f8;
@@ -6,7 +11,17 @@
     left: 0;
     right: 0;">
     <div class="weui-flex" style="margin-top: 5px;" >
-         <h4 class="title" style="color: #333;" >充值游戏</h4>
+         <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">选择游戏</label>
+            </div>
+            <div class="weui-cell__bd">
+                <?php 
+                    $data = MgGames::find()->all();
+                    echo Html::dropDownList('select2', yii::$app->request->get('game_id'), ArrayHelper::map($data,'id', 'title'), ['class' => 'weui-select game_sel']);
+                ?>
+            </div>
+         </div>
     </div>  
     <div class="weui-flex">
         <div class="weui-flex__item" >
@@ -32,6 +47,9 @@
 </div>
 <script>
 $(function(){
+	$(".game_sel").change(function(){
+		location.href = "/Wechat/default/my-charge?game_id="+$(this).val();
+	});
 	$(".game_goods a").click(function(){
 		$(this).addClass("active").siblings().removeClass("active");
 	});
