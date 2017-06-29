@@ -16,7 +16,7 @@
            <div class="flex-box game_goods" >
                 <?php foreach($goods as $id => $good):?>
                 <!--  weui-btn_primary  -->
-                 <a href="javascript:;"  class="weui-btn weui-btn_mini " ><?php echo $good->title?></a>
+                 <a href="javascript:;"  class="btn-group" ><?php echo $good->title?></a>
                 <?php endforeach;?>
             </div>
             <div class="weui-flex" style="margin-top: 10px;">
@@ -33,7 +33,7 @@
 <script>
 $(function(){
 	$(".game_goods a").click(function(){
-		$(this).addClass("weui-btn_primary").siblings().removeClass("weui-btn_primary");
+		$(this).addClass("active").siblings().removeClass("active");
 	});
 	//调用微信JS api 支付
 	$("#weixin_pay").click(callpay);
@@ -92,4 +92,35 @@ function callpay()
 .sp_discount{
 	font-size: 10px;
 }
+
+
+ *{
+      border: 0; margin: 0; padding: 0;
+    }
+    .flex-box{
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+      justify-content: space-around;
+    }
+   
+    .btn-group{
+      flex-basis: 23%;
+      text-decoration: none;
+      font-size: 14px;
+      border-radius: 5px;
+     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      text-align: center;
+      text-decoration: none;
+      color: #333;
+      padding: 0.5em;
+      border: 1px solid #eee;
+      box-sizing: border-box;
+      margin: 5px 0;
+    }
+    .btn-group.active{
+      background-color: #1AAD19;
+      color: #fff;
+    }
+
 </style>
