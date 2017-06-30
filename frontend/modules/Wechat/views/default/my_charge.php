@@ -18,7 +18,7 @@ use common\models\MgGames;
             <div class="weui-cell__bd">
                 <?php 
                     $data = MgGames::find()->all();
-                    echo Html::dropDownList('select2', yii::$app->request->get('game_id'), ArrayHelper::map($data,'id', 'title'), ['class' => 'weui-select game_sel']);
+                    echo Html::dropDownList('select2', yii::$app->request->get('game_id'), ArrayHelper::map( $data,'id', 'title'), ['class' => 'weui-select game_sel', 'prompt' => '请选择游戏'] );
                 ?>
             </div>
          </div>
@@ -47,9 +47,11 @@ use common\models\MgGames;
 </div>
 <script>
 $(function(){
+	//选择游戏
 	$(".game_sel").change(function(){
 		location.href = "/Wechat/default/my-charge?game_id="+$(this).val();
 	});
+	//选择商品
 	$(".game_goods a").click(function(){
 		$(this).addClass("active").siblings().removeClass("active");
 	});
@@ -58,7 +60,10 @@ $(function(){
 });
 function getOrderParams( data ){
 	$.ajax({
-		url:'/Wechat/'
+		url:'/Wechat/order/get-order'
+		success:function( data ){
+			console.dir(data);
+		}
     });
 }
 
