@@ -18,11 +18,11 @@ use common\models\MgGames;
             <div class="weui-cell__bd">
                 <?php 
                     $data = MgGames::find()->all();
-                    echo Html::dropDownList('select2', yii::$app->request->get('game_id'), ArrayHelper::map( $data,'id', 'title'), ['class' => 'weui-select game_sel', 'prompt' => '请选择游戏'] );
+                    echo Html::dropDownList('select2', yii::$app->request->get('game_id', 1), ArrayHelper::map( $data,'id', 'title'), ['class' => 'weui-select game_sel', 'prompt' => '请选择游戏'] );
                 ?>
             </div>
          </div>
-    </div>  
+    </div>
     <div class="weui-flex">
         <div class="weui-flex__item" >
            <div class="weui-flex">
@@ -31,7 +31,7 @@ use common\models\MgGames;
            <div class="flex-box game_goods" >
                 <?php foreach($goods as $id => $good):?>
                 <!--  weui-btn_primary  -->
-                 <a href="javascript:;"  class="btn-group" ><?php echo $good->title?></a>
+                 <a href="javascript:;"  class="btn-group" data='<?php echo json_encode( $good->getAttributes()  ) ?>' ><?php echo $good->title?></a>
                 <?php endforeach;?>
             </div>
             <div class="weui-flex" style="margin-top: 10px;">
@@ -46,6 +46,7 @@ use common\models\MgGames;
      </div>
 </div>
 <script>
+var gid = 0 , gObj = null;
 $(function(){
 	//选择游戏
 	$(".game_sel").change(function(){
@@ -54,24 +55,30 @@ $(function(){
 	//选择商品
 	$(".game_goods a").click(function(){
 		$(this).addClass("active").siblings().removeClass("active");
+		gObj = eval("("+ $(this).attr('data') +")");
+		gid = gObj.id;
 	});
 	//调用微信JS api 支付
 	$("#weixin_pay").click(callpay);
 });
-function getOrderParams( data ){
+function getOrder( data ){
+	var oid = '';
 	$.ajax({
-		url:'/Wechat/order/get-order'
-		success:function( data ){
-			console.dir(data);
+		url:'/Wechat/order/get-order?gid='+gid,
+		async:false,
+		success:function( d ){
+			console.dir( d );
+			oid = d.data;
 		}
     });
 }
 
 function jsApiCall()
 {
+	$oid = getOrder();
 	WeixinJSBridge.invoke(
 		'getBrandWCPayRequest',
-		'<?php //echo $jsApiParameters; ?>',
+		$oid,
 		function(res){
 			WeixinJSBridge.log(res.err_msg);
 			alert(res.err_code+res.err_desc+res.err_msg);
@@ -81,15 +88,19 @@ function jsApiCall()
 
 function callpay()
 {	
-	if (typeof WeixinJSBridge == "undefined"){
-	    if( document.addEventListener ){
-	        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-	    }else if (document.attachEvent){
-	        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
-	        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-	    }
-	}else{
-	    jsApiCall();
+	try{
+    	if (typeof WeixinJSBridge == "undefined"){
+    	    if( document.addEventListener ){
+    	        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+    	    }else if (document.attachEvent){
+    	        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+    	        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+    	    }
+    	}else{
+    	    jsApiCall();
+    	}
+	}catch(  e ){
+		alert(e);
 	}
 }
 </script>
