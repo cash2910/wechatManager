@@ -69,7 +69,7 @@ class OrderController extends Controller
         $input->SetOut_trade_no(  $ret['data']->order_sn  );
         $input->SetTotal_fee( (int)$ret['data']->order_num*100 );
         $input->SetTime_start( date("YmdHis") );
-        $input->SetTime_expire( date("YmdHis", time() + 600));
+        $input->SetTime_expire( date("YmdHis", $_SERVER['REQUEST_TIME'] + 600));
         $input->SetGoods_tag( "test" );
         $input->SetNotify_url( yii::$app->urlManager->createAbsoluteUrl('/Wechat/order/notify') );
         $input->SetTrade_type( "JSAPI" );
