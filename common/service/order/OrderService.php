@@ -72,7 +72,7 @@ class OrderService extends BaseService implements OrderInterface{
             $payObj->pay_num = $orderObj->order_num;
             $res = $payObj->save();
             if( !$res )
-                throw new \Exception( json_encode( $orderObj->getErrors() ) );
+                throw new \Exception( json_encode( $payObj->getErrors() ) );
             $transaction->commit();
             $this->trigger(self::AFTER_PAY_ORDER);
         }catch( Exception $e ){
