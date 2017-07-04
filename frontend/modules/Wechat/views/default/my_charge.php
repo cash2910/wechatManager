@@ -72,7 +72,6 @@ function getOrder( data ){
 		async:false,
 		success:function( d ){
 			var ret = eval( "("+d+")");
-			console.dir(ret);
 			if( !ret.isOk )
 				throw ret.msg ;
 			oid = ret.data;
@@ -84,14 +83,11 @@ function getOrder( data ){
 function jsApiCall()
 {
 	var oInfo = getOrder();
-	console.dir( oInfo );
-	console.dir( JSON.stringify(oInfo) );
 	if( !oInfo )
 		throw '支付失败！';
-	console.dir( JSON.stringify(oInfo) );
 	WeixinJSBridge.invoke(
 		'getBrandWCPayRequest',
-		JSON.stringify(oInfo),
+		oInfo,
 		function(res){
 			WeixinJSBridge.log(res.err_msg);
 			alert(res.err_code+res.err_desc+res.err_msg);
