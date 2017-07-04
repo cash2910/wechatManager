@@ -60,7 +60,7 @@ class OrderController extends Controller
         if( 1 !=  ArrayHelper::getValue($ret, 'isOk' ) )
             CommonResponse::end( ['isOk'=>0,'msg'=>'创建订单失败...'] );
         $input = new \WxPayUnifiedOrder();
-        $input->SetBody("支付充值".$ret['data']->order_num);
+        $input->SetBody("游戏充值".$ret['data']->order_num);
         $input->SetAttach( $ret['data']->id );
         $input->SetOut_trade_no(  $ret['data']->order_sn  );
         $input->SetTotal_fee( $ret['data']->order_num*100 );
