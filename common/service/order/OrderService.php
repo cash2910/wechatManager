@@ -68,7 +68,7 @@ class OrderService extends BaseService implements OrderInterface{
             $payObj = new MgOrderPayList();
             $payObj->pay_sn = $params['transaction_id'];
             $payObj->order_sn = $orderObj->order_sn;
-            $payObj->type = ArrayHelper::getValue($params, 'pay_type', 2);
+            $payObj->pay_type = ArrayHelper::getValue($params, 'pay_type', 2);
             $payObj->num = $params['total_fee'];
             $transaction->commit();
             $this->trigger(self::AFTER_PAY_ORDER);
