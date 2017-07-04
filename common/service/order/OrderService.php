@@ -26,9 +26,9 @@ class OrderService extends BaseService implements OrderInterface{
                 'class'=>'common\components\order\SendProductBehavior',
             ],
             //计算返利
-            'coculateRefund'=>[
-                
-            ]
+        //    'coculateRefund'=>[
+        //        
+        //    ]
         ];
     }
     
