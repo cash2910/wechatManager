@@ -77,6 +77,7 @@ function getOrder( data ){
 			oid = d.data;
 		}
     });
+    return oid;
 }
 
 function jsApiCall()
