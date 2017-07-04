@@ -79,8 +79,10 @@ class OrderController extends Controller
         $input->SetMch_id( yii::$app->params['MCHID'] );
         
         $order = \WxPayApi::unifiedOrder( $input );
-        if( 'FAIL' == $order['return_code'] )
+        if( 'FAIL' == $order['return_code'] ){
+            yii::error( json_encode( $order ) );
             CommonResponse::end( ['isOk'=>0,'msg'=>'创建微信付款单失败...'] );
+        }
         $tools = new \JsApiPay();
         $param = $tools->GetJsApiParameters( $order );
         CommonResponse::end( ['isOk'=>1,'data'=>$param ] );
