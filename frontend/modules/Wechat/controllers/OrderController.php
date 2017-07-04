@@ -67,7 +67,7 @@ class OrderController extends Controller
         $input->SetBody("支付充值".$ret['data']->order_num);
         $input->SetAttach( $ret['data']->id );
         $input->SetOut_trade_no(  $ret['data']->order_sn  );
-        $input->SetTotal_fee( (int)$ret['data']->order_num*100 );
+        $input->SetTotal_fee( $ret['data']->order_num*100 );
         $input->SetTime_start( date("YmdHis") );
         //$input->SetTime_expire( date("YmdHis", time() + 1200));
         $input->SetGoods_tag( "test" );
