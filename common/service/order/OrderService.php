@@ -70,6 +70,7 @@ class OrderService extends BaseService implements OrderInterface{
             $payObj->order_sn = $orderObj->order_sn;
             $payObj->pay_type = ArrayHelper::getValue($params, 'pay_type', 2);
             $payObj->pay_num = $params['total_fee'];
+            $payObj->save();
             $transaction->commit();
             $this->trigger(self::AFTER_PAY_ORDER);
         }catch( Exception $e ){
