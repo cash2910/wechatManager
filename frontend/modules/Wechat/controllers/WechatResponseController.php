@@ -21,7 +21,6 @@ class WechatResponseController extends Controller
      */
     public function actionIndex(){
         
-        
         //检测sign
         //响应用户请求
         try{

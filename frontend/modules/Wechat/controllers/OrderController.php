@@ -12,16 +12,12 @@ use common\models\MgGameGoods;
 use common\models\MgOrderList;
 use yii\helpers\ArrayHelper;
 
-
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayException.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayConfig.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayApi.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayDataBase.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayJsApiPay.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayNotify.php';
-
-
-
 
 /**
  * Default controller for the `Wechat` module
@@ -91,8 +87,23 @@ class OrderController extends Controller
     
     public function actionNotify(){
         
+        $ret = \WxpayApi::notify(array($this, 'NotifyCallBack'), 'OK');
+        $reply = new \WxPayNotify();
+        if($result == false){
+			$reply->SetReturn_code("FAIL");
+			$reply->SetReturn_msg($msg);
+		} else {
+			//该分支在成功回调到NotifyCallBack方法，处理完成之后流程
+			$reply->SetReturn_code("SUCCESS");
+			$reply->SetReturn_msg("OK");
+		}
+		$reply->ReplyNotify( false );
         
+    }
+    
+    public function NotifyCallBack( $result ){
         
+        yii::error(json_encode($result));
         
     }
 }
