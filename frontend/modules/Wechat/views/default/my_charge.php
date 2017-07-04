@@ -57,6 +57,10 @@ $(function(){
 		$(this).addClass("active").siblings().removeClass("active");
 		gObj = eval("("+ $(this).attr('data') +")");
 		gid = gObj.id;
+		//显示价格
+		$(".sp_total").html( gObj.price );
+		//计算折扣
+		$(".sp_discount").html( "("+ parseInt(gObj.price/gObj.score*100) +"折)" );
 	});
 	//调用微信JS api 支付
 	$("#weixin_pay").click(callpay);
@@ -67,7 +71,9 @@ function getOrder( data ){
 		url:'/Wechat/order/get-order?gid='+gid,
 		async:false,
 		success:function( d ){
-			console.dir( d );
+			var ret = eval( "("+d+")");
+			if( !ret.isOk )
+				throw ret.msg ;
 			oid = d.data;
 		}
     });
@@ -75,10 +81,12 @@ function getOrder( data ){
 
 function jsApiCall()
 {
-	$oid = getOrder();
+	var oInfo = getOrder();
+	if( !oInfo )
+		throw '支付失败！';
 	WeixinJSBridge.invoke(
 		'getBrandWCPayRequest',
-		$oid,
+		oInfo,
 		function(res){
 			WeixinJSBridge.log(res.err_msg);
 			alert(res.err_code+res.err_desc+res.err_msg);
@@ -100,7 +108,7 @@ function callpay()
     	    jsApiCall();
     	}
 	}catch(  e ){
-		alert(e);
+		console.dir( e );
 	}
 }
 </script>

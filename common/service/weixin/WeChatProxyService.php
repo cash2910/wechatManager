@@ -36,7 +36,7 @@ class WeChatProxyService{
         $url = ArrayHelper::getValue($conf, 'url');
         //获取token 与生成二维码不需要access_token
         if( ArrayHelper::getValue($conf, 'need_token', true)  ){
-             $params['access_token'] =self::getToken(  );
+             $params['access_token'] =self::getToken();
         }
         /**
          * @todo 修改为字符串替换参数
@@ -60,7 +60,9 @@ class WeChatProxyService{
                 'appid'=> yii::$app->params['AppId'] ,
                 'secret'=>yii::$app->params['AppSecret']
              ]);
-             $token = $res['access_token'];
+             $token = ArrayHelper::getValue($res, 'access_token');
+             if( !$token )
+                 throw new Exception( $res['errmsg'] );
              yii::$app->redis->set( WeixinConfig::TOKEN_KEY, $token, 'EX', 7000 );
          }
          return $token;

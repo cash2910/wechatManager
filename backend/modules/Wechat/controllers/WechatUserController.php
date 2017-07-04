@@ -110,7 +110,7 @@ class WechatUserController extends Controller
     
     public function actionInit()
     {
-        BusinessService::getInstance()->initUsers( true );
+        BusinessService::getInstance()->initUsers( false );
         return $this->redirect(['index']);
     }
     

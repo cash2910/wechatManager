@@ -11,12 +11,15 @@ use common\models\MgUsers;
 use common\models\MgGameGoods;
 use common\models\MgOrderList;
 use yii\helpers\ArrayHelper;
-/* use common\components\wxpay\WxPayUnifiedOrder;
-use common\components\wxpay\WxPayApi;
-use common\components\wxpay\WxPayJsApiPay; */
+
+
+require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayException.php';
+require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayConfig.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayApi.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayDataBase.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayJsApiPay.php';
+require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayNotify.php';
+
 
 
 
@@ -44,13 +47,12 @@ class OrderController extends Controller
      * 创建订单 并生成微信支付单
      */
     public function actionGetOrder(){
-        $this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
+        
         $gid = (int)yii::$app->request->get('gid', 0);
         if(!$gid)
             CommonResponse::end(['isOk'=>0,'msg'=>'invalid gid...']);
         $gObj = MgGameGoods::findOne(['id'=>$gid]);
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
-        
         $ret = OrderService::getInstance()->createOrder([
             'user_id'=>$uObj->id,
             'nick_name'=>$uObj->nickname,
@@ -65,7 +67,7 @@ class OrderController extends Controller
         $input->SetBody("支付充值".$ret['data']->order_num);
         $input->SetAttach( $ret['data']->id );
         $input->SetOut_trade_no(  $ret['data']->order_sn  );
-        $input->SetTotal_fee( $ret['data']->order_num );
+        $input->SetTotal_fee( (int)$ret['data']->order_num*100 );
         $input->SetTime_start( date("YmdHis") );
         $input->SetTime_expire( date("YmdHis", time() + 600));
         $input->SetGoods_tag( "test" );
@@ -74,20 +76,21 @@ class OrderController extends Controller
         $input->SetOpenid( $this->open_id );
         
         $input->SetAppid( yii::$app->params['AppId'] );
-        $input->SetMch_id( yii::$app->params['AppSecret'] );
-        //$inputObj->SetAppid(WxPayConfig::APPID);//公众账号ID
-        //$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
+        $input->SetMch_id( yii::$app->params['MCHID'] );
         
         $order = \WxPayApi::unifiedOrder( $input );
-        
+        if( 'FAIL' == $order['return_code'] )
+            CommonResponse::end( ['isOk'=>0,'msg'=>'创建微信付款单失败...'] );
         $tools = new \JsApiPay();
         $param = $tools->GetJsApiParameters( $order );
-            //$ret['data'] = $ret['data']->getAttributes();
-        CommonResponse::end( ['isOk'=>0,'data'=>$param ] );
+        CommonResponse::end( ['isOk'=>1,'data'=>$param ] );
     }
     
     
     public function actionNotify(){
+        
+        
+        
         
     }
 }
