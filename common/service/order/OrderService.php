@@ -16,15 +16,25 @@ class OrderService extends BaseService implements OrderInterface{
     const AFTER_UPDATE_ORDER  = 'after_update_order';
     const AFTER_PAY_ORDER = 'after_pay_order';
 
+    private $orderObj = null;
+    
     public function behaviors(){
+        
         return [
-            
+            //发放宝石
+            'sendPackage'=>[
+                'class'=>'common\components\order\SendProductBehavior',
+            ],
+            //计算返利
+            'coculateRefund'=>[
+                
+            ]
         ];
     }
     
     public function createOrder( $params , \Closure $callback = null ){
-        $ret = ['isOk'=>1,'msg'=>'订单创建成功','data'=>[]];        
         
+        $ret = ['isOk'=>1,'msg'=>'订单创建成功','data'=>[]];        
         $transaction = Yii::$app->db->beginTransaction();
         try{
             $this->ensureBehaviors();
@@ -41,15 +51,17 @@ class OrderService extends BaseService implements OrderInterface{
                 call_user_func( $callback, $orderObj );
             }
             $transaction->commit();
-            $this->trigger(self::AFTER_CREATE_ORDER);
+            $this->orderObj = $orderObj;
+            $this->sendPackage( $orderObj );
+            //$this->trigger( self::AFTER_CREATE_ORDER );
             $ret['data'] = $orderObj;
         }catch ( \Exception $e){
             //savelog
             yii::error($e->getMessage());
             $transaction->rollBack();
+            return $ret;
         }
         return $ret;
-        
     }
     
     public function updateOrder($params){

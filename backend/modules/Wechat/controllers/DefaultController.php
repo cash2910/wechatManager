@@ -12,6 +12,11 @@ use common\service\weixin\WeChatService;
 use common\service\weixin\BusinessService;
 use common\service\weixin\GameService;
 use common\service\weixin\ProxyXml;
+use yii\base\Behavior;
+use yii\base\Component;
+use yii\base\Object;
+use common\models\MgOrderList;
+use common\components\game\Stone;
 
 
 /**
@@ -152,14 +157,50 @@ class DefaultController extends Controller
    //     $ret = BusinessService::getInstance()->initUsers();
    
       //  $ret = BusinessService::getInstance()->getGames( );
-        $ret = WeChatService::getIns()->sendCsMsg([
+/*         $ret = WeChatService::getIns()->sendCsMsg([
             'touser'=>"opjR8w4dyynJRHFhL8fFY9yrYG8M",
             'msgtype'=>'text',
             'text'=>[
                 'content'=>'哇哈哈'
             ]
         ]);
-        
-        var_dump( $ret );
+         */
+//        var_dump( $ret );
+
+     //      $ret =  Stone::getInstance()->addStone( 1000552 , 100);
+           //var_dump( $ret );
+/*         $order = MgOrderList::findOne([
+            'order_sn'=>'20170622142723131378'
+        ]);*/
+        $order = MgOrderList::findOne(['order_sn'=>'20170622110201231271']);
+        $m = new My();
+        $m->go( $order ); 
     }
+}
+
+class My extends Component{
+    
+    public function behaviors(){
+        return [
+            'sendPackage'=>[
+                'class'=>'common\components\order\SendProductBehavior',
+            ]
+        ];
+    }
+    
+    public function go( $o ){
+        
+        $this->sendPackage( $o );
+        
+    }
+    
+}
+
+
+class Test extends Behavior{
+    
+    public function send(){
+        echo "dsadsa";
+    }
+    
 }

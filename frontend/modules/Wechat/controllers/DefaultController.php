@@ -111,6 +111,8 @@ class DefaultController extends Controller
     public function actionMyOrder()
     {
         $this->title="我的订单";
+        
+        
         return $this->render('my_order');
     }
     
