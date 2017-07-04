@@ -75,7 +75,7 @@ function getOrder( data ){
 			console.dir(ret);
 			if( !ret.isOk )
 				throw ret.msg ;
-			oid = d.data;
+			oid = ret.data;
 		}
     });
     return oid;
