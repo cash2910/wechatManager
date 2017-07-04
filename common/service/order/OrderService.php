@@ -5,12 +5,16 @@ use yii;
 use common\service\BaseService;
 use common\service\OrderInterface;
 use common\models\MgOrderList;
+use yii\base\Exception;
+use yii\base\Object;
+use yii\helpers\ArrayHelper;
 
 
 class OrderService extends BaseService implements OrderInterface{
     
     const AFTER_CREATE_ORDER  = 'after_create_order';
     const AFTER_UPDATE_ORDER  = 'after_update_order';
+    const AFTER_PAY_ORDER = 'after_pay_order';
 
     public function behaviors(){
         return [
@@ -51,6 +55,29 @@ class OrderService extends BaseService implements OrderInterface{
     public function updateOrder($params){
          
         $this->trigger(self::AFTER_UPDATE_ORDER);
+    }
+    
+    public function payOrder( MgOrderList $orderObj, $params ){
+        $transaction = Yii::$app->db->beginTransaction();
+        try{
+            $this->ensureBehaviors();
+            if(  $params['total_fee'] != ($orderObj->order_num*100) )
+                throw new Exception('支付金额不匹配！');
+            $orderObj->pay_sn = $params['transaction_id'];
+            $orderObj->save();
+            $payObj = new MgOrderPayList();
+            $payObj->pay_sn = $params['transaction_id'];
+            $payObj->order_sn = $orderObj->order_sn;
+            $payObj->type = ArrayHelper::getValue($params, 'pay_type', 2);
+            $payObj->num = $params['total_fee'];
+            $transaction->commit();
+            $this->trigger(self::AFTER_PAY_ORDER);
+        }catch( Exception $e ){
+            yii::error($e->getMessage());
+            $transaction->rollBack();
+            return false;
+        }
+        return true;   
     }
     
     /**

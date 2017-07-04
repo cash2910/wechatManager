@@ -105,8 +105,19 @@ class OrderController extends Controller
         
     }
     
+    /**
+     * {"appid":"wxc41b5bd89d328132","attach":"188","bank_type":"CFT","cash_fee":"1","fee_type":"CNY","is_subscribe":"Y","mch_id":"1483656542","nonce_str":"p1q8yvo9jlbq2u6r6aw2trk5jwquhot4","openid":"o9Unv0a0sL-H8lREpQ86O5WodVyg","out_trade_no":"2017070406550682505","result_code":"SUCCESS","return_code":"SUCCESS","sign":"AA6424FE06FD7E085398E15FFE1916C3","time_end":"20170704145510","total_fee":"1","trade_type":"JSAPI","transaction_id":"4000632001201707048856347475"}
+     * @param unknown $result
+     */
     public function NotifyCallBack( $result ){
         
+        $order_sn = $result['out_trade_no'];
+        $orderObj = MgOrderList::findOne([ 'order_sn'=> $order_sn ]);
+        if( !$orderObj ){
+            yii::error( "未找到订单信息：".json_encode($result));
+            return false;            
+        }
+        $ret = OrderService::getInstance()->payOrder( $orderObj , $result );
         yii::error(json_encode($result));
         return true;   
     }
