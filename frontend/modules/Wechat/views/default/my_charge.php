@@ -83,6 +83,7 @@ function getOrder( data ){
 function jsApiCall()
 {
 	var oInfo = getOrder();
+	console.dir( JSON.stringify(oInfo) );
 	if( !oInfo )
 		throw '支付失败！';
 	console.dir( JSON.stringify(oInfo) );
