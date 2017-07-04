@@ -86,7 +86,7 @@ function jsApiCall()
 		throw '支付失败！';
 	WeixinJSBridge.invoke(
 		'getBrandWCPayRequest',
-		oInfo,
+		JSON.stringify(oInfo),
 		function(res){
 			WeixinJSBridge.log(res.err_msg);
 			alert(res.err_code+res.err_desc+res.err_msg);
