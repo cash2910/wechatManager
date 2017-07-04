@@ -93,7 +93,7 @@ class OrderController extends Controller
             yii::error( $msg );
         }
         $reply = new \WxPayNotify();
-        if($result == false){
+        if( $ret  == false){
 			$reply->SetReturn_code("FAIL");
 			$reply->SetReturn_msg($msg);
 		} else {
@@ -102,7 +102,6 @@ class OrderController extends Controller
 			$reply->SetReturn_msg("OK");
 		}
 		$reply->ReplyNotify( false );
-        
     }
     
     /**
