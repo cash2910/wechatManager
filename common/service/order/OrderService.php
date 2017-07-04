@@ -5,8 +5,8 @@ use yii;
 use common\service\BaseService;
 use common\service\OrderInterface;
 use common\models\MgOrderList;
+use common\models\MgOrderPayList;
 use yii\base\Exception;
-use yii\base\Object;
 use yii\helpers\ArrayHelper;
 
 
