@@ -70,6 +70,7 @@ class OrderService extends BaseService implements OrderInterface{
             $payObj->order_sn = $orderObj->order_sn;
             $payObj->pay_type = ArrayHelper::getValue($params, 'pay_type', 2);
             $payObj->pay_num = $orderObj->order_num;
+            $payObj->pay_time = date('Y-m-d H:i:s');
             $res = $payObj->save();
             if( !$res )
                 throw new \Exception( json_encode( $payObj->getErrors() ) );

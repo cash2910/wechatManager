@@ -30,8 +30,8 @@ class MgOrderPayList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'pay_time'], 'required'],
-            [['id', 'pay_type'], 'integer'],
+            [['pay_time'], 'required'],
+            [['pay_type'], 'integer'],
             [['pay_num'], 'number'],
             [['pay_time'], 'safe'],
             [['pay_sn', 'order_sn'], 'string', 'max' => 32],
