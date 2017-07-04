@@ -72,6 +72,7 @@ function getOrder( data ){
 		async:false,
 		success:function( d ){
 			var ret = eval( "("+d+")");
+			console.dir(ret);
 			if( !ret.isOk )
 				throw ret.msg ;
 			oid = d.data;
