@@ -84,6 +84,7 @@ function jsApiCall()
 	var oInfo = getOrder();
 	if( !oInfo )
 		throw '支付失败！';
+	console.dir( JSON.stringify(oInfo) );
 	WeixinJSBridge.invoke(
 		'getBrandWCPayRequest',
 		JSON.stringify(oInfo),
