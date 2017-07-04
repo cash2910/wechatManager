@@ -87,7 +87,11 @@ class OrderController extends Controller
     
     public function actionNotify(){
         
-        $ret = \WxpayApi::notify(array($this, 'NotifyCallBack'), 'OK');
+        $msg = 'OK';
+        $ret = \WxpayApi::notify( array($this, 'NotifyCallBack'), $msg );
+        if( !$ret ){
+            yii::error( $msg );
+        }
         $reply = new \WxPayNotify();
         if($result == false){
 			$reply->SetReturn_code("FAIL");
@@ -104,6 +108,6 @@ class OrderController extends Controller
     public function NotifyCallBack( $result ){
         
         yii::error(json_encode($result));
-        
+        return true;   
     }
 }
