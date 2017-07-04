@@ -53,7 +53,6 @@ class OrderService extends BaseService implements OrderInterface{
             $transaction->commit();
             $this->orderObj = $orderObj;
             $this->sendPackage( $orderObj );
-            //$this->trigger( self::AFTER_CREATE_ORDER );
             $ret['data'] = $orderObj;
         }catch ( \Exception $e){
             //savelog
