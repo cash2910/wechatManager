@@ -85,8 +85,7 @@ class OrderController extends Controller
         }
         $tools = new \JsApiPay();
         $param = $tools->GetJsApiParameters( $order );
-        die(  );
-        //CommonResponse::end( ['isOk'=>1,'data'=>json_decode( $param, true ) ] );
+        CommonResponse::end( ['isOk'=>1,'data'=>json_decode( $param, true ) ] );
     }
     
     
