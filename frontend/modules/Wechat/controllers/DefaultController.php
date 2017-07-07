@@ -26,7 +26,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-              //      'my-index','my-friend','my-order','my-charge'
+                    'my-index','my-friend','my-order','my-charge'
                 ],
             ]
         ];
