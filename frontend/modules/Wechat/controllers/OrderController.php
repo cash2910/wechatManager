@@ -101,7 +101,7 @@ class OrderController extends Controller
 			$reply->SetReturn_code("SUCCESS");
 			$reply->SetReturn_msg("OK");
 		}
-		$reply->ReplyNotify( false );
+		\WxpayApi::replyNotify($reply->ToXml());
     }
     
     /**
