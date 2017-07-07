@@ -52,7 +52,6 @@ class OrderService extends BaseService implements OrderInterface{
             }
             $transaction->commit();
             $this->orderObj = $orderObj;
-            $this->sendPackage( $orderObj );
             $ret['data'] = $orderObj;
         }catch ( \Exception $e){
             //savelog
@@ -92,7 +91,8 @@ class OrderService extends BaseService implements OrderInterface{
             $transaction->rollBack();
             return false;
         }
-        return true;   
+        $this->sendPackage( $orderObj );
+        return true;
     }
     
     /**

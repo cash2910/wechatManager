@@ -101,6 +101,7 @@ class OrderController extends Controller
 			$reply->SetReturn_code("SUCCESS");
 			$reply->SetReturn_msg("OK");
 		}
+		yii::error($reply->ToXml());
 		\WxpayApi::replyNotify($reply->ToXml());
     }
     
@@ -117,7 +118,7 @@ class OrderController extends Controller
             return false;            
         }
         $ret = OrderService::getInstance()->payOrder( $orderObj , $result );
-        yii::error(json_encode($result));
+        //yii::error(json_encode($result));
         return true;   
     }
 }
