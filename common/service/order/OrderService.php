@@ -26,9 +26,9 @@ class OrderService extends BaseService implements OrderInterface{
                 'class'=>'common\components\order\SendProductBehavior',
             ],
             //计算返利
-        //    'coculateRefund'=>[
-        //        
-        //    ]
+            'coculateRefund'=>[
+                'class'=>'common\components\order\BalanceBehavior',   
+            ]
         ];
     }
     
@@ -91,7 +91,10 @@ class OrderService extends BaseService implements OrderInterface{
             $transaction->rollBack();
             return false;
         }
+        //发放道具
         $this->sendPackage( $orderObj );
+        //计算返利
+        $this->doBalance( $orderObj );
         return true;
     }
     

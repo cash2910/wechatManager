@@ -24,7 +24,7 @@ class NoticeController extends Controller
         ];
         yii::error("游戏参数：".json_encode( $_POST ) );
         $model = new MgGameUseropt();
-        $model->setAttributes( Yii::$app->request->post() );
+        $model->setAttributes( $_POST );
         if (  !$model->save() ) {
             yii::error( json_encode( $model->getErrors() ,JSON_UNESCAPED_UNICODE ) );
             $ret['resultNo'] = 90000;

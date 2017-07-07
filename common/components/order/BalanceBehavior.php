@@ -1,0 +1,40 @@
+<?php
+namespace common\components\order;
+
+use yii;
+use yii\base\Behavior;
+use common\models\MgOrderList;
+use common\models\MgUsers;
+use common\components\game\Stone;
+use common\models\MgGameGoods;
+/**
+
+ * @param MgOrderList $order_obj
+ */
+class BalanceBehavior extends Behavior{
+
+    /**
+     * 1、获取用户 向上3级用户
+     * 2、在从游戏获取union_id对应的用户游戏内id
+     * 3、在根据用户游戏内id给用户添加宝石
+     * @param MgOrderList $order_obj
+     */
+    public function doBalance( MgOrderList $order_obj ){
+        try{
+/*             $uInfo = MgUsers::findOne(['id'=>$order_obj->user_id]);
+            $gInfo = MgGameGoods::findOne(['id'=>$order_obj->entity_id]);
+            if( !$uInfo )
+                throw new \Exception("找不到用户 uid:{$order_obj->user_id}");
+            $union_id = $uInfo->union_id;
+            $uid = Stone::getInstance()->getUserId( $union_id );
+            yii::error( "用户游戏uid:{$uid}");
+            $ret = Stone::getInstance()->addStone( $uid, $gInfo->score ); */
+            
+        }catch ( \Exception $e ){
+            //var_dump( $e->getMessage() );
+       //     yii::error( $e->getMessage() );
+        }
+    }
+}
+
+?>
