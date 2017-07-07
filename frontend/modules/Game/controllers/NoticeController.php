@@ -22,6 +22,7 @@ class NoticeController extends Controller
             'resultNo'=>0,
             'resultDesc'=>'请求成功！'
         ];
+        yii::error("游戏参数：".json_encode( $_POST ) );
         $model = new MgGameUseropt();
         $model->setAttributes( Yii::$app->request->post() );
         if (  !$model->save() ) {
@@ -31,5 +32,4 @@ class NoticeController extends Controller
         }
         echo json_encode( $ret );
     }
-    
 }
