@@ -28,6 +28,7 @@ class SendProductBehavior extends Behavior{
                 throw new \Exception("找不到用户 uid:{$order_obj->user_id}");
             $union_id = $uInfo->union_id;
             $uid = Stone::getInstance()->getUserId( $union_id );
+            yii::error( "用户游戏uid:{$uid}");
             $ret = Stone::getInstance()->addStone( $uid, $gInfo->score );
             
         }catch ( \Exception $e ){

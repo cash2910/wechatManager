@@ -42,6 +42,7 @@ class Stone extends BaseService{
         ];
         $url = yii::$app->params['GAME_URL'].'/cmd?cmd=op_diamond&contents='. json_encode( $data  );
         $res = $curl->get( $url );
+        yii::error( "添加砖石接口返回信息:{$res}");
         return $this->commonParse( $res );
     }
     

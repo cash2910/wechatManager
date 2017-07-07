@@ -26,7 +26,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order','my-charge'
+              //      'my-index','my-friend','my-order','my-charge'
                 ],
             ]
         ];
@@ -110,10 +110,10 @@ class DefaultController extends Controller
     //我的订单列表
     public function actionMyOrder()
     {
-        //$this->open_id = 'o9Unv0a0sL-H8lREpQ86O5WodVyg';
+        $this->open_id = 'o9Unv0a0sL-H8lREpQ86O5WodVyg';
         $this->title="我的订单";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
-        $orderList = MgOrderList::findAll(['user_id'=>$uObj->id ]);
+        $orderList = MgOrderList::findAll(['user_id'=>$uObj->id, 'pay_sn'=>['<>',''] ]);
         return $this->render('my_order',[
             'order_list'=>$orderList
         ]);
