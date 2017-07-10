@@ -7,13 +7,13 @@
             <h2 class="weui-msg__title" style="font-size: 25px;">¥<?php echo isset( $account->free_balance ) ? $account->free_balance : 0; ?></h2>
         </div>
         <div class="weui-msg__opr-area">
-            <?php if( isset( $account->free_balance ) && !empty( $account->free_balance ) ):?>
             <p class="weui-btn-area">
+                <?php if( isset( $account->free_balance ) && !empty( $account->free_balance ) ):?>
                 <a href="javascript:history.back();" class="weui-btn weui-btn_primary">提现</a>
                 <br>   <!--   class="weui-btn weui-btn_default" -->
+                <?php endif;?>
                 <a  href="/Wechat/default/my-rebates">查看记录</a>
             </p>
-            <?php endif;?>
         </div>
     </div>
 </div>

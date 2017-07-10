@@ -207,7 +207,7 @@ class BusinessService extends BaseService{
      public function getGames( ProxyXml $entity  ){
          
          $games = MgGames::find()->where([
-             'status'=> 0
+             'status'=> MgGames::IS_ONLINE
          ])->all();
          $total = 0;
          $data = [];

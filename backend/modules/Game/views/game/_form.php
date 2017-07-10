@@ -26,11 +26,8 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'url')->textInput() ?>
     
+    <?= $form->field($model, 'status')->radioList([0=>'上架',1=>'下架'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
     
-    <?php  // echo  $form->field($model, 'status')->textInput() ?>
-
-    <?php  // echo  $form->field($model, 'status')->textInput() ?>
-
     <?php //echo $form->field($model, 'type')->textInput() ?>
 
     <?= $form->field($model, 'remark')->textInput(['maxlength' => true]) ?>
