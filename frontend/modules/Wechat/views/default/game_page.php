@@ -3,14 +3,14 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>娄底放炮罚</title>
+		<title><?php echo $gInfo->title ?></title>
 		<meta name="Keywords" content="二百胡,娄底放炮罚,湘乡告胡子，跑胡子" />
 		<meta name="Description" content="" />
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
 		<link rel="stylesheet" href="/files/style.css" />
 	</head>
 	<body>
-		<h1>娄底放炮罚</h1>
+		<h1><?php echo $gInfo->title ?></h1>
 		<div class="download-app">
 			<a href="https://itunes.apple.com/cn/app/id1164850097?mt=8"><img src="http://qp.cdn.supernanogame.com/images/web/appleld.png" /></a>
 			<a href="http://qp.cdn.supernanogame.com/apk/fpf/fpf2.0.apk"><img src="http://qp.cdn.supernanogame.com/images/web/googleld.png" /></a>

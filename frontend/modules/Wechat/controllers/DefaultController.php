@@ -13,6 +13,7 @@ use common\service\game\GameService;
 use common\models\MgOrderList;
 use common\models\MgUserAccount;
 use common\models\MgUserAccountLog;
+use common\models\MgGames;
 
 /**
  * Default controller for the `Wechat` module
@@ -57,7 +58,12 @@ class DefaultController extends Controller
     
     public function actionGamePage()
     {
-        return $this->renderPartial('game_page');
+        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 0)]);
+        if( !$gObj )
+            die('信息错误');
+        return $this->renderPartial('game_page',[
+            'gInfo'=> $gObj
+        ]);
     }
     
     /**
