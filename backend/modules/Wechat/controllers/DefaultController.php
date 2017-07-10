@@ -20,6 +20,8 @@ use common\components\game\Stone;
 use common\components\wxtransfer\WeixinTrans;
 use common\models\TransferEntity;
 use common\components\wxtransfer\WeixinTransfer;
+use common\service\order\RebateService;
+use common\models\MgUserAccount;
 
 
 /**
@@ -194,6 +196,8 @@ class DefaultController extends Controller
         $tObj = new WeixinTransfer();
         $tObj->setData($entity)->doTransFer();
         */
+        $aObj = MgUserAccount::findOne(['user_id'=>11]);
+        RebateService::getInstance()->createRebateOrder( $aObj , 5 );
     }
 }
 

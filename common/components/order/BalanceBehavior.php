@@ -20,11 +20,14 @@ class BalanceBehavior extends Behavior{
     //默认返利用户
     const DEFAULT_UID = 19;
     /**
+     * 订单金额小于1元不进行返利
      * 1、获取返利用户
      * 2、创建返利单 并将返利添加入用户账户
      * @param MgOrderList $order_obj
      */
     public function doBalance( MgOrderList $order_obj ){
+        //if( $order_obj->order_num < 1)
+        //    return false;
         $transaction = Yii::$app->db->beginTransaction();
         try{
             $uInfo = MgUsers::findOne([ 'id'=>$order_obj->user_id ]);

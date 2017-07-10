@@ -9,7 +9,7 @@
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
                 <?php if( isset( $account->free_balance ) && !empty( $account->free_balance ) ):?>
-                <a href="javascript:history.back();" class="weui-btn weui-btn_primary">提现</a>
+                <a href="javascript:void(0);" class="weui-btn weui-btn_primary _rebate">提现</a>
                 <br>   <!--   class="weui-btn weui-btn_default" -->
                 <?php endif;?>
                 <a  href="/Wechat/default/my-rebates">查看记录</a>
@@ -17,3 +17,18 @@
         </div>
     </div>
 </div>
+<script>
+//提现操作
+$("._rebate").click(function(){
+	var limit = 80;
+	var money = parseInt( $(".weui-msg__title").html().substring( 1 ) );
+	if( money < limit ){
+		alert('余额大于'+limit+'以上才可提现');
+		return false;
+	}
+	
+	
+});
+
+</script>
+
