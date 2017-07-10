@@ -61,12 +61,13 @@ class MgRebateList extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'rebate_sn' => 'Rebate Sn',
-            'user_id' => 'User ID',
-            'status' => 'Status',
-            'rebate_num' => 'Rebate Num',
-            'add_time' => 'Add Time',
-            'update_time' => 'Update Time',
+            'rebate_sn' => '提现单号',
+            'user_id' => '用户id',
+            'status' => '状态',
+            'desc'=> '描述信息',
+            'rebate_num' => '提现金额',
+            'add_time' => '申请时间',
+            'update_time' => '更新时间',
         ];
     }
 }

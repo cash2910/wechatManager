@@ -28,6 +28,7 @@ class OrderModule extends \yii\base\Module
         $items =  [
             'items' => [
                 ['label'=>'订单管理','url' => ['/Order/order'], 'active' => 0 ],
+                ['label'=>'提现管理','url' => ['/Order/rebate'], 'active' => 0 ],
             ]
         ];
         $func = function( &$items ) use ( &$func, $path ){

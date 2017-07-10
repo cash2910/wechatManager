@@ -197,7 +197,8 @@ class DefaultController extends Controller
         $tObj->setData($entity)->doTransFer();
         */
         $aObj = MgUserAccount::findOne(['user_id'=>11]);
-        RebateService::getInstance()->createRebateOrder( $aObj , 5 );
+        $ret = RebateService::getInstance()->createRebateOrder( $aObj , 5 );
+        var_dump( $ret );
     }
 }
 

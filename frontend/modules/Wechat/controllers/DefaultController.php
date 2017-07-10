@@ -54,8 +54,6 @@ class DefaultController extends Controller
         return $this->renderPartial('share_page');
     }
     
-
-    
     public function actionGamePage()
     {
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 0)]);
@@ -147,7 +145,9 @@ class DefaultController extends Controller
         ]);
     }
     
-    
+    /**
+     * 获取二维码
+     */
     public function actionGetQrCode(){
         $id = yii::$app->request->get('id', 0);
         $url = BusinessService::getInstance()->getQrcode( $id );

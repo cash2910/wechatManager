@@ -38,14 +38,15 @@ class RebateService extends BaseService {
             $rebateObj->status = MgRebateList::APPLY;
             $rebateObj->desc = "用户提现： ¥{$num}" ;
             $rebateObj->rebate_num = $num;
-            $ret = $rebateObj->save();
-            if( !$ret )
+            $res = $rebateObj->save();
+            if( !$res )
                 throw new \Exception( json_encode( $rebateObj->getErrors() ) );
             $account->free_balance -= $num;
-            $account->save();
-            
+            $res = $account->save();
+            if( !$res )
+                throw new \Exception( json_encode( $rebateObj->getErrors() ) );
             $transaction->commit();
-            $this->orderObj = $orderObj;
+            $this->orderObj = $rebateObj;
             $ret = [
                 'isOk'=>1,
                 'msg' =>'创建提款单成功！',
@@ -53,11 +54,15 @@ class RebateService extends BaseService {
             ];
         }catch ( \Exception $e){
             //savelog
-            yii::error($e->getMessage());
+            var_dump( $e->getMessage() );
+            //yii::error($e->getMessage());
             $transaction->rollBack();
         }
         return $ret;
     }
+    
+    
+    
     
     /**
      * 创建提款单号

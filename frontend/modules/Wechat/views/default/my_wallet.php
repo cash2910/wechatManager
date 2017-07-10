@@ -20,14 +20,22 @@
 <script>
 //提现操作
 $("._rebate").click(function(){
-	var limit = 80;
+	var limit = 30;
 	var money = parseInt( $(".weui-msg__title").html().substring( 1 ) );
 	if( money < limit ){
 		alert('余额大于'+limit+'以上才可提现');
 		return false;
 	}
-	
-	
+	$.ajax({
+		url:'/Wechat/order/get-rebate',
+		success:function( data ){
+			var d = eval("("+data+")");
+			alert( d.msg );
+			if( !d.isOk )
+				return false;
+			location.href="/Wechat/default/my-wallet";
+		}
+	});
 });
 
 </script>
