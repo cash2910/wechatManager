@@ -11,7 +11,7 @@
    </div>
    -->
 </div>
-<div class="weui-flex" style="/* margin-top:60px;margin-bottom:30px; */ ">
+<div class="weui-flex" style="/* margin-top:60px;*/margin-bottom:30px;  ">
     <div style="width: 100%;">
         <?php foreach ($order_list as $k =>$order ):?>
         <div class="weui-form-preview">
@@ -33,7 +33,7 @@
                 <?php if( !empty( $order->pay_sn ) ): ?>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">支付信息</label>
-                    <span class="weui-form-preview__value">支付流水号：<?php echo $order->pay_sn; ?>   时间：<?php echo $order->update_time;?></span>
+                    <span class="weui-form-preview__value">流水号：<?php echo $order->pay_sn; ?>   时间：<?php echo $order->update_time;?></span>
                 </div>
                 <?php endif;?>
             </div>
