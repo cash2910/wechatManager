@@ -115,7 +115,7 @@ class DefaultController extends Controller
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         
         $orderList = MgOrderList::findAll( ['user_id1'=>$uObj->id, ['<>','pay_sn1','dsadsa'] ] );
-        var_dump( $orderList );
+        //var_dump( $orderList );
         return $this->render('my_order',[
             'order_list'=>$orderList
         ]);

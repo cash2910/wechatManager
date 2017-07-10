@@ -33,15 +33,4 @@ class WechatResponseController extends Controller
         
     }
     
-    
-    /**
-     * 获取网页授权信息
-     */
-    public function actionGetToken(){
-        
-        
-        
-    }
-    
-    
 }
