@@ -3,13 +3,15 @@
     right: 0;
     top: 0;
     z-index: 999; ">
+    <!--
     <div class="weui-navbar" >
         <div class="weui-navbar__item weui-bar__item_on">我的订单</div>
-        <!-- <div class="weui-navbar__item">待支付</div>
-        <div class="weui-navbar__item">已取消</div> -->
+         <div class="weui-navbar__item">待支付</div>
+        <div class="weui-navbar__item">已取消</div> 
    </div>
+   -->
 </div>
-<div class="weui-flex" style="margin-top:60px;margin-bottom:30px; ">
+<div class="weui-flex" style="/* margin-top:60px;margin-bottom:30px; */ ">
     <div style="width: 100%;">
         <?php foreach ($order_list as $k =>$order ):?>
         <div class="weui-form-preview">

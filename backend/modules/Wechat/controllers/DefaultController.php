@@ -183,14 +183,14 @@ class My extends Component{
     public function behaviors(){
         return [
             'sendPackage'=>[
-                'class'=>'common\components\order\SendProductBehavior',
+                'class'=>'common\components\order\BalanceBehavior',
             ]
         ];
     }
     
     public function go( $o ){
         
-        $this->sendPackage( $o );
+        $this->doBalance( $o );
         
     }
     
