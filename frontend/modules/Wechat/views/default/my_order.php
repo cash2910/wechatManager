@@ -33,7 +33,7 @@
                 <?php if( !empty( $order->pay_sn ) ): ?>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">支付信息</label>
-                    <span class="weui-form-preview__value">流水号：<?php echo $order->pay_sn; ?> <br>  时间：<?php echo $order->update_time;?></span>
+                    <span class="weui-form-preview__value">  <br>  流水号：<?php echo $order->pay_sn; ?> <br>  时间：<?php echo $order->update_time;?></span>
                 </div>
                 <?php endif;?>
             </div>

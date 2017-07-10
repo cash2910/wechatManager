@@ -11,6 +11,8 @@ use common\models\MgUsers;
 use common\models\MgUserRel;
 use common\service\game\GameService;
 use common\models\MgOrderList;
+use common\models\MgUserAccount;
+use common\models\MgUserAccountLog;
 
 /**
  * Default controller for the `Wechat` module
@@ -65,7 +67,6 @@ class DefaultController extends Controller
     public function actionMyIndex()
     {
         $this->title = 'MG首页';
-        //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
         //判断用户是否为mg用户   
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
@@ -80,7 +81,6 @@ class DefaultController extends Controller
     public function actionMyFriend()
     {
         $this->title = '我的好友';
-        //$this->open_id = 'opjR8w4dyynJRHFhL8fFY9yrYG8M';
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
             die('访问受限');
@@ -110,7 +110,6 @@ class DefaultController extends Controller
     //我的订单列表
     public function actionMyOrder()
     {
-        $this->open_id = 'o9Unv0a0sL-H8lREpQ86O5WodVyg';
         $this->title="我的订单";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         $orderList = MgOrderList::find()->where(['user_id'=>$uObj->id])->andWhere(['<>','pay_sn',' '])->all();
@@ -124,14 +123,22 @@ class DefaultController extends Controller
     public function actionMyWallet()
     {
         $this->title="提现管理";
-        return $this->render('my_wallet');
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        $uaObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
+        return $this->render('my_wallet',[
+            'account' => $uaObj
+        ]);
     }
     
     //我的提现
     public function actionMyRebates()
     {
         $this->title="提现明细";
-        return $this->render('my_rebates');
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        $aList = MgUserAccountLog::findAll(['user_id'=>$uObj->id]);
+        return $this->render('my_rebates',[
+            'account_list'=> $aList
+        ]);
     }
     
     
