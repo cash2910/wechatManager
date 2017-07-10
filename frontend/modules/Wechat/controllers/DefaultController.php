@@ -113,9 +113,7 @@ class DefaultController extends Controller
         $this->open_id = 'o9Unv0a0sL-H8lREpQ86O5WodVyg';
         $this->title="我的订单";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
-        
-        $orderList = MgOrderList::findAll( ['user_id1'=>$uObj->id, ['<>','pay_sn1','dsadsa'] ] );
-        //var_dump( $orderList );
+        $orderList = MgOrderList::find()->where(['user_id'=>$uObj->id])->andWhere(['<>','pay_sn',' '])->all();
         return $this->render('my_order',[
             'order_list'=>$orderList
         ]);

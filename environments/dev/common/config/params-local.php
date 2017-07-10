@@ -13,6 +13,6 @@ return [
     'MCHID' =>'1483656542', 
     
     //游戏地址
-    'GAME_URL'=>'http://183.61.243.96:9321'
-    
+    'GAME_URL'=>'http://183.61.243.96:9321',
+    'CERT_PATH' => 'C:/Users/zaixing.jiang/Desktop/wxpay/cert/',
 ];

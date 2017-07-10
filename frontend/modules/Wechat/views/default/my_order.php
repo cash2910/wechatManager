@@ -30,7 +30,7 @@
                     <label class="weui-form-preview__label">状态</label>
                     <span class="weui-form-preview__value">支付成功</span>
                 </div>
-                <?php if( !empty( $orde->pay_sn ) ): ?>
+                <?php if( !empty( $order->pay_sn ) ): ?>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">支付信息</label>
                     <span class="weui-form-preview__value">支付流水号：<?php echo $order->pay_sn; ?>   时间：<?php echo $order->update_time;?></span>
