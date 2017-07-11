@@ -3,6 +3,7 @@ namespace common\components\wxtransfer;
 
 use yii;
 use common\models\TransferEntity;
+use yii\base\Exception;
 
 /**
  * 微信交易方法
@@ -83,13 +84,15 @@ class WeixinTransfer{
     
     public function doTransFer(){
         
+        $ret = [
+            'isOk' => 0,
+            'msg'  => '系统微信支付错误'
+        ];
         $vars = $this->getXML();
-     //   var_dump($vars);die();
         $ch = curl_init();
-        //超时时间
-        curl_setopt($ch,CURLOPT_TIMEOUT, 1);
+        //超时时间  响应时间很慢
+        curl_setopt($ch,CURLOPT_TIMEOUT, 5);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-        //这里设置代理，如果有的话
         curl_setopt($ch,CURLOPT_URL, self::TRANSFER_URL );
         curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
         curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
@@ -102,19 +105,40 @@ class WeixinTransfer{
         curl_setopt($ch,CURLOPT_POST, 1);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $vars );
         $data = curl_exec($ch);
-        if($data){
-            curl_close($ch);
-            var_dump( $data );
-            return $data;
-        }
-        else {
+        if( !$data ){
             $error = curl_errno($ch);
-            echo "call faild, errorCode:$error\n";
-            curl_close($ch);
-            return false;
+            yii::error( "向用户支付错误：call faild, errorCode:$error\n" );
+            return $ret;
         }
+        $data = $this->FromXml( $data );
+        if( $data['return_code'] != 'SUCCESS' ){
+            yii::error( "支付返回错误：{$data['return_msg']}" );
+            return $ret;
+        }
+        return [
+            'isOk' => 1,
+            'msg' =>'支付成功',
+            'data'=> $data['payment_no']
+        ];
     }
     
+    /**
+     * 将xml转为array
+     * @param string $xml
+     * @throws WxPayException
+     */
+    public function FromXml($xml)
+    {
+        $str = "";
+        if(!$xml){
+            throw new Exception("xml数据异常！");
+        }
+        //将XML转为array
+        //禁止引用外部xml实体
+        libxml_disable_entity_loader(true);
+        $str = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+        return $str;
+    }
 }
 
 

@@ -81,7 +81,6 @@ class RebateService extends BaseService {
             if( !$uInfo )
                 throw new Exception('用户信息有误！');
             $num = intval( $rObj->rebate_num*100 );
-            var_dump( $num );die();
             $entity->setAttributes([
                 'partner_trade_no'=> $rObj->rebate_sn ,
                 'openid'=> $uInfo->open_id,
@@ -95,8 +94,8 @@ class RebateService extends BaseService {
             if( !$res['isOk'] )
                 throw new Exception("支付信息错误: {$res['msg']}");
             $rObj->status = MgRebateList::CONFIRM;
+            $rObj->pay_sn = $res['data'];
             $res = $rObj->save();
-            
         }catch( \Exception $e ){
             $ret = [
                 'isOk' =>0,

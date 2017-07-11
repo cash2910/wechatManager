@@ -11,7 +11,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-rebate-list-index">
     <p>
-        <?php //echo Html::a('Create Mg Rebate List', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php 
+            echo Yii::$app->getSession()->getFlash( 'msg'  );
+        //echo Html::a('Create Mg Rebate List', ['create'], ['class' => 'btn btn-success']) 
+        ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -45,10 +48,12 @@ $this->params['breadcrumbs'][] = $this->title;
                       //  return Html::a('查看', ['admin/reviewapp','id'=>$model->id, 'status'=>1], ['class' => "btn btn-xs btn-success"]);
                     },
                     'update' => function ($url, $model, $key) {
-                          return Html::a('通过', ['/Order/default/apply-rebate','id'=>$model->id], ['class' => "btn btn-xs btn-info"]);
+                          if( $model->status == common\models\MgRebateList::APPLY  )
+                                return Html::a('通过', ['/Order/default/apply-rebate','id'=>$model->id], ['class' => "btn btn-xs btn-info"]);
                     },
                     'delete' => function ($url, $model, $key) {
-                            return Html::a('拒绝', ['admin/reviewapp', 'id' => $model->id ], ['class' => "btn btn-xs btn-danger"]);
+                          if( $model->status == common\models\MgRebateList::APPLY  )
+                                return Html::a('拒绝', ['admin/reviewapp', 'id' => $model->id ], ['class' => "btn btn-xs btn-danger"]);
                     }
                  ]
             ]

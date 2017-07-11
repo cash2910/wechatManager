@@ -182,7 +182,7 @@ class DefaultController extends Controller
         $m->go( $order );  */
         
         //微信支付给用户
-        $entity = new TransferEntity();
+/*         $entity = new TransferEntity();
         $entity->setAttributes([
             'partner_trade_no'=>'dsasdad311saa',
             'openid'=>'o9Unv0a0sL-H8lREpQ86O5WodVyg',
@@ -192,7 +192,7 @@ class DefaultController extends Controller
             'spbill_create_ip'=>'127.0.0.1',
         ]);
         $tObj = new WeixinTransfer();
-        $ret = $tObj->setData($entity)->doTransFer();
+        $ret = $tObj->setData($entity)->doTransFer(); */
 /*         $aObj = MgUserAccount::findOne(['user_id'=>11]);
         $ret = RebateService::getInstance()->createRebateOrder( $aObj , 5 );
         var_dump( $ret ); */
