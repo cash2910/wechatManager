@@ -21,6 +21,13 @@ class MgRebateList extends \yii\db\ActiveRecord
     const APPLY  = 0;
     const CONFIRM = 1;
     const REJECT = 2;
+    
+    static $statMsg = [
+        self::APPLY => '申请中',
+        self::CONFIRM => '已确认',
+        self::REJECT => '驳回申请',
+    ];
+    
     /**
      * @inheritdoc
      */
