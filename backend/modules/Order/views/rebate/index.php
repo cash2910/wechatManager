@@ -10,8 +10,6 @@ $this->title = 'Mg Rebate Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-rebate-list-index">
-
-
     <p>
         <?php //echo Html::a('Create Mg Rebate List', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -31,7 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'add_time',
                 'format' => ['date', 'php:Y-m-d H:i:s'],
             ],
-            // 'update_time',
+            [
+                'label'=>'更新日期',
+                'attribute' => 'update_time',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],
             [
                 'header' => "查看／审核",
                 'class' => 'yii\grid\ActionColumn',
@@ -39,13 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['text-align' => 'center'],
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
-                        return Html::a(Html::tag('span', '', ['class' => "glyphicon fa fa-eye"]), ['admin/view-app', 'id'=>$model->id], ['class' => "btn btn-xs btn-success", 'title' => '查看']);
+                         return "";
+                      //  return Html::a('查看', ['admin/reviewapp','id'=>$model->id, 'status'=>1], ['class' => "btn btn-xs btn-success"]);
                     },
                     'update' => function ($url, $model, $key) {
-                          return Html::a('通过', ['admin/reviewapp','id'=>$model->id, 'status'=>1], ['class' => "btn btn-xs btn-info"]);
+                          return Html::a('通过', ['/Order/default/apply-rebate','id'=>$model->id], ['class' => "btn btn-xs btn-info"]);
                     },
                     'delete' => function ($url, $model, $key) {
-                            return Html::a('拒绝', ['admin/reviewapp', 'id' => $model->id, 'status'=>0], ['class' => "btn btn-xs btn-danger"]);
+                            return Html::a('拒绝', ['admin/reviewapp', 'id' => $model->id ], ['class' => "btn btn-xs btn-danger"]);
                     }
                  ]
             ]

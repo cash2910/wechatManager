@@ -181,16 +181,14 @@ class DefaultController extends Controller
         $m = new My();
         $m->go( $order );  */
         
-        
         //微信支付给用户
-        
         $entity = new TransferEntity();
         $entity->setAttributes([
-            'partner_trade_no'=>'231321',
+            'partner_trade_no'=>'dsasdad311saa',
             'openid'=>'o9Unv0a0sL-H8lREpQ86O5WodVyg',
             'check_name'=>'NO_CHECK',
             'amount'=>100,
-            'desc'=>'dsadsa',
+            'desc'=>'等级考试架空了',
             'spbill_create_ip'=>'127.0.0.1',
         ]);
         $tObj = new WeixinTransfer();

@@ -41,8 +41,19 @@ class WeixinTransfer{
         $arr = $this->data->getAttributes();
         ksort( $arr );
         $arr = array_filter( $arr );
-        $str = http_build_query( $arr )."&key=".\WxPayConfig::KEY;
+        $str = $this->buildQuery( $arr )."&key=".\WxPayConfig::KEY;
         $this->data->sign = strtoupper( Md5($str) );
+    }
+    
+    private function buildQuery( $data ){
+        $buff = "";
+        foreach ( $data  as $k => $v)
+        {
+            $buff .= $k . "=" . $v . "&";
+        }
+        
+        $buff = trim($buff, "&");
+        return $buff;
     }
     
     private function getXML(){
@@ -73,6 +84,7 @@ class WeixinTransfer{
     public function doTransFer(){
         
         $vars = $this->getXML();
+     //   var_dump($vars);die();
         $ch = curl_init();
         //超时时间
         curl_setopt($ch,CURLOPT_TIMEOUT, 1);

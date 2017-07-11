@@ -105,6 +105,9 @@ class RebateController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    
+    
 
     /**
      * Finds the MgRebateList model based on its primary key value.
