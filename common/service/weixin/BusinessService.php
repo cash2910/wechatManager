@@ -167,28 +167,37 @@ class BusinessService extends BaseService{
      public function getQrcode( $id ,
          $eternal = false //是否生成永久二维码
      ){
-         if( $eternal && $id > 100000 ){
-             throw new Exception('exceed max limit 10000');
-         }
-         $key = sprintf("mg_user_shareqrcode_url_%s", $id);
-         $type = $eternal ? 'QR_LIMIT_STR_SCENE' : 'QR_SCENE';
-         if( !( $url = yii::$app->redis->get( $key ) ) ){
-             $ret = WeChatService::getIns()->createQrcode([
-                 'expire_seconds'=> WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME,
-                 'action_name' => $type,
-                 'action_info' =>[
-                     'scene'=>[
-                         'scene_id'=> $id , // $id ,
+         $url = "";
+         try{
+             if( $eternal && $id > 100000 ){
+                 throw new Exception('exceed max limit 10000');
+             }
+             $key = sprintf("mg_user_shareqrcode_url_%s", $id);
+             $type = $eternal ? 'QR_LIMIT_STR_SCENE' : 'QR_SCENE';
+             if( !( $url = yii::$app->redis->get( $key ) ) ){
+                 $ret = WeChatService::getIns()->createQrcode([
+                     'expire_seconds'=> WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME,
+                     'action_name' => $type,
+                     'action_info' =>[
+                         'scene'=>[
+                             'scene_id'=> $id , // $id ,
+                         ]
                      ]
-                 ]
-             ]);
-             if( !isset( $ret['ticket'] ) )
-                 throw new Exception('failed to get qrcode');
-             $url = WeixinConfig::WX_QRCODE_URL. $ret['ticket'] ;
-             $url = $this->getShortUrl( $url );
-             if( empty( $url ) )
-                 throw new Exception('failed to get short url');
-             yii::$app->redis->set( $key, $url , 'EX', WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
+                 ]);
+                 if( !isset( $ret['ticket'] ) ){
+                     throw new Exception('failed to get qrcode');
+                     var_dump($ret);die();
+                 }
+                 $url = WeixinConfig::WX_QRCODE_URL. $ret['ticket'] ;
+                 $url = $this->getShortUrl( $url );
+                 if( empty( $url ) ){
+                     throw new Exception('failed to get short url');
+                 }
+                 yii::$app->redis->set( $key, $url , 'EX', WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
+             }
+         }catch( \Exception $e ){
+             
+             
          }
          return $url;
      }
@@ -199,6 +208,7 @@ class BusinessService extends BaseService{
              'action'=>'long2short',
              'long_url'=>$url
          ]);
+         var_dump($ret);
          return ArrayHelper::getValue($ret, 'short_url', '');
      }
      
