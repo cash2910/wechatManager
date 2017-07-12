@@ -112,10 +112,17 @@ class WeChatResponseService extends Module{
                         $rel->save();
                     });
                     //通知上线用户 
+                    $ret = WeChatService::getIns()->sendCsMsg([
+                        'touser'=> $uInfo->open_id ,
+                        'msgtype'=>'text',
+                        'text'=>[
+                            'content'=> '{$model->nickname} 已成功绑定为您的好友 ！',
+                        ]
+                    ]);
+                /*     
                     $ret = WeChatService::getIns()->sendMsg([
                         'touser'=> $uInfo->open_id,
                         'template_id'=>'8g7uVLKEUDPalyxX3nXoBAlAbKaktmdkjh8itzlbXAk',
-                       // 'url'=>'',
                         'data'=>[
                             'first'=>[
                                 'value'=>'恭喜您通过分享链接成功锁定一位会员！',
@@ -134,7 +141,7 @@ class WeChatResponseService extends Module{
                                 'color'=>'#173177'
                             ]
                         ]
-                    ]);
+                    ]); */
                     yii::error( '通知信息 :'.json_encode( $ret ) );
                 } catch (Exception $e) {
                     yii::error( $e->getMessage() );
