@@ -1,12 +1,17 @@
 <!DOCTYPE html>
+<?php
+//微信SDK
+use common\components\JSSDK;
+$signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params['AppSecret'] )->getSignPackage();
+?>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?php echo $gInfo->title; ?></title>
     <link rel="stylesheet" href="/css/game_css.css">
     <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
+    <script  type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<script type="text/javascript">
     	/*alert(1);
 		var na = window.navigator.userAgent.toLowerCase(),
@@ -22,31 +27,75 @@
 		};
 	*/
 	window.onload = function(){
-    if(isWeiXin()){
-        var tip = document.getElementById("tip");
-		tip.style.display = 'block';
-        //tip[0].innerHTML = window.navigator.userAgent;
+        if(isWeiXin()){
+            var tip = document.getElementById("tip");
+    		tip.style.display = 'block';
+            //tip[0].innerHTML = window.navigator.userAgent;
+        }
     }
-}
-$().ready(function () {
-        $("#tip").click(function () {
-            $(this).hide();
+    $().ready(function () {
+            $("#tip").click(function () {
+                $(this).hide();
+            });
         });
-    });
-function isWeiXin(){
-    var ua = window.navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-        return true;
-    }else{
-        return false;
+    function isWeiXin(){
+        var ua = window.navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+            return true;
+        }else{
+            return false;
+        }
     }
-}
-function func() {
-                if(tip.style.display == "block")
-                    tip.style.display = "none";
-                else
-                    tip.style.display = "block";
-}
+    function func() {
+                    if(tip.style.display == "block")
+                        tip.style.display = "none";
+                    else
+                        tip.style.display = "block";
+    }
+
+    wx.config({
+        debug: false,
+        appId: '<?php echo $signPackage["appId"];?>',
+        timestamp: <?php echo $signPackage["timestamp"];?>,
+        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+        signature: '<?php echo $signPackage["signature"];?>',
+        jsApiList: [
+          // 所有要调用的 API 都要加到这个列表中
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage'
+        ]
+    });
+    
+    wx.ready(function () {
+    	// 分享到朋友圈
+    	wx.onMenuShareTimeline({
+    	    title: '快和我来玩麻将！', // 分享标题
+    	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/head_logo.png'); ?>', // 分享图标
+    	    success: function () { 
+    	        // 用户确认分享后执行的回调函数
+    	    	alert('share ok');
+        	},
+    	    cancel: function () { 
+    	        // 用户取消分享后执行的回调函数
+    	    }
+    	});
+
+    	// 分享给朋友
+    	wx.onMenuShareAppMessage({
+    		title: '快和我来玩麻将！', // 分享标题
+    	    desc: '我玩很久了，值得推荐给你，一起来玩吧~', // 分享描述
+    	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/head_logo.png'); ?>', // 分享图标
+    	    success: function () { 
+    	    	// 用户确认分享后执行的回调函数
+    	    	alert('share ok');
+    	    },
+    	    cancel: function () { 
+    	        // 用户取消分享后执行的回调函数
+    	    }
+    	});
+    });
 </script>
 </head>
 
