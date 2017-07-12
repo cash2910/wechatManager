@@ -89,7 +89,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/mj_wx_logo.png'); ?>', // 分享图标
     	    success: function () { 
     	    	// 用户确认分享后执行的回调函数
-    	    	alert('share ok');
+    	    	//alert('share ok');
     	    },
     	    cancel: function () { 
     	        // 用户取消分享后执行的回调函数
