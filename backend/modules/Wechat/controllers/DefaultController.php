@@ -162,15 +162,15 @@ class DefaultController extends Controller
    //     $ret = BusinessService::getInstance()->initUsers();
    
       //  $ret = BusinessService::getInstance()->getGames( );
-/*         $ret = WeChatService::getIns()->sendCsMsg([
-            'touser'=>"opjR8w4dyynJRHFhL8fFY9yrYG8M",
+/*          $ret = WeChatService::getIns()->sendCsMsg([
+            'touser'=>"o9Unv0a0sL-H8lREpQ86O5WodVyg",
             'msgtype'=>'text',
             'text'=>[
                 'content'=>'哇哈哈'
             ]
         ]);
-         */
-//        var_dump( $ret );
+       
+        var_dump( $ret ); */
 
      //      $ret =  Stone::getInstance()->addStone( 1000552 , 100);
            //var_dump( $ret );
