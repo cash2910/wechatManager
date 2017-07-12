@@ -188,7 +188,7 @@ class BusinessService extends BaseService{
              $url = $this->getShortUrl( $url );
              if( empty( $url ) )
                  throw new Exception('failed to get short url');
-             yii::$app->redis->set( $key, $url , 'EX', time()+WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
+             yii::$app->redis->set( $key, $url , 'EX', WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
          }
          return $url;
      }

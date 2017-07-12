@@ -14,6 +14,7 @@ use common\models\MgOrderList;
 use common\models\MgUserAccount;
 use common\models\MgUserAccountLog;
 use common\models\MgGames;
+use common\components\CommonResponse;
 
 /**
  * Default controller for the `Wechat` module
@@ -151,10 +152,10 @@ class DefaultController extends Controller
     public function actionGetQrCode(){
         $id = yii::$app->request->get('id', 0);
         $url = BusinessService::getInstance()->getQrcode( $id );
-        die(json_encode([
+        CommonResponse::end([
             'isOk'=> 1,
             'msg' => '获取成功',
             'pic_url'=>$url
-        ]));
+        ]);
     }
 }
