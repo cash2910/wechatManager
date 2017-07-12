@@ -54,7 +54,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     }
 
     wx.config({
-        debug: true,
+        debug: false,
         appId: '<?php echo $signPackage["appId"];?>',
         timestamp: <?php echo $signPackage["timestamp"];?>,
         nonceStr: '<?php echo $signPackage["nonceStr"];?>',
@@ -69,12 +69,12 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     wx.ready(function () {
     	// 分享到朋友圈
     	wx.onMenuShareTimeline({
-    	    title: '快和我来玩麻将！', // 分享标题
+    	    title: '快和我来玩<?php echo $gInfo->title; ?> ！', // 分享标题
     	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/head_logo.png'); ?>', // 分享图标
+    	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/mj_wx_logo.png'); ?>', // 分享图标
     	    success: function () { 
     	        // 用户确认分享后执行的回调函数
-    	    	alert('share ok');
+    	    	//alert('share ok');
         	},
     	    cancel: function () { 
     	        // 用户取消分享后执行的回调函数
@@ -83,10 +83,10 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 
     	// 分享给朋友
     	wx.onMenuShareAppMessage({
-    		title: '快和我来玩麻将！', // 分享标题
+    		title: '快和我来玩<?php echo $gInfo->title; ?> ！', // 分享标题
     	    desc: '我玩很久了，值得推荐给你，一起来玩吧~', // 分享描述
     	    link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/head_logo.png'); ?>', // 分享图标
+    	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/mj_wx_logo.png'); ?>', // 分享图标
     	    success: function () { 
     	    	// 用户确认分享后执行的回调函数
     	    	alert('share ok');
