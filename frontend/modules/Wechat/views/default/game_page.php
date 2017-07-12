@@ -108,7 +108,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
             <a class="iphone" href="http://itunes.apple.com/us/app/pei-yi/id1126325671?l=zh&ls=1&mt=8" id="JdownApp" ><img src="/images/iphone_icon.png"></a>
       </div>
         <div class="erweima">
-        	<img src="/images/erweima.png">
+        	<img src="/images/erweima.png?aa">
         </div>
     </div>
     <div id="tip">

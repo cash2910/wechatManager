@@ -15,7 +15,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 		<link rel="stylesheet" href="/files/style.css" />
 	</head>
 	<body>
-		<h1>娄底放炮罚</h1>
+		<h1>四川麻将</h1>
 <!-- 		<div class="download-app">
 			<a href="https://itunes.apple.com/cn/app/id1164850097?mt=8"><img src="http://qp.cdn.supernanogame.com/images/web/appleld.png" /></a>
 			<a href="http://qp.cdn.supernanogame.com/apk/fpf/fpf2.0.apk"><img src="http://qp.cdn.supernanogame.com/images/web/googleld.png" /></a>
