@@ -206,7 +206,6 @@ class BusinessService extends BaseService{
              'action'=>'long2short',
              'long_url'=>$url
          ]);
-         var_dump($ret);
          return ArrayHelper::getValue($ret, 'short_url', '');
      }
      
