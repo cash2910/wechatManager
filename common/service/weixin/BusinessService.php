@@ -185,8 +185,7 @@ class BusinessService extends BaseService{
                      ]
                  ]);
                  if( !isset( $ret['ticket'] ) ){
-                     throw new Exception('failed to get qrcode');
-                     var_dump($ret);die();
+                     throw new Exception( "failed to get qrcode: {$ret['errmsg']}" );
                  }
                  $url = WeixinConfig::WX_QRCODE_URL. $ret['ticket'] ;
                  $url = $this->getShortUrl( $url );
@@ -196,8 +195,7 @@ class BusinessService extends BaseService{
                  yii::$app->redis->set( $key, $url , 'EX', WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
              }
          }catch( \Exception $e ){
-             
-             
+             yii::error( $e->getMessage() );
          }
          return $url;
      }
