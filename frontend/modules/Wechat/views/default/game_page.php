@@ -37,7 +37,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
             $("#tip").click(function () {
                 $(this).hide();
             });
-        });
+    });
     function isWeiXin(){
         var ua = window.navigator.userAgent.toLowerCase();
         if(ua.match(/MicroMessenger/i) == 'micromessenger'){
