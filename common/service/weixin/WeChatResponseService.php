@@ -83,7 +83,7 @@ class WeChatResponseService extends Module{
             $uwInfo = WeChatService::getIns()->getUserInfo([
                 'openid'=> $open_id 
             ]);
-            
+            yii::error( "用户信息：".json_encode( $uwInfo ) );
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
                 'union_id' =>  $uwInfo['unionid'],
