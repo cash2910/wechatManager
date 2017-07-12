@@ -1,38 +1,18 @@
-
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title><?php echo $gInfo->title ?></title>
-		<meta name="Keywords" content="二百胡,娄底放炮罚,湘乡告胡子，跑胡子" />
-		<meta name="Description" content="" />
-		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
-		<link rel="stylesheet" href="/files/style.css" />
-	</head>
-	<body>
-		<h1><?php echo $gInfo->title ?></h1>
-		<div class="download-app">
-			<a href="https://itunes.apple.com/cn/app/id1164850097?mt=8"><img src="http://qp.cdn.supernanogame.com/images/web/appleld.png" /></a>
-			<a href="http://qp.cdn.supernanogame.com/apk/fpf/fpf2.0.apk"><img src="http://qp.cdn.supernanogame.com/images/web/googleld.png" /></a>
-		</div>
-		<div class="qr">
-			<p>请关注官方公众号！</p>
-			<img src="http://qp.cdn.supernanogame.com/images/web/qr.jpg" />
-		</div>
-		
-		<footer>湖南棋牌官方微信：hnqp11。京ICP证16056757号</footer>
-		<div id="tip">
-			<p>如果没有自动跳转，可能是微信限制了第三方应用的跳转。</p>
-			<p>1. 点击右上角的…</p>
-			<p>2. 选择在浏览器中打开</p>
-			<img src="http://qp.cdn.supernanogame.com/images/web/arrow.png" />
-		</div>
-	</body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><?php echo $gInfo->title; ?></title>
+    <link rel="stylesheet" href="/css/game_css.css">
+    <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript">
-		var na = navigator.userAgent.toLowerCase(),
+    	/*alert(1);
+		var na = window.navigator.userAgent.toLowerCase(),
 			tip = document.getElementById('tip');
 
-		if (/micromessenger/.test(na)) {
+		if ((ua.match(/MicroMessenger/i) == 'micromessenger')) {
 		//if (!/micromessenger/.test(na)) {
 			tip.style.display = 'block';
 		}
@@ -40,5 +20,55 @@
 		tip.onclick = function() {
 			this.style.top = '-100%';
 		};
-	</script>
+	*/
+	window.onload = function(){
+    if(isWeiXin()){
+        var tip = document.getElementById("tip");
+		tip.style.display = 'block';
+        //tip[0].innerHTML = window.navigator.userAgent;
+    }
+}
+$().ready(function () {
+        $("#tip").click(function () {
+            $(this).hide();
+        });
+    });
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
+function func() {
+                if(tip.style.display == "block")
+                    tip.style.display = "none";
+                else
+                    tip.style.display = "block";
+}
+</script>
+</head>
+
+<body>
+<div id="contents">
+	<div class="banner"><img src="/images/banner.png"></div>
+  <div class="icon_ma">
+    	<div class="icon">
+        	<a class="android" href="http://xxx/xxx.apk" ><img src="/images/android_icon.png"></a>
+            <a class="iphone" href="http://itunes.apple.com/us/app/pei-yi/id1126325671?l=zh&ls=1&mt=8" id="JdownApp" ><img src="/images/iphone_icon.png"></a>
+      </div>
+        <div class="erweima">
+        	<img src="/images/erweima.png">
+        </div>
+    </div>
+    <div id="tip">
+			<p>如果没有自动跳转，可能是微信限制了第三方应用的跳转。</p>
+			<p>1. 点击右上角的…</p>
+			<p>2. 选择在浏览器中打开</p>
+			<img src="/images/arrow.png">
+		</div>
+</div>
+</body>
+
 </html>

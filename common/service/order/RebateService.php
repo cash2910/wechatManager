@@ -49,6 +49,7 @@ class RebateService extends BaseService {
                 throw new \Exception( json_encode( $rebateObj->getErrors() ) );
             //添加提现记录到accountlog
             
+            
             $transaction->commit();
             $this->orderObj = $rebateObj;
             $ret = [

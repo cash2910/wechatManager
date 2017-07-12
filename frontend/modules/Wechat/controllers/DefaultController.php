@@ -56,9 +56,9 @@ class DefaultController extends Controller
     
     public function actionGamePage()
     {
-        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 0)]);
+        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 1)]);
         if( !$gObj )
-            die('信息错误');
+           die('信息错误');
         return $this->renderPartial('game_page',[
             'gInfo'=> $gObj
         ]);
