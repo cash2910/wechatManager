@@ -3,15 +3,16 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=dream_core',
-            'username' => 'root',
-            'password' => 'root',
+            'dsn' => 'mysql:host=10.121.1.200;dbname=dream_core',
+            'username' => 'mg_plat_user',
+            'password' => '123456',
             'charset' => 'utf8',
         ],
         'redis' => [
             'class' => 'yii\redis\Connection',
-            'hostname' => 'redis.dlgive.idc.dalegames.com',
-            'port' => 6379,
+            'hostname' => '10.121.1.221',
+            'password' => '9z0a_wang',
+	    'port' => 6379,
             'database' => 0,
         ],
         'mailer' => [
