@@ -60,7 +60,7 @@ $(function(){
 		//显示价格
 		$(".sp_total").html( gObj.price );
 		//计算优惠
-		$(".sp_discount").html( "(赠送"+ (gObj.score- parseInt(gObj.price/10)) +"钻石)" );
+		$(".sp_discount").html( "(赠送"+ parseInt(gObj.score- parseInt( gObj.price*10 ) ) +"钻石)" );
 	});
 	//默认选中
 	$(".game_goods a")[0].click();
