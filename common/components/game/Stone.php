@@ -39,7 +39,7 @@ class Stone extends BaseService{
         $data = [
             'uid'=>$uid,
             'diamond_num'=>$num,
-            'game_type'=>13
+            'game_type'=>28
         ];
         $url = yii::$app->params['GAME_URL'].'/cmd?cmd=op_diamond&contents='. json_encode( $data  );
         yii::error( "游戏添加宝石URL: $url" );
