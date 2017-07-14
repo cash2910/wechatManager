@@ -149,7 +149,7 @@ function callpay()
     }
    
     .btn-group{
-      flex-basis: 23%;
+      flex-basis: 31%;
       text-decoration: none;
       font-size: 14px;
       border-radius: 5px;

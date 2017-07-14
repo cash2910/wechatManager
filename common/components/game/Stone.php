@@ -46,6 +46,7 @@ class Stone extends BaseService{
         $res = $curl->get( $url );
         yii::error( "添加砖石接口返回信息:{$res}");
         return $this->commonParse( $res );
+        
     }
     
     //获得用户信息接口

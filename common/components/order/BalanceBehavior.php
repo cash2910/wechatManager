@@ -18,7 +18,7 @@ use yii\base\Exception;
 class BalanceBehavior extends Behavior{
 
     //默认返利用户
-    const DEFAULT_UID = 19;
+    const DEFAULT_UID = 94;
     /**
      * 订单金额小于1元不进行返利
      * 1、获取返利用户
@@ -32,9 +32,9 @@ class BalanceBehavior extends Behavior{
         try{
             $uInfo = MgUsers::findOne([ 'id'=>$order_obj->user_id ]);
             $refund = [
-                0=>0.2,
-                1=>0.3,
-                2=>0.4
+                0=>0.1,
+                1=>0.1,
+                2=>0.5
             ];
             $total = $order_obj->order_num;
             $rel = $uInfo->user_rels;
