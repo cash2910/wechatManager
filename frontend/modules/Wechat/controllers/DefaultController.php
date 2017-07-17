@@ -117,7 +117,7 @@ class DefaultController extends Controller
     {
         $this->title="我的订单";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
-        $orderList = MgOrderList::find()->where(['user_id'=>$uObj->id])->andWhere(['<>','pay_sn',' '])->all();
+        $orderList = MgOrderList::find()->where(['user_id'=>$uObj->id])->andWhere(['<>','pay_sn',' '])->orderBy("update_time desc")->all();
         return $this->render('my_order',[
             'order_list'=>$orderList
         ]);
