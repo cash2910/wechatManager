@@ -247,7 +247,7 @@ class BusinessService extends BaseService{
                      'Title'=>'回复“咨询客服” 即可在线沟通',
                      'Description'=>'回复“咨询客服” 即可在线沟通',
                      'PicUrl'=> 'https://mmbiz.qlogo.cn/mmbiz_png/bOWzAibGJ912OrqyGpYBtt6fK6QCwvZ88bgZJknrJZ0rceoGt6Z2Z9lWCPRywdTVicGqaalqHba0ZdwDGohzIfcg/0?wx_fmt=png',
-                     'Url' =>"https://mp.weixin.qq.com/s?__biz=MzI3OTY5NzA2Mg==&mid=100000001&idx=1&sn=39f7eb4ad4dee2b8930cc5f289a2ebb6&chksm=6b4282c85c350bde33257163a048bd0ce112d0f72888f828a2e4d57d0a16104cc1bd0f8c3bb3&scene=0&pass_ticket=6hnexhCFLQhTLCFfAZuY44AwWCS5jdCtqOZP9AN%2F29k7hDlwwWlGz1WlFlp0i2uL#rd"
+                     'Url' =>"https://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&mid=100000003&idx=1&sn=a185319370ddeeb1621901f0ca02681c&chksm=79d1ff994ea6768f4f16ddf1d95ab9b8dd984e794d04223bc008431454131433a06cd1b782dd&mpshare=1&scene=1&srcid=0718hcC0VWdr1Ek4UxsBDRKd&pass_ticket=XvBhaROsnBNkkpSnGBa9HtEL3%2BCgr737nUqw6Fht2YgDpXJvzKCAcUOof%2FkZcLgq#rd"
                  ]],
              ]
          ]);
