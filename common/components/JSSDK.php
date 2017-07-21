@@ -4,35 +4,39 @@ use yii;
 use common\service\BaseService;
 use yii\helpers\ArrayHelper;
 class JSSDK extends BaseService{
+    
     private $appId;
     private $appSecret;
     const JS_TICKET_KEY = 'WEIXIN_JS_TICKET';
     const JS_TOKEN_KEY = 'WEIXIN_JS_TOKEN';
     const JS_EXPIRE = 7000;
+    
     public function __construct($appId, $appSecret) {
-            $this->appId = $appId;
-            $this->appSecret = $appSecret;
+        $this->appId = $appId;
+        $this->appSecret = $appSecret;
     }
+    
     public function getSignPackage() {
-            $jsapiTicket = $this->getJsApiTicket();
-            // 注意 URL 一定要动态获取，不能 hardcode.
-            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-            $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-            $timestamp = time();
-            $nonceStr = $this->createNonceStr();
-            // 这里参数的顺序要按照 key 值 ASCII 码升序排序
-            $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
-            $signature = sha1($string);
-            $signPackage = array(
-              "appId"     => $this->appId,
-              "nonceStr"  => $nonceStr,
-              "timestamp" => $timestamp,
-              "url"       => $url,
-              "signature" => $signature,
-              "rawString" => $string
-            );
-            return $signPackage; 
+        $jsapiTicket = $this->getJsApiTicket();
+        // 注意 URL 一定要动态获取，不能 hardcode.
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $timestamp = time();
+        $nonceStr = $this->createNonceStr();
+        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
+        $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        $signature = sha1($string);
+        $signPackage = array(
+          "appId"     => $this->appId,
+          "nonceStr"  => $nonceStr,
+          "timestamp" => $timestamp,
+          "url"       => $url,
+          "signature" => $signature,
+          "rawString" => $string
+        );
+        return $signPackage; 
     }
+    
     private function createNonceStr($length = 16) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $str = "";
@@ -41,9 +45,11 @@ class JSSDK extends BaseService{
         }
         return $str;
     }
+    
     private function getJsApiTicket() {
         // jsapi_ticket 应该全局存储与更新，以下代码以写入到文件中做示例
         $ticket = yii::$app->redis->get(self::JS_TICKET_KEY);
+      
         if ( !$ticket ) {
             $accessToken = $this->getAccessToken();
             // 如果是企业号用以下 URL 获取 ticket
@@ -59,14 +65,16 @@ class JSSDK extends BaseService{
         }
         return $ticket;
     }
+    
     private function getAccessToken() {
         // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
         $access_token = yii::$app->redis->get( self::JS_TOKEN_KEY );
         if ( !$access_token ) {
             // 如果是企业号用以下URL获取access_token
             // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
-            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
+            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$this->appId}&secret={$this->appSecret}";
             $res = json_decode($this->httpGet($url),true);
+          
             //$access_token = $res->access_token;
             $access_token = ArrayHelper::getValue($res, 'access_token', '');
             if ( !$access_token) {}
@@ -74,13 +82,15 @@ class JSSDK extends BaseService{
         }
         return $access_token;
     }
+    
     private function httpGet($url) {
+        
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 500);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
         // 为保证第三方服务器与微信服务器之间数据传输的安全性，所有微信接口采用https方式调用，必须使用下面2行代码打开ssl安全校验。
         // 如果在部署过程中代码在此处验证失败，请到 http://curl.haxx.se/ca/cacert.pem 下载新的证书判别文件。
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($curl, CURLOPT_URL, $url);
         

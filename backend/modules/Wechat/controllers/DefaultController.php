@@ -17,6 +17,11 @@ use yii\base\Component;
 use yii\base\Object;
 use common\models\MgOrderList;
 use common\components\game\Stone;
+use common\components\wxtransfer\WeixinTrans;
+use common\models\TransferEntity;
+use common\components\wxtransfer\WeixinTransfer;
+use common\service\order\RebateService;
+use common\models\MgUserAccount;
 
 
 /**
@@ -157,24 +162,40 @@ class DefaultController extends Controller
    //     $ret = BusinessService::getInstance()->initUsers();
    
       //  $ret = BusinessService::getInstance()->getGames( );
-/*         $ret = WeChatService::getIns()->sendCsMsg([
-            'touser'=>"opjR8w4dyynJRHFhL8fFY9yrYG8M",
+/*          $ret = WeChatService::getIns()->sendCsMsg([
+            'touser'=>"o9Unv0a0sL-H8lREpQ86O5WodVyg",
             'msgtype'=>'text',
             'text'=>[
                 'content'=>'哇哈哈'
             ]
         ]);
-         */
-//        var_dump( $ret );
+       
+        var_dump( $ret ); */
 
      //      $ret =  Stone::getInstance()->addStone( 1000552 , 100);
            //var_dump( $ret );
 /*         $order = MgOrderList::findOne([
             'order_sn'=>'20170622142723131378'
         ]);*/
-        $order = MgOrderList::findOne(['order_sn'=>'20170622110201231271']);
+/*         $order = MgOrderList::findOne(['order_sn'=>'20170622110201231271']);
         $m = new My();
-        $m->go( $order ); 
+        $m->go( $order );  */
+        
+        //微信支付给用户
+/*         $entity = new TransferEntity();
+        $entity->setAttributes([
+            'partner_trade_no'=>'dsasdad311saa',
+            'openid'=>'o9Unv0a0sL-H8lREpQ86O5WodVyg',
+            'check_name'=>'NO_CHECK',
+            'amount'=>100,
+            'desc'=>'等级考试架空了',
+            'spbill_create_ip'=>'127.0.0.1',
+        ]);
+        $tObj = new WeixinTransfer();
+        $ret = $tObj->setData($entity)->doTransFer(); */
+/*         $aObj = MgUserAccount::findOne(['user_id'=>11]);
+        $ret = RebateService::getInstance()->createRebateOrder( $aObj , 5 );
+        var_dump( $ret ); */
     }
 }
 
@@ -183,14 +204,14 @@ class My extends Component{
     public function behaviors(){
         return [
             'sendPackage'=>[
-                'class'=>'common\components\order\SendProductBehavior',
+                'class'=>'common\components\order\BalanceBehavior',
             ]
         ];
     }
     
     public function go( $o ){
         
-        $this->sendPackage( $o );
+        $this->doBalance( $o );
         
     }
     

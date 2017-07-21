@@ -23,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'nick_name',
             'mobile',
             // 'order_num',
-            ['label' => '订单状态','value' => function($data){
-                return \common\models\MgOrderList::$statDesc[$data->status];
+            ['label' => '是否支付','value' => function($data){
+                return empty( $data->pay_sn ) ? '未支付': '已支付';
             }],
             ['label' => '订单渠道','value' => function($data){
                 return \common\models\MgOrderList::$channelDesc[$data->channel];

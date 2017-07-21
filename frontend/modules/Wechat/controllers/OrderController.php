@@ -11,6 +11,8 @@ use common\models\MgUsers;
 use common\models\MgGameGoods;
 use common\models\MgOrderList;
 use yii\helpers\ArrayHelper;
+use common\models\MgUserAccount;
+use common\service\order\RebateService;
 
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayException.php';
 require_once dirname(dirname(dirname(dirname( __DIR__ )))).'/common/components/wxpay/WxPayConfig.php';
@@ -33,7 +35,7 @@ class OrderController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                     'get-order'
+                     'get-order', 'get-rebate'
                 ],
             ]
         ];
@@ -120,5 +122,17 @@ class OrderController extends Controller
         $ret = OrderService::getInstance()->payOrder( $orderObj , $result );
         //yii::error(json_encode($result));
         return true;   
+    }
+    
+    
+    public function actionGetRebate(){
+        $uObj = MgUsers::findOne( [ 'open_id'=>$this->open_id ] );
+        $aObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
+        $ret = RebateService::getInstance()->createRebateOrder( $aObj , 2000 );
+        if( $ret['isOk'] ){
+            $ret['msg'] = '提现成功 ,请等待管理员审核...';
+            $ret['data'] = json_encode( $ret['data']->getAttributes() );
+        }
+        CommonResponse::end( $ret );
     }
 }

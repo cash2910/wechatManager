@@ -1,22 +1,15 @@
 <div class="rebates_list" >
+    <?php foreach( $account_list as $log ):?>
     <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
         <div class="weui-media-box__bd">
             <h4 class="weui-media-box__title" style="font-weight: bold;font-size: 15px;">用户返利</h4>
-            <p class="weui-media-box__desc">2017-06-07 11:56:23</p>
+            <p class="weui-media-box__desc"><?php echo $log->add_time?></p>
         </div>
         <div class="weui-media-box__bd" >
-            <p style="text-align: right;font-size: 23px; color: limegreen;">+ 22.66</p>
+            <p style="text-align: right;font-size: 23px; color: limegreen;">+ <?php echo $log->num?></p>
         </div>
     </a>
-    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-        <div class="weui-media-box__bd">
-            <h4 class="weui-media-box__title" style="font-weight: bold;font-size: 15px;">用户返利</h4>
-            <p class="weui-media-box__desc">2017-06-07 11:56:23</p>
-        </div>
-        <div class="weui-media-box__bd" >
-            <p style="text-align: right;font-size: 23px; color: limegreen;">+ 22.66</p>
-        </div>
-    </a>
+    <?php endforeach;?>
 </div>
 <div class="detail" style="display:none" >
     <div class="weui-form-preview">
@@ -56,12 +49,12 @@
 <script>
 $(function(){
 	$(".rebates_list a").click(function(){
-		$(".rebates_list").hide();
-		$(".detail").show();
+		//$(".rebates_list").hide();
+		//$(".detail").show();
 	});
 	$("._back").click(function(){
-		$(".detail").hide();
-		$(".rebates_list").show();
+		//$(".detail").hide();
+		//$(".rebates_list").show();
 	});
 });
 </script>

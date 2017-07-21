@@ -167,28 +167,35 @@ class BusinessService extends BaseService{
      public function getQrcode( $id ,
          $eternal = false //是否生成永久二维码
      ){
-         if( $eternal && $id > 100000 ){
-             throw new Exception('exceed max limit 10000');
-         }
-         $key = sprintf("mg_user_shareqrcode_url_%s", $id);
-         $type = $eternal ? 'QR_LIMIT_STR_SCENE' : 'QR_SCENE';
-         if( !( $url = yii::$app->redis->get( $key ) ) ){
-             $ret = WeChatService::getIns()->createQrcode([
-                 'expire_seconds'=> WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME,
-                 'action_name' => $type,
-                 'action_info' =>[
-                     'scene'=>[
-                         'scene_id'=> $id , // $id ,
+         $url = "";
+         try{
+             if( $eternal && $id > 100000 ){
+                 throw new Exception('exceed max limit 10000');
+             }
+             $key = sprintf("mg_user_shareqrcode_url_%s", $id);
+             $type = $eternal ? 'QR_LIMIT_STR_SCENE' : 'QR_SCENE';
+             if( !( $url = yii::$app->redis->get( $key ) ) ){
+                 $ret = WeChatService::getIns()->createQrcode([
+                     'expire_seconds'=> WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME,
+                     'action_name' => $type,
+                     'action_info' =>[
+                         'scene'=>[
+                             'scene_id'=> $id , // $id ,
+                         ]
                      ]
-                 ]
-             ]);
-             if( !isset( $ret['ticket'] ) )
-                 throw new Exception('failed to get qrcode');
-             $url = WeixinConfig::WX_QRCODE_URL. $ret['ticket'] ;
-             $url = $this->getShortUrl( $url );
-             if( empty( $url ) )
-                 throw new Exception('failed to get short url');
-             yii::$app->redis->set( $key, $url , 'EX', time()+WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
+                 ]);
+                 if( !isset( $ret['ticket'] ) ){
+                     throw new Exception( "failed to get qrcode: {$ret['errmsg']}" );
+                 }
+                 $url = WeixinConfig::WX_QRCODE_URL. $ret['ticket'] ;
+                 $url = $this->getShortUrl( $url );
+                 if( empty( $url ) ){
+                     throw new Exception('failed to get short url');
+                 }
+                 yii::$app->redis->set( $key, $url , 'EX', WeixinConfig::WX_QRCODE_DEFAULT_EXPIRED_TIME );
+             }
+         }catch( \Exception $e ){
+             yii::error( $e->getMessage() );
          }
          return $url;
      }
@@ -207,7 +214,7 @@ class BusinessService extends BaseService{
      public function getGames( ProxyXml $entity  ){
          
          $games = MgGames::find()->where([
-             'status'=> 0
+             'status'=> MgGames::IS_ONLINE
          ])->all();
          $total = 0;
          $data = [];
@@ -240,7 +247,7 @@ class BusinessService extends BaseService{
                      'Title'=>'回复“咨询客服” 即可在线沟通',
                      'Description'=>'回复“咨询客服” 即可在线沟通',
                      'PicUrl'=> 'https://mmbiz.qlogo.cn/mmbiz_png/bOWzAibGJ912OrqyGpYBtt6fK6QCwvZ88bgZJknrJZ0rceoGt6Z2Z9lWCPRywdTVicGqaalqHba0ZdwDGohzIfcg/0?wx_fmt=png',
-                     'Url' =>"https://mp.weixin.qq.com/s?__biz=MzI3OTY5NzA2Mg==&mid=100000001&idx=1&sn=39f7eb4ad4dee2b8930cc5f289a2ebb6&chksm=6b4282c85c350bde33257163a048bd0ce112d0f72888f828a2e4d57d0a16104cc1bd0f8c3bb3&scene=0&pass_ticket=6hnexhCFLQhTLCFfAZuY44AwWCS5jdCtqOZP9AN%2F29k7hDlwwWlGz1WlFlp0i2uL#rd"
+                     'Url' =>"https://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&mid=100000003&idx=1&sn=a185319370ddeeb1621901f0ca02681c&chksm=79d1ff994ea6768f4f16ddf1d95ab9b8dd984e794d04223bc008431454131433a06cd1b782dd&mpshare=1&scene=1&srcid=0718hcC0VWdr1Ek4UxsBDRKd&pass_ticket=XvBhaROsnBNkkpSnGBa9HtEL3%2BCgr737nUqw6Fht2YgDpXJvzKCAcUOof%2FkZcLgq#rd"
                  ]],
              ]
          ]);

@@ -102,6 +102,7 @@ interface WeixinInterface{
      * 发送客服消息
      */
     public function sendCsMsg( $params );
+
 }
 
 ?>

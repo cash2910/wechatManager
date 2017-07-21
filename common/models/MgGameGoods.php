@@ -43,8 +43,8 @@ class MgGameGoods extends \yii\db\ActiveRecord
                 'createdAtAttribute' => 'add_time',
                 'updatedAtAttribute' => 'update_time',
                 'value'   => function(){return $_SERVER['REQUEST_TIME'];},
-                ],
-                ];
+             ],
+        ];
     }
 
     /**

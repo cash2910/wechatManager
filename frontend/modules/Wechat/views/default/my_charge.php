@@ -35,7 +35,7 @@ use common\models\MgGames;
                 <?php endforeach;?>
             </div>
             <div class="weui-flex" style="margin-top: 10px;">
-                 <p ><span class="sp_total">50.6</span>元<span class="sp_discount">（95折）</span></p>
+                 <p ><span class="sp_total">0</span>元<span class="sp_discount"></span></p>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@ use common\models\MgGames;
      </div>
 </div>
 <script>
-var gid = 0 , gObj = null;
+var gid = 0 , gObj = null , gift=0;
 $(function(){
 	//选择游戏
 	$(".game_sel").change(function(){
@@ -59,9 +59,14 @@ $(function(){
 		gid = gObj.id;
 		//显示价格
 		$(".sp_total").html( gObj.price );
-		//计算折扣
-		$(".sp_discount").html( "("+ parseInt(gObj.price/gObj.score*100) +"折)" );
+		//计算优惠
+		$(".sp_discount").html("");
+		gift = parseInt(gObj.score- parseInt( gObj.price*10 ) );
+		if( gift > 0 )
+			$(".sp_discount").html( "(赠送"+ gift +"钻石)" );
 	});
+	//默认选中
+	$(".game_goods a")[0].click();
 	//调用微信JS api 支付
 	$("#weixin_pay").click(callpay);
 });
@@ -149,7 +154,7 @@ function callpay()
     }
    
     .btn-group{
-      flex-basis: 23%;
+      flex-basis: 31%;
       text-decoration: none;
       font-size: 14px;
       border-radius: 5px;

@@ -83,7 +83,7 @@ class WeChatResponseService extends Module{
             $uwInfo = WeChatService::getIns()->getUserInfo([
                 'openid'=> $open_id 
             ]);
-            
+            yii::error( "用户信息：".json_encode( $uwInfo ) );
             $ret = $uServ->createUser([
                 'open_id' =>  $open_id,
                 'union_id' =>  $uwInfo['unionid'],
@@ -112,27 +112,11 @@ class WeChatResponseService extends Module{
                         $rel->save();
                     });
                     //通知上线用户 
-                    $ret = WeChatService::getIns()->sendMsg([
-                        'touser'=> $uInfo->open_id,
-                        'template_id'=>'8g7uVLKEUDPalyxX3nXoBAlAbKaktmdkjh8itzlbXAk',
-                       // 'url'=>'',
-                        'data'=>[
-                            'first'=>[
-                                'value'=>'恭喜您通过分享链接成功锁定一位会员！',
-                                'color'=>'#173177'
-                            ],
-                            'keyword1'=>[
-                                'value'=> $model->nickname,
-                                'color'=>'#173177'
-                            ],
-                            'keyword2'=>[
-                                'value'=>date('Y-m-d H:i:s'),
-                                'color'=>'#173177'
-                            ],
-                            'remark'=>[
-                                'value'=>'记得提醒他多关注平台。',
-                                'color'=>'#173177'
-                            ]
+                    $ret = WeChatService::getIns()->sendCsMsg([
+                        'touser'=> $uInfo->open_id ,
+                        'msgtype'=>'text',
+                        'text'=>[
+                            'content'=> "{$model->nickname} 成功绑定为您的好友 ！",
                         ]
                     ]);
                     yii::error( '通知信息 :'.json_encode( $ret ) );

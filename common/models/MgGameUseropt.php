@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "mg_game_useropt".
  *
@@ -25,6 +25,18 @@ class MgGameUseropt extends \yii\db\ActiveRecord
     {
         return 'mg_game_useropt';
     }
+    
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'add_time',
+                'updatedAtAttribute' => 'update_time',
+                'value'   => function(){return $_SERVER['REQUEST_TIME'];},
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -33,7 +45,7 @@ class MgGameUseropt extends \yii\db\ActiveRecord
     {
         return [
             [['game_id', 'add_time', 'update_time'], 'integer'],
-            [['union_id'], 'string', 'max' => 50],
+            [['union_id','ip'], 'string', 'max' => 50],
             [['opt_code', 'ip'], 'string', 'max' => 20],
             [['data'], 'string', 'max' => 200],
         ];
