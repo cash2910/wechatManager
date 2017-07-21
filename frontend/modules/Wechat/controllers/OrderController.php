@@ -56,6 +56,7 @@ class OrderController extends Controller
             'nick_name'=>$uObj->nickname,
             'game_id'=> $gObj->game_id,
             'entity_id'=>$gObj->id,
+            'order_desc'=> "购买商品{$gObj->title}",
             'order_num' => $gObj->price,
             'channel'=>MgOrderList::WEIXIN_CHANNEL,
         ]);

@@ -25,7 +25,7 @@
                 <div class="weui-form-preview__bd">
                     <div class="weui-form-preview__item">
                         <label class="weui-form-preview__label">商品</label>
-                        <span class="weui-form-preview__value"><?php echo "游戏砖石"?></span>
+                        <span class="weui-form-preview__value"><?php echo empty( $order->order_desc ) ? "游戏钻石": $order->order_desc;?></span>
                     </div>
                     <div class="weui-form-preview__item">
                         <label class="weui-form-preview__label">状态</label>

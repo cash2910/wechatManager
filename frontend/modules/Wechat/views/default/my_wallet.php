@@ -20,7 +20,7 @@
 <script>
 //提现操作
 $("._rebate").click(function(){
-	var limit = 30;
+	var limit = 2000;
 	var money = parseInt( $(".weui-msg__title").html().substring( 1 ) );
 	if( money < limit ){
 		alert('余额大于'+limit+'以上才可提现');

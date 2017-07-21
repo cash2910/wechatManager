@@ -70,9 +70,10 @@ class MgOrderList extends \yii\db\ActiveRecord
         return [
             [['user_id', 'status', 'channel', 'pay_type', 'entity_id','game_id','region_id'], 'integer'],
             [['order_num'], 'number'],
-            //[['add_time', 'update_time'], 'required'],
+            //[['add_time', 'update_time'], 'required'],9z0a_wang
             [['add_time', 'update_time'], 'safe'],
             [['order_sn', 'pay_sn'], 'string', 'max' => 32],
+            [['order_desc'], 'string', 'max' => 30],
             [['nick_name'], 'string', 'max' => 40],
             [['mobile'], 'string', 'max' => 13],
         ];
