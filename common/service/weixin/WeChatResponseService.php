@@ -109,8 +109,8 @@ class WeChatResponseService extends Module{
                         $rel = new MgUserRel();
                         $rel->user_id = $id;
                         $rel->sub_user_id = $ent->sender->id;
-                        $rel->user_openid = $uInfo->openid;
-                        $rel->sub_user_openid = $model->openid;
+                        $rel->user_openid = $uInfo->open_id;
+                        $rel->sub_user_openid = $model->open_id;
                         $rel->save();
                     });
                     //通知上线用户 
