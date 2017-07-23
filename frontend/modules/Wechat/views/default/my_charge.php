@@ -45,6 +45,7 @@ use common\models\MgGames;
         </div>
      </div>
 </div>
+<script src="/js/base.js"></script>
 <script>
 var gid = 0 , gObj = null , gift=0;
 $(function(){
@@ -95,6 +96,7 @@ function jsApiCall()
 		oInfo,
 		function(res){
 			WeixinJSBridge.log(res.err_msg);
+			mgUI.msg( "充值成功， 请到游戏内查看！~"  );
 			//alert(res.err_code+res.err_desc+res.err_msg);
 			
 		}
@@ -115,7 +117,8 @@ function callpay()
     	    jsApiCall();
     	}
 	}catch(  e ){
-		console.dir( e );
+		mgUI.msg( e  );
+		//console.dir( e );
 	}
 }
 </script>
