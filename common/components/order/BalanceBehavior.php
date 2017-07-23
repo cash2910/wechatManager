@@ -9,8 +9,8 @@ use common\components\game\Stone;
 use common\models\MgGameGoods;
 use common\models\MgUserAccount;
 use common\models\MgUserAccountLog;
-use yii\base\Object;
-use yii\base\Exception;
+use common\service\weixin\WeChatService;
+use common\models\MgUserRel;
 /**
 
  * @param MgOrderList $order_obj
@@ -55,10 +55,10 @@ class BalanceBehavior extends Behavior{
             }
             $this->genRefund( $data, $order_obj );
             $transaction->commit();
-            //通知用户
+
                             
         }catch ( \Exception $e ){
-            //var_dump( $e->getMessage() );
+            var_dump( $e->getMessage() );
             $transaction->rollBack();
             yii::error( $e->getMessage() );
         }
@@ -85,6 +85,17 @@ class BalanceBehavior extends Behavior{
             if( !$r )
                 throw new \Exception( "返利error:".json_encode( $u->getErrors() ) );
             $infos[] = [$d['uid'],  $d['refund'] , 1, $t , "返利订单：{$order_obj->order_sn}, 返利比例{$d['ratio']}" ];
+            //通知用户
+            $uInfo = MgUserRel::findOne(['user_id'=>$uid]);
+            if( $uInfo ){
+                $ret = WeChatService::getIns()->sendCsMsg([
+                    'touser'=> $uInfo->user_openid,
+                    'msgtype'=>'text',
+                    'text'=>[
+                         'content'=> "恭喜您成功获得充值返利 {$d['refund']} 元！~"
+                    ]
+                ]);
+            }
         }
         $ret = yii::$app->db->createCommand()->batchInsert( MgUserAccountLog::tableName(), [
             'user_id','num','c_type', 'add_time','content'

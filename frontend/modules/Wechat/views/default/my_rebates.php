@@ -1,15 +1,30 @@
+<?php
+use common\models\MgUserAccountLog;
+?>
 <div class="rebates_list" >
-    <?php foreach( $account_list as $log ):?>
-    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-        <div class="weui-media-box__bd">
-            <h4 class="weui-media-box__title" style="font-weight: bold;font-size: 15px;">用户返利</h4>
-            <p class="weui-media-box__desc"><?php echo $log->add_time?></p>
+    <?php if($account_list ): ?>
+        <?php foreach( $account_list as $log ):?>
+        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+            <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title" style="font-weight: bold;font-size: 15px;"><?php echo MgUserAccountLog::$msg[$log->c_type];?></h4>
+                <p class="weui-media-box__desc"><?php echo $log->add_time?></p>
+            </div>
+            <div class="weui-media-box__bd" >
+                <?php $color = $log->c_type == MgUserAccountLog::INCOME ? 'limegreen': 'red' ?>
+                <?php $append = $log->c_type == MgUserAccountLog::INCOME ? '+': '-' ?>
+                <p style="text-align: right;font-size: 23px; color: <?php echo $color; ?>;"> <?php echo $append.$log->num?></p>
+            </div>
+        </a>
+        <?php endforeach;?>
+    
+    <?php else:?>
+        <div class="weui-cell" style="height: 100%;">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无信息</span>
         </div>
-        <div class="weui-media-box__bd" >
-            <p style="text-align: right;font-size: 23px; color: limegreen;">+ <?php echo $log->num?></p>
         </div>
-    </a>
-    <?php endforeach;?>
+    <?php endif;?>
+        
 </div>
 <div class="detail" style="display:none" >
     <div class="weui-form-preview">

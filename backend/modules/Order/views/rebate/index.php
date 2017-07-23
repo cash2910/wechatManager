@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return \common\models\MgRebateList::$statMsg[$data->status];
             }],
             'desc',
+            'pay_sn',
             'rebate_num',
             [
                 'label'=>'申请日期',

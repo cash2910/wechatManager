@@ -8,6 +8,8 @@ use yii\base\Exception;
 use common\components\wxtransfer\WeixinTransfer;
 use common\models\MgUsers;
 use common\models\TransferEntity;
+use common\models\MgUserAccountLog;
+use common\service\weixin\WeChatService;
 
 class RebateService extends BaseService {
     
@@ -47,9 +49,6 @@ class RebateService extends BaseService {
             $res = $account->save();
             if( !$res )
                 throw new \Exception( json_encode( $rebateObj->getErrors() ) );
-            //添加提现记录到accountlog
-            
-            
             $transaction->commit();
             $this->orderObj = $rebateObj;
             $ret = [
@@ -88,7 +87,7 @@ class RebateService extends BaseService {
                 'check_name'=>'NO_CHECK',
                 'amount'=> $num, 
                 'desc'=> "用户提现￥{$rObj->rebate_num}",
-                'spbill_create_ip'=>'127.0.0.1',
+                'spbill_create_ip'=>  yii::$app->request->userIP,
             ]);
             $tObj = new WeixinTransfer();
             $res = $tObj->setData($entity)->doTransFer();
@@ -97,6 +96,23 @@ class RebateService extends BaseService {
             $rObj->status = MgRebateList::CONFIRM;
             $rObj->pay_sn = $res['data'];
             $res = $rObj->save();
+            //添加提现记录
+            $rebateRecord = new MgUserAccountLog();
+            $rebateRecord->user_id = $uInfo->id;
+            $rebateRecord->num = $rObj->rebate_num ;
+            $rebateRecord->c_type = MgUserAccountLog::OUTCOME;
+            $rebateRecord->content = "提现：{$rObj->rebate_num} 元";
+            $rebateRecord->add_time = date('Y-m-d H:i:s');
+            $rebateRecord->save();
+            //提现通知
+            $res = WeChatService::getIns()->sendCsMsg([
+                'touser'=> $uInfo->open_id,
+                'msgtype'=>'text',
+                'text'=>[
+                    'content'=> "您成功提现 {$rObj->rebate_num} 元！~"
+                ]
+            ]);
+            yii::error( json_encode( $res ) );
         }catch( \Exception $e ){
             $ret = [
                 'isOk' =>0,

@@ -74,6 +74,7 @@ class MgRebateList extends \yii\db\ActiveRecord
             'user_id' => '用户id',
             'status' => '状态',
             'desc'=> '描述信息',
+            'pay_sn'=>'支付流水号',
             'rebate_num' => '提现金额',
             'add_time' => '申请时间',
             'update_time' => '更新时间',

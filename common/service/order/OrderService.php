@@ -87,6 +87,7 @@ class OrderService extends BaseService implements OrderInterface{
             $transaction->commit();
             $this->trigger(self::AFTER_PAY_ORDER);
         }catch( Exception $e ){
+            var_dump( $e->getMessage() );
             yii::error($e->getMessage());
             $transaction->rollBack();
             return false;

@@ -29,6 +29,7 @@ class MgUserRel extends \yii\db\ActiveRecord
         return [
             [['user_id', 'sub_user_id'], 'required'],
             [['user_id', 'sub_user_id'], 'integer'],
+            [['user_openid','sub_user_openid'], 'string', 'max' => 50],
         ];
     }
 

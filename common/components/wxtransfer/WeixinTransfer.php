@@ -108,11 +108,13 @@ class WeixinTransfer{
         if( !$data ){
             $error = curl_errno($ch);
             yii::error( "向用户支付错误：call faild, errorCode:$error\n" );
+            $ret['msg'] = "向用户支付错误：call faild, errorCode:$error\n";
             return $ret;
         }
         $data = $this->FromXml( $data );
-        if( $data['return_code'] != 'SUCCESS' ){
-            yii::error( "支付返回错误：{$data['return_msg']}" );
+        if( $data['return_code'] != 'SUCCESS' || $data['result_code'] == 'FAIL' ){
+            yii::error( "支付返回错误：{$data['return_msg']} , {$data['err_code_des']}" );
+            $ret['msg'] = "{$data['return_msg']} , {$data['err_code_des']}";
             return $ret;
         }
         return [

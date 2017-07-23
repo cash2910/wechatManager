@@ -17,6 +17,14 @@ use Yii;
  */
 class MgUserAccountLog extends \yii\db\ActiveRecord
 {
+    const INCOME = 1;
+    const OUTCOME = 2;
+    
+    static public $msg = [
+        self::INCOME =>'用户返利',
+        self::OUTCOME=>'用户提现'
+    ];
+    
     /**
      * @inheritdoc
      */

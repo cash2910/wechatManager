@@ -140,7 +140,7 @@ class DefaultController extends Controller
     {
         $this->title="提现明细";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
-        $aList = MgUserAccountLog::findAll(['user_id'=>$uObj->id]);
+        $aList = MgUserAccountLog::find()->where(['user_id'=>$uObj->id])->orderBy("add_time desc")->all();
         return $this->render('my_rebates',[
             'account_list'=> $aList
         ]);
