@@ -14,6 +14,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $type
  * @property string $url
  * @property string $pic_url
+ * @property string $android_url
+ * @property string $ios_url
  * @property string $add_time
  * @property string $update_time
  * @property string $remark
@@ -55,7 +57,7 @@ class MgGames extends \yii\db\ActiveRecord
         return [
             [['status', 'type', 'add_time', 'update_time'], 'integer'],
             [['title','game_code'], 'string', 'max' => 30],
-            [['desc','pic_url','url'], 'string', 'max' => 200],
+            [['desc','pic_url','url','android_url' ,'ios_url'], 'string', 'max' => 200],
             [['remark'], 'string', 'max' => 100],
         ];
     }
@@ -73,6 +75,8 @@ class MgGames extends \yii\db\ActiveRecord
             'game_code'=>'游戏别名',
             'type' => '游戏类型',
             'pic_url'=>'banner图片链接',
+            'android_url'=>'安卓下载地址',
+            'ios_url'=>'苹果下载地址',
             'url' =>'游戏链接',
             'add_time' => '添加时间',
             'update_time' => '更新时间',

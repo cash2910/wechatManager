@@ -12,6 +12,7 @@ use common\service\weixin\WeChatService;
 use yii\base\Exception;
 use common\service\weixin\BusinessService;
 use yii\helpers\ArrayHelper;
+use yii\filters\AccessControl;
 
 /**
  * TagController implements the CRUD actions for WechatUserTag model.
@@ -24,6 +25,15 @@ class TagController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
