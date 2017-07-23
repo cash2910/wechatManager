@@ -105,7 +105,7 @@ class WeChatResponseService extends Module{
                     $rel = empty( $uInfo->user_rels ) ? (string)$uInfo->id : ( $uInfo->user_rels.'-'.$uInfo->id );
                     $model->user_rels = $rel;
                     yii::error("rel :".$model->user_rels );
-                    $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id, $model ){
+                    $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id, $model, $uInfo ){
                         $rel = new MgUserRel();
                         $rel->user_id = $id;
                         $rel->sub_user_id = $ent->sender->id;
