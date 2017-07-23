@@ -34,7 +34,7 @@ class DefaultController extends Controller
         if (!( $model = MgRebateList::findOne([ 'id'=>$id ]) ) ) {
             throw new Exception('信息不存在');
         }
-        //$model->rebate_num = 1;
+        $model->rebate_num = 1;
         $ret = RebateService::getInstance()->applyRebate( $model );
         Yii::$app->getSession()->setFlash( 'msg' , $ret['msg'] );
         $this->redirect(['/Order/rebate']);
