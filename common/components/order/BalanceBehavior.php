@@ -48,9 +48,9 @@ class BalanceBehavior extends Behavior{
                     $_refund += $data[$_uid]['refund'];
                     $ratio += $data[$_uid]['ratio'];
                 }
-                $data[$_uid] = ['uid'=> $_uid, 'refund'=>$_refund , 'ratio'=>$ratio , 'user'=>$uInfo ];       
+                $data[$_uid] = ['uid'=> $_uid, 'refund'=>$_refund , 'ratio'=>$ratio  ];       
             }
-            $this->genRefund( $data, $order_obj );
+            $this->genRefund( $data, $order_obj , $uInfo );
             $transaction->commit();
 
                             
@@ -65,7 +65,7 @@ class BalanceBehavior extends Behavior{
      * 添加返利记录
      * @param unknown $data
      */
-    private function genRefund( $data , MgOrderList $order_obj ){
+    private function genRefund( $data , MgOrderList $order_obj, MgUsers $uObj  ){
         
         $infos = []; $t = date('Y-m-d H:i:s' );
         foreach ( $data as $uid => $d ){
@@ -89,7 +89,7 @@ class BalanceBehavior extends Behavior{
                     'touser'=> $uInfo->user_openid,
                     'msgtype'=>'text',
                     'text'=>[
-                         'content'=> "恭喜您成功获得{$data['user']->nickname}充值返利 : {$d['refund']} 元！~"
+                         'content'=> "恭喜您成功获得{$uObj->nickname}充值返利 : {$d['refund']} 元！~"
                     ]
                 ]);
             }
