@@ -5,14 +5,11 @@ use yii;
 use yii\base\Behavior;
 use common\models\MgOrderList;
 use common\models\MgUsers;
-use common\components\game\Stone;
-use common\models\MgGameGoods;
 use common\models\MgUserAccount;
 use common\models\MgUserAccountLog;
 use common\service\weixin\WeChatService;
 use common\models\MgUserRel;
 /**
-
  * @param MgOrderList $order_obj
  */
 class BalanceBehavior extends Behavior{
@@ -51,7 +48,7 @@ class BalanceBehavior extends Behavior{
                     $_refund += $data[$_uid]['refund'];
                     $ratio += $data[$_uid]['ratio'];
                 }
-                $data[$_uid] = ['uid'=> $_uid, 'refund'=>$_refund , 'ratio'=>$ratio ];       
+                $data[$_uid] = ['uid'=> $_uid, 'refund'=>$_refund , 'ratio'=>$ratio , 'user'=>$uInfo ];       
             }
             $this->genRefund( $data, $order_obj );
             $transaction->commit();
@@ -92,7 +89,7 @@ class BalanceBehavior extends Behavior{
                     'touser'=> $uInfo->user_openid,
                     'msgtype'=>'text',
                     'text'=>[
-                         'content'=> "恭喜您成功获得充值返利 {$d['refund']} 元！~"
+                         'content'=> "恭喜您成功获得{$data['user']->nickname}充值返利 : {$d['refund']} 元！~"
                     ]
                 ]);
             }
