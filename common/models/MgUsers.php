@@ -22,6 +22,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class MgUsers extends \yii\db\ActiveRecord
 {
+    const IS_SUBSCRIPT = 1;
+    const NOT_SUBSCRIPT = 2;
     public function behaviors()
     {
         return [

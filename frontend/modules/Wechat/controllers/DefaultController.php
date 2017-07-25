@@ -55,8 +55,10 @@ class DefaultController extends Controller
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('gid', 1)]);
         if( !$gObj )
             die('游戏信息错误');
+        //判断用户是否关注
         $uObj = MgUsers::findOne([
-            'open_id'=>$this->open_id
+            'open_id'=>$this->open_id,
+            'status'=>MgUsers::IS_SUBSCRIPT
         ]);
         
         return $this->renderPartial('share_page',[
