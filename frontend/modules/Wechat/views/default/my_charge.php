@@ -96,7 +96,6 @@ function jsApiCall()
 		oInfo,
 		function(res){
 			WeixinJSBridge.log(res.err_msg);
-			alert(res.err_code+res.err_desc+res.err_msg);
 			if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 				mgUI.msg( "充值成功， 请到游戏内查看！~"  );
 			}
