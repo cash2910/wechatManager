@@ -100,12 +100,19 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 		$("#share_img").attr("src" ,data.pic_url );
 	});
 </script>
+<style>
+.erweima1 {
+    width: 64%;
+	padding: o;
+}
+</style>
 </head>
 
 <body>
 <div id="contents">
 	<div class="banner"><img src="/images/banner.png"></div>
-  <div class="icon_ma">
+	<?php if( $uObj ): ?>
+    <div class="icon_ma">
     	<div class="icon">
         	<a class="android" href="<?php echo $gInfo->android_url; ?>" ><img src="/images/android_icon.png"></a>
             <a class="iphone" href="<?php echo $gInfo->ios_url; ?>" id="JdownApp" ><img src="/images/iphone_icon.png"></a>
@@ -114,6 +121,13 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         	<img id="share_img" src="" />
         </div>
     </div>
+    <?php else:?>
+    <div class="icon_ma">
+        <div class="erweima" style="width: 70%; float: none;">
+        	<img id="share_img" src="" />
+        </div>
+    </div>
+    <?php endif;?>
     <div id="tip">
 			<p>如果没有自动跳转，可能是微信限制了第三方应用的跳转。</p>
 			<p>1. 点击右上角的…</p>
@@ -121,6 +135,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 			<img src="/images/arrow.png">
 	</div>
 </div>
+
 </body>
 
 </html>

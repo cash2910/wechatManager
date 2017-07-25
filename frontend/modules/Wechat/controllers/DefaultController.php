@@ -30,7 +30,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order','my-charge','my-wallet' ,'my-rebates'
+                    'my-index','my-friend','my-order','my-charge','my-wallet' ,'my-rebates' , 'share-page'
                 ],
             ]
         ];
@@ -54,9 +54,14 @@ class DefaultController extends Controller
     {
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('gid', 1)]);
         if( !$gObj )
-            die('信息错误');
+            die('游戏信息错误');
+        $uObj = MgUsers::findOne([
+            'open_id'=>$this->open_id
+        ]);
+        
         return $this->renderPartial('share_page',[
-            'gInfo'=> $gObj
+            'gInfo'=> $gObj,
+            'uObj' => $uObj
         ]);
     }
     
