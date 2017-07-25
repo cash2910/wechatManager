@@ -96,7 +96,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 			}
 	    });
 	}
-	getQrCode( '<?= $_GET['id'] ?>' , function( data ){
+	getQrCode( '<?= yii::$app->request->get('id', 1); ?>' , function( data ){
 		$("#share_img").attr("src" ,data.pic_url );
 	});
 </script>

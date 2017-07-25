@@ -52,7 +52,7 @@ class DefaultController extends Controller
     
     public function actionSharePage()
     {
-        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 1)]);
+        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('gid', 1)]);
         if( !$gObj )
             die('信息错误');
         return $this->renderPartial('share_page',[
