@@ -52,7 +52,12 @@ class DefaultController extends Controller
     
     public function actionSharePage()
     {
-        return $this->renderPartial('share_page');
+        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 1)]);
+        if( !$gObj )
+            die('信息错误');
+        return $this->renderPartial('share_page',[
+            'gInfo'=> $gObj
+        ]);
     }
     
     public function actionGamePage()

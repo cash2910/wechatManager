@@ -29,6 +29,8 @@ class WeChatProxyService{
         }else{
             $res = $curl->get( $finalUrl );
         }
+        //统一判断处理异常
+        //var_dump( $res );
         return json_decode( $res, true );
     }
     

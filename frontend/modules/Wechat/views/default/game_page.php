@@ -13,19 +13,6 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
     <script  type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<script type="text/javascript">
-    	/*alert(1);
-		var na = window.navigator.userAgent.toLowerCase(),
-			tip = document.getElementById('tip');
-
-		if ((ua.match(/MicroMessenger/i) == 'micromessenger')) {
-		//if (!/micromessenger/.test(na)) {
-			tip.style.display = 'block';
-		}
-
-		tip.onclick = function() {
-			this.style.top = '-100%';
-		};
-	*/
 	window.onload = function(){
         if(isWeiXin()){
             var tip = document.getElementById("tip");
@@ -47,10 +34,10 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         }
     }
     function func() {
-                    if(tip.style.display == "block")
-                        tip.style.display = "none";
-                    else
-                        tip.style.display = "block";
+        if(tip.style.display == "block")
+            tip.style.display = "none";
+        else
+            tip.style.display = "block";
     }
 
     wx.config({
