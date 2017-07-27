@@ -20,14 +20,7 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $ret = WeChatService::getIns()->sendCsMsg([
-            'touser'=> 'o9Unv0a0sL-H8lREpQ86O5WodVyg',
-            'msgtype'=>'text',
-            'text'=>[
-                'content'=> "恭喜您成功获得充值返利100 元！~"
-             ]
-        ]);
-        var_dump( $ret );
+       // var_dump(yii::$app->request->url);
     }
     
     
