@@ -64,7 +64,7 @@ $(function(){
 		$(".sp_discount").html("");
 		gift = parseInt(gObj.score- parseInt( gObj.price*10 ) );
 		if( gift > 0 )
-			$(".sp_discount").html( "(赠送"+ gift +"钻石)" );
+			$(".sp_discount").html( "(赠送"+ gift +"元宝)" );
 	});
 	//默认选中
 	$(".game_goods a")[0].click();
