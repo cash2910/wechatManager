@@ -43,11 +43,11 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         if( !( $code = yii::$app->request->get('code') ) ){
-            die('访问受限');
+            die('访问受限 。');
         }
         $token = WeixinWeb::getInstance()->getClient()->fetchAccessToken( $code );
-
-        Yii::$app->getResponse()->redirect( Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-index'] ) );
+        $this->goBack();
+        //Yii::$app->getResponse()->redirect( Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-index'] ) );
     }
     
     public function actionSharePage()
