@@ -6,7 +6,7 @@ return [
             'dsn' => 'mysql:host=10.121.1.200;dbname=dream_core',
             'username' => 'mg_plat_user',
             'password' => '123456',
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
         ],
         'redis' => [
             'class' => 'yii\redis\Connection',
