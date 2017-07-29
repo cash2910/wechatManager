@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'nick_name',
             'mobile',
-            // 'order_num',
+            'order_num',
             ['label' => '是否支付','value' => function($data){
                 return empty( $data->pay_sn ) ? '未支付': '已支付';
             }],
@@ -32,9 +32,28 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'pay_type',
             // 'entity_id',
             // 'pay_sn',
-            // 'add_time',
+            'add_time',
             // 'update_time',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'header' => "查看／审核",
+                'class' => 'yii\grid\ActionColumn',
+                'template'=> '{view} {update} {delete}',
+                'headerOptions' => ['text-align' => 'center'],
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                         return "";
+                      //  return Html::a('查看', ['admin/reviewapp','id'=>$model->id, 'status'=>1], ['class' => "btn btn-xs btn-success"]);
+                    },
+                    'update' => function ($url, $model, $key) {
+                          if( $model->status == common\models\MgRebateList::APPLY  )
+                                return Html::a('通过', ['/Order/default/apply-rebate','id'=>$model->id], ['class' => "btn btn-xs btn-info"]);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                          if( $model->status == common\models\MgRebateList::APPLY  )
+                                return Html::a('拒绝', ['admin/reviewapp', 'id' => $model->id ], ['class' => "btn btn-xs btn-danger"]);
+                    }
+                 ]
+            ]
         ],
     ]); ?>
 </div>
