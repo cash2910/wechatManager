@@ -45,8 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['text-align' => 'center'],
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
-                         return "";
-                      //  return Html::a('查看', ['admin/reviewapp','id'=>$model->id, 'status'=>1], ['class' => "btn btn-xs btn-success"]);
+                         return Html::a('查看', ['/Order/account-log','uid'=>$model->user_id, 'status'=>1], ['class' => "btn btn-xs btn-success"]);
                     },
                     'update' => function ($url, $model, $key) {
                           if( $model->status == common\models\MgRebateList::APPLY  )

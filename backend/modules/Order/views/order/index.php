@@ -38,17 +38,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => "查看／审核",
                 'class' => 'yii\grid\ActionColumn',
                 'template'=> '{view} {update} {delete}',
-                'headerOptions' => ['text-align' => 'center'],
+                //'headerOptions' => ['text-align' => 'center'],
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
-                         return "";
-                      //  return Html::a('查看', ['admin/reviewapp','id'=>$model->id, 'status'=>1], ['class' => "btn btn-xs btn-success"]);
+                         return Html::a('查看', ['/Order/order/view','id'=>$model->id], ['class' => "btn btn-xs btn-success"]);
                     },
                     'update' => function ($url, $model, $key) {
+                          return "";
                           if( $model->status == common\models\MgRebateList::APPLY  )
                                 return Html::a('通过', ['/Order/default/apply-rebate','id'=>$model->id], ['class' => "btn btn-xs btn-info"]);
                     },
                     'delete' => function ($url, $model, $key) {
+                          return "";
                           if( $model->status == common\models\MgRebateList::APPLY  )
                                 return Html::a('拒绝', ['admin/reviewapp', 'id' => $model->id ], ['class' => "btn btn-xs btn-danger"]);
                     }

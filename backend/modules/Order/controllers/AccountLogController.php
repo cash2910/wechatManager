@@ -1,20 +1,18 @@
 <?php
 
-namespace backend\modules\Game\controllers;
+namespace backend\modules\Order\controllers;
 
 use Yii;
-use common\models\MgGameGift;
+use common\models\MgUserAccountLog;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\components\game\Stone;
 
 /**
- * GameGiftController implements the CRUD actions for MgGameGift model.
+ * AccountLogController implements the CRUD actions for MgUserAccountLog model.
  */
-class GameGiftController extends Controller
+class AccountLogController extends Controller
 {
     /**
      * @inheritdoc
@@ -22,15 +20,6 @@ class GameGiftController extends Controller
     public function behaviors()
     {
         return [
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ]
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -41,13 +30,13 @@ class GameGiftController extends Controller
     }
 
     /**
-     * Lists all MgGameGift models.
+     * Lists all MgUserAccountLog models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => MgGameGift::find(),
+            'query' => MgUserAccountLog::find(),
         ]);
 
         return $this->render('index', [
@@ -56,7 +45,7 @@ class GameGiftController extends Controller
     }
 
     /**
-     * Displays a single MgGameGift model.
+     * Displays a single MgUserAccountLog model.
      * @param integer $id
      * @return mixed
      */
@@ -68,23 +57,16 @@ class GameGiftController extends Controller
     }
 
     /**
-     * Creates a new MgGameGift model.
+     * Creates a new MgUserAccountLog model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new MgGameGift();
+        $model = new MgUserAccountLog();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //赠送道具
-            try{
-                 $ret = Stone::getInstance()->addStone( $model->game_uid, $model->num );
-                 //$model->game_sn = $ret[''];
-                 //$moodel->save();
-            }catch( \Exception $e ){
-                yii::error( $e->getMessage() );
-            }
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -93,7 +75,7 @@ class GameGiftController extends Controller
     }
 
     /**
-     * Updates an existing MgGameGift model.
+     * Updates an existing MgUserAccountLog model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -103,7 +85,7 @@ class GameGiftController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -112,7 +94,7 @@ class GameGiftController extends Controller
     }
 
     /**
-     * Deletes an existing MgGameGift model.
+     * Deletes an existing MgUserAccountLog model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -125,15 +107,15 @@ class GameGiftController extends Controller
     }
 
     /**
-     * Finds the MgGameGift model based on its primary key value.
+     * Finds the MgUserAccountLog model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return MgGameGift the loaded model
+     * @return MgUserAccountLog the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = MgGameGift::findOne($id)) !== null) {
+        if (($model = MgUserAccountLog::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
