@@ -37,8 +37,8 @@ class Stone extends BaseService{
     public function addStone( $uid, $num ){
         $curl = new Curl();
         $data = [
-            'uid'=>$uid,
-            'diamond_num'=>$num,
+            'uid'=>(int)$uid,
+            'diamond_num'=>(int)$num,
             'game_type'=>28
         ];
         $url = yii::$app->params['GAME_URL'].'/cmd?cmd=op_diamond&contents='. json_encode( $data  );
