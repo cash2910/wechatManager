@@ -54,12 +54,12 @@ class MgUserAccountLog extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'num' => 'Num',
-            'c_type' => 'C Type',
-            'content' => 'Content',
-            'type' => 'Type',
-            'add_time' => 'Add Time',
+            'user_id' => '用户id',
+            'num' => '金额',
+            'c_type' => '详情',
+            'content' => '描述',
+            'type' => '类型',
+            'add_time' => '添加时间',
         ];
     }
 }

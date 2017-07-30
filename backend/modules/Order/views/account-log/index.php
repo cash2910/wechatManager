@@ -22,7 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'user_id',
             'num',
-            'c_type',
+            ['label' => '订单渠道','value' => function($data){
+                return $data::$msg[$data->c_type];
+            }],
             'content',
             // 'type',
             // 'add_time',
