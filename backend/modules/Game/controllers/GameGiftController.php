@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\components\game\Stone;
+use yii\helpers\ArrayHelper;
 
 /**
  * GameGiftController implements the CRUD actions for MgGameGift model.
@@ -79,9 +80,8 @@ class GameGiftController extends Controller
             //赠送道具
             try{
                  $ret = Stone::getInstance()->addStone( $model->game_uid, $model->num );
-                 yii::error( json_encode( $ret ) );
-                 //$model->game_sn = $ret[''];
-                 //$moodel->save();
+                 $model->game_sn = ArrayHelper::getColumn($ret, 'result.log_id', " ");
+                 $model->save();
             }catch( \Exception $e ){
                 yii::error( "后台添加元宝出错 :".$e->getMessage() );
             }

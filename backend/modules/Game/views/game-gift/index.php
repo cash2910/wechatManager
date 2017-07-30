@@ -22,9 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'game_id',
             'game_uid',
             'num',
+            ['label' => '状态','value' => function($data){
+                return $data::$msg[$data->status];
+            }],
             //'data',
             'desc',
-            // 'game_sn',
+            'game_sn',
             // 'apply_user',
             'add_time:datetime',
             // 'update_time',

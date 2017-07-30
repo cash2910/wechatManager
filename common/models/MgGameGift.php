@@ -23,6 +23,12 @@ use yii\behaviors\TimestampBehavior;
  */
 class MgGameGift extends \yii\db\ActiveRecord
 {
+    const SUCCESS = 1;
+    const SENDING = 0;
+    static public $msg = [
+        self::SUCCESS => '发送成功',
+        self::SENDING => '发送中',
+    ];
     /**
      * @inheritdoc
      */
