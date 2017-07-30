@@ -32,8 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'desc',
             'rebate_num',
-            'add_time',
-            'update_time',
+            [
+                'label'=>'注册日期',
+                'attribute' => 'register_time',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],[
+                'label'=>'更新日期',
+                'attribute' => 'update_time',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ]
         ],
     ]) ?>
 

@@ -65,15 +65,15 @@ class MgUsers extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nickname' => 'Nickname',
-            'status' => 'Status',
+            'nickname' => '用户昵称',
+            'status' => '状态',
             'open_id' => 'Open ID',
-            'passwd' => 'Passwd',
-            'is_bd' => 'Is Bd',
-            'mobile' => 'Mobile',
-            'register_time' => 'Register Time',
-            'update_time' => 'Update Time',
-            'user_rels' => 'User Rels',
+            'passwd' => '密码',
+            'is_bd' => '是否为推广员',
+            'mobile' => '手机号',
+            'register_time' => '注册时间',
+            'update_time' => '更新时间',
+            'user_rels' => '好友层级',
         ];
     }
 }

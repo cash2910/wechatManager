@@ -188,6 +188,7 @@ class WeChatResponseService extends Module{
     public function getEvent( $xmlStr ){
         if( empty( $xmlStr ) )
             throw new Exception(" invalid xml: {$xmlStr}");
+        yii::error( "微信接口信息: ".$xmlStr );
         return new ProxyXml( simplexml_load_string( $xmlStr , 'SimpleXMLElement', LIBXML_NOCDATA) );
     }
     
