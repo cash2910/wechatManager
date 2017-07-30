@@ -79,10 +79,11 @@ class GameGiftController extends Controller
             //赠送道具
             try{
                  $ret = Stone::getInstance()->addStone( $model->game_uid, $model->num );
+                 yii::error( json_encode( $ret ) );
                  //$model->game_sn = $ret[''];
                  //$moodel->save();
             }catch( \Exception $e ){
-                yii::error( $e->getMessage() );
+                yii::error( "后台添加元宝出错 :".$e->getMessage() );
             }
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
