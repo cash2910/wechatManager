@@ -45,7 +45,7 @@ class WeChatResponseService extends Module{
                     ]
                 ]);
                 $ret = WeChatService::getIns()->sendCsMsg([
-                    'touser'=> $entity->ToUserName ,
+                    'touser'=> $entity->FromUserName ,
                     'msgtype'=>'text',
                     'text'=>[
                         'content'=> "您好，正在为您接入，请耐心等待...",
