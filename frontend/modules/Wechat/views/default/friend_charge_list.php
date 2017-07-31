@@ -2,7 +2,7 @@
 use common\models\MgUserAccountLog;
 ?>
 <div style="padding: 25px;">
-    <h3 class="page__title">好友充值总额：<span style="color: #1ccc91;"><?php echo $sum;?></span></h3>
+    <h3 class="page__title">好友充值总额：<span style="color: limegreen;"><?php echo $sum;?></span></h3>
 </div>
 <div class="rebates_list" >
     <?php if($order_list ): ?>
@@ -14,7 +14,7 @@ use common\models\MgUserAccountLog;
                 <p class="weui-media-box__desc"><?php echo $order->add_time?></p>
             </div>
             <div class="weui-media-box__bd" >
-                <p style="text-align: right;font-size: 23px; color: #1ccc91;"> <?php echo $order->order_num?></p>
+                <p style="text-align: right;font-size: 23px; color: limegreen;"> <?php echo $order->order_num?></p>
             </div>
         </a>
         <?php endforeach;?>

@@ -61,6 +61,9 @@ use common\models\MgUserAccountLog;
         </div>
     </div>
 </div>
+<style>
+A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
+</style>
 <script>
 $(function(){
 	$(".rebates_list a").click(function(){
