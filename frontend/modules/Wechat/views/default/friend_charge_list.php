@@ -30,4 +30,5 @@ use common\models\MgUserAccountLog;
 ._desc{
 	font-weight: bold;font-size: 15px;
 }
+A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 </style>
