@@ -37,12 +37,12 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-<!--                  <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/friends-charge">
+                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/friends-charge">
                     <div class="weui-cell__bd">
                         <p>好友充值</p>
                     </div>
                     <div class="weui-cell__ft"></div>
-                </a> -->
+                </a>
             </div>
         </div>
     </div>

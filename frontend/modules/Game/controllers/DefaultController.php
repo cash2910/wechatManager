@@ -23,14 +23,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
        // var_dump(yii::$app->request->url);
-       $uObj = MgUsers::findOne(['id'=>94]);
-       $uList = UserService::getInstance()->getUserFriend( $uObj );
-       $uids = [];
-       foreach ($uList as $_uObj ){
-           $uids[] = $_uObj->id;
-       }
-       $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
-       var_dump($orderList);
+      
     }
     
     

@@ -15,6 +15,9 @@ use common\models\MgUserAccount;
 use common\models\MgUserAccountLog;
 use common\models\MgGames;
 use common\components\CommonResponse;
+use common\service\users\UserService;
+use common\service\order\OrderService;
+use yii\helpers\ArrayHelper;
 
 /**
  * Default controller for the `Wechat` module
@@ -30,7 +33,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order','my-charge','my-wallet' ,'my-rebates' , 'share-page'
+                    'my-index','my-friend','my-order','my-charge','my-wallet' ,'my-rebates' , 'share-page', 'friends-charge'
                 ],
             ]
         ];
@@ -185,9 +188,20 @@ class DefaultController extends Controller
     {
         $this->title="好友充值";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
-        $aList = MgUserAccountLog::find()->where(['user_id'=>$uObj->id])->orderBy("add_time desc")->all();
-        return $this->render('my_rebates',[
-            'account_list'=> $aList
+        $uList = UserService::getInstance()->getUserFriend( $uObj );
+        $uids = [];
+        foreach ($uList as $_uObj ){
+           $uids[] = $_uObj->id;
+        }
+        $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
+        $sum = 0;
+        foreach ($orderList as $order ){
+           $sum += $order->order_num;
+        }
+        return $this->render('friend_charge_list',[
+            'order_list'=> $orderList,
+            'sum' => $sum,
+            'user_map' => ArrayHelper::index($uList, null, 'id')
         ]);
     }
     
