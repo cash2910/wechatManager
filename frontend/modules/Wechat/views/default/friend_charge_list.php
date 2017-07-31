@@ -9,8 +9,8 @@ use common\models\MgUserAccountLog;
         <?php foreach( $order_list as $order ):?>
         <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
             <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title _desc" ><?php echo $user_map[$order->user_id][0]->nickname;?>:</h4>
-                <h4 class="weui-media-box__title" ><?php echo $order->order_desc;?></h4>
+                <h4 class="weui-media-box__title _desc" > 好友 : <?php echo $user_map[$order->user_id][0]->nickname;?></h4>
+                <h3 class="weui-media-box__title" ><?php echo $order->order_desc;?></h3>
                 <p class="weui-media-box__desc"><?php echo $order->add_time?></p>
             </div>
             <div class="weui-media-box__bd" >
