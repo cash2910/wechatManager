@@ -99,6 +99,18 @@ class OrderService extends BaseService implements OrderInterface{
         return true;
     }
     
+    
+    /**
+     * 获取用户充值记录
+     */
+    public function getPaymentListByUids( array $uids ){
+        $ret = null;
+        if( !empty($uids) )
+            $ret = $OrderList = MgOrderList::find()->where(['user_id'=>$uids])->andWhere(['<>','pay_sn',' '])->orderBy("update_time desc")->all();
+        return $ret;
+    }
+    
+    
     /**
      * 创建订单号
      */

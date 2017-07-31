@@ -44,6 +44,13 @@ class WeChatResponseService extends Module{
                         'KfAccount'=>''
                     ]
                 ]);
+                $ret = WeChatService::getIns()->sendCsMsg([
+                    'touser'=> $entity->ToUserName ,
+                    'msgtype'=>'text',
+                    'text'=>[
+                        'content'=> "您好，正在为您接入，请耐心等待...",
+                    ]
+                ]);
                 yii::error( "cs: ".$entity->FromUserName );
                 return ;
             }

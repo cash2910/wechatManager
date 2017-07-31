@@ -81,9 +81,9 @@ class GameGiftController extends Controller
             try{
                  $ret = Stone::getInstance()->addStone( $model->game_uid, $model->num );
                  yii::error( json_encode($ret));
-                 $model->game_sn = ArrayHelper::getValue($ret, 'result.log_id', " ");
-                 $model->status = MgGameGift::SUCCESS;
-                 $model->save();
+                 //$model->game_sn = ArrayHelper::getValue($ret, 'result.log_id', " ");
+                 //$model->status = MgGameGift::SUCCESS;
+                 //$model->save();
             }catch( \Exception $e ){
                 yii::error( "后台添加元宝出错 :".$e->getMessage() );
             }

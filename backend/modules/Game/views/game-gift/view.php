@@ -12,10 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-game-gift-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+     <!--    <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -23,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+         -->
     </p>
 
     <?= DetailView::widget([
@@ -36,8 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'desc',
             'game_sn',
             'apply_user',
-            'add_time',
-            'update_time',
+            [
+                'label'=>'申请日期',
+                'attribute' => 'add_time',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],
+            [
+                'label'=>'申请日期',
+                'attribute' => 'update_time',
+                'format' => ['date', 'php:Y-m-d H:i:s']
+            ]
         ],
     ]) ?>
 

@@ -31,8 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'apply_user',
             'add_time:datetime',
             // 'update_time',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'header' => "操作",
+                'class' => 'yii\grid\ActionColumn',
+                'template'=> '{view} ',
+                //'headerOptions' => ['text-align' => 'center'],
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                         return Html::a('查看', ['/Game/game-gift/view','id'=>$model->id], ['class' => "btn btn-xs btn-success"]);
+                    },
+                 ]
+            ]
         ],
     ]); ?>
 </div>

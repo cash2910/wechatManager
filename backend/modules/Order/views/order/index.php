@@ -10,9 +10,26 @@ $this->title = 'Mg Order Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-order-list-index">
-    <p>
-        <?= Html::a('创建订单', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <form class="form-inline" style="padding-bottom: 20px;">
+         <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail2">邮箱</label>
+            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="请输入你的邮箱地址">
+        </div>
+        <div class="form-group" >
+            <label class="sr-only" for="exampleInputPassword2">密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="请输入你的邮箱密码">
+        </div>
+        <div class="form-group" >
+            <label class="sr-only" for="exampleInputPassword2">密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="请输入你的邮箱密码">
+        </div>
+        <div class="checkbox">
+            <label >
+                <input type="checkbox" >记住密码
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default">进入邮箱</button>
+    </form>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [

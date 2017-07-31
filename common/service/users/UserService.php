@@ -6,6 +6,7 @@ use common\service\BaseService;
 use common\models\MgUsers;
 
 use yii;
+use yii\helpers\ArrayHelper;
 
 class UserService extends BaseService implements UserInterface
 {
@@ -82,6 +83,21 @@ class UserService extends BaseService implements UserInterface
         }
         return $res;
     }
+    
+    /**
+     * 获取用户全部下线信息
+     */
+    public function getUserFriend( MgUsers $uObj , $limit = 0 ){
+        $rels = !empty( ArrayHelper::getValue($uObj, 'user_rels') ) ? $uObj->user_rels.'-'.$uObj->id : $uObj->id;
+        $query = MgUsers::find()->where(['like','user_rels', "{$rels}%", false ]);
+        if(  0 !== $limit  ){
+            $query->limit( $limit );
+        }
+        return $query->all();
+    }
+    
+
+    
 }
 
 ?>

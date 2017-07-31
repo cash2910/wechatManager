@@ -159,6 +159,40 @@ class DefaultController extends Controller
     }
     
     /**
+     * 游戏房间分享页面
+     * @return string
+     */
+    public function actionRoomPage()
+    {
+/*         echo json_encode([
+            'Room_id'=>12121,
+            'Title'=>'人人麻将：房间号[756 433] ',
+            'Desc'=>'4局、3番封顶,1底分 赶快来！',
+            'Time'=>1503364468
+        ],JSON_UNESCAPED_UNICODE);die(); */
+        //var_dump(json_decode( $_GET['data'] ,true));die();
+        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 1)]);
+        if( !$gObj )
+            die('信息错误');
+        return $this->renderPartial('room_page',[
+            'gInfo'=> $gObj
+        ]);
+    }
+    
+    
+    //我的提现
+    public function actionFriendsCharge()
+    {
+        $this->title="好友充值";
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        $aList = MgUserAccountLog::find()->where(['user_id'=>$uObj->id])->orderBy("add_time desc")->all();
+        return $this->render('my_rebates',[
+            'account_list'=> $aList
+        ]);
+    }
+    
+    
+    /**
      * 获取二维码
      */
     public function actionGetQrCode(){

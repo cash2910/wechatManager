@@ -8,6 +8,8 @@ use common\service\weixin\WeChatService;
 use common\service\order\OrderService;
 use common\models\MgOrderList;
 use common\components\order\BalanceBehavior;
+use common\service\users\UserService;
+use common\models\MgUsers;
 
 /**
  * Default controller for the `Game` module
@@ -21,6 +23,14 @@ class DefaultController extends Controller
     public function actionIndex()
     {
        // var_dump(yii::$app->request->url);
+       $uObj = MgUsers::findOne(['id'=>94]);
+       $uList = UserService::getInstance()->getUserFriend( $uObj );
+       $uids = [];
+       foreach ($uList as $_uObj ){
+           $uids[] = $_uObj->id;
+       }
+       $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
+       var_dump($orderList);
     }
     
     
