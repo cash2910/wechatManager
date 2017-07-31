@@ -15,8 +15,8 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 	<script type="text/javascript">
 	window.onload = function(){
         if(isWeiXin()){
-            var tip = document.getElementById("tip");
-    		tip.style.display = 'block';
+            //var tip = document.getElementById("tip");
+    		//tip.style.display = 'block';
             //tip[0].innerHTML = window.navigator.userAgent;
         }
     }
