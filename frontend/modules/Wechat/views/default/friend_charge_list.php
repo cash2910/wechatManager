@@ -31,4 +31,5 @@ use common\models\MgUserAccountLog;
 	font-weight: bold;font-size: 15px;
 }
 A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
+A:active { TEXT-DECORATION: none}
 </style>

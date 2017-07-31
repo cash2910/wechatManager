@@ -47,3 +47,7 @@
         </div>
     </div>
 </div>
+<style>
+A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
+A:active { TEXT-DECORATION: none}
+</style>
