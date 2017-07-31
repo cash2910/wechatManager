@@ -174,5 +174,6 @@ function callpay()
       background-color: #1AAD19;
       color: #fff;
     }
-
+A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
+A:active { TEXT-DECORATION: none}
 </style>
