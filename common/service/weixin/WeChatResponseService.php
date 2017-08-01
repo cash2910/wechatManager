@@ -36,6 +36,16 @@ class WeChatResponseService extends Module{
         $this->on('text', function( $event ){
             $entity = $event->sender;
             if( $entity->Content == '咨询客服' ){
+                $hour = (int)date('h', $_SERVER['REQUEST_TIME']);
+                if( $hour < 9 || $hour > 19  ){
+                    $entity->setResp([
+                        'FromUserName'=>$entity->ToUserName,
+                        'ToUserName'=>$entity->FromUserName,
+                        'MsgType'=>'text',
+                        'Content'=>'您好，人工客服时间为9：00-19：00。目前时段，您可以先留言，我们会在下个人工服务时间第一时间回复您的问题。'
+                    ]);
+                    return ;
+                }
                 $entity->setResp([
                     'FromUserName'=>$entity->ToUserName,
                     'ToUserName'=>$entity->FromUserName,
@@ -54,12 +64,6 @@ class WeChatResponseService extends Module{
                 yii::error( "cs: ".$entity->FromUserName );
                 return ;
             }
-            $entity->setResp([
-                'FromUserName'=>$entity->ToUserName,
-                'ToUserName'=>$entity->FromUserName,
-                'MsgType'=>'text',
-                'Content'=>'【你好】'
-            ]);
         });
         /**
          * 用户订阅 ...

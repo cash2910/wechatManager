@@ -23,7 +23,6 @@ class DefaultController extends Controller
     public function actionIndex()
     {
        // var_dump(yii::$app->request->url);
-      
     }
     
     
