@@ -58,7 +58,7 @@ class WeChatResponseService extends Module{
                     'touser'=> $entity->FromUserName ,
                     'msgtype'=>'text',
                     'text'=>[
-                        'content'=> "您好，正在为您接入，请耐心等待...",
+                        'content'=> "尊敬的用户，坐席正忙，请耐心等待，谢谢！",
                     ]
                 ]);
                 yii::error( "cs: ".$entity->FromUserName );
