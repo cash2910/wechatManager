@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mg User Accounts';
+$this->title = '用户余额信息';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-user-account-index">
@@ -16,14 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'user_id',
             'balance',
             'free_balance',
             'update_time',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

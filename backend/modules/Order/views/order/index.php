@@ -10,6 +10,10 @@ $this->title = 'Mg Order Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-order-list-index">
+    <?= Html::beginForm(['order/update'], 'post', ['enctype' => 'multipart/form-data','class'=>'form-inline','style'=>"padding-bottom: 20px;"]) ?>
+        <?= Html::input('text', 'username', 'dsdsa', ['class' =>'form-group','lable'=>'sdsa']) ?>
+    <?= Html::endForm() ?>
+    <!-- 
     <form class="form-inline" style="padding-bottom: 20px;">
          <div class="form-group">
             <label class="sr-only" for="exampleInputEmail2">邮箱</label>
@@ -30,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <button type="submit" class="btn btn-default">进入邮箱</button>
     </form>
+     -->
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [

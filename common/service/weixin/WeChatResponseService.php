@@ -141,7 +141,7 @@ class WeChatResponseService extends Module{
             $entity->setResp([
                 'FromUserName'=> $entity->ToUserName,
                 'ToUserName'=> $open_id,
-                'Content'=>"欢迎加入MG竞技",
+                'Content'=>"欢迎加入MG互娱",
                 'MsgType' =>'text',
             ]);
             yii::trace( json_encode( $ret ) );
