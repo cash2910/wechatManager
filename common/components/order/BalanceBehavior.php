@@ -29,9 +29,9 @@ class BalanceBehavior extends Behavior{
         try{
             $uInfo = MgUsers::findOne([ 'id'=>$order_obj->user_id ]);
             $refund = [
-                0=>0.05,
+                0=>0.5,
                 1=>0.15,
-                2=>0.5
+                2=>0.05
             ];
             $total = $order_obj->order_num;
             $rel = $uInfo->user_rels;
