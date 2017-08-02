@@ -41,7 +41,7 @@ class BalanceBehavior extends Behavior{
                 $_uid = self::DEFAULT_UID;
                 $ratio = $refund[$i];
                 $_refund = $ratio*$total;
-                if( isset( $uids[$i] ) )
+                if( isset( $uids[$i] ) && !empty( $uids[$i] ) )
                     $_uid = $uids[$i];
                 //累加计算
                 if( isset( $data[$_uid] ) ){
@@ -85,13 +85,13 @@ class BalanceBehavior extends Behavior{
             //通知用户
             $uInfo = MgUserRel::findOne(['user_id'=>$uid]);
             if( $uInfo ){
-                $ret = WeChatService::getIns()->sendCsMsg([
+/*                 $ret = WeChatService::getIns()->sendCsMsg([
                     'touser'=> $uInfo->user_openid,
                     'msgtype'=>'text',
                     'text'=>[
                          'content'=> "恭喜您成功获得{$uObj->nickname}充值返利 : {$d['refund']} 元！~"
                     ]
-                ]);
+                ]); */
             }
         }
         $ret = yii::$app->db->createCommand()->batchInsert( MgUserAccountLog::tableName(), [
