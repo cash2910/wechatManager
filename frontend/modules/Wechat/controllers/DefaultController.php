@@ -194,7 +194,7 @@ class DefaultController extends Controller
            $uids[] = $_uObj->id;
         }
         $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
-        $sum = 0;
+        $sum = 0.00;
         foreach ($orderList as $order ){
            $sum += $order->order_num;
         }

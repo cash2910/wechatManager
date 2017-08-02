@@ -27,8 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             }],
             'content',
             // 'type',
-            // 'add_time',
-
+            [
+                'label'=>'添加日期',
+                'attribute' => 'add_time',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
