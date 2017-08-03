@@ -109,6 +109,7 @@ EOF;
             $supperObj = null;
             yii::error( "_key:".$entity->EventKey );
             if( !empty( $entity->EventKey ) ){
+                yii::error( $entity->EventKey );
                 list( $p, $id ) = explode("_",$entity->EventKey); //上级id
                 yii::error( "key:".$entity->EventKey."id:".$id);
                 $supperObj = $uServ->getUserInfo(['id'=> $id ]);
