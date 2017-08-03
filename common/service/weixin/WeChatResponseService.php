@@ -114,6 +114,7 @@ EOF;
                 yii::error( "key:".$entity->EventKey."id:".$id);
                 $supperObj = $uServ->getUserInfo(['id'=> $id ]);
             }
+            yii::error( $supperObj );
             //判断用户是否存在
             if( ( $uObj = $uServ->getUserInfo(['open_id'=>$open_id]) ) == true  ){
                 //savelog...
