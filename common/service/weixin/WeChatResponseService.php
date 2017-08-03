@@ -107,14 +107,10 @@ EOF;
             $open_id =  $entity->FromUserName;
             //上级用户
             $supperObj = null;
-            yii::error( "_key:".$entity->EventKey );
             if( $entity->EventKey ){
-                yii::error( $entity->EventKey );
                 list( $p, $id ) = explode("_",$entity->EventKey); //上级id
-                yii::error( "key:".$entity->EventKey."id:".$id);
                 $supperObj = $uServ->getUserInfo(['id'=> $id ]);
             }
-            yii::error( $supperObj );
             //判断用户是否存在
             if( ( $uObj = $uServ->getUserInfo(['open_id'=>$open_id]) ) == true  ){
                 //savelog...
@@ -147,7 +143,7 @@ EOF;
                     'union_id' =>  $uwInfo['unionid'],
                     'nickname'=> $uwInfo['nickname'],
                     'user_logo'=>$uwInfo['headimgurl'],
-                ],function( $model ) use ( $supperObj ){
+                ],function( $model ) use ( $supperObj, $uServ ){
                     //若不存在招募关系 则不进行关系绑定
                     if(  !$supperObj )
                         return false;
