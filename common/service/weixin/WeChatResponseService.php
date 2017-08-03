@@ -103,7 +103,7 @@ EOF;
                 ]);
                 //通知用户
                  $msg = <<<EOF
- 客官，终于等到您了，欢迎来到人人麻将！
+客官，终于等到您了，欢迎来到人人麻将！
     1、	下载游戏请<a href="http://wx.menguanol.net/Wechat/default/game-page">点击</a>
     2、	提交BUG请回复咨询客服
     3、	游戏充值<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击</a>
@@ -174,7 +174,7 @@ EOF;
             //通知用户
                             //通知用户
                  $msg = <<<EOF
- 客官，终于等到您了，欢迎来到人人麻将！
+客官，终于等到您了，欢迎来到人人麻将！
     1、	下载游戏请<a href="http://wx.menguanol.net/Wechat/default/game-page">点击</a>
     2、	提交BUG请回复咨询客服
     3、	游戏充值<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击</a>
