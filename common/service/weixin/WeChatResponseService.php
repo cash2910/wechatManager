@@ -65,9 +65,9 @@ class WeChatResponseService extends Module{
                 yii::error( "cs: ".$entity->FromUserName );
                 return ;
             }
-            
              $msg = <<<EOF
-客官，终于等到您了，欢迎关注人人麻将公众号！
+客观，终于等到您了，欢迎关注人人麻将公众号！
+首次关注请查看游戏使用说明、常见问题
 
 点击：下载游戏
 
@@ -82,13 +82,13 @@ class WeChatResponseService extends Module{
 
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
 
-1、可查看好友账单明细与提现等操作。
+可查看好友账单明细与提现等操作。
       
-2、生成自己专属二维码，方便推广。
+生成自己专属二维码，方便推广。
 
-3、成功绑定下级，享受名下玩家消费返利。
+成功绑定下级，享受名下玩家消费返利。
 
-4、免费培训，帮助代理躺着赚钱。 
+免费培训，帮助代理躺着赚钱。
 EOF;
              $entity->setResp([
                  'FromUserName'=>$entity->ToUserName,
@@ -167,7 +167,6 @@ EOF;
            }
                  //欢迎信息
                  $msg = <<<EOF
-                 
 客观，终于等到您了，欢迎关注人人麻将公众号！
 首次关注请查看游戏使用说明、常见问题
 

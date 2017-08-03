@@ -195,8 +195,10 @@ class DefaultController extends Controller
         }
         $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
         $sum = 0.00;
-        foreach ($orderList as $order ){
-           $sum += $order->order_num;
+        if( $orderList ){
+            foreach ($orderList as $order ){
+               $sum += $order->order_num;
+            }
         }
         return $this->render('friend_charge_list',[
             'order_list'=> $orderList,

@@ -22,10 +22,10 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-          $super =  UserService::getInstance()->getUserInfo(['open_id'=>'o9Unv0ZyVUaNOQ-HjnXO6mpASKpc']);
+/*           $super =  UserService::getInstance()->getUserInfo(['open_id'=>'o9Unv0ZyVUaNOQ-HjnXO6mpASKpc']);
           $uObj2 =  UserService::getInstance()->getUserInfo(['open_id'=>'o9Unv0a0sL-H8lREpQ86O5WodVyg']);
           $ret = UserService::getInstance()->bindRel( $super , $uObj2 );
-          var_dump( $ret );
+          var_dump( $ret ); */
     }
     
     
