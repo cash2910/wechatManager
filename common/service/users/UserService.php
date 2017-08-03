@@ -112,6 +112,8 @@ class UserService extends BaseService implements UserInterface
             $uids = explode('-', $rel);
             if( in_array($uObj->id, $uids) )
                 throw new \Exception('不能绑定到下级用户');
+            if( !empty( $this->getUserFriend($uObj,1) ) )
+                throw new \Exception("用户{$uObj->nickname}已经有下级了");
             $uObj->user_rels = $rel;
             if( !$uObj->save() ){
                 throw new \Exception( json_encode( $uObj->getErrors() ) );

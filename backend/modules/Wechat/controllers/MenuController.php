@@ -135,10 +135,10 @@ class MenuController extends Controller
                         'name'=>'进入后台',
                         'type'=>'view',
                         'url' => yii::$app->params['my_index']
-                    ]]              
+                    ]]             
                 ],[
                     'type'=>'click',
-                    'name'=>'咨询客服',
+                    'name'=>'人工客服',
                     'key'=>'CONSULT_CS'
                 ]
             ]
