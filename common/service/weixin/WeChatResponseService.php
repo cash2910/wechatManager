@@ -66,18 +66,18 @@ class WeChatResponseService extends Module{
                 return ;
             }
              $msg = <<<EOF
-客观，终于等到您了，欢迎关注人人麻将公众号！
+客官，终于等到您了，欢迎关注人人麻将公众号！
 首次关注请查看游戏使用说明、常见问题
 
-点击：下载游戏
+点击：<a href="http://wx.menguanol.net/Wechat/default/game-page">下载游戏</a>
 
 点击：提交BUG奖励元宝
 
-点击：充值元宝
+点击：<a href="http://wx.menguanol.net/Wechat/default/my-charge">充值元宝</a>
 
-点击：代理后台
+点击：<a href="http://wx.menguanol.net/Wechat/default/my-index">代理后台</a>
 
-点击：邀请好友组局（生成自己专属二维码，推广下线）
+点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局（生成自己专属二维码，推广下线）</a>
 
 
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
@@ -167,18 +167,18 @@ EOF;
            }
                  //欢迎信息
                  $msg = <<<EOF
-客观，终于等到您了，欢迎关注人人麻将公众号！
+客官，终于等到您了，欢迎关注人人麻将公众号！
 首次关注请查看游戏使用说明、常见问题
 
-点击：下载游戏
+点击：<a href="http://wx.menguanol.net/Wechat/default/game-page">下载游戏</a>
 
 点击：提交BUG奖励元宝
 
-点击：充值元宝
+点击：<a href="http://wx.menguanol.net/Wechat/default/my-charge">充值元宝</a>
 
-点击：代理后台
+点击：<a href="http://wx.menguanol.net/Wechat/default/my-index">代理后台</a>
 
-点击：邀请好友组局（生成自己专属二维码，推广下线）
+点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局（生成自己专属二维码，推广下线）</a>
 
 
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
