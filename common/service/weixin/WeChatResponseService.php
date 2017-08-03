@@ -96,6 +96,7 @@ EOF;
             $open_id =  $entity->FromUserName;
             //上级用户
             $supperObj = null;
+            yii::error( "_key:".$entity->EventKey );
             if( !empty( $entity->EventKey ) ){
                 list( $p, $id ) = explode("_",$entity->EventKey); //上级id
                 yii::error( "key:".$entity->EventKey."id:".$id);
