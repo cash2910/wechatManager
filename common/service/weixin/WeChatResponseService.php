@@ -98,6 +98,7 @@ EOF;
             $supperObj = null;
             if( !empty( $entity->EventKey ) ){
                 list( $p, $id ) = explode("_",$entity->EventKey); //上级id
+                yii::error( "key:".$entity->EventKey."id:".$id);
                 $supperObj = $uServ->getUserInfo(['id'=> $id ]);
             }
             //判断用户是否存在
