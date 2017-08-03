@@ -37,7 +37,7 @@ class WeChatResponseService extends Module{
         $this->on('text', function( $event ){
             $entity = $event->sender;
             if( $entity->Content == '咨询客服' ){
-                $hour = (int)date('h', $_SERVER['REQUEST_TIME']);
+                $hour = (int)date('h');
                 yii::error(" 当前时间：".$hour);
                 if( $hour < 9 || $hour > 19  ){
                     $entity->setResp([
