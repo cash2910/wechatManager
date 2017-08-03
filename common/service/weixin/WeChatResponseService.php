@@ -106,7 +106,7 @@ EOF;
  客官，终于等到您了，欢迎来到人人麻将！
     1、	下载游戏请<a href="http://wx.menguanol.net/Wechat/default/game-page">点击</a>
     2、	提交BUG请回复咨询客服
-    3、	游戏充值<a href="http://wx.menguanol.net/Wechat/default/my-index">点击</a>
+    3、	游戏充值<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击</a>
     4、	进入我的后台 <a href="http://wx.menguanol.net/Wechat/default/my-index">点击</a>
     5、	立刻生成自己<a href="http://wx.menguanol.net/Wechat/default/share-page">专属二维码</a>，推广下线。
 我们正在招兵买马，全国招收代理：代理可享受以下政策
