@@ -237,19 +237,16 @@ class BusinessService extends BaseService{
      }
      
      public function consultCs( ProxyXml $entity ){
+         $msg = <<<EOF
+《人人麻将》各位玩家如需客服帮助，请在公众号输入“咨询客服”，客服会为您提供帮助；
+我们的工作时间是9：00-20：00；其他时间您可以先留言，我们会在下个人工服务时间第一时间回复您的问题。
+客服邮箱：kf@menguanol.com
+EOF;
          $entity->setResp([
              'FromUserName'=>$entity->ToUserName,
              'ToUserName'=>$entity->FromUserName,
-             'MsgType'=>'news',
-             'ArticleCount'=>1,
-             'Articles'=>[
-                 ['item'=>[
-                     'Title'=>'回复“咨询客服” 即可在线沟通',
-                     'Description'=>'回复“咨询客服” 即可在线沟通',
-                     'PicUrl'=> 'https://mmbiz.qlogo.cn/mmbiz_png/bOWzAibGJ912OrqyGpYBtt6fK6QCwvZ88bgZJknrJZ0rceoGt6Z2Z9lWCPRywdTVicGqaalqHba0ZdwDGohzIfcg/0?wx_fmt=png',
-                     'Url' =>"https://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&mid=100000003&idx=1&sn=a185319370ddeeb1621901f0ca02681c&chksm=79d1ff994ea6768f4f16ddf1d95ab9b8dd984e794d04223bc008431454131433a06cd1b782dd&mpshare=1&scene=1&srcid=0718hcC0VWdr1Ek4UxsBDRKd&pass_ticket=XvBhaROsnBNkkpSnGBa9HtEL3%2BCgr737nUqw6Fht2YgDpXJvzKCAcUOof%2FkZcLgq#rd"
-                 ]],
-             ]
+             'MsgType'=>'text',
+             'Content'=>$msg,
          ]);
      }
     
