@@ -109,6 +109,7 @@ EOF;
     3、	游戏充值<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击</a>
     4、	进入我的后台 <a href="http://wx.menguanol.net/Wechat/default/my-index">点击</a>
     5、	立刻生成自己<a href="http://wx.menguanol.net/Wechat/default/share-page">专属二维码</a>，推广下线。
+                     
 我们正在招兵买马，全国招收代理：代理可享受以下政策
     1、	可查看好友账单明细与提现等操作。
     2、	生成自己专属二维码，方便推广。
@@ -179,6 +180,7 @@ EOF;
     3、	游戏充值<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击</a>
     4、	进入我的后台 <a href="http://wx.menguanol.net/Wechat/default/my-index">点击</a>
     5、	立刻生成自己<a href="http://wx.menguanol.net/Wechat/default/share-page">专属二维码</a>，推广下线。
+                     
 我们正在招兵买马，全国招收代理：代理可享受以下政策
     1、	可查看好友账单明细与提现等操作。
     2、	生成自己专属二维码，方便推广。
