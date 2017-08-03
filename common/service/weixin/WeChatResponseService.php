@@ -108,6 +108,7 @@ EOF;
                 //建立绑定关系
                 if( $supperObj ){
                     $ret = $uServ->bindRel( $supperObj,  $uObj );
+                    yii::error( json_encode( $ret ) );
                     if( $ret['isOk'] ){
                         //通知上线用户
                         $ret = WeChatService::getIns()->sendCsMsg([
