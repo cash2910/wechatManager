@@ -4,6 +4,7 @@ namespace common\service\users;
 use common\service\UserInterface;
 use common\service\BaseService;
 use common\models\MgUsers;
+use common\models\MgUserRel;
 
 use yii;
 use yii\helpers\ArrayHelper;
@@ -21,7 +22,7 @@ class UserService extends BaseService implements UserInterface
     //创建用户
     public function createUser( $params, \Closure $callback = null ){
  
-        $res = ['isOk'=>1,'msg'=>'创建用户成功'];
+        $res = ['isOk'=>1,'msg'=>'创建用户成功','data'=>[]];
         $transaction = Yii::$app->db->beginTransaction();
         try{
             $uObj = new MgUsers();
@@ -29,10 +30,9 @@ class UserService extends BaseService implements UserInterface
             if( $callback != null ){
                 $res['data']  = call_user_func( $callback, $uObj );
             }
-            $ret = $uObj->save();
-            yii::error(  json_encode($ret) );
-            if( !$ret )
+            if( !$uObj->save() )
                  throw new \Exception( json_encode( $uObj->getErrors() ) );
+            $res['data']['user'] = $uObj;
             $transaction->commit();
         }catch ( \Exception $e){
             $res['isOk'] = 0;
@@ -94,6 +94,42 @@ class UserService extends BaseService implements UserInterface
             $query->limit( $limit );
         }
         return $query->all();
+    }
+    
+    
+    /**
+     * 绑定上下级关系
+     * @param MgUsers $touObj 上级用户
+     * @param MgUsers $uObj   当前用户
+     */
+    public function bindRel( MgUsers $touObj, MgUsers $uObj ){
+        $ret = ['isOk'=>1, 'msg'=>'绑定成功'];
+        $transaction = Yii::$app->db->beginTransaction();
+        try{
+            if( !empty($uObj->user_rels) )
+                throw new \Exception('该用户已绑定上级');
+            $rel = !empty( $touObj->user_rels ) ? $touObj->user_rels.'-'.$touObj->id : (string)$touObj->id;
+            $uids = explode('-', $rel);
+            if( in_array($uObj->id, $uids) )
+                throw new \Exception('不能绑定到下级用户');
+            $uObj->user_rels = $rel;
+            if( !$uObj->save() ){
+                throw new \Exception( json_encode( $uObj->getErrors() ) );
+            }
+            $relObj = new MgUserRel();
+            $relObj->user_id = $touObj->id;
+            $relObj->sub_user_id = $uObj->id;
+            $relObj->user_openid = $touObj->open_id;
+            $relObj->sub_user_openid = $uObj->open_id;
+            if( !$relObj->save() )
+                throw new \Exception( json_encode( $relObj->getErrors() ) );
+            $transaction->commit();
+        }catch( \Exception $e ){
+            $transaction->rollBack();
+            $ret['isOk'] = 0 ;
+            $ret['msg'] = $e->getMessage();
+        }
+        return $ret;
     }
     
 

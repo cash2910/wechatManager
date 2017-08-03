@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
 use common\models\MgUserRel;
 use common\components\WeixinMenuConfig;
 use yii\helpers\ArrayHelper;
+use common\models\MgUsers;
 /**
  * 回复微信消息方法
  * @author zaixing.jiang
@@ -90,89 +91,69 @@ EOF;
          * 获取推广id, 创建用户 并绑定关系
          */
         $this->on('subscribe', function( $event ){
-            $entity = $event->sender;
-            $id  = $entity->EventKey; //上级id
-            $open_id =  $entity->FromUserName;
             $uServ = UserService::getInstance();
-            //判断用户是否存在
-            if( $uServ->checkExist(  $entity->FromUserName ) ){
-                //savelog...
-                $ret = UserService::getInstance()->modifyUser([
-                    'open_id'=> $open_id,
-                    'status'=> 1,
-                ]);
-                //通知用户
-                 $msg = <<<EOF
-客官，终于等到您了，欢迎来到人人麻将！
-    1、	下载游戏请<a href="http://wx.menguanol.net/Wechat/default/game-page">点击</a>
-    2、	提交BUG请回复咨询客服
-    3、	游戏充值<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击</a>
-    4、	进入我的后台 <a href="http://wx.menguanol.net/Wechat/default/my-index">点击</a>
-    5、	立刻生成自己<a href="http://wx.menguanol.net/Wechat/default/share-page">专属二维码</a>，推广下线。
-                     
-我们正在招兵买马，全国招收代理：代理可享受以下政策
-    1、	可查看好友账单明细与提现等操作。
-    2、	生成自己专属二维码，方便推广。
-    3、	成功绑定下级，享受名下玩家消费返利。
-    4、	免费培训，帮助代理躺着赚钱。
-EOF;
-                $entity->setResp([
-                    'FromUserName'=>$entity->ToUserName,
-                    'ToUserName'=>$entity->FromUserName,
-                    'MsgType'=>'text',
-                    'Content'=>$msg
-                ]);
-                return true;
+            $entity = $event->sender;
+            $open_id =  $entity->FromUserName;
+            //上级用户
+            $supperObj = null;
+            if( !empty( $entity->EventKey ) ){
+                list( $p, $id ) = explode("_",$entity->EventKey); //上级id
+                $supperObj = $uServ->getUserInfo(['id'=> $id ]);
             }
-            //获取用户微信信息
-            $uwInfo = WeChatService::getIns()->getUserInfo([
-                'openid'=> $open_id 
-            ]);
-            yii::error( "用户信息：".json_encode( $uwInfo ) );
-            $ret = $uServ->createUser([
-                'open_id' =>  $open_id,
-                'union_id' =>  $uwInfo['unionid'],
-                'nickname'=> $uwInfo['nickname'],
-                'user_logo'=>$uwInfo['headimgurl'],
-                'ticket' => $entity->Ticket
-            ],function( $model ) use ( $id, $entity ){
-                //若不存在招募关系 则不进行关系绑定
-                if( empty( $id ) )
-                    return false;
-                try {
-                    list( $p, $id ) = explode("_",$id);
-                    //获取招募人信息
-                    $uInfo = \common\service\users\UserService::getInstance()->getUserInfo([
-                        'id'=> $id
-                    ]);
-                    if( empty($uInfo)  )
-                        throw new Exception(" invalid scran ID");
-                    $rel = empty( $uInfo->user_rels ) ? (string)$uInfo->id : ( $uInfo->user_rels.'-'.$uInfo->id );
-                    $model->user_rels = $rel;
-                    yii::error("rel :".$model->user_rels );
-                    $model->on( ActiveRecord::EVENT_AFTER_INSERT, function( $ent ) use ( $id, $model, $uInfo ){
-                        $rel = new MgUserRel();
-                        $rel->user_id = $id;
-                        $rel->sub_user_id = $ent->sender->id;
-                        $rel->user_openid = $uInfo->open_id;
-                        $rel->sub_user_openid = $model->open_id;
-                        $rel->save();
-                    });
-                    //通知上线用户 
-                    $ret = WeChatService::getIns()->sendCsMsg([
-                        'touser'=> $uInfo->open_id ,
-                        'msgtype'=>'text',
-                        'text'=>[
-                            'content'=> "{$model->nickname} 成功绑定为您的好友 ！",
-                        ]
-                    ]);
-                    yii::error( '通知信息 :'.json_encode( $ret ) );
-                } catch (Exception $e) {
-                    yii::error( $e->getMessage() );
+            //判断用户是否存在
+            if( ( $uObj = $uServ->getUserInfo(['open_id'=>$open_id]) ) == true  ){
+                //savelog...
+                $uObj->status = MgUsers::IS_SUBSCRIPT;
+                $uObj->save();
+                //建立绑定关系
+                if( $supperObj ){
+                    $ret = $uServ->bindRel( $supperObj,  $uObj );
+                    if( $ret['isOk'] ){
+                        //通知上线用户
+                        $ret = WeChatService::getIns()->sendCsMsg([
+                            'touser'=> $supperObj->open_id ,
+                            'msgtype'=>'text',
+                            'text'=>[
+                                'content'=> "{$uObj->nickname} 成功绑定为您的好友 ！",
+                            ]
+                        ]);
+                        yii::error( '通知信息 :'.json_encode( $ret ) );
+                    }
                 }
-            });
-            //通知用户
-                            //通知用户
+            }else{
+                //获取用户微信信息
+                $uwInfo = WeChatService::getIns()->getUserInfo([
+                    'openid'=> $open_id 
+                ]);
+                yii::error( "用户信息：".json_encode( $uwInfo ) );
+                $ret = $uServ->createUser([
+                    'open_id' =>  $open_id,
+                    'union_id' =>  $uwInfo['unionid'],
+                    'nickname'=> $uwInfo['nickname'],
+                    'user_logo'=>$uwInfo['headimgurl'],
+                ],function( $model ) use ( $supperObj ){
+                    //若不存在招募关系 则不进行关系绑定
+                    if(  !$supperObj )
+                        return false;
+                    try{
+                        $ret = $uServ->bindRel( $supperObj,  $uObj );
+                        if( $ret['isOk'] ){
+                            //通知上线用户
+                            $ret = WeChatService::getIns()->sendCsMsg([
+                                'touser'=> $supperObj->open_id ,
+                                'msgtype'=>'text',
+                                'text'=>[
+                                    'content'=> "{$uObj->nickname} 成功绑定为您的好友 ！",
+                                ]
+                            ]);
+                            yii::error( '通知信息 :'.json_encode( $ret ) );
+                         }
+                    } catch (Exception $e) {
+                        yii::error( $e->getMessage() );
+                    }
+                });
+           }
+                 //欢迎信息
                  $msg = <<<EOF
 客官，终于等到您了，欢迎来到人人麻将！
     1、	下载游戏请<a href="http://wx.menguanol.net/Wechat/default/game-page">点击</a>
