@@ -77,7 +77,7 @@ class WeChatResponseService extends Module{
 
 点击：<a href="http://wx.menguanol.net/Wechat/default/my-index">代理后台</a>
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局（生成自己专属二维码，推广下线）</a>
+点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局</a>（生成自己专属二维码，推广下线）
 
 
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
@@ -178,7 +178,7 @@ EOF;
 
 点击：<a href="http://wx.menguanol.net/Wechat/default/my-index">代理后台</a>
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局（生成自己专属二维码，推广下线）</a>
+点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局</a>（生成自己专属二维码，推广下线）
 
 
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
