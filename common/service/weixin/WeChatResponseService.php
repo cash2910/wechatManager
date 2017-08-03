@@ -143,7 +143,7 @@ EOF;
                     'union_id' =>  $uwInfo['unionid'],
                     'nickname'=> $uwInfo['nickname'],
                     'user_logo'=>$uwInfo['headimgurl'],
-                ],function( $model ) use ( $supperObj, $uServ ){
+                ],function( $uObj ) use ( $supperObj, $uServ ){
                     //若不存在招募关系 则不进行关系绑定
                     if(  !$supperObj )
                         return false;
