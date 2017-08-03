@@ -180,7 +180,7 @@ EOF;
 
 免费培训，帮助代理躺着赚钱。
 EOF;
-            $entity->setResp([
+            $ret = $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
                 'MsgType'=>'text',
