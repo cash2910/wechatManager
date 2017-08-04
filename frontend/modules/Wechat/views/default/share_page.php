@@ -88,13 +88,13 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
      * 获取专属二维码
      */
 	function getQrCode( id, callback ){
-/* 		$.ajax({
+ 		$.ajax({
 			url:'/Wechat/default/get-qr-code?id='+id,
 			success:function( data ){
 				var data  = eval("("+data+")");
 				callback( data );
 			}
-	    }); */
+	    });
 	}
 	getQrCode( '<?= yii::$app->request->get('id', 1); ?>' , function( data ){
 		$("#share_img").attr("src" ,data.pic_url );
