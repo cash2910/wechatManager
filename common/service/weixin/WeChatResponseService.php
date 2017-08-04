@@ -70,7 +70,7 @@ class WeChatResponseService extends Module{
 
 <a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
-<a href="http://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&tempkey=OTE2X1Zhc3B6RVJlLzdvWk1WSzVPUmJFWnB4TmpXd2FrU0NUMVJKXzlRdmZjRFBlMFdJazAzNEVSd1NzbjkxVjRCR002RDRsSkc4UHdleXR1QWNMaFk3eEtRLVh5N0UyYXdoOHFBRnRaRnJTd01Hem8xZGRubFZVSHA5RGFfbGdKaVVBOTZnZXA2cTBGREdVd3JoUjlDU3FneWZMQmRGMzlJSWY1cjQ3cUF%2Bfg%3D%3D&chksm=79d1ffd94ea676cf237ee78c670fd345ff0b5f79f57c511592f1c3303cbfcd0d7e88aa857b5a&scene=0&previewkey=K4Uta%252B8DVtM4kPSD84Bn7cwqSljwj2bfCUaCyDofEow%253D#wechat_redirect">点击：提交BUG奖励元宝</a>
+<a href="https://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&mid=100000067&idx=1&sn=37adc701903b0887c4de40f0167f49fb&chksm=79d1ffd94ea676cf237ee78c670fd345ff0b5f79f57c511592f1c3303cbfcd0d7e88aa857b5a&mpshare=1&scene=1&srcid=08049o0TX0XeToXdEmZFB8EB&pass_ticket=u3FuFChcrQEli0xy%2FhPTMMHcEMwXF8dHH88LDijWCp7YRns37y6GezXgONI0QYHP#rd">点击：提交BUG奖励元宝</a>
 
 <a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
@@ -169,7 +169,7 @@ EOF;
 
 <a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
-<a href="http://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&tempkey=OTE2X1Zhc3B6RVJlLzdvWk1WSzVPUmJFWnB4TmpXd2FrU0NUMVJKXzlRdmZjRFBlMFdJazAzNEVSd1NzbjkxVjRCR002RDRsSkc4UHdleXR1QWNMaFk3eEtRLVh5N0UyYXdoOHFBRnRaRnJTd01Hem8xZGRubFZVSHA5RGFfbGdKaVVBOTZnZXA2cTBGREdVd3JoUjlDU3FneWZMQmRGMzlJSWY1cjQ3cUF%2Bfg%3D%3D&chksm=79d1ffd94ea676cf237ee78c670fd345ff0b5f79f57c511592f1c3303cbfcd0d7e88aa857b5a&scene=0&previewkey=K4Uta%252B8DVtM4kPSD84Bn7cwqSljwj2bfCUaCyDofEow%253D#wechat_redirect">点击：提交BUG奖励元宝</a>
+<a href="https://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&mid=100000067&idx=1&sn=37adc701903b0887c4de40f0167f49fb&chksm=79d1ffd94ea676cf237ee78c670fd345ff0b5f79f57c511592f1c3303cbfcd0d7e88aa857b5a&mpshare=1&scene=1&srcid=08049o0TX0XeToXdEmZFB8EB&pass_ticket=u3FuFChcrQEli0xy%2FhPTMMHcEMwXF8dHH88LDijWCp7YRns37y6GezXgONI0QYHP#rd">点击：提交BUG奖励元宝</a>
 
 <a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
