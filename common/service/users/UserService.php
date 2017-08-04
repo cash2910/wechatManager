@@ -27,11 +27,11 @@ class UserService extends BaseService implements UserInterface
         try{
             $uObj = new MgUsers();
             $uObj->setAttributes( $params );
+            if( !$uObj->save() )
+                throw new \Exception( json_encode( $uObj->getErrors() ) );
             if( $callback != null ){
                 $res['data']  = call_user_func( $callback, $uObj );
             }
-            if( !$uObj->save() )
-                 throw new \Exception( json_encode( $uObj->getErrors() ) );
             $res['data']['user'] = $uObj;
             $transaction->commit();
         }catch ( \Exception $e){
@@ -89,7 +89,6 @@ class UserService extends BaseService implements UserInterface
      */
     public function getUserFriend( MgUsers $uObj , $limit = 0 ){
         $rels = !empty( ArrayHelper::getValue($uObj, 'user_rels') ) ? $uObj->user_rels.'-'.$uObj->id : $uObj->id;
-        yii::error( "rels:".$rels);
         $query = MgUsers::find()->where(['like','user_rels', "{$rels}%", false ]);
         if(  0 !== $limit  ){
             $query->limit( $limit );
