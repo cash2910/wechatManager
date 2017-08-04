@@ -129,7 +129,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         </div>
     </div>
     <?php endif;?>
-    <div id="tip" style="display: block">
+    <div id="tip" style="display: <?php echo $owner?'block':'none'?>">
 		<div style="    
     padding: 20px;
     margin-top: 192px;
