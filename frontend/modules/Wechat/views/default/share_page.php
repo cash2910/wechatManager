@@ -88,13 +88,13 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
      * 获取专属二维码
      */
 	function getQrCode( id, callback ){
-		$.ajax({
+/* 		$.ajax({
 			url:'/Wechat/default/get-qr-code?id='+id,
 			success:function( data ){
 				var data  = eval("("+data+")");
 				callback( data );
 			}
-	    });
+	    }); */
 	}
 	getQrCode( '<?= yii::$app->request->get('id', 1); ?>' , function( data ){
 		$("#share_img").attr("src" ,data.pic_url );
@@ -141,7 +141,23 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     font-family: 微软雅黑;
     margin-bottom: 0;"
     >点这里分享给朋友</p></div>
-		<div></div>
+		<div style="background-image:  url(/images/btn-back.png);
+        height: 45px;
+        margin-left: 90px;
+        margin-right: 90px;
+        border-radius: 4.6rem;
+        font-size: 25px;
+        font-family: 微软雅黑;
+        color: white;
+    "><button style="
+    width: 100%;
+    height: 100%;
+    background: none;    
+    border-radius: 4.6rem;
+    font-size: 25px;
+    font-family: 微软雅黑;
+    color: white;
+    ">知道了</button></div>
 		<img src="/images/arrow.png">
 	</div>
 </div>
