@@ -63,10 +63,15 @@ class DefaultController extends Controller
             'open_id'=>$this->open_id,
             'status'=>MgUsers::IS_SUBSCRIPT
         ]);
+        //判断是否为本人访问
+        $owner = false;
+        if( $uObj->id == Yii::$app->request->get('id') )
+            $owner = true;
         
         return $this->renderPartial('share_page',[
             'gInfo'=> $gObj,
-            'uObj' => $uObj
+            'uObj' => $uObj,
+            'owner' => $owner
         ]);
     }
     
