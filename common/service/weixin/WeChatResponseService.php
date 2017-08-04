@@ -67,7 +67,6 @@ class WeChatResponseService extends Module{
             }
              $msg = <<<EOF
 客官，终于等到您了，欢迎关注人人麻将公众号！
-首次关注请查看游戏使用说明、常见问题
 
 <a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
@@ -167,7 +166,6 @@ EOF;
                  //欢迎信息
                  $msg = <<<EOF
 客官，终于等到您了，欢迎关注人人麻将公众号！
-首次关注请查看游戏使用说明、常见问题
 
 <a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
