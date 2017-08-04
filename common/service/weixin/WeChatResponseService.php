@@ -69,24 +69,24 @@ class WeChatResponseService extends Module{
 客官，终于等到您了，欢迎关注人人麻将公众号！
 首次关注请查看游戏使用说明、常见问题
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/game-page">下载游戏</a>
+<a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
 点击：提交BUG奖励元宝
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/my-charge">充值元宝</a>
+<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/my-index">代理后台</a>
+<a href="http://wx.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局</a>（生成自己专属二维码，推广下线）
+<a href="http://wx.menguanol.net/Wechat/default/share-page">点击：邀请好友组局</a>（生成自己专属二维码，推广下线）
 
 
-我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
+1、我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
 
-可查看好友账单明细与提现等操作。
+2、可查看好友账单明细与提现等操作。
       
-生成自己专属二维码，方便推广。
+3、生成自己专属二维码，方便推广。
 
-成功绑定下级，享受名下玩家消费返利。
+4、成功绑定下级，享受名下玩家消费返利。
 
 免费培训，帮助代理躺着赚钱。
 EOF;
@@ -170,24 +170,24 @@ EOF;
 客官，终于等到您了，欢迎关注人人麻将公众号！
 首次关注请查看游戏使用说明、常见问题
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/game-page">下载游戏</a>
+<a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
 点击：提交BUG奖励元宝
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/my-charge">充值元宝</a>
+<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/my-index">代理后台</a>
+<a href="http://wx.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
 
-点击：<a href="http://wx.menguanol.net/Wechat/default/share-page">邀请好友组局</a>（生成自己专属二维码，推广下线）
+<a href="http://wx.menguanol.net/Wechat/default/share-page">点击：邀请好友组局</a>（生成自己专属二维码，推广下线）
 
 
-我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
+1、我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
 
-可查看好友账单明细与提现等操作。
+2、可查看好友账单明细与提现等操作。
       
-生成自己专属二维码，方便推广。
+3、生成自己专属二维码，方便推广。
 
-成功绑定下级，享受名下玩家消费返利。
+4、成功绑定下级，享受名下玩家消费返利。
 
 免费培训，帮助代理躺着赚钱。
 EOF;

@@ -129,11 +129,20 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         </div>
     </div>
     <?php endif;?>
-    <div id="tip" style="display: none">
-			<p>如果没有自动跳转，可能是微信限制了第三方应用的跳转。</p>
-			<p>1. 点击右上角的…</p>
-			<p>2. 选择在浏览器中打开</p>
-			<img src="/images/arrow.png">
+    <div id="tip" style="display: block">
+		<div style="    
+    padding: 20px;
+    margin-top: 192px;
+    background: none;"><p
+    style="   
+    padding: 0;
+    text-align: center;
+    font-size: 35px;
+    font-family: 微软雅黑;
+    margin-bottom: 0;"
+    >点这里分享给朋友</p></div>
+		<div></div>
+		<img src="/images/arrow.png">
 	</div>
 </div>
 
