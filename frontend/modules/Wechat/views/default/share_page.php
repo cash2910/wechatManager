@@ -112,7 +112,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 <div id="contents">
 	<div class="banner"><img src="/images/banner.png"></div>
 	<div style="margin: 7px;"><p style="text-align: center;   color: floralwhite; font-family: 微软雅黑;">请长按下方二维码 识别并下载游戏！</p></div>
-	<?php if( $uObj && !owner ): ?>
+	<?php if( $uObj && !$owner ): ?>
     <div class="icon_ma">
     	<div class="icon">
         	<a class="android" href="<?php echo $gInfo->android_url; ?>" ><img src="/images/android_icon.png"></a>
