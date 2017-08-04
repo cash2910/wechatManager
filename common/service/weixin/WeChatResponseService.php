@@ -157,6 +157,8 @@ EOF;
                                 ]
                             ]);
                             yii::error( '通知信息 :'.json_encode( $ret ) );
+                         }else{
+                            yii::error( '绑定失败 :'.$ret['isOk'] );
                          }
                     } catch (Exception $e) {
                         yii::error( $e->getMessage() );
