@@ -169,7 +169,7 @@ EOF;
 
 <a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
-点击：提交BUG奖励元宝
+<a href="http://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&tempkey=OTE2X1Zhc3B6RVJlLzdvWk1WSzVPUmJFWnB4TmpXd2FrU0NUMVJKXzlRdmZjRFBlMFdJazAzNEVSd1NzbjkxVjRCR002RDRsSkc4UHdleXR1QWNMaFk3eEtRLVh5N0UyYXdoOHFBRnRaRnJTd01Hem8xZGRubFZVSHA5RGFfbGdKaVVBOTZnZXA2cTBGREdVd3JoUjlDU3FneWZMQmRGMzlJSWY1cjQ3cUF%2Bfg%3D%3D&chksm=79d1ffd94ea676cf237ee78c670fd345ff0b5f79f57c511592f1c3303cbfcd0d7e88aa857b5a&scene=0&previewkey=K4Uta%252B8DVtM4kPSD84Bn7cwqSljwj2bfCUaCyDofEow%253D#wechat_redirect">点击：提交BUG奖励元宝</a>
 
 <a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
