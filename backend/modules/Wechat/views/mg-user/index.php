@@ -22,8 +22,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\CheckboxColumn',
                 'name' => 'id',
                 'headerOptions' => ['style' => 'width: 40px;'],
+            ],  
+            [
+                'attribute' => 'user_logo',
+                'headerOptions' => ['style' => 'width: 80px;'],
+                'format'=>'html',
+                'label' => '用户头像',
+                'value' => function( $model ){
+                    return  Html::img($model->user_logo,[
+                        'width'=>40,'height'=>40
+                    ]);
+                }
             ],
-            'id',
             'nickname',
             'status',
             'open_id',
