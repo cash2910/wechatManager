@@ -65,7 +65,7 @@ class DefaultController extends Controller
         ]);
         //判断是否为本人访问
         $owner = false;
-        if( $uObj->id == Yii::$app->request->get('id') )
+        if( $uObj && ( $uObj->id == Yii::$app->request->get('id') ) )
             $owner = true;
         
         return $this->renderPartial('share_page',[
