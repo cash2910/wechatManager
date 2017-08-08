@@ -125,11 +125,14 @@ class OrderController extends Controller
         return true;   
     }
     
-    
+    /**
+     * 一次性提走全部返利
+     */
     public function actionGetRebate(){
         $uObj = MgUsers::findOne( [ 'open_id'=>$this->open_id ] );
         $aObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
-        $ret = RebateService::getInstance()->createRebateOrder( $aObj , 2000 );
+        $num = $aObj->free_balance;
+        $ret = RebateService::getInstance()->createRebateOrder( $aObj , $num );
         if( $ret['isOk'] ){
             $ret['msg'] = '提现成功 ,请等待管理员审核...';
             $ret['data'] = json_encode( $ret['data']->getAttributes() );
