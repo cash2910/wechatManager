@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="mg-order-list-index">
     <?= Html::beginForm(['order/update'], 'post', ['enctype' => 'multipart/form-data','class'=>'form-inline','style'=>"padding-bottom: 20px;"]) ?>
         <?= Html::input('text', 'username', 'dsdsa', ['class' =>'form-group','lable'=>'sdsa']) ?>
+        <?= Html::input('text', 'username', 'dsdsa', ['class' =>'form-group','lable'=>'sdsa']) ?>
     <?= Html::endForm() ?>
     <!-- 
     <form class="form-inline" style="padding-bottom: 20px;">

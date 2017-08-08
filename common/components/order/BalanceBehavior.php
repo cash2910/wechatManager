@@ -30,14 +30,14 @@ class BalanceBehavior extends Behavior{
             $uInfo = MgUsers::findOne([ 'id'=>$order_obj->user_id ]);
             $refund = [
                 0=>0.5,
-                1=>0.15,
-                2=>0.05
+                1=>0.1,
+                //2=>0.05
             ];
             $total = $order_obj->order_num;
             $rel = $uInfo->user_rels;
             $uids = array_reverse( explode("-", $rel) );
             $data = [];
-            for( $i=0; $i <=2; $i++ ){
+            for( $i=0; $i <= (count( $refund ) -1); $i++ ){
                 $_uid = self::DEFAULT_UID;
                 $ratio = $refund[$i];
                 $_refund = $ratio*$total;
@@ -57,7 +57,7 @@ class BalanceBehavior extends Behavior{
         }catch ( \Exception $e ){
             //var_dump( $e->getMessage() );
             $transaction->rollBack();
-            yii::error( $e->getMessage() );
+            yii::error( "返利失败： ".$e->getMessage() );
         }
     }
     

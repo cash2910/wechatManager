@@ -33,7 +33,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order','my-charge','my-wallet' ,'my-rebates' , 'share-page', 'friends-charge'
+                    'my-index','my-friend','my-order','my-charge','my-wallet', 'game-page' ,'my-rebates' , 'share-page', 'friends-charge'
                 ],
             ]
         ];
@@ -41,7 +41,7 @@ class DefaultController extends Controller
     
     /**
      * Renders the index view for the module
-     * @return string
+     * @return string 
      */
     public function actionIndex()
     {
