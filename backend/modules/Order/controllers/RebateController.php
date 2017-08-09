@@ -96,10 +96,10 @@ class RebateController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
+        $id = yii::$app->request->get('id');
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->rebate_sn]);
         } else {
