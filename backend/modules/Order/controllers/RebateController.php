@@ -48,6 +48,11 @@ class RebateController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => MgRebateList::find(),
+            'sort' => [
+                'defaultOrder' => [
+                    'add_time' => SORT_DESC,
+                ]
+            ]
         ]);
 
         return $this->render('index', [

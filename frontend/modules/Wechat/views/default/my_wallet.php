@@ -17,28 +17,34 @@
         </div>
     </div>
 </div>
+<style>
+A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
+</style>
 <script src="/js/base.js"></script>
 <script>
 //提现操作
 $("._rebate").click(function(){
-	var limit = 2000;
+	var limit = 1;
 	var money = parseInt( $(".weui-msg__title").html().substring( 1 ) );
 	if( money < limit ){
 		mgUI.msg('余额大于'+limit+'以上才可提现');
 		return false;
 	}
-	mgUI.startload('dsadsa');
+	mgUI.startload('请求处理中');
 	$.ajax({
 		url:'/Wechat/order/get-rebate',
 		success:function( data ){
 			var d = eval("("+data+")");
-			mgUI.endload();
+			if( !d.isOk ){
+				mgUI.msg( d.msg );
+				return false;
+			}
 			mgUI.msg( d.msg, function(){
 				location.href="/Wechat/default/my-wallet";
 			});
+			//mgUI.endload();
 		}
 	});
 });
-
 </script>
 

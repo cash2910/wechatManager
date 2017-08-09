@@ -8,8 +8,8 @@ var mgUI = {
 				        '</div>'+
 				   ' </div>'+
               '</div>',
-    loadTpl:'<div id="_loadingToast" style="display:none;">'+
-		        '<div class="weui-mask_transparent"></div>'+
+    loadTpl:'<div class="js_dialog" id="_loadingToast" style="display:none;">'+
+		        '<div class="weui-mask"></div>'+
 		        '<div class="weui-toast">'+
 		            '<i class="weui-loading weui-icon_toast"></i>'+
 		            '<p class="weui-toast__content">数据加载中</p>'+

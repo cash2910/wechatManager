@@ -131,8 +131,9 @@ class OrderController extends Controller
     public function actionGetRebate(){
         $uObj = MgUsers::findOne( [ 'open_id'=>$this->open_id ] );
         $aObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
-        $num = $aObj->free_balance;
-        $ret = RebateService::getInstance()->createRebateOrder( $aObj , $num );
+        if( !$aObj || $aObj->free_balance < 1 )
+            CommonResponse::end( ['isOk'=>0,'msg'=>'提现金额不足' ] );
+        $ret = RebateService::getInstance()->createRebateOrder( $aObj , $aObj->free_balance );
         if( $ret['isOk'] ){
             $ret['msg'] = '提现成功 ,请等待管理员审核...';
             $ret['data'] = json_encode( $ret['data']->getAttributes() );
