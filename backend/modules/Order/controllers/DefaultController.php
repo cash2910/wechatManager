@@ -7,6 +7,8 @@ use yii\web\Controller;
 use common\models\MgRebateList;
 use common\service\order\RebateService;
 use yii\base\Exception;
+use common\models\MgOrderList;
+use common\components\CommonResponse;
 
 /**
  * Default controller for the `Order` module
@@ -51,6 +53,33 @@ class DefaultController extends Controller
             throw new NotFoundHttpException('信息不存在');
         }
 
+    }
+    
+    
+    public function actionGetCharge(){
+    
+        $ret = ['isOk'=>1,'msg'=>'获取成功','data'=>[]];
+        try{
+            $f = $from = strtotime("-7 day");
+            $to = time();
+            $_date = [];
+            while ( $from < $to ) {
+                $_d = date('Y-m-d', $from );
+                $_date[$_d] = 0;
+                $from += 86400;
+            }
+            $oList = MgOrderList::find()->andWhere(['<>','pay_sn',' '])->andWhere(['between', 'add_time', date('Y-m-d', $f ),  date('Y-m-d',$to )])->all();
+            foreach ($oList as $order ){
+                list( $_d, $t) = explode( " ", $order->add_time );
+                $_date[$_d] += $order->order_num;
+            }
+            $ret['data']['series'] = array_keys( $_date );
+            $ret['data']['sum'] = array_values( $_date );;
+        }catch (\Exception $e){
+            $ret['isOk'] = 0;
+            $ret['msg'] = $e->getMessage();
+        }
+        CommonResponse::end( $ret );
     }
     
 }
