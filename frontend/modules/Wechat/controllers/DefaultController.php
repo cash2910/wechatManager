@@ -185,7 +185,7 @@ class DefaultController extends Controller
         if( !$uObj ){
             return $this->redirect(['/Wechat/default/share-page','id'=>yii::$app->params['DEFAULT_USER']]);
         }
-        $viewUser = MgUsers::findOne(['open_id'=>$this->open_id]);
+        $viewUser = MgUsers::findOne( [ 'open_id'=>$this->open_id, 'status'=>MgUsers::IS_SUBSCRIPT ] );
         if( !$viewUser ){
             return $this->redirect(['/Wechat/default/share-page','id'=>$uObj->id]);
         }
