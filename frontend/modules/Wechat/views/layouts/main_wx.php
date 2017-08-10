@@ -25,7 +25,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 <?= $content ?>
 </div>
 <div class="weui-footer">
-    <p class="weui-footer__text">Copyright © 2017 MG互娱</p>
+    <p class="weui-footer__text">Copyright © 2017 人人万州</p>
 </div>
 <script  type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
