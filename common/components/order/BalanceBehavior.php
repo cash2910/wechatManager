@@ -15,7 +15,7 @@ use common\models\MgUserRel;
 class BalanceBehavior extends Behavior{
 
     //默认返利用户
-    const DEFAULT_UID = 94;
+    const DEFAULT_UID = 322;
     /**
      * 订单金额小于1元不进行返利
      * 1、获取返利用户
