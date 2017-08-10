@@ -3,9 +3,10 @@
 *{ padding:o; margin:0 auto; background:#5d130a}
 #contents{ width:100%;}
 p{ background:none;}
+.banner{ position: relative}
 .banner img{ width:100%;}
 .icon_ma{ width:90%; text-align:center;}
-.icon{ width:50%; float:left; margin-top:10px;}
+.icon{ width:50%; margin-top:10px;}
 .icon img{ width:100%}
 .icon .iphone{ display:block; padding-top:20px;}
 .erweima{ width:45%; float:right}
@@ -15,4 +16,13 @@ p{ background:none;}
 #tip p{ padding:0 20% 0 5%; line-height:1.8em; margin-bottom:1em;}
 #tip p:first-child{ padding-top:5%;}
 #tip img{ position:absolute; top:5%; right:5%; background:none;}
+.text {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1em;
+    position: absolute;
+    top: 85%;
+    background: none;
+}
 

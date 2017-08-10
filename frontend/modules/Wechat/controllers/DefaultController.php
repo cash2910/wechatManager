@@ -168,22 +168,36 @@ class DefaultController extends Controller
     
     /**
      * 游戏房间分享页面
-     * @return string
-     */
-    public function actionRoomPage()
-    {
-/*         echo json_encode([
+     * 1、若分享者信息不存在。显示游戏下载页面
+     * 2、若点击分享页面用户没有关注公众号，跳转到分享用户专属链接页
+     * 3、若1、2都不满足，则显示房间信息页
+       echo json_encode([
             'Room_id'=>12121,
             'Title'=>'人人麻将：房间号[756 433] ',
             'Desc'=>'4局、3番封顶,1底分 赶快来！',
             'Time'=>1503364468
-        ],JSON_UNESCAPED_UNICODE);die(); */
-        //var_dump(json_decode( $_GET['data'] ,true));die();
+        ],JSON_UNESCAPED_UNICODE);die(); 
+     * @return string
+     */
+    public function actionRoomPage()
+    {
+        $uObj = MgUsers::findOne(['union_id'=>yii::$app->request->get('union_id')]);
+        if( !$uObj ){
+            return $this->redirect(['/Wechat/default/share-page','id'=>yii::$app->params['DEFAULT_USER']]);
+        }
+        $viewUser = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( !$viewUser ){
+            return $this->redirect(['/Wechat/default/share-page','id'=>$uObj->id]);
+        }
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 1)]);
         if( !$gObj )
             die('信息错误');
+        
+        $roomInfo = json_decode( yii::$app->request->get('data') ,true );
         return $this->renderPartial('room_page',[
-            'gInfo'=> $gObj
+            'gInfo'=> $gObj,
+            'uInfo'=> $uObj,
+            'roomInfo'=> $roomInfo
         ]);
     }
     

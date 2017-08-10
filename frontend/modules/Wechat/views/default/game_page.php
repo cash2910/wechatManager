@@ -87,16 +87,18 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 </head>
 
 <body>
+
 <div id="contents">
-	<div class="banner"><img src="/images/banner.png"></div>
+	<div class="banner">
+	    <img src="/images/banner.png">
+	    <div class="text">诚招代理 官方微信：renren-mj</div>
+	</div>
+	
   <div class="icon_ma">
     	<div class="icon">
         	<a class="android" href="<?php echo $gInfo->android_url; ?>" ><img src="/images/android_icon.png"></a>
             <a class="iphone" href="<?php echo $gInfo->ios_url; ?>" id="JdownApp" ><img src="/images/iphone_icon.png"></a>
-      </div>
-        <div class="erweima">
-        	<img src="/images/erweima.png?aa">
-        </div>
+         </div>
     </div>
     <div id="tip">
 			<p>如果没有自动跳转，可能是微信限制了第三方应用的跳转。</p>
