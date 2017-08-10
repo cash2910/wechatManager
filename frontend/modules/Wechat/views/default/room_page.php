@@ -111,11 +111,11 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     <div class="xc_pic">
     	<img src="/images/pic.png">
     </div>
-    <div class="btn">
+    <!-- <div class="btn">
     	<a href="#">
         	<img src="/images/btn.png">
         </a>
-    </div>
+    </div> -->
 </div>
 </body>
     <style type="text/css">
