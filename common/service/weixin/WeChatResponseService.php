@@ -68,15 +68,15 @@ class WeChatResponseService extends Module{
              $msg = <<<EOF
 客官，终于等到您了，欢迎关注人人麻将公众号！
 
-<a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
-<a href="https://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&mid=100000067&idx=1&sn=37adc701903b0887c4de40f0167f49fb&chksm=79d1ffd94ea676cf237ee78c670fd345ff0b5f79f57c511592f1c3303cbfcd0d7e88aa857b5a&mpshare=1&scene=1&srcid=08049o0TX0XeToXdEmZFB8EB&pass_ticket=u3FuFChcrQEli0xy%2FhPTMMHcEMwXF8dHH88LDijWCp7YRns37y6GezXgONI0QYHP#rd">点击：提交BUG奖励元宝</a>
+<a href="http://mp.weixin.qq.com/s/1AjQevdwgz6jrQu83pmCuQ" >点击：提交BUG奖励元宝</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/share-page">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/share-page">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
     
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
     
@@ -169,15 +169,15 @@ EOF;
                  $msg = <<<EOF
 客官，终于等到您了，欢迎关注人人麻将公众号！
 
-<a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
-<a href="https://mp.weixin.qq.com/s?__biz=MzUyMjEyMDE4MQ==&mid=100000067&idx=1&sn=37adc701903b0887c4de40f0167f49fb&chksm=79d1ffd94ea676cf237ee78c670fd345ff0b5f79f57c511592f1c3303cbfcd0d7e88aa857b5a&mpshare=1&scene=1&srcid=08049o0TX0XeToXdEmZFB8EB&pass_ticket=u3FuFChcrQEli0xy%2FhPTMMHcEMwXF8dHH88LDijWCp7YRns37y6GezXgONI0QYHP#rd">点击：提交BUG奖励元宝</a>
+<a href="http://mp.weixin.qq.com/s/1AjQevdwgz6jrQu83pmCuQ" >点击：提交BUG奖励元宝</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/share-page">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
+<a href="http://wxwz.menguanol.net/Wechat/default/share-page">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
     
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
     
