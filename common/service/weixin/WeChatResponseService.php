@@ -43,7 +43,7 @@ class WeChatResponseService extends Module{
                         'FromUserName'=>$entity->ToUserName,
                         'ToUserName'=>$entity->FromUserName,
                         'MsgType'=>'text',
-                        'Content'=>'您好，人工客服时间为9：00-19：00。目前时段，您可以先留言，我们会在下个人工服务时间第一时间回复您的问题。'
+                        'Content'=>'您好，人工客服时间为10：00-22：00。目前时段，您可以先留言，我们会在下个人工服务时间第一时间回复您的问题。'
                     ]);
                     return ;
                 }

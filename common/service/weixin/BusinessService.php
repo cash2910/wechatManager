@@ -239,7 +239,7 @@ class BusinessService extends BaseService{
      public function consultCs( ProxyXml $entity ){
          $msg = <<<EOF
 《人人麻将》各位玩家如需客服帮助，请在公众号输入“咨询客服”，客服会为您提供帮助；
-我们的工作时间是9：00-20：00；其他时间您可以先留言，我们会在下个人工服务时间第一时间回复您的问题。
+我们的工作时间是10：00-22：00；其他时间您可以先留言，我们会在下个人工服务时间第一时间回复您的问题。
 客服邮箱：kf@menguanol.com
 EOF;
          $entity->setResp([
