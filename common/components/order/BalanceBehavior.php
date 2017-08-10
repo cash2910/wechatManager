@@ -30,8 +30,8 @@ class BalanceBehavior extends Behavior{
             $uInfo = MgUsers::findOne([ 'id'=>$order_obj->user_id ]);
             $refund = [
                 0=>0.5,
-                1=>0.1,
-                //2=>0.05
+                1=>0.07,
+                2=>0.03
             ];
             $total = $order_obj->order_num;
             $rel = $uInfo->user_rels;

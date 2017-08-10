@@ -105,7 +105,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 			<p>1. 点击右上角的…</p>
 			<p>2. 选择在浏览器中打开</p>
 			<img src="/images/arrow.png">
-		</div>
+	</div>
 </div>
 </body>
 
