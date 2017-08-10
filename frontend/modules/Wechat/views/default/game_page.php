@@ -91,7 +91,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 <div id="contents">
 	<div class="banner">
 	    <img src="/images/banner.png">
-	    <div class="text">诚招代理 官方微信：renren-mj</div>
+	    <div class="text">诚招代理 官方微信：<?php echo yii::$app->params['WEIXIN_ID'];?></div>
 	</div>
 	
   <div class="icon_ma">
