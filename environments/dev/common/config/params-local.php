@@ -13,6 +13,8 @@ return [
     'MCHID' =>'1483656542', 
     
     'DEFAULT_USER'=>94, //默认最终用户ID
+    'my_index'=>'http://wx.menguanol.net/Wechat/default/my-index',
+    'WEIXIN_ID' =>'renren_wz',
     
     //游戏地址
     'GAME_URL'=>'http://183.61.243.96:9321',
