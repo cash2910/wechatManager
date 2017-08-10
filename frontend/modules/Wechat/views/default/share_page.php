@@ -111,7 +111,6 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 <body>
 <div id="contents">
 	<div class="banner"><img src="/images/banner.png"></div>
-	<div style="margin: 7px;"><p style="text-align: center;   color: floralwhite; font-family: 微软雅黑;">请长按下方二维码 识别并下载游戏！</p></div>
 	<?php if( $uObj && !$owner ): ?>
     <div class="icon_ma">
     	<div class="icon" >
@@ -123,6 +122,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         </div> -->
     </div>
     <?php else:?>
+    <div style="margin: 7px;"><p style="text-align: center;   color: floralwhite; font-family: 微软雅黑;">请长按下方二维码 识别并下载游戏！</p></div>
     <div class="icon_ma">
         <div class="erweima" style="width: 70%; float: none;">
         	<img id="share_img" src="" />
