@@ -24,7 +24,7 @@ A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 <script>
 //提现操作
 $("._rebate").click(function(){
-	var limit = 1;
+	var limit = 2000;
 	var money = parseInt( $(".weui-msg__title").html().substring( 1 ) );
 	if( money < limit ){
 		mgUI.msg('余额大于'+limit+'以上才可提现');
