@@ -48,7 +48,14 @@ class AccountLogController extends Controller
     {
         $query = MgUserAccountLog::find();
         if( Yii::$app->request->get('user_id') )
-            $query->where(['user_id'=>Yii::$app->request->get('user_id') ]);
+            $query->andWhere(['user_id'=>Yii::$app->request->get('user_id') ]);
+        if(  ($from_date = Yii::$app->request->get('from_date', '') ) == true ){
+            $query->andWhere(['>=','add_time',$from_date]);
+        }
+        
+        if(  ($end_date = Yii::$app->request->get('end_date', '') ) == true ){
+            $query->andWhere(['<=','add_time',$end_date]);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
