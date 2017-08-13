@@ -10,32 +10,32 @@ $this->title = 'Mg Order Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-order-list-index">
-    <?= Html::beginForm(['order/update'], 'post', ['enctype' => 'multipart/form-data','class'=>'form-inline','style'=>"padding-bottom: 20px;"]) ?>
-        <?= Html::input('text', 'username', 'dsdsa', ['class' =>'form-group','lable'=>'sdsa']) ?>
-        <?= Html::input('text', 'username', 'dsdsa', ['class' =>'form-group','lable'=>'sdsa']) ?>
+    <?= Html::beginForm(['order/index'], 'get', ['enctype' => 'multipart/form-data','class'=>'form-inline']) ?>
+        <div class="form-group col-md-3">
+            <label class="control-label col-md=5"  >订单号:</label>
+            <?php echo Html::input('text','order_sn',yii::$app->request->get('order_sn',''),['class'=>'form-control','placeholder'=>'请输入订单号'])?>
+        </div>         
+        <div class="form-group col-md-3">
+            <label class="  control-label"  >用户昵称:</label>
+            <?php echo Html::input('text','nick_name',yii::$app->request->get('nick_name',''),['class'=>'form-control','placeholder'=>'请输入用户昵称'])?>
+        </div> 
+        <div class="form-group col-md-3">
+            <label class="  control-label"  >用户ID:</label>
+            <?php echo Html::input('text','user_id',yii::$app->request->get('user_id',''),['class'=>'form-control','placeholder'=>'请输入用户ID'])?>
+        </div> 
+        <div class="form-group col-md-3">
+            <label class="control-label"  >是否支付:</label>
+            <?php echo Html::dropDownList('p_status',yii::$app->request->get('p_status',""),[1=>"已支付",2=>'未支付'],['class'=>'form-control','prompt' => '全部']);?>
+        </div>
+        <div class="form-group ">
+            <label class=" control-label"  for="exampleInputPassword2">创建日期:</label>
+            <?php echo Html::input('text','from_date',yii::$app->request->get('from_date',''),['class'=>'form-control','placeholder'=>'开始日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
+        </div> 
+        <div class="form-group ">
+            <?php echo Html::input('text','end_date',yii::$app->request->get('end_date',''),['class'=>'form-control','placeholder'=>'结束日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
+        </div>
+        <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
     <?= Html::endForm() ?>
-    <!-- 
-    <form class="form-inline" style="padding-bottom: 20px;">
-         <div class="form-group">
-            <label class="sr-only" for="exampleInputEmail2">邮箱</label>
-            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="请输入你的邮箱地址">
-        </div>
-        <div class="form-group" >
-            <label class="sr-only" for="exampleInputPassword2">密码</label>
-            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="请输入你的邮箱密码">
-        </div>
-        <div class="form-group" >
-            <label class="sr-only" for="exampleInputPassword2">密码</label>
-            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="请输入你的邮箱密码">
-        </div>
-        <div class="checkbox">
-            <label >
-                <input type="checkbox" >记住密码
-            </label>
-        </div>
-        <button type="submit" class="btn btn-default">进入邮箱</button>
-    </form>
-     -->
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -81,3 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+<script src="/js/DatePicker/WdatePicker.js"></script>
+<style>
+.form-inline .form-group{
+	margin-bottom: 15px;
+}
+</style>

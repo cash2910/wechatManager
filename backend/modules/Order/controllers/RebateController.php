@@ -46,14 +46,29 @@ class RebateController extends Controller
      */
     public function actionIndex()
     {
+        $query =  MgRebateList::find();
+        
+        if(  ($rebate_sn = Yii::$app->request->get('rebate_sn', '') ) == true ){
+            $query->andWhere(['rebate_sn'=>$rebate_sn]);
+        }
+        if(  ($user_id = Yii::$app->request->get('user_id', '') ) == true ){
+            $query->andWhere(['user_id'=>$user_id]);
+        }
+        if(  ($from_date = Yii::$app->request->get('from_date', '') ) == true ){
+            $query->andWhere(['>=','add_time',strtotime( $from_date )]);
+        }
+        if(  ($end_date = Yii::$app->request->get('end_date', '') ) == true ){
+            $query->andWhere(['<=','add_time',strtotime( $end_date ) ]);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => MgRebateList::find(),
+            'query' =>$query,
             'sort' => [
                 'defaultOrder' => [
                     'add_time' => SORT_DESC,
                 ]
             ]
         ]);
+      //  var_dump($dataProvider);die();
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,

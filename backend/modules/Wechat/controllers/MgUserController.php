@@ -45,8 +45,33 @@ class MgUserController extends Controller
      */
     public function actionIndex()
     {
+        $query =  MgUsers::find();
+        if(  ($user_id = Yii::$app->request->get('user_id', '') ) == true ){
+            $query->andWhere(['id'=>$user_id]);
+        }
+        if(  ($nickname = Yii::$app->request->get('nickname', '') ) == true ){
+            $query->andWhere(['like','nickname',$nickname]);
+        }
+        if(  ($status = Yii::$app->request->get('status', '') ) == true ){
+            $query->andWhere(['status'=>$status]);
+        }
+        if(  ($open_id = Yii::$app->request->get('open_id', '') ) == true ){
+            $query->andWhere(['open_id'=>$open_id]);
+        }
+        if(  ($union_id = Yii::$app->request->get('union_id', '') ) == true ){
+            $query->andWhere(['union_id'=>$union_id]);
+        }
+        
+        if(  ($union_id = Yii::$app->request->get('union_id', '') ) == true ){
+            $query->andWhere(['union_id'=>$union_id]);
+        }
+
+        if(  ($rels = Yii::$app->request->get('fri', '') ) == true ){
+            $query->andWhere(['like','user_rels', "{$rels}%", false ]);
+        }
+        
         $dataProvider = new ActiveDataProvider([
-            'query' => MgUsers::find(),
+            'query' =>$query
         ]);
 
         return $this->render('index', [

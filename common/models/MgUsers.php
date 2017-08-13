@@ -24,6 +24,12 @@ class MgUsers extends \yii\db\ActiveRecord
 {
     const IS_SUBSCRIPT = 1;
     const NOT_SUBSCRIPT = 2;
+    
+    static public $status_msg=[
+        self::IS_SUBSCRIPT =>'已关注',
+        self::NOT_SUBSCRIPT=>'未关注',
+    ];
+    
     public function behaviors()
     {
         return [

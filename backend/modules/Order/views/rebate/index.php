@@ -10,12 +10,27 @@ $this->title = 'Mg Rebate Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-rebate-list-index">
-    <p>
-        <?php 
-            echo Yii::$app->getSession()->getFlash( 'msg'  );
-        //echo Html::a('Create Mg Rebate List', ['create'], ['class' => 'btn btn-success']) 
-        ?>
+    <p style="color:red;font-size:20px;">
+        <?php  echo Yii::$app->getSession()->getFlash( 'msg'  ); ?>
     </p>
+    <?= Html::beginForm(['rebate/index'], 'get', ['enctype' => 'multipart/form-data','class'=>'form-inline']) ?>
+        <div class="form-group col-md-3">
+            <label class="control-label col-md=5"  >订单号:</label>
+            <?php echo Html::input('text','rebate_sn',yii::$app->request->get('rebate_sn',''),['class'=>'form-control','placeholder'=>'请输入订单号'])?>
+        </div>         
+        <div class="form-group col-md-3">
+            <label class="  control-label"  >用户ID:</label>
+            <?php echo Html::input('text','user_id',yii::$app->request->get('user_id',''),['class'=>'form-control','placeholder'=>'请输入用户ID'])?>
+        </div> 
+        <div class="form-group ">
+            <label class=" control-label"  for="exampleInputPassword2">申请日期:</label>
+            <?php echo Html::input('text','from_date',yii::$app->request->get('from_date',''),['class'=>'form-control','placeholder'=>'开始日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
+        </div> 
+        <div class="form-group ">
+            <?php echo Html::input('text','end_date',yii::$app->request->get('end_date',''),['class'=>'form-control','placeholder'=>'结束日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
+        </div>
+        <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
+    <?= Html::endForm() ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -45,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['text-align' => 'center'],
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
-                         return Html::a('查看', ['/Order/account-log','uid'=>$model->user_id, 'status'=>1], ['class' => "btn btn-xs btn-success"]);
+                         return Html::a('查看', ['/Order/account-log','user_id'=>$model->user_id], ['class' => "btn btn-xs btn-success"]);
                     },
                     'update' => function ($url, $model, $key) {
                           if( $model->status == common\models\MgRebateList::APPLY  )
@@ -60,3 +75,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+<script src="/js/DatePicker/WdatePicker.js"></script>
+<style>
+.form-inline .form-group{
+	margin-bottom: 15px;
+}
+</style>

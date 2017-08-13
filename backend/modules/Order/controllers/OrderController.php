@@ -46,8 +46,39 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
+        $query = MgOrderList::find();
+        if(  ($order_sn = Yii::$app->request->get('order_sn', '') ) == true ){
+            $query->andWhere(['order_sn'=>$order_sn]);
+        }
+        if(  ($nickname = Yii::$app->request->get('nick_name', '') ) == true ){
+            $query->andWhere(['like','nick_name',$nickname]);
+        }
+        if(  ($user_id = Yii::$app->request->get('user_id', '') ) == true ){
+            $query->andWhere(['user_id'=>$user_id]);
+        }
+        if(  ($p_status = Yii::$app->request->get('p_status', '') ) == true ){
+            if( 1 == $p_status)
+                 $query->andWhere(['<>','pay_sn',' ']);
+            else 
+               $query->andWhere(['pay_sn'=>' ']);
+        }
+        if(  ($p_status = Yii::$app->request->get('p_status', '') ) == true ){
+            if( 1 == $p_status)
+                $query->andWhere(['<>','pay_sn',' ']);
+            else
+              $query->andWhere(['pay_sn'=>' ']);
+        }
+        
+        if(  ($from_date = Yii::$app->request->get('from_date', '') ) == true ){
+            $query->andWhere(['>=','add_time',$from_date]);
+        }
+        
+        if(  ($end_date = Yii::$app->request->get('end_date', '') ) == true ){
+            $query->andWhere(['<=','add_time',$end_date]);
+        }
+        
         $dataProvider = new ActiveDataProvider([
-            'query' => MgOrderList::find(),
+            'query' => $query,
             'sort' => [
                 'defaultOrder' => [
                     'add_time' => SORT_DESC,            

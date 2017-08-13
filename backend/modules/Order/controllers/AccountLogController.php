@@ -47,8 +47,8 @@ class AccountLogController extends Controller
     public function actionIndex()
     {
         $query = MgUserAccountLog::find();
-        if( Yii::$app->request->get('uid') )
-            $query->where(['user_id'=>Yii::$app->request->get('uid') ]);
+        if( Yii::$app->request->get('user_id') )
+            $query->where(['user_id'=>Yii::$app->request->get('user_id') ]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
