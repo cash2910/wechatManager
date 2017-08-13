@@ -55,7 +55,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'nickname',
-            'status',
+            ['label' => '订单渠道','value' => function($data){
+                return $data::$status_msg[$data->status];
+            }],
             'open_id',
             //'passwd',
             // 'is_bd',
