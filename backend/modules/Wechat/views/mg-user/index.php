@@ -59,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $data::$status_msg[$data->status];
             }],
             'open_id',
+            'union_id',
             //'passwd',
             // 'is_bd',
             // 'mobile',
