@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+<script src="/js/DatePicker/WdatePicker.js"></script>
 <style>
 .form-inline .form-group{
 	margin-bottom: 15px;
