@@ -20,7 +20,7 @@
         "yiisoft/yii2-swiftmailer": "*",
         "kartik-v/yii2-widget-select2": "2.0.8",
         "linslin/yii2-curl": "dev-master",
-        "yiisoft/yii2-authclient": "2.1",
+        "yiisoft/yii2-authclient": "2.1.2",
         "mdmsoft/yii2-admin": "~2.0"
     },
     "require-dev": {
