@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\MgUserAccountLog;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -22,6 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
         </div> 
         <div class="form-group ">
             <?php echo Html::input('text','end_date',yii::$app->request->get('end_date',''),['class'=>'form-control','placeholder'=>'结束日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label"  >操作行为:</label>
+            <?php echo Html::dropDownList('c_type',yii::$app->request->get('c_type',""),MgUserAccountLog::$msg,['class'=>'form-control','prompt' => '全部']);?>
         </div>
         <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
     <?= Html::endForm() ?>

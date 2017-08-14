@@ -56,6 +56,11 @@ class AccountLogController extends Controller
         if(  ($end_date = Yii::$app->request->get('end_date', '') ) == true ){
             $query->andWhere(['<=','add_time',$end_date]);
         }
+        
+        if(  ($c_type = Yii::$app->request->get('c_type', '') ) == true ){
+            $query->andWhere(['c_type'=>$c_type]);
+        }
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
