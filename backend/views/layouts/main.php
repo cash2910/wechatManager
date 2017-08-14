@@ -58,6 +58,12 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
+    use mdm\admin\components\MenuHelper;
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right nav-pills '],
+        #修改使用yii2-admin的菜单控制项
+        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id),
+    ]);
     NavBar::end();
     ?>
     <div class="row" style="padding: 70px 15px 20px; margin-left:0px;margin-right:0px;">

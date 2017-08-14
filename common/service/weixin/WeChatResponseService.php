@@ -65,33 +65,6 @@ class WeChatResponseService extends Module{
                 yii::error( "cs: ".$entity->FromUserName );
                 return ;
             }
-             $msg = <<<EOF
-客官，终于等到您了，欢迎关注人人麻将公众号！
-
-<a href="http://wxwz.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
-
-<a href="http://mp.weixin.qq.com/s/1AjQevdwgz6jrQu83pmCuQ" >点击：提交BUG奖励元宝</a>
-
-<a href="http://wxwz.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
-
-<a href="http://wxwz.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
-    
-我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
-    
-1、可查看好友账单明细与提现等操作。
-      
-2、生成自己专属二维码，方便推广。
-
-3、成功绑定下级，享受名下玩家消费返利。
-
-4、免费培训，帮助代理躺着赚钱。
-EOF;
-             $entity->setResp([
-                 'FromUserName'=>$entity->ToUserName,
-                 'ToUserName'=>$entity->FromUserName,
-                 'MsgType'=>'text',
-                 'Content'=>$msg
-             ]);
         });
         /**
          * 用户订阅 ...

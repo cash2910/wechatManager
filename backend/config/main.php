@@ -20,6 +20,18 @@ return [
         ],
         'Order' => [
             'class' => 'backend\modules\Order\OrderModule',
+        ],
+
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'top-menu',
+            'mainLayout' => '@app/views/layouts/main.php',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'common\models\User'
+                ]
+            ]
         ]
     ],
     'components' => [
@@ -53,6 +65,10 @@ return [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager', // or use 'yii\rbac\DbManager'
+            'defaultRoles' => ['admin', 'author'],
         ],
     ],
     'params' => $params,
