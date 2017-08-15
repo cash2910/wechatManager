@@ -135,6 +135,7 @@ class WeChatResponseService extends Module{
                         yii::error( $e->getMessage() );
                     }
                 });
+                $uObj = $res['data']['user'];
            }
                  //欢迎信息
                  $msg = <<<EOF
@@ -148,10 +149,12 @@ class WeChatResponseService extends Module{
 
 <a href="http://wxwz.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
     
+<a href="http://wxwz.menguanol.net/Wechat/default/share-page{$uObj->id}">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
+    
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
     
 1、可查看好友账单明细与提现等操作。
-      
+
 2、生成自己专属二维码，方便推广。
 
 3、成功绑定下级，享受名下玩家消费返利。
