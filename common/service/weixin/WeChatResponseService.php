@@ -135,7 +135,7 @@ class WeChatResponseService extends Module{
                         yii::error( $e->getMessage() );
                     }
                 });
-                $uObj = $res['data']['user'];
+                $uObj = $ret['data']['user'];
            }
                  //欢迎信息
                  $msg = <<<EOF
