@@ -35,14 +35,10 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => '首页', 'url' => ['/site/index']],
-        ['label' => '游戏管理', 'url' => ['/Game/game/index']],
-        ['label' => '微信管理', 'url' => ['/Wechat/wechat-user']],
-        ['label' => '订单管理', 'url' => ['/Order/order']],
-       // ['label' => '推广员管理', 'url' => ['/Wechat/menu']],
-    ];
-    if (Yii::$app->user->isGuest) {
+
+    use mdm\admin\components\MenuHelper;
+    $menuItems = MenuHelper::getAssignedMenu(Yii::$app->user->id);
+/*     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
@@ -53,17 +49,14 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-    }
+    } */
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-   /*  use mdm\admin\components\MenuHelper;
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right nav-pills '],
         #修改使用yii2-admin的菜单控制项
-        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id),
-    ]); */
+        'items' =>$menuItems
+    ]);
+
     NavBar::end();
     ?>
     <div class="row" style="padding: 70px 15px 20px; margin-left:0px;margin-right:0px;">

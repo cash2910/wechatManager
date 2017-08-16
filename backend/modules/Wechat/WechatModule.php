@@ -33,7 +33,7 @@ class WechatModule extends \yii\base\Module
                    ['label'=>'菜单管理','url' => ['/Wechat/menu'], 'active' => 0 ],
                    ['label'=>'用户管理','url' => ['/Wechat/mg-user'], 'active' => 0 ],
                    ['label'=>'客服管理','url' => ['/Wechat/cs'], 'active' => 0 ],
-                   ['label'=>'后台用户管理','url' => ['/Wechat/user'], 'active' => 0 ],
+                   //['label'=>'后台用户管理','url' => ['/Wechat/user'], 'active' => 0 ],
               ]
         ];
         $func = function( &$items ) use ( &$func, $path ){
