@@ -141,15 +141,15 @@ class WeChatResponseService extends Module{
                  $msg = <<<EOF
 客官，终于等到您了，欢迎关注人人麻将公众号！
 
-<a href="http://wxwz.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
+<a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
 
 <a href="http://mp.weixin.qq.com/s/1AjQevdwgz6jrQu83pmCuQ" >点击：提交BUG奖励元宝</a>
 
-<a href="http://wxwz.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
+<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
 
-<a href="http://wxwz.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
+<a href="http://wx.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
     
-<a href="http://wxwz.menguanol.net/Wechat/default/share-page?id={$uObj->id}">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
+<a href="http://wx.menguanol.net/Wechat/default/share-page?id={$uObj->id}">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
     
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
     
