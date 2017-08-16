@@ -16,7 +16,7 @@ return [
     'AppSecret'=>'baf231fd4587f8370c144577f956a7e6',
     'MCHID' =>'1485129652',
     
-    'DEFAULT_USER'=>94, //默认最终用户ID
+    'DEFAULT_USER'=>322, //默认最终用户ID
 	
     'WEIXIN_ID' =>'renren_wz',   
     'my_index'=>'http://wxwz.menguanol.net/Wechat/default/my-index',
