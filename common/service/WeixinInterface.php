@@ -102,6 +102,16 @@ interface WeixinInterface{
      * 发送客服消息
      */
     public function sendCsMsg( $params );
+    
+    /**
+     * 获取用户增减数据
+     */
+    public function getUserSummary( $params );
+    
+    /**
+     * 获取累计用户数据
+     */
+    public function getUserCumulate($params);
 
 }
 

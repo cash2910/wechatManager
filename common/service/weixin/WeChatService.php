@@ -111,6 +111,16 @@ class WeChatService implements WeixinInterface
         list( $nsp, $method ) = explode('::', __METHOD__ );
         return call_user_func([ $this->proxy, $method ],$params);
     }
+    
+    public function getUserSummary( $params ){
+        list( $nsp, $method ) = explode('::', __METHOD__ );
+        return call_user_func([ $this->proxy, $method ],$params);
+    }
+    
+    public function getUserCumulate($params){
+        list( $nsp, $method ) = explode('::', __METHOD__ );
+        return call_user_func([ $this->proxy, $method ],$params);
+    }
 }
 
 ?>

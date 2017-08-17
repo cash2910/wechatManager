@@ -77,6 +77,14 @@ class WeixinConfig{
         'sendCsMsg'=>[
             'url'=>'https://api.weixin.qq.com/cgi-bin/message/custom/send',
             'isPost'=>1
+        ],
+        'getUserSummary'=>[
+            'url'=>'https://api.weixin.qq.com/datacube/getusersummary',
+            'isPost'=>1
+        ],
+        'getUserCumulate'=>[
+            'url'=>'https://api.weixin.qq.com/datacube/getusercumulate',
+            'isPost'=>1
         ]
     ];
     
