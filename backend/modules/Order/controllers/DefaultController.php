@@ -55,7 +55,9 @@ class DefaultController extends Controller
 
     }
     
-    
+    /**
+     * 获取最近7天充值信息
+     */
     public function actionGetCharge(){
     
         $ret = ['isOk'=>1,'msg'=>'获取成功','data'=>[]];

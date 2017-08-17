@@ -22,6 +22,7 @@ use common\models\TransferEntity;
 use common\components\wxtransfer\WeixinTransfer;
 use common\service\order\RebateService;
 use common\models\MgUserAccount;
+use common\components\CommonResponse;
 
 
 /**
@@ -38,6 +39,27 @@ class DefaultController extends Controller
         return $this->render('index');
     }
     
+    /**
+     * 获取最近7天用户变化信息
+     */
+    public function actionGetCumulate(){
+        
+        $from = date('Y-m-d', strtotime("-7 day") );
+        $to = date('Y-m-d', strtotime("-1 day"));
+        $ret = WeChatService::getIns()->getUserCumulate([
+            'begin_date'=> $from,
+            'end_date'=> $to,
+        ]);
+        $data = [];
+        $arr = ArrayHelper::getValue($ret, 'list');
+        if( !empty( $arr ) ){
+            $_arr = array_column( $arr ,'cumulate_user','ref_date');
+            $data['series'] = array_keys($_arr);
+            $data['sum'] = array_values($_arr);
+        }
+        CommonResponse::end( $data );
+    }
+    
     //设置行业模板
     public function actionSetTpl(){
         
@@ -47,6 +69,8 @@ class DefaultController extends Controller
         ]);
         //var_dump( $ret );
     }
+    
+    
     
     
     public function actionTest(){
@@ -196,32 +220,6 @@ class DefaultController extends Controller
 /*         $aObj = MgUserAccount::findOne(['user_id'=>11]);
         $ret = RebateService::getInstance()->createRebateOrder( $aObj , 5 );
         var_dump( $ret ); */
-    }
-}
 
-class My extends Component{
-    
-    public function behaviors(){
-        return [
-            'sendPackage'=>[
-                'class'=>'common\components\order\BalanceBehavior',
-            ]
-        ];
     }
-    
-    public function go( $o ){
-        
-        $this->doBalance( $o );
-        
-    }
-    
-}
-
-
-class Test extends Behavior{
-    
-    public function send(){
-        echo "dsadsa";
-    }
-    
 }
