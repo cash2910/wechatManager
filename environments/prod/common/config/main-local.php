@@ -9,7 +9,7 @@ return [
             'charset' => 'utf8mb4',
         ],
         'redis' => [
-            'class' => 'yii\redis\Connection',
+            'class' => 'common\components\redis\Connection',
             'hostname' => '10.121.1.221',
             'password' => '9z0a_wang',
 	    'port' => 6379,
