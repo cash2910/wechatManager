@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -34,7 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="form-group ">
             <?php echo Html::input('text','end_date',yii::$app->request->get('end_date',''),['class'=>'form-control','placeholder'=>'结束日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
         </div>
-        <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
+        <?= Html::a("导出", Url::current(['export'=>1]), ["class" => "btn btn-info","style"=>'margin-bottom:15px;  float:right',"target"=>'blank']) ?>
+        <button  type="submit" class="btn btn-success" style="margin-bottom:15px;  margin-right:5px; float:right">搜索</button>
+        
     <?= Html::endForm() ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
