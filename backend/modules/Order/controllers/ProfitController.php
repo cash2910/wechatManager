@@ -35,8 +35,12 @@ class ProfitController extends Controller
      */
     public function actionIndex()
     {
+        $query = MgUserAccount::find();
+        if(  ($user_id = Yii::$app->request->get('user_id', '') ) == true ){
+            $query->andWhere(['user_id'=>$user_id]);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => MgUserAccount::find(),
+            'query' => $query
         ]);
 
         return $this->render('index', [
