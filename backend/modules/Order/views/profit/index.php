@@ -10,9 +10,13 @@ $this->title = '用户余额信息';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-user-account-index">
-    <p>
-        <?php // echo Html::a('Create Mg User Account', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?= Html::beginForm(['/Order/profit'], 'get', ['enctype' => 'multipart/form-data','class'=>'form-inline']) ?>
+        <div class="form-group col-md-3">
+            <label class="  control-label"  >用户ID:</label>
+            <?php echo Html::input('text','user_id',yii::$app->request->get('user_id',''),['class'=>'form-control','placeholder'=>'请输入用户ID'])?>
+        </div> 
+        <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
+    <?= Html::endForm() ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -21,7 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'balance',
             'free_balance',
             'update_time',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'header' => "查看详情",
+                'class' => 'yii\grid\ActionColumn',
+                'template'=> '{view} ',
+                'headerOptions' => ['text-align' => 'center'],
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                         return Html::a('查看历史记录', ['/Order/account-log','user_id'=>$model->user_id], ['class' => "btn btn-xs btn-success"]);
+                    }
+                 ]
+            ]
         ],
     ]); ?>
 </div>

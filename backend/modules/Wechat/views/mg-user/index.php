@@ -73,16 +73,19 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'header' => "查看详情",
                 'class' => 'yii\grid\ActionColumn',
-                'template'=> '{view} {update}',
+                'template'=> '{view} {view1} {view2}',
                 'headerOptions' => ['text-align' => 'center'],
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
                          return Html::a('查看', ['/Wechat/mg-user/view','id'=>$model->id], ['class' => "btn btn-xs btn-success"]);
                     },
-                    'update' => function ($url, $model, $key) {
+                    'view1' => function ($url, $model, $key) {
                          $rel = !empty( $model->user_rels ) ? $model->user_rels.'-'.$model->id : $model->id;
                          return Html::a('推广信息', ['/Wechat/mg-user/','fri'=>$rel ], ['class' => "btn btn-xs btn-info"]);
                     },
+                    'view2' => function ($url, $model, $key) {
+                        return Html::a('查看账户', ['/Order/profit','user_id'=>$model->id], ['class' => "btn btn-xs btn-success",'target'=>'_blank']);
+                    }
                  ]
             ]
         ],

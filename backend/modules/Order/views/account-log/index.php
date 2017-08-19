@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-user-account-log-index">
 
-        <?= Html::beginForm(['/Order/account-log'], 'get', ['enctype' => 'multipart/form-data','class'=>'form-inline']) ?>
+    <?= Html::beginForm(['/Order/account-log'], 'get', ['enctype' => 'multipart/form-data','class'=>'form-inline']) ?>
         <div class="form-group col-md-3">
             <label class="  control-label"  >用户ID:</label>
             <?php echo Html::input('text','user_id',yii::$app->request->get('user_id',''),['class'=>'form-control','placeholder'=>'请输入用户ID'])?>
