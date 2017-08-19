@@ -105,7 +105,7 @@ function jsApiCall()
 
 function callpay()
 {	
-	mgUI.msg("公众号已关闭游戏充值业务，请到人人万州公众号进行充值");
+	mgUI.msg("公众号已关闭游戏充值业务，如需充值请联系客服或您的朋友");
 	return false;
 	try{
     	if (typeof WeixinJSBridge == "undefined"){
