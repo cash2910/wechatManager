@@ -1,7 +1,7 @@
 <div class="weui-flex">
     <div class="weui-flex__item">
         <div class="icon-box" style="padding:30px;">
-            <img style="float:left;" src="<?=$user['user_logo'] ?>" width="80" height="80"/>
+            <img style="float:left; border-radius: 1.0rem;" src="<?=$user['user_logo'] ?>" width="80" height="80"/>
             <div style="float:left;  margin-left:15px;">
                 <span class="nickname"><?=$user['nickname'] ?></span>
                 <?php if( $user['is_bd'] ){ ?>

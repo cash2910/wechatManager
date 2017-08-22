@@ -1,3 +1,6 @@
+<?php 
+use common\helper\StringHelp;
+?>
 <div class="logo-box" style="
     padding: 40px;
     margin-bottom: 100px;
@@ -6,11 +9,11 @@
     <img style=" border-radius: 1.0rem;" src="<?= $fObj['user_logo'] ?>" width="100">
     </div>
     <div style="float:left;    margin-left: 30px;">
-        <h3 ><?= $fObj['nickname'] ?></h3>
+        <h3 ><?= StringHelp::truncateUtf8String($fObj['nickname'], 6); ?></h3>
         <p  >加入时间：<?= date("Y-m-d",$fObj['register_time']) ?></p>
     </div>
 </div>
-<div class="weui-cells weui-cells_form">
+<div class="weui-cells weui-cells_form" style="margin-bottom: 20px;">
         <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd"><label class="weui-label">设置为推广员</label></div>
             <div class="weui-cell__ft">
@@ -21,7 +24,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">分成比例</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入分成比例">
+                <input class="weui-input" type="number" pattern="[0-9]\.*" placeholder="请输入分成比例">
             </div>
         </div>
         
@@ -39,7 +42,7 @@
         
         <label for="weuiAgree" class="weui-agree">
             <input id="weuiAgree" type="checkbox"  checked  class="weui-agree__checkbox">
-            <span class="weui-agree__text"> 阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+            <span class="weui-agree__text"> 阅读并同意上述《相关条款》
             </span>
         </label>
         <div class="weui-btn-area">
