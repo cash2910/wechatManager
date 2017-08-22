@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 //微信SDK
+use common\helper\StringHelp;
 use common\components\JSSDK;
 $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params['AppSecret'] )->getSignPackage();
 ?>
@@ -95,7 +96,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
         	<div class="person">
             	<img src="<?php echo $uInfo->user_logo;?>">
             	<div class="about">
-            	    <p class="name">昵称：<?php echo $uInfo->nickname;?></p>
+            	    <p class="name">昵称：<?= StringHelp::truncateUtf8String($uInfo->nickname, 6); ?></p>
             	    <p class="numb">房间号：<?php echo $roomInfo['Room_id'];?></p>
             	    <p class="tip">提示：长按可复制房间号</p>
             	</div>
