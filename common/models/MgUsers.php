@@ -25,6 +25,14 @@ class MgUsers extends \yii\db\ActiveRecord
     const IS_SUBSCRIPT = 1;
     const NOT_SUBSCRIPT = 2;
     
+    const IS_BD = 1;
+    const IS_PLAYER = 0;
+    
+    static public $role_msg=[
+        self::IS_BD     =>'代理',
+        self::IS_PLAYER =>'普通玩家',
+    ];
+    
     static public $status_msg=[
         self::IS_SUBSCRIPT =>'已关注',
         self::NOT_SUBSCRIPT=>'未关注',

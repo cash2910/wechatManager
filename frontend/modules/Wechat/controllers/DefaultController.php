@@ -115,9 +115,35 @@ class DefaultController extends Controller
         foreach( $subObjs as $subObj){
             $ids[] = $subObj->sub_user_id;
         }
-        $subs = MgUsers::findAll( ['id'=>$ids] );
+        $role = yii::$app->request->get('role', MgUsers::IS_PLAYER );
+        $subs = MgUsers::findAll( [ 'id'=>$ids,'is_bd'=>$role ] );
         return $this->render('my_friend', [
-            'subs'=> $subs
+            'subs'=> $subs,
+            'role'=> $role
+        ]);
+    }
+    
+    
+    //我的下线列表
+    public function actionFriendInfo()
+    {
+        $this->title = '我的好友';
+        $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( $mgInfo == null ){
+            die('访问受限');
+        }
+        if( !($friend_id = yii::$app->request->get('id', 0) )  )
+            die('用户id为空');
+        $friendObj = MgUsers::findOne( ['id'=>$friend_id] );
+        if( !$friendObj )
+            die('好友不存在');
+        //判断是否为自己的好友
+        $rels = explode("-",$friendObj->user_rels);
+        $pid = array_pop( $rels );
+        if( $pid != $mgInfo->id )
+            die('好友不存在');
+        return $this->render('friend_info', [
+            'fObj'=> $friendObj,
         ]);
     }
     

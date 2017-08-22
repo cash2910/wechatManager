@@ -3,8 +3,11 @@
         <div class="icon-box" style="padding:30px;">
             <img style="float:left;" src="<?=$user['user_logo'] ?>" width="80" height="80"/>
             <div style="float:left;  margin-left:15px;">
-                <h4 ><?=$user['nickname'] ?></h4>
-                <p class="icon-box__desc">加入时间：<?=date("Y-m-d",$user['register_time']) ?></p>
+                <span class="nickname"><?=$user['nickname'] ?></span>
+                <?php if( $user['is_bd'] ){ ?>
+                <span class="type_wrp" style=" margin-left: 5px; ">  <a href="javascript:;" class="icon_proxy_label" >代理</a> </span>
+                <?php }?>                                                                                                                                 
+                <p class="icon-box__desc" style=" margin-top: 10px;">加入时间：<?=date("Y-m-d",$user['register_time']) ?></p>
             </div>
         </div>
     </div>
@@ -50,4 +53,22 @@
 <style>
 A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 A:active { TEXT-DECORATION: none}
+.nickname{
+	font-family: 微软雅黑;
+    font-size: 21px;
+}
+.icon_proxy_label{
+	background-color: #fbc15e;
+	padding-left: 3px;
+	padding-right: 3px;
+    width: 48px;
+    height: 21px;
+    vertical-align: middle;
+    line-height: 30px;
+    overflow: hidden;
+    font-size: 12px;
+    border-radius: 0.2rem;
+    color: white;
+	font-family: 微软雅黑;
+}
 </style>
