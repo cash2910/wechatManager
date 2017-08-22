@@ -53,6 +53,7 @@
 <style>
 A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 A:active { TEXT-DECORATION: none}
+
 .nickname{
 	font-family: 微软雅黑;
     font-size: 21px;

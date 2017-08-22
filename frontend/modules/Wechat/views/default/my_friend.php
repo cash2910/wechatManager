@@ -36,4 +36,5 @@ use common\models\MgUsers;
 <style>
 A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 A:active { TEXT-DECORATION: none}
+A:VISITED{color:black;}
 </style>
