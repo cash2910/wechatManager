@@ -21,10 +21,10 @@ use common\helper\StringHelp;
             </div>
         </div>
         
-        <div class="weui-cell">
+        <div class="weui-cell " >
             <div class="weui-cell__hd"><label class="weui-label">分成比例</label></div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" type="number" pattern="[0-9]\.*" placeholder="请输入分成比例">
+            <div class="weui-cell__bd" style="display: inline-flex;">
+                <input class="weui-input" type="number" pattern="[0-9]\.*" placeholder="请输入分成比例">%
             </div>
         </div>
         
