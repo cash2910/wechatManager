@@ -25,8 +25,20 @@
             </div>
         </div>
         
+        <article class="weui-article">
+           <section>
+                <section>
+                    <h3>推广员权限说明：</h3>
+                    <p> 好友的推广权限，给予之后，就不能取消，只可以设定其返利比例为0 .</p>
+                    <p>该好友 的好友的充值 按照下面返利比例 给予 他；</p>
+                    <p>我 自己可以通过 这个充值 获得 XX%.</p>
+                    <p>推荐根据好友的业绩来 来调整 这个返利比例设定。在下笔充值的时候按照新比例生效。</p>
+                </section>
+           </section>
+        </article>
+        
         <label for="weuiAgree" class="weui-agree">
-            <input id="weuiAgree" type="checkbox"  check  class="weui-agree__checkbox">
+            <input id="weuiAgree" type="checkbox"  checked  class="weui-agree__checkbox">
             <span class="weui-agree__text"> 阅读并同意<a href="javascript:void(0);">《相关条款》</a>
             </span>
         </label>
@@ -35,17 +47,7 @@
         </div>
 </div>
 <div >
-    <article class="weui-article">
-          <section>
-                <section>
-                    <h3>推广员权限说明：</h3>
-                    <p> 好友的推广权限，给予之后，就不能取消，只可以设定其返利比例为0 .</p>
-                    <p>该好友 的好友的充值 按照下面返利比例 给予 他；</p>
-                    <p>我 自己可以通过 这个充值 获得 XX%.</p>
-                    <p> 推荐根据好友的业绩来 来调整 这个返利比例设定。在下笔充值的时候按照新比例生效。</p>
-                </section>
-            </section>
-    </article>
+    
 </div>
 <style>
 A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
