@@ -24,7 +24,7 @@ use common\helper\StringHelp;
         <div class="weui-cell " >
             <div class="weui-cell__hd"><label class="weui-label">分成比例</label></div>
             <div class="weui-cell__bd" style="display: inline-flex;">
-                <input class="weui-input" type="number" pattern="[0-9]*" step="1" max="99.9" placeholder="请输入分成比例">%
+                <input class="weui-input" type="number" pattern="[0-9]*"  value="" placeholder="请输入分成比例">%
             </div>
         </div>
         
@@ -56,3 +56,13 @@ use common\helper\StringHelp;
 A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 A:active { TEXT-DECORATION: none;}
 </style>
+<script src="/js/base.js"></script>
+<script>
+$(function(){
+    $('#showTooltips').on('click', function(){
+        //$('.page.cell').removeClass('slideIn');
+       if()
+        mgUI.errorTip("dsadsads");
+    });
+});
+</script>

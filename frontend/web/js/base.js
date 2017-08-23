@@ -15,6 +15,7 @@ var mgUI = {
 		            '<p class="weui-toast__content">数据加载中</p>'+
 		        '</div>'+
 		    '</div>',
+    errorTipTpl:'<div class="weui-toptips weui-toptips_warn js_tooltips" style="display: none;"></div>',
 	msg:function( msg, callback ){
 		var $msg = $("#_iosDialog2");
 		if(  !$msg.length ){
@@ -50,6 +51,21 @@ var mgUI = {
 		var $load = $("#_loadingToast");
 		if( $load.length )
 			$load.fadeOut(100);
+	},
+	
+	errorTip:function( msg ,timeout ,callback ){
+		var $tip = $(".js_tooltips");
+		if(  !$tip.length ){
+			$tip = $( this.errorTipTpl );
+			$tip.appendTo('body');
+		}
+		$tip.html( msg ).css('display', 'block');
+		timeout = timeout||2000;
+        setTimeout(function () {
+        	$tip.css('display', 'none');
+        	if( typeof callback == 'function' ) 
+        		callback();
+        }, timeout); 
 	}
 	
 
