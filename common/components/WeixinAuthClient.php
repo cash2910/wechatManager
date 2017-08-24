@@ -54,7 +54,7 @@ class WeixinAuthClient extends OAuth2{
         
         //获取用户详细信息
         $uInfo = [];
-        if( ArrayHelper::get( $response, 'scope' ) == 'snsapi_userinfo' ){
+        if( ArrayHelper::getValue( $response, 'scope' ) == 'snsapi_userinfo' ){
             $req = $this->createRequest()
             ->setMethod('GET')
             ->setUrl($this->getUserUrl )
