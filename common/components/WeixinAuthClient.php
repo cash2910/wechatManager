@@ -10,7 +10,9 @@ class WeixinAuthClient extends OAuth2{
     public $tokenUrl = 'https://api.weixin.qq.com/sns/oauth2/access_token';
     public $getUserUrl = 'https://api.weixin.qq.com/sns/userinfo';
     
-    public $scope= 'snsapi_base';  //获取用户的union_id
+    public $scope= 'snsapi_base';  //获取用户的union_id   snsapi_userinfo
+    
+    
     
     public function buildAuthUrl(array $params = [])
     {
@@ -52,6 +54,7 @@ class WeixinAuthClient extends OAuth2{
             'access_token'=>$response['access_token'],
             'open_id' => $response['openid'],
             'union_id' => $response['unionid'],
+            'all_data' => $response,
             'expir'=> 7000
         ]]);
         $this->setAccessToken($token);

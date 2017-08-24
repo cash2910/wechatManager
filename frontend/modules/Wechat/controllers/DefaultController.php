@@ -27,14 +27,17 @@ class DefaultController extends Controller
     public $layout = "main_wx";
     public $title ;
     public $open_id = '';
+    public $user_data = [];
     
     public function behaviors(){
         return [
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order','my-charge','my-wallet', 'game-page' ,'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info'
+                    'my-index','my-friend','my-order','my-charge','my-wallet', 'game-page' ,
+                    'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','link-proxy'
                 ],
+                'detail_actions'=>['link-proxy']
             ]
         ];
     }
@@ -72,6 +75,46 @@ class DefaultController extends Controller
             'gInfo'=> $gObj,
             'uObj' => $uObj,
             'owner' => $owner
+        ]);
+    }
+    
+    
+    /**
+     * 代理分享链接
+     * @return string
+     */
+    public function actionShareProxy()
+    {
+        if( !($uid = (int)yii::$app->request->get('id')) )
+            die('用户信息错误');
+        $uObj = MgUsers::findOne(['id'=>$uid,'is_bd'=>MgUsers::IS_BD]);
+        if( !$uObj )
+            die('用户信息错误');
+        //判断是否满足推广
+        $isProxyBd = false;
+        if( $uObj->rebate_ratio >= 35 )
+            $isProxyBd = true;
+        return $this->renderPartial('share_proxy',[
+            'isBd'=> $isProxyBd,
+        ]);
+    }
+    
+    /**
+     * 绑定代理关系
+     */
+    public function actionShowProxyLink(){
+        if( !($uid = (int)yii::$app->request->get('id')) )
+            die('用户信息错误');
+        $proxyObj = MgUsers::findOne(['id'=>$uid,'is_bd'=>MgUsers::IS_BD]);
+        if( !$proxyObj )
+            die('用户信息错误');
+        yii::error( $this->user_data );
+        //var_dump( $this->user_data );
+        $uObj = MgUsers::findOne(['open_id'=>$this->user_data['open_id']]);
+        return $this->renderPartial('show-proxy-link',[
+            'uObj' => $uObj,
+            'user_data'=> $this->user_data,
+            'proxyObj'=> $proxyObj
         ]);
     }
     
