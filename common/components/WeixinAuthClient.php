@@ -3,6 +3,7 @@ namespace common\components;
 use yii;
 use yii\authclient\OAuth2;
 use yii\authclient\OAuthToken;
+use yii\helpers\ArrayHelper;
 
 class WeixinAuthClient extends OAuth2{
     
@@ -50,11 +51,27 @@ class WeixinAuthClient extends OAuth2{
         if( !isset( $response['access_token'] ) ){
             //log...
         }
+        
+        //获取用户详细信息
+        $uInfo = [];
+        if( ArrayHelper::get( $response, 'scope' ) == 'snsapi_userinfo' ){
+            $req = $this->createRequest()
+            ->setMethod('GET')
+            ->setUrl($this->getUserUrl )
+            ->setData([
+                 'access_token'=> $response['access_token'],
+                 'openid'=> $response['openid'],
+                 'lang'=> 'zh_CN',
+             ]);
+            $resp = $this->sendRequest($request);
+            $uInfo = $resp;
+        }
+        
         $token = $this->createToken(['params' => [
             'access_token'=>$response['access_token'],
             'open_id' => $response['openid'],
             'union_id' => $response['unionid'],
-            'all_data' => $response,
+            'all_data' => $uInfo,
             'expir'=> 7000
         ]]);
         $this->setAccessToken($token);
