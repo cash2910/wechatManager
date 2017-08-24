@@ -63,7 +63,7 @@ class WeixinAuthClient extends OAuth2{
                  'openid'=> $response['openid'],
                  'lang'=> 'zh_CN',
              ]);
-            $resp = $this->sendRequest($request);
+            $resp = $this->sendRequest( $req );
             $uInfo = $resp;
         }
         
