@@ -35,9 +35,9 @@ class DefaultController extends Controller
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
                     'my-index','my-friend','my-order','my-charge','my-wallet', 'game-page' ,
-                    'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','link-proxy'
+                    'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','show-proxy-link'
                 ],
-                'detail_actions'=>['link-proxy']
+                'detail_actions'=>['show-proxy-link']
             ]
         ];
     }
