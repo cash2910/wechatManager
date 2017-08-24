@@ -64,6 +64,7 @@ class WeixinAuthClient extends OAuth2{
                  'lang'=> 'zh_CN',
              ]);
             $resp = $this->sendRequest( $req );
+            yii::error("user:".$resp);
             $uInfo = $resp;
         }
         

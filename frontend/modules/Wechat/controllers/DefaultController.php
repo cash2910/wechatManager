@@ -110,7 +110,7 @@ class DefaultController extends Controller
             die('用户信息错误');
         yii::error( $this->user_data );
         //var_dump( $this->user_data );
-        $uObj = MgUsers::findOne(['open_id'=>$this->user_data['open_id']]);
+        $uObj = MgUsers::findOne(['open_id'=>$this->user_data['openid']]);
         return $this->renderPartial('show-proxy-link',[
             'uObj' => $uObj,
             'user_data'=> $this->user_data,
