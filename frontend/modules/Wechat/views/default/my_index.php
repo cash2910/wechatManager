@@ -34,6 +34,12 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-proxy">
+                    <div class="weui-cell__bd">
+                        <p>我的代理链接</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
                  <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-wallet">
                     <div class="weui-cell__bd">
                         <p>提现管理</p>
