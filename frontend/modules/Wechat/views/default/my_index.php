@@ -1,6 +1,6 @@
 <div class="weui-flex">
     <div class="weui-flex__item">
-        <div class="icon-box" style="padding:30px;">
+        <div class="icon-box" style="padding:20px;">
             <img style="float:left; border-radius: 1.0rem;" src="<?=$user['user_logo'] ?>" width="80" height="80"/>
             <div style="float:left;  margin-left:15px;">
                 <span class="nickname"><?=$user['nickname'] ?></span>

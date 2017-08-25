@@ -34,6 +34,7 @@ use common\models\MgUsers;
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
                 <a href="/Wechat/default/share-page?id=<?= $uObj->id ?>" class="weui-btn weui-btn_primary">去邀请玩家</a>
+                <a href="/Wechat/default/my-index" class="weui-btn weui-btn_default">进入后台</a>
             </p>
         </div>
 </div>
