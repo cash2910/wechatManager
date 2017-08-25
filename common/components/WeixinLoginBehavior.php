@@ -19,7 +19,7 @@ class WeixinLoginBehavior extends ActionFilter{
             return true;
         $token = WeixinWeb::getInstance()->getClient()->getAccessToken();
         if( !$token ){
-            $url =  Yii::$app->urlManager->createAbsoluteUrl( ["/Wechat?r_url=".Yii::$app->request->url] ); 
+            $url =  Yii::$app->urlManager->createAbsoluteUrl(['/Wechat','r_url'=> yii::$app->request->url  ] ); 
             $clientObj = WeixinWeb::getInstance()->getClient();
             $clientObj->setReturnUrl( $url );
             if( in_array( $action->id, $this->detail_actions ) )
