@@ -25,7 +25,6 @@ class WeixinLoginBehavior extends ActionFilter{
             if( in_array( $action->id, $this->detail_actions ) )
                 $clientObj->scope = 'snsapi_userinfo';
             $returl =  $clientObj->buildAuthUrl();
-            die( $returl );
             Yii::$app->getResponse()->redirect( $returl );
             return false;
         }
