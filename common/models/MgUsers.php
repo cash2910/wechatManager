@@ -19,6 +19,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $register_time
  * @property integer $update_time
  * @property string $user_rels
+ * @property string $user_proxy_rels
+ * @property string $rebate_ratio
  */
 class MgUsers extends \yii\db\ActiveRecord
 {
@@ -64,8 +66,9 @@ class MgUsers extends \yii\db\ActiveRecord
     {
         return [
             [['status', 'is_bd', 'register_time', 'update_time'], 'integer'],
-            [['nickname', 'user_rels'], 'string', 'max' => 30],
-            [['rebate_ratio'],'number','max'=>7],
+            [['nickname'], 'string', 'max' => 30],
+            [['rebate_ratio'],'number','max'=>100,'min'=>30],
+            [['user_rels','user_proxy_rels'],'string','max'=>150],
             [['user_logo'],'string','max'=>200],
             [['open_id','union_id'], 'string', 'max' => 60],
             [['passwd'], 'string', 'max' => 70],

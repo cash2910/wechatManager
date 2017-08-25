@@ -5,9 +5,11 @@ use common\service\UserInterface;
 use common\service\BaseService;
 use common\models\MgUsers;
 use common\models\MgUserRel;
+use common\models\MgUserProxyRel;
 
 use yii;
 use yii\helpers\ArrayHelper;
+
 
 class UserService extends BaseService implements UserInterface
 {
@@ -134,6 +136,40 @@ class UserService extends BaseService implements UserInterface
         return $ret;
     }
     
+    /**
+     * 绑定上下级代理关系
+     * @param MgUsers $touObj 上级用户
+     * @param MgUsers $uObj   当前用户
+     */
+    public function bindProxyRel( MgUsers $touObj, MgUsers $uObj ){
+        $ret = ['isOk'=>1, 'msg'=>'绑定成功'];
+        $transaction = Yii::$app->db->beginTransaction();
+        try{
+            if( $uObj->is_bd == MgUsers::IS_BD )
+                throw new \Exception('该用户已经为代理');
+            $rel = !empty( $touObj->user_proxy_rels ) ? $touObj->user_proxy_rels.'-'.$touObj->id : (string)$touObj->id;
+            $uids = explode('-', $rel);
+            $uObj->user_proxy_rels = $rel;
+            $uObj->rebate_ratio = 30;
+            $uObj->is_bd = MgUsers::IS_BD;
+            if( !$uObj->save() ){
+                throw new \Exception( json_encode( $uObj->getErrors() ) );
+            }
+            $relObj = new MgUserProxyRel();
+            $relObj->user_id = $touObj->id;
+            $relObj->sub_user_id = $uObj->id;
+            $relObj->user_openid = $touObj->open_id;
+            $relObj->sub_user_openid = $uObj->open_id;
+            if( !$relObj->save() )
+                throw new \Exception( json_encode( $relObj->getErrors() ) );
+            $transaction->commit();
+        }catch( \Exception $e ){
+            $transaction->rollBack();
+            $ret['isOk'] = 0 ;
+            $ret['msg'] = $e->getMessage();
+        }
+        return $ret;
+    }
 
     
 }

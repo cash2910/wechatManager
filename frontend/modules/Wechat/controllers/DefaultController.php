@@ -18,6 +18,7 @@ use common\components\CommonResponse;
 use common\service\users\UserService;
 use common\service\order\OrderService;
 use yii\helpers\ArrayHelper;
+use yii\web\HttpException;
 
 /**
  * Default controller for the `Wechat` module
@@ -35,9 +36,9 @@ class DefaultController extends Controller
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
                     'my-index','my-friend','my-order','my-charge','my-wallet', 'game-page' ,
-                    'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','show-proxy-link'
+                    'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','show-proxy-link','bind-proxy'
                 ],
-                'detail_actions'=>['show-proxy-link']
+                'detail_actions'=>['show-proxy-link','bind-proxy']  //需要用户授权
             ]
         ];
     }
@@ -49,7 +50,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         if( !( $code = yii::$app->request->get('code') ) ){
-            die('访问受限 。');
+            $this->_404('访问受限 。');
         }
         $token = WeixinWeb::getInstance()->getClient()->fetchAccessToken( $code );
 
@@ -60,7 +61,7 @@ class DefaultController extends Controller
     {
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('gid', 1)]);
         if( !$gObj )
-            die('游戏信息错误');
+            $this->_404('游戏信息错误');
         //判断用户是否关注
         $uObj = MgUsers::findOne([
             'open_id'=>$this->open_id,
@@ -85,32 +86,34 @@ class DefaultController extends Controller
      */
     public function actionShareProxy()
     {
-        if( !($uid = (int)yii::$app->request->get('id')) )
-            die('用户信息错误');
-        $uObj = MgUsers::findOne(['id'=>$uid,'is_bd'=>MgUsers::IS_BD]);
-        if( !$uObj )
-            die('用户信息错误');
+        $proxyObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( !$proxyObj )
+            $this->_404('用户信息错误');
         //判断是否满足推广
         $isProxyBd = false;
-        if( $uObj->rebate_ratio >= 35 )
+        $shareUrl = yii::$app->request->url;
+        if( $proxyObj->rebate_ratio >= 35 ){
             $isProxyBd = true;
+            $shareUrl = Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/show-proxy-link','id'=>$proxyObj->id ] );
+        }
+        
         return $this->renderPartial('share_proxy',[
-            'isBd'=> $isProxyBd,
+            'uObj'=> $proxyObj,
+            'shareLink'=> $shareUrl,
+            'isProxyBd'=> $isProxyBd
         ]);
     }
     
     /**
-     * 绑定代理关系
+     * 绑定代理关系确认页
      */
     public function actionShowProxyLink(){
         if( !($uid = (int)yii::$app->request->get('id')) )
-            die('用户信息错误');
+            $this->_404('用户信息错误');
         $proxyObj = MgUsers::findOne(['id'=>$uid,'is_bd'=>MgUsers::IS_BD]);
         if( !$proxyObj )
-            die('用户信息错误');
-        yii::error( $this->user_data );
-        //var_dump( $this->user_data );
-        $uObj = MgUsers::findOne(['open_id'=>$this->user_data['openid']]);
+            $this->_404('用户信息错误');
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         return $this->renderPartial('show-proxy-link',[
             'uObj' => $uObj,
             'user_data'=> $this->user_data,
@@ -118,11 +121,52 @@ class DefaultController extends Controller
         ]);
     }
     
+    /**
+     * 关系绑定页
+     */
+    public function actionBindProxy(){
+        
+        if( !($uid = (int)yii::$app->request->get('id')) )
+            $this->_404('用户信息错误');
+        $proxy = MgUsers::find()->where(['id'=>$uid,'is_bd'=>MgUsers::IS_BD])->andWhere(['>=','rebate_ratio', 35])->one();
+        if( !$proxy )
+            $this->_404('代理信息错误');
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( !$uObj ){
+            try{
+                $ret = UserService::getInstance()->createUser([
+                    'open_id' =>  $this->user_data['openid'],
+                    'union_id' =>  $this->user_data['unionid'],
+                    'nickname'=> $this->user_data['nickname'],
+                    'user_logo'=>$this->user_data['headimgurl'],
+                ]);
+                $uObj = $ret['data']['user'];
+            }catch (\Exception $e ){
+                yii::error($e->getMessage());
+                $this->_404('用户信息错误');
+            }
+        }
+        if( $uObj->is_bd == MgUsers::IS_BD )
+            $this->_404('您已经是代理，无法关注');
+        $ret = UserService::getInstance()->bindProxyRel( $proxy , $uObj );
+        if( !$ret['isOk'] ){
+            yii::error( "绑定代理错误: ".$ret['msg']);
+            $this->_404('绑定信息失败，请稍后再试');
+        }
+        return $this->renderPartial('proxy-bind-success',[
+            'uObj' => $uObj,
+            'proxyObj'=> $proxy
+        ]);
+    }
+    
+    /**
+     * 游戏下载页
+     */
     public function actionGamePage()
     {
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 1)]);
         if( !$gObj )
-           die('信息错误');
+            $this->_404('信息错误');
         return $this->renderPartial('game_page',[
             'gInfo'=> $gObj
         ]);
@@ -138,7 +182,7 @@ class DefaultController extends Controller
         //判断用户是否为mg用户   
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
-            die('访问受限');
+            $this->_404('访问受限');
         }
         return $this->render('my_index',[
             'user'=>$mgInfo
@@ -151,7 +195,7 @@ class DefaultController extends Controller
         $this->title = '我的好友';
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
-            die('访问受限');
+            $this->_404('访问受限 ');
         }
         $ids = [];
         $subObjs = MgUserRel::findAll( ['user_id'=>$mgInfo->id] );
@@ -173,18 +217,18 @@ class DefaultController extends Controller
         $this->title = '我的好友';
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
-            die('访问受限');
+            $this->_404('访问受限 ');
         }
         if( !($friend_id = yii::$app->request->get('id', 0) )  )
-            die('用户id为空');
+            $this->_404('用户id为空');
         $friendObj = MgUsers::findOne( ['id'=>$friend_id] );
         if( !$friendObj )
-            die('好友不存在');
+            $this->_404('好友不存在');
         //判断是否为自己的好友
         $rels = explode("-",$friendObj->user_rels);
         $pid = array_pop( $rels );
         if( $pid != $mgInfo->id )
-            die('好友不存在');
+            $this->_404('好友不存在');
         return $this->render('friend_info', [
             'fObj'=> $friendObj,
         ]);
@@ -260,7 +304,7 @@ class DefaultController extends Controller
         }
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 1)]);
         if( !$gObj )
-            die('信息错误');
+            $this->_404('信息错误');
         
         $roomInfo = json_decode( yii::$app->request->get('data') ,true );
         return $this->renderPartial('room_page',[
@@ -295,6 +339,9 @@ class DefaultController extends Controller
         ]);
     }
     
+    private function _404( $msg, $data =[] ){
+        throw new HttpException(500, $msg);
+    }
     
     /**
      * 获取二维码
