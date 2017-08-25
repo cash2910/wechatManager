@@ -19,8 +19,8 @@ class WeixinAuthClient extends OAuth2{
     {
         $defaultParams = [
             'appid' => yii::$app->params['AppId'],
-            'response_type' => 'code',
             'redirect_uri' =>  urldecode( $this->getReturnUrl() ),
+            'response_type' => 'code',
             //'xoauth_displayname' => Yii::$app->name,
         ];
         if (!empty($this->scope)) {
