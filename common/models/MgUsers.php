@@ -92,6 +92,8 @@ class MgUsers extends \yii\db\ActiveRecord
             'register_time' => '注册时间',
             'update_time' => '更新时间',
             'user_rels' => '好友层级',
+            'user_proxy_rels' => '代理层级',
+            'rebate_ratio' => '返利比例',
         ];
     }
 }

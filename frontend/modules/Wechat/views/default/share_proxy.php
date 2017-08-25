@@ -8,7 +8,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>我的专属链接</title>
+    <title>我的代理链接</title>
     
     <link rel="stylesheet" href="/css/weui/weui.min.css">
     <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
