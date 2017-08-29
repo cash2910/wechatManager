@@ -20,6 +20,7 @@ use common\service\order\OrderService;
 use yii\helpers\ArrayHelper;
 use yii\web\HttpException;
 use common\models\MgUserProxyRel;
+use common\service\weixin\WeChatService;
 
 /**
  * Default controller for the `Wechat` module
@@ -158,6 +159,14 @@ class DefaultController extends Controller
             yii::error( "绑定代理错误: ".$ret['msg']);
             $this->_404('绑定信息失败，请稍后再试');
         }
+        //发送绑定 成功通知
+        $ret = WeChatService::getIns()->sendCsMsg([
+            'touser'=> $proxy->open_id ,
+            'msgtype'=>'text',
+            'text'=>[
+                'content'=> "恭喜，您已成功邀请 {$uObj->nickname} 成为您的推广员。",
+            ]
+        ]);
         return $this->renderPartial('proxy-bind-success',[
             'uObj' => $uObj,
             'proxyObj'=> $proxy
