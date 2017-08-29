@@ -250,7 +250,7 @@ class DefaultController extends Controller
     //我的下级代理列表
     public function actionMyProxy()
     {
-        $this->title = '我的好友';
+        $this->title = '我的代理';
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $uObj == null ){
             $this->_404('访问受限 ');

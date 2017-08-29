@@ -1,7 +1,7 @@
 <?php 
 use common\models\MgUsers;
 ?>
-<div class="weui-cells" style="margin-top: 45px;">
+<div class="weui-cells" style="margin-top: 20px;">
     <?php if( !empty( $subs ) ):?>
         <?php foreach ($subs as $sub):?>
         <div class="weui-cell">
