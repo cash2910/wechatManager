@@ -11,7 +11,7 @@
 <div class="weui-msg">
         <div class="weui-msg__icon-area"><img src="/images/erweima.png" width="200"></div>
         <div class="weui-msg__text-area">
-            <h2 class="weui-msg__title">绑定成功</h2>
+            <h2 class="weui-msg__title">恭喜你，成功成为我们的代理</h2>
             <p class="weui-msg__desc">请您关注官方微信，完成最终绑定</p>
         </div>
         <div class="weui-msg__opr-area">

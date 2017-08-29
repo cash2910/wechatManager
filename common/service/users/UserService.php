@@ -216,17 +216,20 @@ class UserService extends BaseService implements UserInterface
                 throw new \Exception("用户信息错误");
             if( $ratio < 30 )
                 throw new \Exception("调整比例最低不能低于30%");
+            $origin_ratio = $uObj->rebate_ratio;
             $uObj->rebate_ratio = $ratio;
             $uObj->save();
-            //调整下级用户比例
-            $proxys = static::getInstance()->getSubProxy( $uObj );
-            $subList = [];
-            foreach ( $proxys as $p ){
-                if( !isset($subList[$p->proxy_pid]) )
-                    $subList[$p->proxy_pid] = [];
-                 $subList[$p->proxy_pid][] = $p;
+            if( $origin_ratio > $ratio ){
+                //调整下级用户比例
+                $proxys = static::getInstance()->getSubProxy( $uObj );
+                $subList = [];
+                foreach ( $proxys as $p ){
+                    if( !isset($subList[$p->proxy_pid]) )
+                        $subList[$p->proxy_pid] = [];
+                     $subList[$p->proxy_pid][] = $p;
+                }
+                $ret = static::getInstance()->modifySubProxy( $subList[$uObj->id] , $subList, $ratio );
             }
-            $ret = static::getInstance()->modifySubProxy( $subList[$uObj->id] , $subList, $ratio );
             $transaction->commit();
         }catch(\Exception $e){
             $ret['isOk'] = 0;
