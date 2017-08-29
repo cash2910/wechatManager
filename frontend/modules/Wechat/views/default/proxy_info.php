@@ -64,7 +64,8 @@ $(function(){
         //$('.page.cell').removeClass('slideIn');
     	var rebateVal = $("#rebate_ratio").val();
     	var pid = $("#pid").val();
-        if(  rebateVal < 30 ){
+    	var max = '<?= $proxyObj->rebate_ratio; ?>';
+        if(  rebateVal < 30 || rebateVal >60 ){
         	mgUI.errorTip("代理返利比例最低不能低于30%");
         	$("#rebate_ratio").val("");
         	return false;

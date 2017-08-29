@@ -286,6 +286,7 @@ class DefaultController extends Controller
             $this->_404('好友不存在');
         return $this->render('proxy_info', [
             'fObj'=> $proxyObj,
+            'proxyObj' => $uObj
         ]);
     }
     
