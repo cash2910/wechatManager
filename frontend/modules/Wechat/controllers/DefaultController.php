@@ -280,7 +280,7 @@ class DefaultController extends Controller
         if( !$proxyObj )
             $this->_404('信息不存在');
         //判断是否为自己的好友
-        $rels = explode("-",$proxyObj->user_rels);
+        $rels = explode("-",$proxyObj->user_proxy_rels);
         $pid = array_pop( $rels );
         if( $pid != $uObj->id )
             $this->_404('好友不存在');
