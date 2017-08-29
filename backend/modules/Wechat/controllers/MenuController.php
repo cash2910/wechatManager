@@ -126,16 +126,20 @@ class MenuController extends Controller
                    'name'=>'下载游戏',
                    'key'=>'MY_GAME'
                 ],[
-                    'name'=>'代理信息',
+                    'name'=>'成为代理',
                     'sub_button'=>[[
-                        'name'=>'我的推广链接',
+                        'name'=>'游戏推广',
                         'type'=>'click',
                         'key'=>'MY_SHARE_LINK',
                     ],[
+                        'name'=>'代理推广',
+                        'type'=>'view',
+                        'url' => Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-proxy'] )
+                    ],[
                         'name'=>'进入后台',
                         'type'=>'view',
-                        'url' => yii::$app->params['my_index']
-                    ]]             
+                        'url' => Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-index'] )
+                    ]]            
                 ],[
                     'type'=>'click',
                     'name'=>'人工客服',
