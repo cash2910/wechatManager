@@ -222,13 +222,15 @@ class UserService extends BaseService implements UserInterface
             if( $origin_ratio > $ratio ){
                 //调整下级用户比例
                 $proxys = static::getInstance()->getSubProxy( $uObj );
-                $subList = [];
-                foreach ( $proxys as $p ){
-                    if( !isset($subList[$p->proxy_pid]) )
-                        $subList[$p->proxy_pid] = [];
-                     $subList[$p->proxy_pid][] = $p;
+                if( !empty( $proxys ) ){
+                    $subList = [];
+                    foreach ( $proxys as $p ){
+                        if( !isset($subList[$p->proxy_pid]) )
+                            $subList[$p->proxy_pid] = [];
+                         $subList[$p->proxy_pid][] = $p;
+                    }
+                    $ret = static::getInstance()->modifySubProxy( $subList[$uObj->id] , $subList, $ratio );
                 }
-                $ret = static::getInstance()->modifySubProxy( $subList[$uObj->id] , $subList, $ratio );
             }
             $transaction->commit();
         }catch(\Exception $e){
