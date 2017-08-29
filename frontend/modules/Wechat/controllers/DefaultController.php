@@ -67,8 +67,11 @@ class DefaultController extends Controller
         //判断用户是否关注
         $uObj = MgUsers::findOne([
             'open_id'=>$this->open_id,
-            'status'=>MgUsers::IS_SUBSCRIPT
+            'status'=>MgUsers::IS_SUBSCRIPT,
+            //'is_bd'=> MgUsers::IS_BD
         ]);
+        if( !$uObj || ($uObj->is_bd != MgUsers::IS_BD) )
+            $this->_404('您还不是推广员请联系您的代理设置');
         //判断是否为本人访问
         $owner = false;
         if( $uObj && ( $uObj->id == Yii::$app->request->get('id') ) )
