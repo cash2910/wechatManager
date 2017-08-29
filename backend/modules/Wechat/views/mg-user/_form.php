@@ -32,10 +32,13 @@ use common\models\MgUsers;
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'register_time')->textInput(['maxlength' => true]) ?>
+    
 
     <?= $form->field($model, 'update_time')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'user_rels')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'proxy_pid')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'user_proxy_rels')->textInput(['maxlength' => true]) ?>
     
