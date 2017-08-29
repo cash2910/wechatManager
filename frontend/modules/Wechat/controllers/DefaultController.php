@@ -19,6 +19,7 @@ use common\service\users\UserService;
 use common\service\order\OrderService;
 use yii\helpers\ArrayHelper;
 use yii\web\HttpException;
+use common\models\MgUserProxyRel;
 
 /**
  * Default controller for the `Wechat` module
@@ -36,7 +37,8 @@ class DefaultController extends Controller
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
                     'my-index','my-friend','my-order','my-charge','my-wallet', 'game-page' ,
-                    'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','show-proxy-link','bind-proxy'
+                    'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','show-proxy-link','bind-proxy',
+                    'my-proxy','proxy-info','change-ratio'
                 ],
                 'detail_actions'=>['show-proxy-link','bind-proxy']  //需要用户授权
             ]
@@ -210,7 +212,6 @@ class DefaultController extends Controller
         ]);
     }
     
-    
     //我的下线列表
     public function actionFriendInfo()
     {
@@ -233,6 +234,50 @@ class DefaultController extends Controller
             'fObj'=> $friendObj,
         ]);
     }
+    
+    //我的下级代理列表
+    public function actionMyProxy()
+    {
+        $this->title = '我的好友';
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( $uObj == null ){
+            $this->_404('访问受限 ');
+        }
+        $ids = [];
+        $subObjs = MgUserProxyRel::findAll( ['user_id'=>$uObj->id] );
+        foreach( $subObjs as $subObj){
+            $ids[] = $subObj->sub_user_id;
+        }
+        $subs = MgUsers::findAll( ['id'=>$ids ] );
+        return $this->render('my_proxy', [
+            'subs'=> $subs,
+        ]);
+    }
+    
+    //我的下级代理详情
+    public function actionProxyInfo()
+    {
+        $this->title = '我的下级代理';
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( $uObj == null ){
+            $this->_404('访问受限 ');
+        }
+        if( !($proxy_id = yii::$app->request->get('id', 0) )  )
+            $this->_404('用户id为空');
+        $proxyObj = MgUsers::findOne( ['id'=>$proxy_id] );
+        if( !$proxyObj )
+            $this->_404('信息不存在');
+        //判断是否为自己的好友
+        $rels = explode("-",$proxyObj->user_rels);
+        $pid = array_pop( $rels );
+        if( $pid != $uObj->id )
+            $this->_404('好友不存在');
+        return $this->render('proxy_info', [
+            'fObj'=> $proxyObj,
+        ]);
+    }
+    
+   
     
     //我的订单列表
     public function actionMyCharge()
@@ -354,5 +399,26 @@ class DefaultController extends Controller
             'msg' => '获取成功',
             'pic_url'=>$url
         ]);
+    }
+    
+    
+    /**
+     * 修改返利比例
+     */
+    public function actionChangeRatio(){
+        $ratio = Yii::$app->request->get("ratio", 0 );
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        if( $uObj == null ){
+            $this->_404('访问受限 ');
+        }
+        if( !($proxy_id = yii::$app->request->get('pid', 0) )  )
+            $this->_404('用户id为空');
+        $pObj = MgUsers::findOne( ['id'=>$proxy_id] );
+        if( !$pObj )
+            $this->_404('信息不存在');
+        if( $ratio < 30 || $ratio > $uObj->rebate_ratio )
+            $this->_404("返利比例错误");
+        $ret = UserService::getInstance()->changeRatio( $pObj , $ratio );
+        CommonResponse::end($ret);
     }
 }

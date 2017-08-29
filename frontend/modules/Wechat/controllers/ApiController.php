@@ -15,10 +15,6 @@ use yii;
 class ApiController extends Controller
 {
     public $enableCsrfValidation = false;
-    
-    
-
-
     public function actionGetFriend(){
         
                         

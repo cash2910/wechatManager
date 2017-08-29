@@ -1,11 +1,15 @@
+<?php 
+use common\helper\StringHelp;
+use common\service\users\UserService;
+?>
 <div class="weui-flex">
     <div class="weui-flex__item">
-        <div class="icon-box" style="padding:20px;">
-            <img style="float:left; border-radius: 1.0rem;" src="<?=$user['user_logo'] ?>" width="80" height="80"/>
+        <div class="icon-box" style="padding:30px;">
+            <img style="float:left; border-radius: 1.0rem;" src="<?= $user['user_logo']?>" width="80" height="80"/>
             <div style="float:left;  margin-left:15px;">
-                <span class="nickname"><?=$user['nickname'] ?></span>
+                <span class="nickname"><?= StringHelp::truncateUtf8String($user['nickname'], 8); ?></span>
                 <?php if( $user['is_bd'] ){ ?>
-                <span class="type_wrp" style=" margin-left: 5px; ">  <a href="javascript:;" class="icon_proxy_label" >代理</a> </span>
+                    <span class="type_wrp" style=" margin-left: 5px; ">  <a href="javascript:;" class="icon_proxy_label" ><?= UserService::getInstance()->getProxyStatus($user)?></a> </span>
                 <?php }?>                                                                                                                                 
                 <p class="icon-box__desc" style=" margin-top: 10px;">加入时间：<?=date("Y-m-d",$user['register_time']) ?></p>
             </div>
@@ -34,13 +38,22 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+                <?php if( UserService::getInstance()->checkIsProxy( $user ) ):?>
+                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-proxy">
+                    <div class="weui-cell__bd">
+                        <p>我的代理</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <?php endif;?>
                 <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-proxy">
                     <div class="weui-cell__bd">
                         <p>我的代理链接</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                 <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-wallet">
+                
+                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-wallet">
                     <div class="weui-cell__bd">
                         <p>提现管理</p>
                     </div>

@@ -27,7 +27,7 @@ class OrderService extends BaseService implements OrderInterface{
             ],
             //计算返利
             'coculateRefund'=>[
-                'class'=>'common\components\order\BalanceBehavior',   
+                'class'=>'common\components\order\RebateBehavior',   
             ]
         ];
     }

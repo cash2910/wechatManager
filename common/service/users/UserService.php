@@ -9,6 +9,7 @@ use common\models\MgUserProxyRel;
 
 use yii;
 use yii\helpers\ArrayHelper;
+use common\models\MgUserAccount;
 
 
 class UserService extends BaseService implements UserInterface
@@ -152,6 +153,7 @@ class UserService extends BaseService implements UserInterface
             $uObj->user_proxy_rels = $rel;
             $uObj->rebate_ratio = 30;
             $uObj->is_bd = MgUsers::IS_BD;
+            $uObj->proxy_pid = $touObj->id;
             if( !$uObj->save() ){
                 throw new \Exception( json_encode( $uObj->getErrors() ) );
             }
@@ -169,6 +171,97 @@ class UserService extends BaseService implements UserInterface
             $ret['msg'] = $e->getMessage();
         }
         return $ret;
+    }
+    
+    
+    /**
+     * 获取代理身份
+     */
+    static public function getProxyStatus( MgUsers $uObj ){
+        $res = "";
+        if( $uObj->is_bd == MgUsers::IS_PLAYER )
+            return $res;
+        $level = [
+            ['推广员','30','35'],
+            ['黄金代理','35','45'],
+            ['白金代理','45','55'],
+            ['总代理','55','99'],
+        ];
+        foreach ($level as $_level ){
+            if( ( $uObj->rebate_ratio >= $_level[1] ) && $uObj->rebate_ratio <  $_level[2] ){
+                $res = $_level[0];
+                break;
+            }
+        }
+        return $res;
+    }
+    
+    /**
+     * 判断是否为代理
+     */
+    static public function checkIsProxy( MgUsers $uObj ){
+        return ($uObj->is_bd == MgUsers::IS_BD && $uObj->rebate_ratio >= 35);
+    }
+    
+    /**
+     * 先调整当前用户比例 、 在调整下级比例
+     * @param MgUsers $uObj  被调整人
+     * @param number $ratio  调整后比例
+     */
+    static public function changeRatio( MgUsers $uObj , $ratio = 30 ){
+        $ret = ['isOk'=>1, 'msg'=>'调整完成'];
+        $transaction = Yii::$app->db->beginTransaction();
+        try{
+            if( $uObj->is_bd != MgUsers::IS_BD )
+                throw new \Exception("用户信息错误");
+            if( $ratio < 30 )
+                throw new \Exception("调整比例最低不能低于30%");
+            $uObj->rebate_ratio = $ratio;
+            $uObj->save();
+            //调整下级用户比例
+            $proxys = static::getInstance()->getSubProxy( $uObj );
+            $subList = [];
+            foreach ( $proxys as $p ){
+                if( !isset($subList[$p->proxy_pid]) )
+                    $subList[$p->proxy_pid] = [];
+                 $subList[$p->proxy_pid][] = $p;
+            }
+            $ret = static::getInstance()->modifySubProxy( $subList[$uObj->id] , $subList, $ratio );
+            $transaction->commit();
+        }catch(\Exception $e){
+            $ret['isOk'] = 0;
+            $ret['msg'] = $e->getMessage();
+            $transaction->rollBack();
+        }
+        return $ret;
+    }
+    
+    /**
+     * 获取全部下级代理
+     * @param MgUsers $uObj
+     */
+    static public function getSubProxy( MgUsers $uObj ){
+        $rels = !empty( ArrayHelper::getValue($uObj, 'user_proxy_rels') ) ? $uObj->user_proxy_rels.'-'.$uObj->id : $uObj->id;
+        $query = MgUsers::find()->where(['like','user_proxy_rels', "{$rels}%", false ]);
+        return $query->all();
+    }
+    
+    /**
+     * 修改下级代理用户
+     * 若代理用户返利低于调整后的 则不需要调整，若高于则调整为当前比例，并判断此代理的再下级代理
+     * @param array $proxy
+     * @param MgUsers $uObj
+     * @param unknown $ratio
+     */
+    static public function modifySubProxy( $proxys ,&$subList, $ratio ){
+        foreach ( $proxys as $p){
+            if( $p->rebate_ratio <= $ratio )
+                continue;
+            $p->rebate_ratio = $ratio;
+            $p->save();
+            if( isset( $subList[$p->id] ) )
+                static::getInstance()->modifySubProxy( $subList[$p->id] , $subList, $ratio  );
+        }
     }
 
     
