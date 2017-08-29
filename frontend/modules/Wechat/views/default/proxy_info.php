@@ -66,12 +66,12 @@ $(function(){
     	var pid = $("#pid").val();
     	var max = '<?= $proxyObj->rebate_ratio; ?>';
         if(  rebateVal < 30 || rebateVal > max ){
-        	mgUI.errorTip("可调整的代理返利比例范围为30%~"+parseInt(max)+"%");
+        	mgUI.errorTip("可调整的代理返利比例范围为30%~"+parseInt(max)+"%", 4000);
         	$("#rebate_ratio").val("");
         	return false;
         }
 		if( !$("#weuiAgree")[0].checked ){
-        	mgUI.errorTip("请先阅读并同意相关条款");
+        	mgUI.errorTip("请先阅读并同意相关条款", 4000);
         	return false;
         }
 
