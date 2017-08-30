@@ -6,8 +6,6 @@ use yii\base\Module;
 use yii\base\Exception;
 use common\service\users\UserService;
 use yii\base\Event;
-use yii\db\ActiveRecord;
-use common\models\MgUserRel;
 use common\components\WeixinMenuConfig;
 use yii\helpers\ArrayHelper;
 use common\models\MgUsers;
@@ -137,19 +135,24 @@ class WeChatResponseService extends Module{
                 });
                 $uObj = $ret['data']['user'];
            }
+           
+           $gameUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page']);
+           $chargeUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-charge']);
+           $indexUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-index']);
+           $shareUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-page','id'=>$uObj->id]);
                  //欢迎信息
                  $msg = <<<EOF
 客官，终于等到您了，欢迎关注人人麻将公众号！
 
-<a href="http://wx.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
+<a href="{$gameUrl}">点击：下载游戏</a>
 
 <a href="http://mp.weixin.qq.com/s/1AjQevdwgz6jrQu83pmCuQ" >点击：提交BUG奖励元宝</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
+<a href="{$chargeUrl}">点击：充值元宝</a>
 
-<a href="http://wx.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
+<a href="{$indexUrl}">点击：代理后台</a>
     
-<a href="http://wx.menguanol.net/Wechat/default/share-page?id={$uObj->id}">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
+<a href="{$shareUrl}">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
     
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
     
@@ -274,7 +277,7 @@ class ProxyXml{
    
     
     function wrap( $k, $v ){
-         $formate = '%s';
+        $formate = '%s';
         if( in_array( $k, ProxyXml::WRAP_LIST) )
             $formate = '<![CDATA[%s]]>';
         return sprintf( $formate,  $v );
