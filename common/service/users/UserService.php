@@ -14,6 +14,8 @@ use common\models\MgUserAccount;
 
 class UserService extends BaseService implements UserInterface
 {
+    const DEFAULT_NOTIFY = 'common\components\Notify';
+    private $notifyHandler = null;
     
     //检测用户是否存在
     public function checkExist( $open_id ){
@@ -210,6 +212,8 @@ class UserService extends BaseService implements UserInterface
      */
     static public function changeRatio( MgUsers $uObj , $ratio = 30 ){
         $ret = ['isOk'=>1, 'msg'=>'调整完成'];
+        if( $ratio == $uObj->rebate_ratio)
+            return $ret;
         $transaction = Yii::$app->db->beginTransaction();
         try{
             if( $uObj->is_bd != MgUsers::IS_BD )
@@ -219,6 +223,9 @@ class UserService extends BaseService implements UserInterface
             $origin_ratio = $uObj->rebate_ratio;
             $uObj->rebate_ratio = $ratio;
             $uObj->save();
+            //通知用户
+            $msg = self::getMsg( $uObj, $origin_ratio , $ratio);
+            static::getInstance()->recordNotify( $msg );
             if( $origin_ratio > $ratio ){
                 //调整下级用户比例
                 $proxys = static::getInstance()->getSubProxy( $uObj );
@@ -233,6 +240,7 @@ class UserService extends BaseService implements UserInterface
                 }
             }
             $transaction->commit();
+            static::getInstance()->notify();
         }catch(\Exception $e){
             $ret['isOk'] = 0;
             $ret['msg'] = $e->getMessage();
@@ -262,13 +270,50 @@ class UserService extends BaseService implements UserInterface
         foreach ( $proxys as $p){
             if( $p->rebate_ratio <= $ratio )
                 continue;
+            $origin_ratio = $p->rebate_ratio;
             $p->rebate_ratio = $ratio;
             $p->save();
+            $msg = self::getMsg( $p, $origin_ratio , $ratio );
+            static::getInstance()->recordNotify( $msg );
             if( isset( $subList[$p->id] ) )
                 static::getInstance()->modifySubProxy( $subList[$p->id] , $subList, $ratio  );
         }
     }
+    
+    public function setNotifyHandler( $Obj = '' ){
+        if( empty( $Obj ) || is_string($Obj) ){
+            $class = new \ReflectionClass( static::DEFAULT_NOTIFY );
+            $Obj = $class->newInstanceArgs();
+        }
+        $this->notifyHandler = $Obj;
+    }
+    
+    public function notify(){
+        if( $this->notifyHandler == null  )
+            $this->setNotifyHandler();
+        return $this->notifyHandler->notify();
+    }
+    
+    public function recordNotify( $data ){
+        if( $this->notifyHandler == null  )
+            $this->setNotifyHandler();
+        return $this->notifyHandler->record( $data );
+    }
 
+    /**
+     * 
+     * @param unknown $uObj
+     * @param unknown $origin_ratio
+     * @param unknown $ratio
+     */
+    static public function getMsg( $uObj, $origin_ratio , $ratio ){
+        $ret = ['msg'=>''];
+        if( $origin_ratio > $ratio)
+            $ret['msg'] .= "很抱歉，您的返利比例被调低至{$ratio}%， 请及时和您的上级沟通返利政策调整原因";
+        else 
+          $ret['msg'] .= "恭喜您，您的返利比例被调高至{$ratio}%， 如有其它问题，请联系您的上级代理" ;
+        return $ret;
+    }
     
 }
 

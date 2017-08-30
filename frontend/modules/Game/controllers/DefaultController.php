@@ -26,6 +26,9 @@ class DefaultController extends Controller
               $uObj2 =  UserService::getInstance()->getUserInfo(['open_id'=>'o9Unv0a0sL-H8lREpQ86O5WodVyg']);
               $ret = UserService::getInstance()->bindRel( $super , $uObj2 );
               var_dump( $ret ); */
+        UserService::getInstance()->recordNotify(['open_id'=>'dsaaaa','msg'=>'success']);
+        $ret = UserService::getInstance()->notify();
+        var_dump($ret);
     }
     
     
