@@ -308,6 +308,7 @@ class UserService extends BaseService implements UserInterface
      */
     static public function getMsg( $uObj, $origin_ratio , $ratio ){
         $ret = ['msg'=>''];
+        $ret['open_id'] = $uObj['open_id'];
         if( $origin_ratio > $ratio)
             $ret['msg'] .= "很抱歉，您的返利比例被调低至{$ratio}%， 请及时和您的上级沟通返利政策调整原因";
         else 
