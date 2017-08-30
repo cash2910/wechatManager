@@ -6,8 +6,6 @@ use yii\base\Module;
 use yii\base\Exception;
 use common\service\users\UserService;
 use yii\base\Event;
-use yii\db\ActiveRecord;
-use common\models\MgUserRel;
 use common\components\WeixinMenuConfig;
 use yii\helpers\ArrayHelper;
 use common\models\MgUsers;
