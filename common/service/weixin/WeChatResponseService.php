@@ -135,30 +135,36 @@ class WeChatResponseService extends Module{
                 });
                 $uObj = $ret['data']['user'];
            }
-                 //欢迎信息
-                 $msg = <<<EOF
+           
+           $gameUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/game-page']);
+           $chargeUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-charge']);
+           $indexUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-index']);
+           $shareUrl = yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-page','id'=>$uObj->id]);
+           //欢迎信息
+           $msg = <<<EOF
 客官，终于等到您了，欢迎关注人人麻将公众号！
-
-<a href="http://wxwz.menguanol.net/Wechat/default/game-page">点击：下载游戏</a>
-
+           
+<a href="{$gameUrl}">点击：下载游戏</a>
+           
 <a href="http://mp.weixin.qq.com/s/1AjQevdwgz6jrQu83pmCuQ" >点击：提交BUG奖励元宝</a>
-
-<a href="http://wxwz.menguanol.net/Wechat/default/my-charge">点击：充值元宝</a>
-
-<a href="http://wxwz.menguanol.net/Wechat/default/my-index">点击：代理后台</a>
-    
-<a href="http://wxwz.menguanol.net/Wechat/default/share-page?id={$uObj->id}">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
-    
+           
+<a href="{$chargeUrl}">点击：充值元宝</a>
+           
+<a href="{$indexUrl}">点击：代理后台</a>
+           
+<a href="{$shareUrl}">点击：邀请好友组局（生成自己专属二维码，推广下线）</a>
+           
 我们正在招兵买马，全国范围内招收代理：代理可享受以下政策
-    
+           
 1、可查看好友账单明细与提现等操作。
-
+           
 2、生成自己专属二维码，方便推广。
-
+           
 3、成功绑定下级，享受名下玩家消费返利。
-
+           
 4、免费培训，帮助代理躺着赚钱。
 EOF;
+                 
             $ret = $entity->setResp([
                 'FromUserName'=>$entity->ToUserName,
                 'ToUserName'=>$entity->FromUserName,
