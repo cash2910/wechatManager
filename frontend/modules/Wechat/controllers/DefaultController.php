@@ -91,7 +91,7 @@ class DefaultController extends Controller
      */
     public function actionMyIndex()
     {
-        $this->title = 'MG首页';
+        $this->title = '首页';
         //判断用户是否为mg用户   
         $mgInfo = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( $mgInfo == null ){
