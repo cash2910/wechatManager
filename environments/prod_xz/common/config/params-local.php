@@ -24,7 +24,7 @@ return [
 
     'DEFAULT_USER'=>322, //默认最终用户ID
 	
-    'WEIXIN_ID' =>'renren_wz',   
+    'WEIXIN_ID' =>'renrenxuezhan',   
     'my_index'=>'http://wxxz.menguanol.net/Wechat/default/my-index',
     //游戏地址
     'GAME_URL'=>'http://116.62.113.199:9321',
