@@ -17,6 +17,7 @@ return [
     //'MCHID' =>'1485129652',
       
     //血战
+    'APP_NAME' =>'血战麻将',
     'AppId' => 'wx504fbccb58b2f158',
     'AppSecret'=>'5822c1d4ac5a010d631ce8fb9905bfc9',
     'MCHID' =>'1485129653',

@@ -12,6 +12,7 @@ return [
     //'AppSecret'=>'4be0b3d8ff64babcb1559c6f091e092b',
     //'MCHID' =>'1483656542', 
     //万州麻将
+    'APP_NAME' =>'万州麻将',
     'AppId' => 'wxa5fc45698fa938c4',
     'AppSecret'=>'baf231fd4587f8370c144577f956a7e6',
     'MCHID' =>'1485129652',
