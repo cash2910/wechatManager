@@ -81,6 +81,11 @@ A{ TEXT-DECORATION: none; color:black}
 $(function(){
     $('#showTooltips').on('click', function(){
         //$('.page.cell').removeClass('slideIn');
+       //若值不变则不调整
+       if( $("#rebate_ratio")[0].defaultValue == $("#rebate_ratio").val() ){
+    	    mgUI.msg( '调整完成' );
+            return false;
+        }
     	var rebateVal = $("#rebate_ratio").val();
     	var pid = $("#pid").val();
     	var max = '<?= $proxyObj->rebate_ratio; ?>';
