@@ -46,13 +46,6 @@ use common\service\users\UserService;
                     <div class="weui-cell__ft"></div>
                 </a>
                 <?php endif;?>
-                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-proxy">
-                    <div class="weui-cell__bd">
-                        <p>我的代理链接</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-                
                 <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-wallet">
                     <div class="weui-cell__bd">
                         <p>提现管理</p>
@@ -62,6 +55,18 @@ use common\service\users\UserService;
                 <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/friends-charge">
                     <div class="weui-cell__bd">
                         <p>好友充值</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-proxy">
+                    <div class="weui-cell__bd">
+                        <p>我的代理链接</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                 <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-page?id=<?=$user['id'] ?>">
+                    <div class="weui-cell__bd">
+                        <p>我的游戏链接</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
