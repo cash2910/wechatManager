@@ -134,12 +134,12 @@ class MenuController extends Controller
                     ],[
                         'name'=>'代理推广',
                         'type'=>'view',
-                        'url' => Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/share-proxy'] )
+                        'url' => 'http://wx.menguanol.net/Wechat/default/share-proxy'
                     ],[
                         'name'=>'进入后台',
                         'type'=>'view',
-                        'url' => Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/my-index'] )
-                    ]]            
+                        'url' => 'http://wx.menguanol.net/Wechat/default/my-index'
+                    ]]
                 ],[
                     'type'=>'click',
                     'name'=>'人工客服',
