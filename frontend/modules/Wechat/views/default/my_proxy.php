@@ -10,8 +10,9 @@ use common\models\MgUsers;
                  <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;"><?= (int)$sub['rebate_ratio'] ?>%</span> 
             </div>
             <div class="weui-cell__bd">
-                <a href="/Wechat/default/proxy-info?id=<?=$sub['id'] ?>"><p><?=$sub['nickname'] ?></p></a>
-                <p style="font-size: 13px;color: #888888;">返利比例：<?=$sub['rebate_ratio'] ?>% 加入时间：<?=date("Y-m-d",$sub['register_time']) ?>  </p>
+                <a href="/Wechat/default/proxy-info?id=<?=$sub['id'] ?>"><p style="margin:0"><?=$sub['nickname'] ?></p></a>
+                <p style="font-size: 13px;color: #888888; margin:0">返利比例：<?=$sub['rebate_ratio'] ?>% </p>
+                <p style="font-size: 13px;color: #888888; margin:0">加入时间：<?=date("Y-m-d",$sub['register_time']) ?>  </p>
             </div>
             <div class="weui-cell__ft"><a href="/Wechat/default/proxy-info?id=<?=$sub['id'] ?>" style="color:#999">详情</div>
         </div>
