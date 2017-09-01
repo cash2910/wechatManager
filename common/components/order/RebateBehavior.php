@@ -48,7 +48,7 @@ class RebateBehavior extends Behavior{
             foreach ( $userArr as $uObj ){
                 $cur_ratio = ( $uObj->rebate_ratio - $devided_ratio );
                 $_refund = $cur_ratio*$total/100;
-                $data[$uObj->id] = ['uid'=> $uObj->id, 'refund'=> $_refund, 'ratio'=>$cur_ratio  ];       
+                $data[$uObj->id] = ['uid'=> $uObj->id, 'refund'=> $_refund, 'ratio'=>$cur_ratio ,'total'=>$total ];       
                 $devided_ratio = $uObj->rebate_ratio;
             }
             $ret = $this->genRefund( $data, $order_obj , $uInfo );
@@ -73,8 +73,12 @@ class RebateBehavior extends Behavior{
                 $u = new MgUserAccount();
                 $u->user_id = $uid;
                 $u->free_balance = $d['refund'];
+                $u->total_balance = $d['refund'];
+                $u->total_num = $d['total'];
             }else{
                 $u->free_balance += $d['refund'];
+                $u->total_balance += $d['refund'];
+                $u->total_num += $d['total'];
             }
             $u->update_time = $t;
             $r = $u->save();
@@ -84,13 +88,13 @@ class RebateBehavior extends Behavior{
             //通知用户
             $uInfo = MgUserRel::findOne(['user_id'=>$uid]);
             if( $uInfo ){
-/*                  $ret = WeChatService::getIns()->sendCsMsg([
+                  $ret = WeChatService::getIns()->sendCsMsg([
                     'touser'=> $uInfo->user_openid,
                     'msgtype'=>'text',
                     'text'=>[
                          'content'=> "恭喜您成功获得{$uObj->nickname}充值返利 : {$d['refund']} 元！~"
                     ]
-                ]); */
+                ]);
             }
         }
         $ret = yii::$app->db->createCommand()->batchInsert( MgUserAccountLog::tableName(), [

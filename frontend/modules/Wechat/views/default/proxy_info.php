@@ -1,5 +1,6 @@
 <?php 
 use common\helper\StringHelp;
+use yii\helpers\ArrayHelper;
 ?>
 <div class="logo-box" style="
     padding: 40px;
@@ -24,6 +25,24 @@ use common\helper\StringHelp;
             <div class="weui-cell__hd"><label class="weui-label">分成比例</label></div>
             <div class="weui-cell__bd" style="display: inline-flex;">
                 <input class="weui-input" type="number" pattern="[0-9]*"  id ="rebate_ratio" name="rebate_ratio" value="<?= $fObj['rebate_ratio'] ?>" placeholder="请输入分成比例">%
+            </div>
+        </div>
+        
+         <div class="weui-cell " >
+            <div class="weui-cell__hd"><label class="weui-label">下级玩家</label></div>
+            <div class="weui-cell__bd" style=""><?=$playerNum ?>
+            </div>
+        </div>
+        
+        <div class="weui-cell " >
+            <div class="weui-cell__hd"><label class="weui-label">下级代理</label></div>
+            <div class="weui-cell__bd" style=""><?=$proxyNum ?>
+            </div>
+        </div>
+        
+        <div class="weui-cell " >
+            <div class="weui-cell__hd"><label class="weui-label">累计业绩</label></div>
+            <div class="weui-cell__bd" style=""><?php echo ArrayHelper::getValue($uAccount, 'total_num', 0) ?>
             </div>
         </div>
         

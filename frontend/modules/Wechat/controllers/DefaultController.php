@@ -284,9 +284,17 @@ class DefaultController extends Controller
         $pid = array_pop( $rels );
         if( $pid != $uObj->id )
             $this->_404('好友不存在');
+        //获取下级代理数
+        $proxyNum = MgUserProxyRel::find()->andWhere(['user_id'=>$proxyObj->id])->count('id');
+        $playerNum = MgUserRel::find()->andWhere(['user_id'=>$proxyObj->id])->count('id');
+        //总累计金额
+        $uAccount = MgUserAccount::findOne(['user_id'=>$proxyObj->id]);
         return $this->render('proxy_info', [
             'fObj'=> $proxyObj,
-            'proxyObj' => $uObj
+            'proxyObj' => $uObj,
+            'proxyNum' => $proxyNum,
+            'playerNum' =>$playerNum,
+            'uAccount' => $uAccount
         ]);
     }
     
