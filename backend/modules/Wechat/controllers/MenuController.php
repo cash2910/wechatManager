@@ -134,11 +134,11 @@ class MenuController extends Controller
                     ],[
                         'name'=>'代理推广',
                         'type'=>'view',
-                        'url' => 'http://wx.menguanol.net/Wechat/default/share-proxy'
+                        'url' => 'http://wxxz.menguanol.net/Wechat/default/share-proxy'
                     ],[
                         'name'=>'进入后台',
                         'type'=>'view',
-                        'url' => 'http://wx.menguanol.net/Wechat/default/my-index'
+                        'url' => 'http://wxxz.menguanol.net/Wechat/default/my-index'
                     ]]
                 ],[
                     'type'=>'click',
