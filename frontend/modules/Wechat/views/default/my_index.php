@@ -7,7 +7,7 @@ use common\service\users\UserService;
         <div class="icon-box" style="padding:30px;">
             <img style="float:left; border-radius: 1.0rem;" src="<?= $user['user_logo']?>" width="80" height="80"/>
             <div style="float:left;  margin-left:15px;">
-                <span class="nickname"><?= StringHelp::truncateUtf8String($user['nickname'], 8); ?></span>
+                <span class="nickname"><?= StringHelp::truncateUtf8String($user['nickname'], 6); ?></span>
                 <?php if( $user['is_bd'] ){ ?>
                     <span class="type_wrp" style=" margin-left: 5px; ">  <a href="javascript:;" class="icon_proxy_label" ><?= UserService::getInstance()->getProxyStatus($user)?></a> </span>
                 <?php }?>                                                                                                                                 
