@@ -71,7 +71,7 @@ class DefaultController extends Controller
             'status'=>MgUsers::IS_SUBSCRIPT,
             //'is_bd'=> MgUsers::IS_BD
         ]);
-        if( !$uObj || ($uObj->is_bd != MgUsers::IS_BD) )
+        if( $uObj && ($uObj->is_bd != MgUsers::IS_BD) )
             $this->_404('您还不是推广员请联系您的代理设置');
         //判断是否为本人访问
         $owner = false;
