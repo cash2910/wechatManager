@@ -58,6 +58,7 @@ use common\service\users\UserService;
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+                <?php if( UserService::getInstance()->checkIsProxy( $user ) ):?>
                 <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-proxy">
                     <div class="weui-cell__bd">
                         <p>我的代理链接</p>
@@ -70,6 +71,7 @@ use common\service\users\UserService;
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+                <?php endif;?>
             </div>
         </div>
     </div>
