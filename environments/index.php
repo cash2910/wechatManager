@@ -81,4 +81,22 @@ return [
             'frontend/config/main-local.php',
         ],
     ],
+
+   'Production_xz' => [
+        'path' => 'prod_xz',
+        'setWritable' => [
+            'backend/runtime',
+            'backend/web/assets',
+            'frontend/runtime',
+            'frontend/web/assets',
+        ],
+        'setExecutable' => [
+            'yii',
+        ],
+        'setCookieValidationKey' => [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+        ],
+    ],
+
 ];
