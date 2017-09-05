@@ -15,4 +15,7 @@ $config = yii\helpers\ArrayHelper::merge(
 );
 
 $application = new yii\web\Application($config);
+$application->on( $application::EVENT_BEFORE_REQUEST, function( $eve ){
+    Yii::setAlias('@bower', $eve->sender->getVendorPath() .  DIRECTORY_SEPARATOR . 'bower-asset');
+});
 $application->run();
