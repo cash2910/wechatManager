@@ -105,8 +105,8 @@ function jsApiCall()
 
 function callpay()
 {	
-	mgUI.msg("公众号已关闭游戏充值业务，如需充值请联系客服或您的朋友");
-	return false;
+	//mgUI.msg("公众号已关闭游戏充值业务，如需充值请联系客服或您的朋友");
+	//return false;
 	try{
     	if (typeof WeixinJSBridge == "undefined"){
     	    if( document.addEventListener ){
