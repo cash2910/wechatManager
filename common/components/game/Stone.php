@@ -22,7 +22,7 @@ class Stone extends BaseService{
         $data = [
             'acc_type'=> "4",
             'union_id'=>$union_id,
-            'game_id'=>'wzmj'
+            'game_id'=>'scmj'
         ];
         $url = yii::$app->params['GAME_URL'].'/cmd?cmd=op_getuserid&contents='. json_encode( $data  );
         yii::error( "获取游戏用户信息URL: $url" );
@@ -39,7 +39,7 @@ class Stone extends BaseService{
         $data = [
             'uid'=>(int)$uid,
             'diamond_num'=>(int)$num,
-            'game_type'=>28
+            'game_type'=>13
         ];
         $url = yii::$app->params['GAME_URL'].'/cmd?cmd=op_diamond&contents='. json_encode( $data  );
         yii::error( "游戏添加宝石URL: $url" );
