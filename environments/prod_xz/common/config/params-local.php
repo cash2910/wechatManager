@@ -28,6 +28,6 @@ return [
     'WEIXIN_ID' =>'renrenxuezhan',   
     'my_index'=>'http://wxxz.menguanol.net/Wechat/default/my-index',
     //游戏地址
-    'GAME_URL'=>'http://116.62.113.199:9321',
+    'GAME_URL'=>'http://183.61.243.96:9321',
     'CERT_PATH' => '/web/cert/',
 ];
