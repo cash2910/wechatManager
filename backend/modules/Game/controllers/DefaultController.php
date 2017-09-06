@@ -32,7 +32,7 @@ class DefaultController extends Controller
       //  $proxys = UserService::getInstance()->getSubProxy( $uObj );
       //  $pTree = UserService::getInstance()->getProxyTree( $proxys, 94 );
       
-      //  $be = new RebateBehavior();
-      //  $be->doBalance( MgOrderList::findOne(['order_sn'=>''] ) );
+        $be = new RebateBehavior();
+        $ret =  $be->doBalance( MgOrderList::findOne(['order_sn'=>'20170714125337101364'] ) );
     }
 }

@@ -40,6 +40,7 @@ class RebateBehavior extends Behavior{
                 //间接代理
                 $pObj = MgUsers::findOne(['id'=>$proxyId]);
                 $superProxyIds  = [];
+                $userArr = [];
                 if( !empty( $pObj->user_proxy_rels ) ){
                     $superProxyIds = explode( "-",  $pObj->user_proxy_rels );
                     $userArr = MgUsers::findAll(['id'=>$superProxyIds]);
@@ -61,6 +62,7 @@ class RebateBehavior extends Behavior{
             $ret = $this->genRefund( $data, $order_obj , $uInfo );
             $transaction->commit();
         }catch ( \Exception $e ){
+            
             $transaction->rollBack();
             yii::error( "订单{$order_obj->order_sn}返利失败： ".$e->getMessage() );
         }
@@ -95,13 +97,13 @@ class RebateBehavior extends Behavior{
             //通知用户
             $uInfo = MgUserRel::findOne(['user_id'=>$uid]);
             if( $uInfo ){
-                  $ret = WeChatService::getIns()->sendCsMsg([
+/*                   $ret = WeChatService::getIns()->sendCsMsg([
                     'touser'=> $uInfo->user_openid,
                     'msgtype'=>'text',
                     'text'=>[
                          'content'=> "恭喜您成功获得{$uObj->nickname}充值返利 : {$d['refund']} 元！~"
                     ]
-                ]);
+                ]); */
             }
         }
         $ret = yii::$app->db->createCommand()->batchInsert( MgUserAccountLog::tableName(), [
