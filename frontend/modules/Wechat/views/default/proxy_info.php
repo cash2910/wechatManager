@@ -29,13 +29,13 @@ use yii\helpers\ArrayHelper;
         </div>
         
          <div class="weui-cell " >
-            <div class="weui-cell__hd"><label class="weui-label">下级玩家</label></div>
+            <div class="weui-cell__hd"><label class="weui-label">下级玩家数</label></div>
             <div class="weui-cell__bd" style=""><?=$playerNum ?>
             </div>
         </div>
         
         <div class="weui-cell " >
-            <div class="weui-cell__hd"><label class="weui-label">下级代理</label></div>
+            <div class="weui-cell__hd"><label class="weui-label">下级代理数</label></div>
             <div class="weui-cell__bd" style=""><?=$proxyNum ?>
             </div>
         </div>
