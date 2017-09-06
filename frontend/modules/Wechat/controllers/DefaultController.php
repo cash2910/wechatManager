@@ -166,7 +166,7 @@ class DefaultController extends Controller
             'text'=>[
                 'content'=> "恭喜，您已成功邀请 {$uObj->nickname} 成为您的推广员。",
             ]
-        ]);
+        ]); 
         return $this->renderPartial('proxy-bind-success',[
             'uObj' => $uObj,
             'proxyObj'=> $proxy
