@@ -116,9 +116,9 @@ class DefaultController extends Controller
     public function actionShowProxyLink(){
         if( !($uid = (int)yii::$app->request->get('id')) )
             $this->_404('用户信息错误');
-        $proxyObj = MgUsers::findOne(['id'=>$uid,'is_bd'=>MgUsers::IS_BD]);
+        $proxyObj = MgUsers::find()->where(['id'=>$uid,'is_bd'=>MgUsers::IS_BD])->andWhere(['>=','rebate_ratio', 35])->one();
         if( !$proxyObj )
-            $this->_404('用户信息错误');
+            $this->_404('代理信息错误或代理连接失效');
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         return $this->renderPartial('show-proxy-link',[
             'uObj' => $uObj,
@@ -136,7 +136,7 @@ class DefaultController extends Controller
             $this->_404('用户信息错误');
         $proxy = MgUsers::find()->where(['id'=>$uid,'is_bd'=>MgUsers::IS_BD])->andWhere(['>=','rebate_ratio', 35])->one();
         if( !$proxy )
-            $this->_404('代理信息错误');
+            $this->_404('代理信息错误或代理连接失效');
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         if( !$uObj ){
             try{

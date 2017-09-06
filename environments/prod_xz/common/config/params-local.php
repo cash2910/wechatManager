@@ -23,7 +23,7 @@ return [
     'MCHID' =>'1485129653',
 
 
-    'DEFAULT_USER'=>322, //默认最终用户ID
+    'DEFAULT_USER'=>320, //默认最终用户ID
 	
     'WEIXIN_ID' =>'renrenxuezhan',   
     'my_index'=>'http://wxxz.menguanol.net/Wechat/default/my-index',
