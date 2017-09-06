@@ -7,6 +7,7 @@ use common\components\order\RebateBehavior;
 use common\models\MgOrderList;
 use common\service\users\UserService;
 use common\models\MgUsers;
+use yii\base\Object;
 
 /**
  * Default controller for the `Game` module
@@ -30,5 +31,8 @@ class DefaultController extends Controller
         // var_dump($ret);
       //  $proxys = UserService::getInstance()->getSubProxy( $uObj );
       //  $pTree = UserService::getInstance()->getProxyTree( $proxys, 94 );
+      
+      //  $be = new RebateBehavior();
+      //  $be->doBalance( MgOrderList::findOne(['order_sn'=>''] ) );
     }
 }

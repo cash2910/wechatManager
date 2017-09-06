@@ -29,27 +29,34 @@ class RebateBehavior extends Behavior{
         try{
             $uInfo = MgUsers::findOne([ 'id'=>$order_obj->user_id ]);
             $total = $order_obj->order_num;
+            $defaultUid = yii::$app->params['DEFAULT_USER'];
             if( empty($uInfo->user_rels) ){
-                throw new \Exception("用户上级不存在");
-            }
-            $uids =  explode( "-", $uInfo->user_rels );
-            //直接代理
-            $proxyId =  array_pop( $uids );
-            //间接代理
-            $pObj = MgUsers::findOne(['id'=>$proxyId]);
-            $superProxyIds  = [];
-            if( !empty( $pObj->user_proxy_rels ) ){
-                $superProxyIds = explode( "-",  $pObj->user_proxy_rels );
-                $userArr = MgUsers::findAll(['id'=>$superProxyIds]);
-            }
-            array_push( $userArr, $pObj );
-            $userArr = array_reverse( $userArr );
-            $data = []; $devided_ratio = 0;
-            foreach ( $userArr as $uObj ){
-                $cur_ratio = ( $uObj->rebate_ratio - $devided_ratio );
-                $_refund = $cur_ratio*$total/100;
-                $data[$uObj->id] = ['uid'=> $uObj->id, 'refund'=> $_refund, 'ratio'=>$cur_ratio ,'total'=>$total ];       
-                $devided_ratio = $uObj->rebate_ratio;
+                //不存在上级则划入公司账户
+                $data[$defaultUid] =  ['uid'=> $defaultUid, 'refund'=> $order_obj->order_num, 'ratio'=>100 ,'total'=>$order_obj->order_num ]; 
+            }else{
+                $uids =  explode( "-", $uInfo->user_rels );
+                //直接代理
+                $proxyId =  array_pop( $uids );
+                //间接代理
+                $pObj = MgUsers::findOne(['id'=>$proxyId]);
+                $superProxyIds  = [];
+                if( !empty( $pObj->user_proxy_rels ) ){
+                    $superProxyIds = explode( "-",  $pObj->user_proxy_rels );
+                    $userArr = MgUsers::findAll(['id'=>$superProxyIds]);
+                }
+                array_push( $userArr, $pObj );
+                $userArr = array_reverse( $userArr );
+                $data = []; $devided_ratio = 0;
+                foreach ( $userArr as $uObj ){
+                    $cur_ratio = ( $uObj->rebate_ratio - $devided_ratio );
+                    $_refund = $cur_ratio*$total/100;
+                    $data[$uObj->id] = ['uid'=> $uObj->id, 'refund'=> $_refund, 'ratio'=>$cur_ratio ,'total'=>$total ];       
+                    $devided_ratio = $uObj->rebate_ratio;
+                }
+                //公司分成
+                $company_ratio = 100 -$devided_ratio ;
+                $company_refund = $company_ratio*$total/100;
+                $data[$defaultUid] = ['uid'=> $defaultUid, 'refund'=> $company_refund, 'ratio'=>$company_ratio ,'total'=>$total ];
             }
             $ret = $this->genRefund( $data, $order_obj , $uInfo );
             $transaction->commit();
@@ -103,6 +110,11 @@ class RebateBehavior extends Behavior{
         return $ret;
     }
     
+    
+    private function getDefaultUser(){
+        $uid = yii::$app->params['DEFAULT_USER'];
+        return MgUsers::findOne( ['id'=>$uid] );
+    }
 }
 
 ?>
