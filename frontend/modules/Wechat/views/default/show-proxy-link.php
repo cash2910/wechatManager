@@ -26,10 +26,10 @@ use common\models\MgUsers;
 </div>
 <?php else:?>
 <div class="weui-msg">
-        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+        <div class="weui-msg__icon-area"><img src="/images/xz_erweima.png" width="200"></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">您已经是代理了</h2>
-            <p class="weui-msg__desc">您已经是代理了,无法再次绑定代理关系</p>
+            <p class="weui-msg__desc">您已经是代理了,无法再次绑定代理关系, 请扫描上方二维码关注公众号</p>
         </div>
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
