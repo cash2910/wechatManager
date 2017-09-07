@@ -30,12 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'nickname',
             'status',
             'open_id',
+            'union_id',
             'passwd',
             'is_bd',
             'mobile',
-            'register_time',
-            'update_time',
+            [
+                'label'=>'申请日期',
+                'attribute' => 'register_time',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],[
+            'label'=>'更新日期',
+            'attribute' => 'update_time',
+            'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],
             'user_rels',
+            'user_proxy_rels',
+            'rebate_ratio'
         ],
     ]) ?>
 

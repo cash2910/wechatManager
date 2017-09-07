@@ -32,6 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <label class="control-label"  >是否关注:</label>
             <?php echo Html::dropDownList('status',yii::$app->request->get('status',""),MgUsers::$status_msg,['class'=>'form-control','prompt' => '全部']);?>
         </div>
+        <div class="form-group col-md-3">
+            <label class="control-label"  >角色信息:</label>
+            <?php echo Html::dropDownList('is_bd',yii::$app->request->get('is_bd',""),MgUsers::$role_msg,['class'=>'form-control','prompt' => '全部']);?>
+        </div>
         <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
     <?= Html::endForm() ?>
     <?= GridView::widget([
@@ -58,19 +62,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ['label' => '订单渠道','value' => function($data){
                 return $data::$status_msg[$data->status];
             }],
-            'open_id',
-            'union_id',
-            //'passwd',
-            // 'is_bd',
+            //'open_id',
+            //'union_id',
+            //'passwd', 
+            ['label' => '角色','value' => function($data){
+                return $data::$role_msg[$data->is_bd];
+            }],
             // 'mobile',
-            [
-            'label'=>'申请日期',
-            'attribute' => 'register_time',
-            'format' => ['date', 'php:Y-m-d H:i:s'],
-            ],
+            'user_proxy_rels',
             // 'update_time',
             'user_rels',
             [
+                'label'=>'申请日期',
+                'attribute' => 'register_time',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],[
                 'header' => "查看详情",
                 'class' => 'yii\grid\ActionColumn',
                 'template'=> '{view} {view1} {view2}',
