@@ -21,6 +21,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\HttpException;
 use common\models\MgUserProxyRel;
 use common\service\weixin\WeChatService;
+use common\models\MgRebateList;
 
 /**
  * Default controller for the `Wechat` module
@@ -329,8 +330,14 @@ class DefaultController extends Controller
         $this->title="提现管理";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         $uaObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
+        //查看是否有提现记录 第一次提现上线为1 元
+        $limit = 200;
+        $rebateObj = MgRebateList::findOne(['user_id'=>$uObj->id]);
+        if( !$rebateObj )
+            $limit = 1 ;
         return $this->render('my_wallet',[
-            'account' => $uaObj
+            'account' => $uaObj,
+            'limit' => $limit
         ]);
     }
     

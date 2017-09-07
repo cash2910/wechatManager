@@ -64,9 +64,26 @@ return [
             'frontend/config/main-local.php',
         ],
     ],
+    
+    'Production_hy' => [
+        'path' => 'prod_hy',
+        'setWritable' => [
+            'backend/runtime',
+            'backend/web/assets',
+            'frontend/runtime',
+            'frontend/web/assets',
+        ],
+        'setExecutable' => [
+            'yii',
+        ],
+        'setCookieValidationKey' => [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+        ],
+    ],
 
-    'Production' => [
-        'path' => 'prod',
+    'Production_wz' => [
+        'path' => 'prod_wz',
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
