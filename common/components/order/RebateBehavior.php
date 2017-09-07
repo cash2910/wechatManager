@@ -97,7 +97,7 @@ class RebateBehavior extends Behavior{
             //通知用户
             $uInfo = MgUserRel::findOne(['user_id'=>$uid]);
             if( $uInfo ){
-                 $ret = WeChatService::getIns()->sendCsMsg([
+                  $ret = WeChatService::getIns()->sendCsMsg([
                     'touser'=> $uInfo->user_openid,
                     'msgtype'=>'text',
                     'text'=>[
