@@ -31,6 +31,7 @@ class WeChatProxyService{
         }
         //统一判断处理异常
         //var_dump( $res );
+        
         return json_decode( $res, true );
     }
     
@@ -38,7 +39,7 @@ class WeChatProxyService{
         $url = ArrayHelper::getValue($conf, 'url');
         //获取token 与生成二维码不需要access_token
         if( ArrayHelper::getValue($conf, 'need_token', true)  ){
-             $params['access_token'] =self::getToken( );
+             $params['access_token'] =self::getToken();
         }
         /**
          * @todo 修改为字符串替换参数

@@ -62,8 +62,8 @@ class MgUserController extends Controller
             $query->andWhere(['union_id'=>$union_id]);
         }
         
-        if(  ($union_id = Yii::$app->request->get('union_id', '') ) == true ){
-            $query->andWhere(['union_id'=>$union_id]);
+        if(  ($is_bd = Yii::$app->request->get('is_bd', '') ) !== '' ){
+            $query->andWhere(['is_bd'=>$is_bd]);
         }
 
         if(  ($rels = Yii::$app->request->get('fri', '') ) == true ){
