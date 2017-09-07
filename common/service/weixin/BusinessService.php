@@ -170,7 +170,7 @@ class BusinessService extends BaseService{
          $url = "";
          try{
              if( $eternal && $id > 100000 ){
-                 throw new Exception('exceed max limit 10000');
+                 throw new Exception('exceed max limit 100000');
              }
              $key = sprintf("mg_user_shareqrcode_url_%s", $id);
              $type = $eternal ? 'QR_LIMIT_STR_SCENE' : 'QR_SCENE';
