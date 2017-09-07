@@ -10,7 +10,7 @@ return [
         ],
         'redis' => [
             'class' => 'common\components\redis\Connection',
-            'hostname' => '10.121.1.221',
+            'hostname' => '10.121.1.222',
             'password' => '9z0a_wang',
 	    'port' => 6379,
             'database' => 2,
