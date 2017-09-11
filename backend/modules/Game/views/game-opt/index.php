@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             'union_id',
-            ['label' => '订单渠道','value' => function($data){
+            ['label' => '操作类型','value' => function($data){
                 return Yii::$app->params['game_opt'][$data->opt_code];
             }],
             'game_id',
