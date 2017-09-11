@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\WechatMessage */
+/* @var $model common\models\MgGameUseropt */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Wechat Messages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Mg Game Useropts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="wechat-message-view">
+<div class="mg-game-useropt-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,13 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'type',
-            'status',
-            'content',
-            'open_id',
-            'num',
+            'union_id',
+            'opt_code',
+            'game_id',
+            'data',
+            'ip',
             'add_time',
-            'update_tie',
+            'update_time',
         ],
     ]) ?>
 

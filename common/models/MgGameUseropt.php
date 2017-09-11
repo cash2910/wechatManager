@@ -58,12 +58,12 @@ class MgGameUseropt extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'union_id' => 'Union ID',
-            'opt_code' => 'Opt Code',
-            'game_id' => 'Game ID',
-            'data' => 'Data',
+            'union_id' => 'UnionId',
+            'opt_code' => '操作code',
+            'game_id' => '游戏id',
+            'data' => '详细数据',
             'ip' => 'Ip',
-            'add_time' => 'Add Time',
+            'add_time' => '添加时间',
             'update_time' => 'Update Time',
         ];
     }

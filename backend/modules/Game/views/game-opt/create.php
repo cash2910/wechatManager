@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\WechatMessage */
+/* @var $model common\models\MgGameUseropt */
 
-$this->title = 'Create Wechat Message';
-$this->params['breadcrumbs'][] = ['label' => 'Wechat Messages', 'url' => ['index']];
+$this->title = 'Create Mg Game Useropt';
+$this->params['breadcrumbs'][] = ['label' => 'Mg Game Useropts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="wechat-message-create">
+<div class="mg-game-useropt-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
