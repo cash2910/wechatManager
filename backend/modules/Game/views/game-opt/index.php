@@ -19,7 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <label class="  control-label"  >Ip:</label>
             <?php echo Html::input('text','ip',yii::$app->request->get('ip',''),['class'=>'form-control','placeholder'=>'请输入用户ID'])?>
         </div> 
-        <div class="form-group ">
+        <div class="form-group col-md-6">
+            <label class="  control-label"  >操作类型:</label>
+            <?php echo Html::dropDownList('opt_code',yii::$app->request->get('opt_code',""),Yii::$app->params['game_opt'],['class'=>'form-control','prompt' => '全部']);?>
+        </div> 
+        <div class="form-group">
             <label class=" control-label"  for="exampleInputPassword2">操作日期:</label>
             <?php echo Html::input('text','from_date',yii::$app->request->get('from_date',''),['class'=>'form-control','placeholder'=>'开始日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
         </div> 
@@ -32,10 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'union_id',
-            'opt_code',
+            ['label' => '订单渠道','value' => function($data){
+                return Yii::$app->params['game_opt'][$data->opt_code];
+            }],
             'game_id',
             'data',
              'ip',

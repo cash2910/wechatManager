@@ -44,6 +44,10 @@ class GameOptController extends Controller
         if(  ($union_id = Yii::$app->request->get('union_id', '') ) == true ){
             $query->andWhere(['union_id'=>$union_id]);
         }
+        
+        if(  ($opt_code = Yii::$app->request->get('opt_code', '') ) == true ){
+            $query->andWhere(['opt_code'=>$opt_code]);
+        }
         if(  ($from_date = Yii::$app->request->get('from_date', '') ) == true ){
             $query->andWhere(['>=','add_time',strtotime( $from_date )]);
         }
