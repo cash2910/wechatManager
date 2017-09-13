@@ -15,7 +15,7 @@ class WeChatMsgService extends BaseService{
         {{remark.DATA}}
      * @var unknown
      */
-    const NOTIFY_TPL = 'gMQn9HidmLF0wBtBMwDkRkFV_W-2skb4dJ0Dywf_05g';
+    //const NOTIFY_TPL = 'gMQn9HidmLF0wBtBMwDkRkFV_W-2skb4dJ0Dywf_05g';
     
     private $proxy = null;
     
@@ -24,7 +24,7 @@ class WeChatMsgService extends BaseService{
     }
     
     public function notify( $data ){
-        $data += ['template_id'=>self::NOTIFY_TPL ];
+        $data += ['template_id'=>yii::$app->params['notify_tpl'] ];
         $ret = $this->proxy->sendMsg($data);
         return $ret;
     }

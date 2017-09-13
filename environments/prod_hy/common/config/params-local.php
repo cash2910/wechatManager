@@ -23,4 +23,7 @@ return [
     //游戏地址
     'GAME_URL'=>'http://116.62.113.199:9321',
     'CERT_PATH' => '/web/cert/',
+    
+    'notify_tpl'=>'gMQn9HidmLF0wBtBMwDkRkFV_W-2skb4dJ0Dywf_05g'
+    
 ];
