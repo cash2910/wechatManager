@@ -19,17 +19,20 @@ use common\models\WechatMessage;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'type')->radioList(WechatMessage::$type_msg, ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']],'value'=>WechatMessage::TYPE_ALL]) ?>
+    <?= $form->field($model, 'type')->radioList(WechatMessage::$type_msg, ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
 
-    <?= $form->field($model, 'status')->radioList(WechatMessage::$status_msg, ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']],'value'=>WechatMessage::STATUS_WAIT]) ?>
+    <?= $form->field($model, 'status')->radioList(WechatMessage::$status_msg, ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
+    
+    <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'open_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'num')->textInput(['maxlength' => true]) ?>
- 
-
+    
+    <?= $form->field($model, 'send_time')->textInput(['maxlength' => true,'placeholder'=>'开始日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"]) ?>
+    
     <div class="form-group">
         <div class="col-sm-offset-2">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -39,3 +42,4 @@ use common\models\WechatMessage;
     <?php ActiveForm::end(); ?>
 
 </div>
+<script src="/js/DatePicker/WdatePicker.js"></script>

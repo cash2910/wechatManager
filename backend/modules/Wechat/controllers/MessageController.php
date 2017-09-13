@@ -37,6 +37,11 @@ class MessageController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => WechatMessage::find(),
+            'sort' => [
+                'defaultOrder' => [
+                    'add_time' => SORT_DESC,            
+                ]
+            ]
         ]);
 
         return $this->render('index', [
@@ -68,6 +73,8 @@ class MessageController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model->type = WechatMessage::TYPE_ONE;
+            $model->status = WechatMessage::STATUS_WAIT;
             return $this->render('create', [
                 'model' => $model,
             ]);

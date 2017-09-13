@@ -34,9 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'content',
             'open_id',
             'num',
-            'add_time',
-            'update_tie',
+            'add_time:datetime',
+            'update_time',
         ],
     ]) ?>
-
 </div>
