@@ -49,7 +49,7 @@ class WechatMessageController extends Controller{
                     break;
             }
             foreach ($users as $user){
-                $ret = $msgService->notify([
+                $res = $msgService->notify([
                     'touser'=>$user->open_id,
                     // 'url'=>'',
                     'data'=>[
