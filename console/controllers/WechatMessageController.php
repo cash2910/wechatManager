@@ -18,14 +18,14 @@ class WechatMessageController extends Controller{
         
         $dateTime = date('Y-m-d H:i:s');
         $msgs = WechatMessage::find()->where(['status'=>WechatMessage::STATUS_WAIT])->andWhere(['<=','send_time',$dateTime])->all();
-        yii::error("{$dateTime}通知执行开启：".$ret['msg']);
+        yii::error("{$dateTime}通知执行开启...");
         foreach ( $msgs as $mObj ){
              $ret = $this->sendMsg( $mObj );    
              $mObj->status = WechatMessage::STATUS_SUCCESS;
              $mObj->save();
              yii::error("通知{$mObj->id}信息发送状态：".$ret['msg']);
         }
-        yii::error("{$dateTime}通知执行完毕：".$ret['msg']);
+        yii::error("{$dateTime}通知执行完毕");
     }
     
     private function sendMsg( WechatMessage $mObj ){
