@@ -62,7 +62,7 @@ class WechatMessageController extends Controller{
                             'color'=>'#173177'
                         ],
                         'keyword2'=>[
-                            'value'=>$dateTime,
+                            'value'=>'普通消息',
                             'color'=>'#173177'
                         ],
                         'remark'=>[
