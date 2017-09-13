@@ -28,6 +28,7 @@ class WechatMessage extends \yii\db\ActiveRecord
     const TYPE_ONE =1 ;
     const TYPE_ALL = 2;
     const TYPE_BD = 3;
+    const TYPE_PLAYER = 4;
     
     static public $status_msg = [
         self::STATUS_WAIT =>'待发送',
@@ -37,10 +38,10 @@ class WechatMessage extends \yii\db\ActiveRecord
     
     static public $type_msg = [
         self::TYPE_ONE =>'单个用户',
+        self::TYPE_PLAYER =>'玩家用户',
         self::TYPE_BD =>'代理用户',
         self::TYPE_ALL =>'所有用户',
     ];
-    
     
     public function behaviors()
     {

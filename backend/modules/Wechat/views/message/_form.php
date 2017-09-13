@@ -31,7 +31,7 @@ use common\models\WechatMessage;
 
     <?= $form->field($model, 'num')->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'send_time')->textInput(['maxlength' => true,'placeholder'=>'开始日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"]) ?>
+    <?= $form->field($model, 'send_time')->textInput(['maxlength' => true,'placeholder'=>'发送日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"]) ?>
     
     <div class="form-group">
         <div class="col-sm-offset-2">

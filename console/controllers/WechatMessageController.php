@@ -20,9 +20,9 @@ class WechatMessageController extends Controller{
         $msgs = WechatMessage::find()->where(['status'=>WechatMessage::STATUS_WAIT])->andWhere(['<=','send_time',$dateTime])->all();
         yii::error("{$dateTime}通知执行开启...");
         foreach ( $msgs as $mObj ){
-             $ret = $this->sendMsg( $mObj );    
              $mObj->status = WechatMessage::STATUS_SUCCESS;
              $mObj->save();
+             $ret = $this->sendMsg( $mObj );    
              yii::error("通知{$mObj->id}信息发送状态：".$ret['msg']);
         }
         yii::error("{$dateTime}通知执行完毕");
@@ -33,9 +33,9 @@ class WechatMessageController extends Controller{
         try {
             $msgService = WeChatMsgService::getInstance(WeChatService::getIns());
             $dateTime = date('Y-m-d H:i:s');
+            //获取用户信息
             switch ($mObj->type){
                 case WechatMessage::TYPE_ONE:
-                    //获取用户信息
                     $u = MgUsers::findOne(['open_id'=>$mObj->open_id]);
                     $users = [$u];
                     break;
@@ -44,6 +44,9 @@ class WechatMessageController extends Controller{
                     break;
                 case WechatMessage::TYPE_BD:
                     $users = MgUsers::findAll(['is_bd'=>MgUsers::IS_BD]);
+                    break;
+                case WechatMessage::TYPE_PLAYER:
+                    $users = MgUsers::findAll(['is_bd'=>MgUsers::IS_PLAYER]);
                     break;
                 default:
                     break;
