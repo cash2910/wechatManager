@@ -28,7 +28,7 @@ return [
     'WEIXIN_ID' =>'renrenxuezhan',   
     'my_index'=>'http://wxxz.menguanol.net/Wechat/default/my-index',
     //游戏地址
-    'GAME_URL'=>'http://183.61.243.94:9321',
+    'GAME_URL'=>'http://rrxzgm.yx28.com:9321',
     'CERT_PATH' => '/web/xz_cert/',
     
     'notify_tpl'=>'UurMLoBBIJMxo7xx1OvXzyWxXhale2TTuPtWJTWLRWY'

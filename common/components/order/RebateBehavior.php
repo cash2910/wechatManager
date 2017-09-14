@@ -74,8 +74,8 @@ class RebateBehavior extends Behavior{
                 $company_refund = $company_ratio*$total/100;
                 $data[$defaultUid] = ['uid'=> $defaultUid, 'refund'=> $company_refund, 'ratio'=>$company_ratio ,'total'=>$total ];
             }
-        //    print_r($data);
-        //    die();
+           // print_r($data);
+           // die();
             
             $ret = $this->genRefund( $data, $order_obj , $uInfo );
             $transaction->commit();
