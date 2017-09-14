@@ -33,6 +33,6 @@ class DefaultController extends Controller
       //  $pTree = UserService::getInstance()->getProxyTree( $proxys, 94 );
       
         $be = new RebateBehavior();
-        $ret =  $be->doBalance( MgOrderList::findOne(['order_sn'=>'20170714125337101364'] ) );
+        $ret =  $be->doBalance( MgOrderList::findOne(['order_sn'=>'2017071409015694219'] ) );
     }
 }
