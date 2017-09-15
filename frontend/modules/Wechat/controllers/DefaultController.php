@@ -398,6 +398,13 @@ class DefaultController extends Controller
         foreach ($uList as $_uObj ){
            $uids[] = $_uObj->id;
         }
+        //获取代理uid
+        $pList = UserService::getInstance()->getSubProxy( $uObj );
+        foreach ( $pList as $pObj ){
+           $uids[] = $pObj->id;
+        }
+        $uids = array_unique( $uids );
+        
         $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
         $sum = 0.00;
         if( $orderList ){
