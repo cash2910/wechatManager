@@ -29,7 +29,7 @@ class NoticeController extends Controller
         $model = new MgGameUseropt();
         $model->setAttributes( $_REQUEST );
         if (  !$model->save() ) {
-            yii::error( json_encode( $model->getErrors() ,JSON_UNESCAPED_UNICODE ) );
+            yii::error( "游戏参数保存失败：".json_encode( $model->getErrors() ,JSON_UNESCAPED_UNICODE ) );
             $ret['resultNo'] = 90000;
             $ret['resultDesc'] = json_encode( $model->getErrors() ,JSON_UNESCAPED_UNICODE );
         }else{
