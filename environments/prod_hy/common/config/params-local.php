@@ -8,6 +8,7 @@ return [
     //'AppSecret'=>'7c3ae345f52e87945cf655c1f24ad1e7',
     //'MCHID' =>'', 
     //MG互娱 (新) //重庆
+    'APP_NAME' =>'MG互娱',
     'AppId' => 'wxc41b5bd89d328132',
     'AppSecret'=>'4be0b3d8ff64babcb1559c6f091e092b',
     'MCHID' =>'1483656542', 
