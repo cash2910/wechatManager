@@ -58,7 +58,7 @@ class DefaultController extends Controller
         }
         $token = WeixinWeb::getInstance()->getClient()->fetchAccessToken( $code );
 
-        Yii::$app->getResponse()->redirect( Yii::$app->request->get('r_url', '/Wechat/default/my-index') );
+        Yii::$app->getResponse()->redirect( yii::$app->session['ret_url'] );
     }
     
     public function actionSharePage()
