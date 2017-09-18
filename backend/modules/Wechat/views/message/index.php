@@ -19,13 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            ['label' => '状态','value' => function($data){
+            ['label' => '类型','value' => function($data){
                 return $data::$type_msg[$data->type];
             }],
             ['label' => '状态','value' => function($data){
                 return $data::$status_msg[$data->status];
             }],
-            'content',
+            ['label' => '内容','value' => function($data){
+                return common\helper\StringHelp::truncateUtf8String( $data->content ,10);
+            }],
             'open_id',
              'num',
             'add_time:datetime',
