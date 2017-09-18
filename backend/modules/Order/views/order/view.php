@@ -12,15 +12,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mg-order-list-view">
 
-    <p>
-        <?= Html::a('支付订单', ['delete', 'id' => $model->id], [
+   <!--  <p>
+        <?php Html::a('支付订单', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </p> --> 
 
     <?= DetailView::widget([
         'model' => $model,

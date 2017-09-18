@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return common\helper\StringHelp::truncateUtf8String( $data->content ,10);
             }],
             'open_id',
-             'num',
+            'num',
             'add_time:datetime',
             // 'update_tie',
             ['class' => 'yii\grid\ActionColumn'],

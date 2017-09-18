@@ -47,7 +47,9 @@ class MgUserAccount extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'balance' => 'Balance',
-            'free_balance' => 'Free Balance',
+            'free_balance' => '未提现金额',
+            'total_balance'=>'总返利',
+            'total_num'=> '总流水',
             'update_time' => 'Update Time',
         ];
     }

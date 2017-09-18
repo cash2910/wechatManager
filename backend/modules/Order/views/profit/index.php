@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'balance',
             'free_balance',
+            'total_balance',
+            'total_num',
             'update_time',
             [
                 'header' => "查看详情",
