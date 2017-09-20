@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use common\models\MgUsers;
 
 /**
  * ProfitController implements the CRUD actions for MgUserAccount model.
@@ -42,9 +44,15 @@ class ProfitController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
+        
+        $data = $dataProvider->getModels();
+        $uids = array_unique( ArrayHelper::getColumn($data, 'user_id') );
+        $userObjs = MgUsers::findAll( ['id'=>$uids] );
+        $uMap = ArrayHelper::map($userObjs, 'id', 'nickname');
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'uMap' => $uMap
         ]);
     }
 

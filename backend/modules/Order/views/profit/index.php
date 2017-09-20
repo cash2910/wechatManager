@@ -22,6 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'user_id',
+            ['label' => '用户昵称','value' => function($data) use ($uMap){
+                return $uMap[$data->user_id];
+            }],
             'balance',
             'free_balance',
             'total_balance',

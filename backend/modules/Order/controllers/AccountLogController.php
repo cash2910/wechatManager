@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
+use common\models\MgUsers;
 
 
 /**
@@ -69,9 +71,14 @@ class AccountLogController extends Controller
                 ]
             ],
         ]);
+        $data = $dataProvider->getModels();
+        $uids = array_unique( ArrayHelper::getColumn($data, 'user_id') );
+        $userObjs = MgUsers::findAll( ['id'=>$uids] );
+        $uMap = ArrayHelper::map($userObjs, 'id', 'nickname');
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'uMap' => $uMap
         ]);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace backend\modules\Order;
+use yii;
 use mdm\admin\components\Helper;
 
 /**
@@ -25,7 +26,7 @@ class OrderModule extends \yii\base\Module
     
     public function getMenu( $path ){
         $path = '/'.$path;
-        $ret = Helper::checkRoute('/Order/order/index');
+        //$ret = Helper::checkRoute('/Order/order/index');
         $items =  [
             'items' => [
                 ['label'=>'订单管理','url' => ['/Order/order/index'], 'active' => 0 ],
@@ -34,6 +35,7 @@ class OrderModule extends \yii\base\Module
                 ['label'=>'返利余额','url' => ['/Order/profit/index'], 'active' => 0 ],
             ]
         ];
+        //var_dump($ret);die();
         $func = function( &$items ) use ( &$func, $path ){
             foreach( $items as &$item ){
                 if( !Helper::checkRoute( $item['url'][0] ) )

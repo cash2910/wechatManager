@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\MgUserAccountLog;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -35,11 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'user_id',
+            ['label' => '用户昵称','value' => function($data) use ($uMap){
+                return ArrayHelper::getValue($uMap, $data->user_id);
+            }],
             'num',
             ['label' => '订单渠道','value' => function($data){
                 return $data::$msg[$data->c_type];
             }],
-            'content',
+            ['label' => '描述','value' => function($data){
+                //return preg_replace("/(返利订单：)([0-9]+)/", "订单返利：".Html::a( "\\2", Yii::$app->urlManager->createAbsoluteUrl(['/Order/order/index','order_sn'=> "\\\\2" ] ) , ['target' => '_blank'] ), $data->content);
+                preg_match("/(返利订单：)([0-9]+)/", $data->content , $match);
+                return isset( $match[2] ) ? $data->content." ".Html::a( "查看订单", Yii::$app->urlManager->createAbsoluteUrl(['/Order/order/index','order_sn'=> $match[2] ] ) , ['target' => '_blank'] ) : $data->content;
+            },'format' => 'raw'],
             // 'type',
             [
                 'label'=>'添加日期',

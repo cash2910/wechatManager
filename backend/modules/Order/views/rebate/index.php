@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -29,14 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="form-group ">
             <?php echo Html::input('text','end_date',yii::$app->request->get('end_date',''),['class'=>'form-control','placeholder'=>'结束日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"])?>
         </div>
+        <?= Html::a("导出", Url::current(['export'=>1]), ["class" => "btn btn-info","style"=>'margin-bottom:15px;  float:right',"target"=>'blank']) ?>
         <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
     <?= Html::endForm() ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            'id',
             'rebate_sn',
             'user_id',
+            ['label' => '用户昵称','value' => function($data) use ($uMap){
+                return $uMap[$data->user_id];
+            }],
             ['label' => '是否支付','value' => function($data){
                 return \common\models\MgRebateList::$statMsg[$data->status];
             }],
@@ -48,11 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'add_time',
                 'format' => ['date', 'php:Y-m-d H:i:s'],
             ],
-            [
+         /*    [
                 'label'=>'更新日期',
                 'attribute' => 'update_time',
                 'format' => ['date', 'php:Y-m-d H:i:s'],
-            ],
+            ], */
             [
                 'header' => "查看／审核",
                 'class' => 'yii\grid\ActionColumn',

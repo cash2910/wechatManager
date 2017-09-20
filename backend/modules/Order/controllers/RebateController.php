@@ -9,6 +9,10 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\helper\ExcelHelp;
+use yii\helpers\ArrayHelper;
+use common\service\users\UserService;
+use common\models\MgUsers;
 
 
 /**
@@ -60,6 +64,8 @@ class RebateController extends Controller
         if(  ($end_date = Yii::$app->request->get('end_date', '') ) == true ){
             $query->andWhere(['<=','add_time',strtotime( $end_date ) ]);
         }
+        
+        
         $dataProvider = new ActiveDataProvider([
             'query' =>$query,
             'sort' => [
@@ -68,10 +74,48 @@ class RebateController extends Controller
                 ]
             ]
         ]);
-      //  var_dump($dataProvider);die();
+        
+        $data = $dataProvider->getModels();
+        $uids = array_unique( ArrayHelper::getColumn($data, 'user_id') );
+        $userObjs = MgUsers::findAll( ['id'=>$uids] );
+        $uMap = ArrayHelper::map($userObjs, 'id', 'nickname');
+        
+        //导出
+        if(Yii::$app->request->get('export')){
+
+            $exObj = ExcelHelp::getPhpExcel();
+            $exObj->setActiveSheetIndex(0);
+            $i = 2;
+            $objActSheet = $exObj->getActiveSheet();
+            $objActSheet->setCellValue('B1', mb_convert_encoding( '提现单号','utf-8' ) );
+            $objActSheet->setCellValue('C1', mb_convert_encoding( '用户昵称','utf-8' ) );
+            $objActSheet->setCellValue('D1', mb_convert_encoding( '用户id','utf-8' ) );
+            $objActSheet->setCellValue('E1', mb_convert_encoding( '提现金额','utf-8' ) );
+            $objActSheet->setCellValue('F1', mb_convert_encoding( '创建时间','utf-8' ) );
+            $objActSheet->setCellValue('G1', mb_convert_encoding( '更新日期','utf-8' ) );
+            $objActSheet->setCellValue('H1', mb_convert_encoding( '支付单号','utf-8' ) );
+            foreach ( $data as $d ){
+                $objActSheet->setCellValueExplicit('B' . $i, $d['rebate_sn'], \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('C' . $i, $uMap[$d['user_id']], \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('D' . $i, $d['user_id'], \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('E' . $i, $d['rebate_num'], \PHPExcel_Cell_DataType::TYPE_NUMERIC);
+                $objActSheet->setCellValueExplicit('F' . $i, date( "Y-m-d H:i:s" ,$d['add_time'] ), \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('G' . $i, date( "Y-m-d H:i:s" ,$d['update_time'] ), \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('H' . $i, $d['pay_sn'], \PHPExcel_Cell_DataType::TYPE_STRING);
+                $i++;
+            }
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="' . date("Y-m-d H:i", time()) . '-提现单.xls"');
+            header('Cache-Control: max-age=0');
+            $objWriter = ExcelHelp::getWriterInstance( $exObj, 'Excel5');
+            $objWriter->save('php://output');
+            exit();
+            //return  '';
+        }
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'uMap' => $uMap
         ]);
     }
 
