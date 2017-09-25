@@ -30,6 +30,7 @@ $("._rebate").click(function(){
 	$.ajax({
 		url:'/Wechat/order/get-rebate?num='+money,
 		success:function( data ){
+			mgUI.endload();
 			var d = eval("("+data+")");
 			if( !d.isOk ){
 				mgUI.msg( d.msg );
@@ -38,7 +39,6 @@ $("._rebate").click(function(){
 			mgUI.msg( d.msg, function(){
 				location.href="/Wechat/default/my-wallet";
 			});
-			mgUI.endload();
 		}
 	});
 });

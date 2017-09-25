@@ -34,6 +34,12 @@ class RebateService extends BaseService {
             $ret['msg'] = "提现金额必须大于5元";
             return $ret;
         }
+        
+        if( $num  > $account->free_balance ){
+            $ret['msg'] = "账户余额不足 {$num}";
+            return $ret;
+        }
+        
         //手续费
         $fee = 0;
         $rule = [
@@ -47,10 +53,7 @@ class RebateService extends BaseService {
                 break;
             }
         }
-        if( ($num + $fee) > $account->free_balance ){
-            $ret['msg'] = "账户余额不足 {$num}";
-            return $ret;
-        }
+
         $transaction = Yii::$app->db->beginTransaction();
         try{
             $rebateObj = new MgRebateList();
@@ -66,7 +69,7 @@ class RebateService extends BaseService {
             $res = $rebateObj->save();
             if( !$res )
                 throw new \Exception( json_encode( $rebateObj->getErrors() ) );
-            $account->free_balance -= ($num+$fee);
+            $account->free_balance -= $num;
             $res = $account->save();
             if( !$res )
                 throw new \Exception( json_encode( $rebateObj->getErrors() ) );
