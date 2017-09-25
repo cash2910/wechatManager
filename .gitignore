@@ -1,5 +1,6 @@
 # yii console command
 /yii
+/frontend/web/images/proxys/*.png
 
 # phpstorm project files
 .idea

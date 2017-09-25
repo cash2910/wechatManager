@@ -90,14 +90,14 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 	<?php if( $isProxyBd ): ?>
 	<link rel="stylesheet" href="/css/game_css.css">
 	<div class="banner"><img src="/images/banner.png"></div>
-    <div style="margin: 7px; background:#5d130a"><p class="p_desc" >【<?=$uObj->nickname ?>】！您可以通过分享本页链接的方式，发展下级代理，扩大业绩基数。</p></div>
-    <!--
+    <div style="margin: 7px; background:#5d130a"><p class="p_desc" >【<?=$uObj->nickname ?>】！您可以通过分享本页链接或者下方二维码的方式，发展下级代理，扩大业绩基数。</p></div>
+    <?php if( $imageUrl ):?>
     <div class="icon_ma">
         <div class="erweima" style="width: 70%; float: none;">
-        	<img id="share_img" src="" />
+        	<img id="share_img" src="<?php echo $imageUrl?>" />
         </div>
     </div>
-    -->
+    <?php endif;?>
     <div id="tip" style="display: block">
 		<div class="share_text" ><p style="padding:0">点这里分享给您的朋友</p></div>
 		<div class="div_btn"><button class="btn_know">知道了</button></div>

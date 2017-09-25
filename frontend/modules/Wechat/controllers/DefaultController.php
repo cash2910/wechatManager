@@ -103,14 +103,17 @@ class DefaultController extends Controller
         //判断是否满足推广
         $isProxyBd = false;
         $shareUrl = yii::$app->request->url;
+        $imageUrl = '';
         if( $proxyObj->rebate_ratio >= 35 ){
             $isProxyBd = true;
             $shareUrl = Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/default/show-proxy-link','id'=>$proxyObj->id ] );
+            $imageUrl = Yii::$app->urlManager->createAbsoluteUrl(['/Wechat/api/get-qr-pic','pid'=>$proxyObj->id ] );
         }
         
         return $this->renderPartial('share_proxy',[
             'uObj'=> $proxyObj,
             'shareLink'=> $shareUrl,
+            'imageUrl' =>$imageUrl,
             'isProxyBd'=> $isProxyBd
         ]);
     }
