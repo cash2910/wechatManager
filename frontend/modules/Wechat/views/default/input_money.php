@@ -21,7 +21,7 @@ A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 //提现操作
 $("._rebate").click(function(){
 	var limit = <?php echo $limit;?>;
-	var money = parseInt( $(".weui-input").val() );
+	var money = parseFloat( $(".weui-input").val()  ).toFixed(2);
 	if( money <= limit ){
 		mgUI.msg('提现金额必须大于'+limit+'元');
 		return false;
@@ -32,12 +32,14 @@ $("._rebate").click(function(){
 		success:function( data ){
 			mgUI.endload();
 			var d = eval("("+data+")");
+			console.dir(d);
 			if( !d.isOk ){
 				mgUI.msg( d.msg );
 				return false;
 			}
 			mgUI.msg( d.msg, function(){
-				location.href="/Wechat/default/my-wallet";
+				console.dir(111);
+				location.href = "/Wechat/default/my-wallet";
 			});
 		}
 	});
