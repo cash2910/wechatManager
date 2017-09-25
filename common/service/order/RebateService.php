@@ -30,7 +30,24 @@ class RebateService extends BaseService {
     public function createRebateOrder( MgUserAccount $account, $num ){
         
         $ret = ['isOk'=>0,'msg'=>'创建提现单失败','data'=>[]]; 
-        if( $account->free_balance < $num ){
+        if( $num <= 5 ){
+            $ret['msg'] = "提现金额必须大于5元";
+            return $ret;
+        }
+        //手续费
+        $fee = 0;
+        $rule = [
+            ['range'=>[0,200],'fee'=>5],
+            ['range'=>[200,9999999],'fee'=>0]
+        ];
+        foreach ( $rule as $r ){
+            $min = $r['range'][0]; $max = $r['range'][1];
+            if( $num >= $min && $num < $max ){
+                $fee = $r['fee'];
+                break;
+            }
+        }
+        if( ($num + $fee) > $account->free_balance ){
             $ret['msg'] = "账户余额不足 {$num}";
             return $ret;
         }
@@ -41,11 +58,15 @@ class RebateService extends BaseService {
             $rebateObj->user_id = $account->user_id;
             $rebateObj->status = MgRebateList::APPLY;
             $rebateObj->desc = "用户提现： ¥{$num}" ;
-            $rebateObj->rebate_num = $num;
+            $rebateObj->fee = $fee;
+            if( $fee > 0 ){
+                $rebateObj->desc .= " 手续费¥{$fee}";
+            }
+            $rebateObj->rebate_num = ($num - $fee);
             $res = $rebateObj->save();
             if( !$res )
                 throw new \Exception( json_encode( $rebateObj->getErrors() ) );
-            $account->free_balance -= $num;
+            $account->free_balance -= ($num+$fee);
             $res = $account->save();
             if( !$res )
                 throw new \Exception( json_encode( $rebateObj->getErrors() ) );

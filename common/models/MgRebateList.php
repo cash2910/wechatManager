@@ -13,6 +13,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $user_id
  * @property integer $status
  * @property string $rebate_num
+ * @property string $fee
  * @property string $pay_sn
  * @property string $add_time
  * @property string $update_time
@@ -56,7 +57,7 @@ class MgRebateList extends \yii\db\ActiveRecord
         return [
             [['rebate_sn'], 'required'],
             [['user_id', 'status', 'add_time', 'update_time'], 'integer'],
-            [['rebate_num'], 'number'],
+            [['rebate_num','fee'], 'number'],
             [['rebate_sn'], 'string', 'max' => 32],
             [['desc'], 'string', 'max' => 150],
             [['pay_sn'], 'string', 'max' => 40],
@@ -75,6 +76,7 @@ class MgRebateList extends \yii\db\ActiveRecord
             'status' => '状态',
             'desc'=> '描述信息',
             'pay_sn'=>'支付流水号',
+            'fee' => '手续费',
             'rebate_num' => '提现金额',
             'add_time' => '申请时间',
             'update_time' => '更新时间',

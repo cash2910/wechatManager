@@ -26,11 +26,12 @@ A:hover { FONT-WEIGHT: normal; TEXT-DECORATION: none}
 $("._rebate").click(function(){
 	var limit = <?php echo $limit;?>;
 	var money = parseInt( $(".weui-msg__title").html().substring( 1 ) );
-	if( money < limit ){
+	if( money <= limit ){
 		mgUI.msg('余额大于'+limit+'以上才可提现');
 		return false;
 	}
-	mgUI.startload('请求处理中');
+	location.href = '/Wechat/default/input-money';
+	/* mgUI.startload('请求处理中');
 	$.ajax({
 		url:'/Wechat/order/get-rebate',
 		success:function( data ){
@@ -44,7 +45,7 @@ $("._rebate").click(function(){
 			});
 			//mgUI.endload();
 		}
-	});
+	}); */
 });
 </script>
 

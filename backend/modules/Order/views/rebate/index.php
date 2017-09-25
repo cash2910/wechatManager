@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'desc',
             'pay_sn',
             'rebate_num',
+            'fee',
             [
                 'label'=>'申请日期',
                 'attribute' => 'add_time',

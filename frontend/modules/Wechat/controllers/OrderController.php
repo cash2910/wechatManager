@@ -133,7 +133,9 @@ class OrderController extends Controller
         $aObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
         if( !$aObj || $aObj->free_balance < 1 )
             CommonResponse::end( ['isOk'=>0,'msg'=>'提现金额不足' ] );
-        $ret = RebateService::getInstance()->createRebateOrder( $aObj , $aObj->free_balance );
+        //获取用户提现金额
+        $num = (int)yii::$app->request->get('num');
+        $ret = RebateService::getInstance()->createRebateOrder( $aObj , $num );
         if( $ret['isOk'] ){
             $ret['msg'] = '提现成功 ,请等待管理员审核...';
             $ret['data'] = json_encode( $ret['data']->getAttributes() );

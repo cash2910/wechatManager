@@ -38,7 +38,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order','my-charge','my-wallet', 'game-page' ,
+                    'my-index','my-friend','my-order','my-charge','my-wallet', 'input-money','game-page' ,
                     'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','show-proxy-link','bind-proxy',
                     'my-proxy','proxy-info','change-ratio'
                 ],
@@ -63,6 +63,11 @@ class DefaultController extends Controller
     
     public function actionSharePage()
     {
+        //判断链接有效性
+        $proxyId =  Yii::$app->request->get('id');
+        $proxyObj = MgUsers::findOne( ['id'=>$proxyId,'is_bd'=> MgUsers::IS_BD ] );
+        if( !$proxyObj )
+            $this->_404('代理链接错误');
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('gid', 1)]);
         if( !$gObj )
             $this->_404('游戏信息错误');
@@ -85,7 +90,6 @@ class DefaultController extends Controller
             'owner' => $owner
         ]);
     }
-    
     
     /**
      * 代理分享链接
@@ -330,12 +334,26 @@ class DefaultController extends Controller
         $this->title="提现管理";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         $uaObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
-        //查看是否有提现记录 第一次提现上线为1 元
-        $limit = 200;
+        $limit = 5;
+        //查看是否有提现记录 第一次提现上线为1元
         $rebateObj = MgRebateList::findOne(['user_id'=>$uObj->id]);
         if( !$rebateObj )
-            $limit = 1 ;
+            $limit = 1;
         return $this->render('my_wallet',[
+            'account' => $uaObj,
+            'limit' => $limit
+        ]);
+    }
+    
+    //输入提现金额 input-money
+    public function actionInputMoney(){
+        
+        $this->title="提取返现";
+        $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
+        $uaObj = MgUserAccount::findOne(['user_id'=>$uObj->id]);
+        //最少提现金额
+        $limit = 5;
+        return $this->render('input_money',[
             'account' => $uaObj,
             'limit' => $limit
         ]);
