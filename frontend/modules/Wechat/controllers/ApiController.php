@@ -21,6 +21,8 @@ class ApiController extends Controller
             return '';
         }
         $proxyImage = "./images/proxys/proxy_{$pObj->id}.png";
+        Yii::$app->response->format = Response::FORMAT_RAW;
+        Header("Content-type: image/png");
         if( !file_exists($proxyImage) ){
             require_once yii::$app->basePath.'/../common/components/qrcode/phpqrcode/qrlib.php';
             $logo = './images/head_logo.png';
@@ -38,10 +40,12 @@ class ApiController extends Controller
             //重新组合图片并调整大小
             imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,
                 $logo_qr_height, $logo_width, $logo_height);
-            imagepng($QR, $proxyImage);
+            
+            ImagePng($QR, $proxyImage);
+        }else{
+            $QR = imagecreatefromstring( file_get_contents( $proxyImage ) );
         }
-        Yii::$app->response->format = Response::FORMAT_RAW;
-        $urlPath = substr($proxyImage, 1);
-        echo "<img src='$urlPath'>";
+        //输出图片
+        ImagePng( $QR );
     }
 }
