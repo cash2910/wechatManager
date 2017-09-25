@@ -28,7 +28,9 @@ use common\models\WechatMessage;
     <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'open_id')->textInput(['maxlength' => true]) ?>
-
+    
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    
     <?= $form->field($model, 'num')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'send_time')->textInput(['maxlength' => true,'placeholder'=>'发送日期','readonly'=>'true','onfocus'=>"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"]) ?>

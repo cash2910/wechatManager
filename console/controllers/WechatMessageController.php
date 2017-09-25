@@ -52,9 +52,10 @@ class WechatMessageController extends Controller{
                     break;
             }
             foreach ($users as $user){
+                
                 $res = $msgService->notify([
                     'touser'=>$user->open_id,
-                    // 'url'=>'',
+                    'url'=>ArrayHelper::getValue($mObj, 'url'),
                     'data'=>[
                         'first'=>[
                             'value'=>ArrayHelper::getValue($mObj, 'desc'),

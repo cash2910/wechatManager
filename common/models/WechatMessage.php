@@ -14,6 +14,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $content
  * @property string $desc
  * @property string $open_id
+ * @property string $url
  * @property string $num
  * @property stirng $send_time
  * @property string $add_time
@@ -71,6 +72,7 @@ class WechatMessage extends \yii\db\ActiveRecord
         return [
             [['type', 'status', 'num', 'add_time', 'update_time'], 'integer'],
             [['content'], 'string', 'max' => 200],
+            [['url'], 'string', 'max' => 300],
             [['desc', 'send_time'], 'string', 'max' => 30],
             [['open_id'], 'string', 'max' => 60],
             ['send_time', 'default', 'value' => '2017-09-01'],
@@ -90,6 +92,7 @@ class WechatMessage extends \yii\db\ActiveRecord
             'desc' => '简述',
             'content' => '内容',
             'open_id' => 'OpenID',
+            'url' =>'链接地址',
             'num' => '推送数量',
             'send_time' => '定时发送',
             'add_time' => '添加时间',
