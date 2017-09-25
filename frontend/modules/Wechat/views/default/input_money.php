@@ -2,7 +2,7 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">金额</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="最多可提现金额<?php echo $account->free_balance; ?>元">
+            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="最多可提现金额<?php echo (int)$account->free_balance; ?>元">
         </div>
     </div>
  </div>
