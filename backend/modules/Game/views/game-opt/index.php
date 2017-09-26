@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['label' => '操作类型','value' => function($data){
                 return ArrayHelper::getValue(Yii::$app->params['game_opt'], $data->opt_code);
             }],
-            //'game_id',
+            'opt_code',
             'data',
              'ip',
             [
