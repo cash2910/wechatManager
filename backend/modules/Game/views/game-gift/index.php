@@ -26,7 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $data::$msg[$data->status];
             }],
             //'data',
-            'desc',
+            ['label' => '赠送理由','value' => function($data){
+                return common\helper\StringHelp::truncateUtf8String( $data->desc ,10);
+            }],
             'game_sn',
             // 'apply_user',
             'add_time:datetime',
