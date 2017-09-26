@@ -58,6 +58,9 @@ class NoticeController extends Controller
         switch ( $optObj->opt_code ){
             case '100001':
                 $uObj = MgUsers::findOne(['union_id'=>$optObj->union_id ]);
+                if( !$uObj ){
+                    break;
+                }
                 $relObj = MgUserRel::findOne([ 'sub_user_openid'=>$uObj->open_id ] );
                 if( !$relObj )
                     break;
