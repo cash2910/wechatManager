@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return ArrayHelper::getValue($uMap, $data->union_id);
             }],
             ['label' => '操作类型','value' => function($data){
-                return Yii::$app->params['game_opt'][$data->opt_code];
+                return ArrayHelper::getValue(Yii::$app->params['game_opt'], $data->opt_code);
             }],
             //'game_id',
             'data',
