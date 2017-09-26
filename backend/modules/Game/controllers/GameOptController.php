@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use common\models\MgUsers;
 
 /**
  * GameOptController implements the CRUD actions for MgGameUseropt model.
@@ -63,9 +65,16 @@ class GameOptController extends Controller
                 ]
             ]
         ]);
+        
+        
+        $data = $dataProvider->getModels();
+        $union_ids = array_unique( ArrayHelper::getColumn($data, 'union_id') );
+        $userObjs = MgUsers::findAll( ['union_id'=>$union_ids] );
+        $uMap = ArrayHelper::map($userObjs, 'union_id', 'nickname');
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'uMap' => $uMap
         ]);
     }
 
