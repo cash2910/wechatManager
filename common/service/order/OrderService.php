@@ -8,6 +8,7 @@ use common\models\MgOrderList;
 use common\models\MgOrderPayList;
 use yii\base\Exception;
 use yii\helpers\ArrayHelper;
+use common\components\order\ActLogBehavior;
 
 
 class OrderService extends BaseService implements OrderInterface{
@@ -16,7 +17,7 @@ class OrderService extends BaseService implements OrderInterface{
     const AFTER_UPDATE_ORDER  = 'after_update_order';
     const AFTER_PAY_ORDER = 'after_pay_order';
 
-    private $orderObj = null;
+    public $orderObj = null;
     
     public function behaviors(){
         
@@ -28,7 +29,8 @@ class OrderService extends BaseService implements OrderInterface{
             //计算返利
             'coculateRefund'=>[
                 'class'=>'common\components\order\RebateBehavior',   
-            ]
+            ],
+            ActLogBehavior::className()
         ];
     }
     
@@ -85,6 +87,7 @@ class OrderService extends BaseService implements OrderInterface{
             if( !$res )
                 throw new \Exception( json_encode( $payObj->getErrors() ) );
             $transaction->commit();
+            $this->orderObj = $orderObj;
             $this->trigger(self::AFTER_PAY_ORDER);
         }catch( Exception $e ){
             var_dump( $e->getMessage() );

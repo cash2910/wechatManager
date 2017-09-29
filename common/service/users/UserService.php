@@ -79,9 +79,9 @@ class UserService extends BaseService implements UserInterface
             }
             $ret = $uObj->save();
             if( !$ret )
-                throw new Exception( $uObj->getErrors() );
+                throw new \Exception( $uObj->getErrors() );
             $transaction->commit();
-        }catch (Exception $e){
+        }catch (\Exception $e){
             $res['isOk'] = 0;
             $res['msg'] = $e->getMessage();
             $transaction->rollBack();

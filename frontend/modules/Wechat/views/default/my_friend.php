@@ -1,6 +1,9 @@
 <?php 
 use common\models\MgUsers;
 ?>
+<div style="padding: 25px;">
+    <h3 class="page__title">活跃用户数：<span style="color: limegreen;"><?php echo $score;?></span></h3>
+</div>
 <div class="weui-cells" style="margin-top: 20px;">
     <?php if( !empty( $subs ) ):?>
         <?php foreach ($subs as $sub):?>
