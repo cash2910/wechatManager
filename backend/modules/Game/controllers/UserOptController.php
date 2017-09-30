@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use common\models\MgUsers;
 
 /**
  * UserOptController implements the CRUD actions for MgUserActlog model.
@@ -35,12 +37,37 @@ class UserOptController extends Controller
      */
     public function actionIndex()
     {
+        $query = MgUserActlog::find();
+        if(  ($user_id = Yii::$app->request->get('user_id', '') ) == true ){
+            $query->andWhere(['user_id'=>$user_id]);
+        }
+        if(  ($opt_code = Yii::$app->request->get('opt', '') ) == true ){
+            $query->andWhere(['opt'=>$opt_code]);
+        }
+        if(  ($from_date = Yii::$app->request->get('from_date', '') ) == true ){
+            $query->andWhere(['>=','add_time',strtotime( $from_date )]);
+        }
+        if(  ($end_date = Yii::$app->request->get('end_date', '') ) == true ){
+            $query->andWhere(['<=','add_time',strtotime( $end_date ) ]);
+        }
+        
         $dataProvider = new ActiveDataProvider([
-            'query' => MgUserActlog::find(),
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'add_time' => SORT_DESC,
+                ]
+            ]
         ]);
+        
+        $data = $dataProvider->getModels();
+        $uids = array_unique( ArrayHelper::getColumn($data, 'user_id') );
+        $userObjs = MgUsers::findAll( ['id'=>$uids] );
+        $uMap = ArrayHelper::map($userObjs, 'id', 'nickname');
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'uMap' => $uMap
         ]);
     }
 

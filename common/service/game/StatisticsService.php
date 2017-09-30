@@ -13,9 +13,15 @@ class StatisticsService extends BaseService {
     
     const PLAY_CODE = '10000';
     const PAY_CODE = '20000';
-    public $log = null; 
+    static public $msg = [
+        self::PLAY_CODE => '8轮对局',
+        self::PAY_CODE => '用户充值',
+    ];
     
     const AFTER_ADD_LOG  = 'after_add_log';
+    
+        
+    public $log = null; 
     
     public function behaviors(){
         return [
