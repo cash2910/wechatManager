@@ -68,7 +68,7 @@ class StatisticsService extends BaseService {
             }
         }
         print_r($info);
-        if( $info[self::PLAY_CODE] < 3 || $info[self::PAY_CODE] == 0 )
+        if( $info[self::PLAY_CODE] < 2 || $info[self::PAY_CODE] == 0 )
                 $isAct = false;
         return $isAct;
         
@@ -117,7 +117,7 @@ class StatisticsService extends BaseService {
         
         //查找满足条件的用户
         foreach ( $users as $uid => &$user ){
-            if( $user[self::PLAY_CODE] < 3 || $user[self::PAY_CODE] == 0 )
+            if( $user[self::PLAY_CODE] < 2 || $user[self::PAY_CODE] == 0 )
                 unset( $user );
         }
         
