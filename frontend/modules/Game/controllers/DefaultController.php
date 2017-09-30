@@ -7,6 +7,8 @@ use yii\web\Controller;
 use common\models\MgUserActlog;
 use common\models\MgOrderList;
 use common\service\order\OrderService;
+use common\models\MgUsers;
+use common\service\game\StatisticsService;
 
 /**
  * Default controller for the `Game` module
@@ -34,6 +36,12 @@ class DefaultController extends Controller
             ];
         $logs = MgUserActlog::find()->where(['open_id1'=>'dsadsa'])->andWhere(['between', 'add_time', strtotime($date['from']),  strtotime($date['to']) ])->one();
          */
+        $uObj = MgUsers::findOne(['id'=>304]);
+        $ret = StatisticsService::getInstance()->checkIsActUser( $uObj ,[
+            'from'=>'2017-09-01',
+            'to' => '2017-11-08'
+        ]);
+        var_dump( $ret );
     }
     
     
