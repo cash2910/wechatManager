@@ -439,7 +439,7 @@ class DefaultController extends Controller
         return $this->render('friend_charge_list',[
             'order_list'=> $orderList,
             'sum' => $sum,
-            'user_map' => ArrayHelper::index($uList, null, 'id')
+            'user_map' => ArrayHelper::map($uList, 'id', 'nickname')
         ]);
     }
     
