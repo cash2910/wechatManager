@@ -31,6 +31,7 @@ class GameModule extends \yii\base\Module
                 ['label'=>'商品管理','url' => ['/Game/goods'], 'active' => 0 ],
                 ['label'=>'赠送道具','url' => ['/Game/game-gift'], 'active' => 0 ],
                 ['label'=>'游戏记录','url' => ['/Game/game-opt'], 'active' => 0 ],
+                ['label'=>'活跃度记录','url' => ['/Game/user-opt/index'], 'active' => 0 ],
             ]
         ];
         $func = function( &$items ) use ( &$func, $path ){

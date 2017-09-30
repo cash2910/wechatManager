@@ -51,10 +51,10 @@ class MgUserActlog extends \yii\db\ActiveRecord
             'union_id' => 'Union ID',
             'user_id' => 'User ID',
             'open_id' => 'Open ID',
-            'opt' => 'Opt',
-            'num' => 'Num',
-            'data' => 'Data',
-            'add_time' => 'Add Time',
+            'opt' => '用户操作',
+            'num' => '数值',
+            'data' => '详细数据',
+            'add_time' => '添加时间',
         ];
     }
 }
