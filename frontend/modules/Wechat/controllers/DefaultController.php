@@ -439,7 +439,7 @@ class DefaultController extends Controller
         return $this->render('friend_charge_list',[
             'order_list'=> $orderList,
             'sum' => $sum,
-            'user_map' => ArrayHelper::map($uList, 'id', 'nickname')
+            'user_map' => ArrayHelper::map( array_merge( $uList, $pList) , 'id', 'nickname')
         ]);
     }
     
