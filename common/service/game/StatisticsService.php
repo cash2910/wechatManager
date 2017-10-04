@@ -74,7 +74,7 @@ class StatisticsService extends BaseService {
             }
         }
         print_r($info);
-        if( $info[self::PLAY_CODE] < 2 || $info[self::PAY_CODE] == 0 )
+        if( $info[self::PLAY_CODE] < 10 || $info[self::PAY_CODE] == 0 )
                 $isAct = false;
         return $isAct;
         
