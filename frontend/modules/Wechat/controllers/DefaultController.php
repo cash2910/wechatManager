@@ -224,8 +224,7 @@ class DefaultController extends Controller
         foreach( $subObjs as $subObj){
             $ids[] = $subObj->sub_user_id;
         }
-        $role = yii::$app->request->get('role', MgUsers::IS_PLAYER );
-        $subs = MgUsers::findAll( [ 'id'=>$ids,'is_bd'=>$role ] );
+        $subs = MgUsers::findAll( [ 'id'=>$ids ] );
         //获取活跃用户数
         $score = (int)yii::$app->redis->ZSCORE( 'ACT_ZSET_RANK', "user_act_users_{$mgInfo->id}" );       
         return $this->render('my_friend', [
