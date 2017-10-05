@@ -229,7 +229,6 @@ class DefaultController extends Controller
         $score = (int)yii::$app->redis->ZSCORE( 'ACT_ZSET_RANK', "user_act_users_{$mgInfo->id}" );       
         return $this->render('my_friend', [
             'subs'=> $subs,
-            'role'=> $role,
             'score'=>$score
         ]);
     }
