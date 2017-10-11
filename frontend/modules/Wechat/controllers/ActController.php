@@ -3,9 +3,7 @@ namespace frontend\modules\Wechat\controllers;
 
 use yii\web\Controller;
 use yii;
-use yii\web\Response;
 use common\models\MgUsers;
-use yii\helpers\ArrayHelper;
 
 
 /**

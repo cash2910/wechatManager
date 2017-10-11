@@ -11,7 +11,6 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\helper\ExcelHelp;
 use yii\helpers\ArrayHelper;
-use common\service\users\UserService;
 use common\models\MgUsers;
 
 
