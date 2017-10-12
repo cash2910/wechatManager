@@ -1,11 +1,11 @@
 <?php if( !empty( $data ) ):?>
     <div class="page__category js_categoryInner" data-height="224" style="">
         <div class="weui-cells page__category-content">
-        
+            <?php $i =1; ?>
             <?php foreach ($data as $k => $info):?>
             <a class="weui-cell weui-cell_access js_item" data-id="button" href="javascript:;">
                 <div class="weui-cell__bd">
-                    <p style="text-align: left;margin-left: 30px;"><?php echo $uMap[$info[2]]->nickname;?>  <span style="float: right; margin-right: 10px;">活跃用户数：<?php echo $info[1];?></span></p>
+                    <p style="text-align: left;margin-left: 30px;"><?php echo ($i++)."、  ".$uMap[$info[2]]->nickname;?>  <span style="float: right; margin-right: 10px;">活跃用户数：<?php echo $info[1];?></span></p>
                 </div>
             </a>
             <?php endforeach; ?>
