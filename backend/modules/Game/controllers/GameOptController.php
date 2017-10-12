@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use common\models\MgUsers;
+use common\helper\ExcelHelp;
 
 /**
  * GameOptController implements the CRUD actions for MgGameUseropt model.
@@ -56,6 +57,35 @@ class GameOptController extends Controller
         if(  ($end_date = Yii::$app->request->get('end_date', '') ) == true ){
             $query->andWhere(['<=','add_time',strtotime( $end_date ) ]);
         }
+        
+        //导出
+        if(Yii::$app->request->get('export')){
+        
+            $data = $query->all();
+            $exObj = ExcelHelp::getPhpExcel();
+            $exObj->setActiveSheetIndex(0);
+            $i = 2;
+            $objActSheet = $exObj->getActiveSheet();
+            $objActSheet->setCellValue('B1', mb_convert_encoding( 'union_id','utf-8' ) );
+            $objActSheet->setCellValue('C1', mb_convert_encoding( '操作类型','utf-8' ) );
+            $objActSheet->setCellValue('D1', mb_convert_encoding( '详细信息','utf-8' ) );
+            $objActSheet->setCellValue('E1', mb_convert_encoding( '添加时间','utf-8' ) );
+            foreach ( $data as $d ){
+                $objActSheet->setCellValueExplicit('B' . $i, $d['union_id'], \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('C' . $i, $d['opt_code'], \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('D' . $i, $d['data'], \PHPExcel_Cell_DataType::TYPE_STRING);
+                $objActSheet->setCellValueExplicit('E' . $i, date( 'Y-m-d H:i:s',$d['add_time']), \PHPExcel_Cell_DataType::TYPE_NUMERIC);
+                $i++;
+            }
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="' . date("Y-m-d H:i", time()) . '订单.xls"');
+            header('Cache-Control: max-age=0');
+            $objWriter = ExcelHelp::getWriterInstance( $exObj, 'Excel5');
+            $objWriter->save('php://output');
+            exit();
+            //return  '';
+        }
+        
         
         $dataProvider = new ActiveDataProvider([
             'query' =>$query ,
