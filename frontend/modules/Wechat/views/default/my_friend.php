@@ -9,14 +9,11 @@ use common\models\MgUsers;
         <?php foreach ($subs as $sub):?>
         <div class="weui-cell">
             <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                  <!--  <a href="/Wechat/default/friend-info?id=<?=$sub['id'] ?>"><img src="<?=$sub['user_logo'] ?>" style="width: 50px;display: block"></a> -->
-               <a href="javascript:;"><img src="<?=$sub['user_logo'] ?>" style="width: 50px;display: block"></a>
-                
+               <a href="/Wechat/default/friend-info?id=<?=$sub['id'] ?>"><img src="<?=$sub['user_logo'] ?>" style="width: 50px;display: block"></a>
                <!--  <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>  -->
             </div>
             <div class="weui-cell__bd">
-                 <!-- <a href="/Wechat/default/friend-info?id=<?=$sub['id'] ?>"><p><?=$sub['nickname'] ?></p></a> -->
-                <a href="javascript:;"><p><?=$sub['nickname'] ?></p></a>
+                 <a href="/Wechat/default/friend-info?id=<?=$sub['id'] ?>"><p><?=$sub['nickname'] ?></p></a>
                 <p style="font-size: 13px;color: #888888;">加入时间：<?=date("Y-m-d",$sub['register_time']) ?></p>
             </div>
         </div>

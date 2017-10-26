@@ -45,7 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'user_rels',
             'user_proxy_rels',
-            'rebate_ratio'
+            'rebate_ratio',
+            ['label' => '角色','value' => function($data){
+                return $data::$role_desc[$data->user_role];
+            }],
         ],
     ]) ?>
 

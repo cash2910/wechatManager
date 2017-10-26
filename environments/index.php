@@ -64,7 +64,7 @@ return [
             'frontend/config/main-local.php',
         ],
     ],
-    
+    //MG互娱
     'Production_hy' => [
         'path' => 'prod_hy',
         'setWritable' => [
@@ -81,7 +81,24 @@ return [
             'frontend/config/main-local.php',
         ],
     ],
-
+    //红中麻将
+    'Production_hz' => [
+        'path' => 'prod_hz',
+        'setWritable' => [
+            'backend/runtime',
+            'backend/web/assets',
+            'frontend/runtime',
+            'frontend/web/assets',
+        ],
+        'setExecutable' => [
+            'yii',
+        ],
+        'setCookieValidationKey' => [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+        ],
+    ],
+    //万州麻将
     'Production_wz' => [
         'path' => 'prod_wz',
         'setWritable' => [
@@ -98,7 +115,7 @@ return [
             'frontend/config/main-local.php',
         ],
     ],
-
+    //血战麻将
    'Production_xz' => [
         'path' => 'prod_xz',
         'setWritable' => [

@@ -74,7 +74,7 @@ class GameOptController extends Controller
                 $objActSheet->setCellValueExplicit('B' . $i, $d['union_id'], \PHPExcel_Cell_DataType::TYPE_STRING);
                 $objActSheet->setCellValueExplicit('C' . $i, $d['opt_code'], \PHPExcel_Cell_DataType::TYPE_STRING);
                 $objActSheet->setCellValueExplicit('D' . $i, $d['data'], \PHPExcel_Cell_DataType::TYPE_STRING);
-                $objActSheet->setCellValueExplicit('E' . $i, date( 'Y-m-d H:i:s',$d['add_time']), \PHPExcel_Cell_DataType::TYPE_NUMERIC);
+                $objActSheet->setCellValueExplicit('E' . $i, date( 'Y-m-d H:i:s',$d['add_time'] ), \PHPExcel_Cell_DataType::TYPE_NUMERIC);
                 $i++;
             }
             header('Content-Type: application/vnd.ms-excel');

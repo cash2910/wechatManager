@@ -120,6 +120,16 @@ class UserService extends BaseService implements UserInterface
             if( !empty( $this->getUserFriend($uObj,1) ) )
                 throw new \Exception("用户{$uObj->nickname}已经有下级了");
             $uObj->user_rels = $rel;
+            switch( $touObj->user_role ){
+                case MgUsers::MANAGER_USER:
+                    $uObj->user_role = MgUsers::BD_USER;
+                    break;
+                case MgUsers::BD_USER:
+                case MgUsers::PLAYER_USER:
+                default:
+                    $uObj->user_role = MgUsers::PLAYER_USER;
+                    break;
+            }
             if( !$uObj->save() ){
                 throw new \Exception( json_encode( $uObj->getErrors() ) );
             }
@@ -202,7 +212,7 @@ class UserService extends BaseService implements UserInterface
      * 判断是否为代理
      */
     static public function checkIsProxy( MgUsers $uObj ){
-        return ($uObj->is_bd == MgUsers::IS_BD && $uObj->rebate_ratio >= 35);
+        return ($uObj->user_rels == MgUsers::BD_USER);
     }
     
     /**
@@ -314,6 +324,60 @@ class UserService extends BaseService implements UserInterface
         else 
           $ret['msg'] .= "恭喜您，您的返利比例被调高至{$ratio}%， 如有其它问题，请联系您的上级代理" ;
         return $ret;
+    }
+    
+    /**
+     * 提升用户等级
+     * @param $uObj 上级用户
+     * @param $fObj 下级用户
+     * @param $params [
+     *     'role'=>1,
+     *     'ratio'=>33
+     * ]
+     * 1.0:
+     *  目前用户等级:管理员、推广员、普通用户。 根据上级用户所属等级可以将所属的下级用户提升到自身等级
+     */
+    public function upgradeLevel( MgUsers $uObj, MgUsers $fObj, $data =[]){
+
+        $ratio = ArrayHelper::getValue( $data, 'ratio');
+        $role  = ArrayHelper::getValue( $data, 'role');
+        $params = [
+            'isOk'=>1,
+            'msg'=>'更新成功'
+        ];
+        //只能赋予下级用户到自身等级
+        if( !empty( $role ) && ( $uObj->user_role == MgUsers::PLAYER_USER || $uObj->user_role != $role ) ){
+            $params['isOk'] = 0;
+            $params['msg'] = '权限不足';
+            return $params;
+        }
+        
+        switch( $role ){
+            case MgUsers::MANAGER_USER:
+                if( $uObj->user_role == MgUsers::BD_USER ){
+                    $params['isOk'] = 0;
+                    $params['msg'] = '权限不足.';
+                    return $params;
+                }
+                $fObj->user_role = MgUsers::MANAGER_USER;
+                $fObj->rebate_ratio = 70;
+                break;
+            case MgUsers::BD_USER:
+                $fObj->user_role = MgUsers::BD_USER;
+            case MgUsers::MANAGER_USER:
+            default:
+                if( !empty( $ratio ) ){
+                    if( $ratio > $uObj->rebate_ratio ){
+                        $params['isOk'] = 0;
+                        $params['msg'] = "比例不能超过自身返利额度{$uObj->rebate_ratio}%";
+                        return $params;
+                    }
+                    $fObj->rebate_ratio = $ratio;
+                }
+                break;
+        }
+        $ret = $fObj->save();
+        return $params;
     }
     
 }

@@ -33,7 +33,6 @@ use common\models\MgUsers;
 
     <?= $form->field($model, 'register_time')->textInput(['maxlength' => true]) ?>
     
-
     <?= $form->field($model, 'update_time')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'user_rels')->textInput(['maxlength' => true]) ?>
@@ -43,6 +42,8 @@ use common\models\MgUsers;
     <?= $form->field($model, 'user_proxy_rels')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'rebate_ratio')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'user_role')->radioList( MgUsers::$role_desc, ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline']]]) ?>
 
     <div class="form-group">
         <div class="col-sm-offset-2">

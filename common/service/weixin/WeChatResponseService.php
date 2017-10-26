@@ -86,7 +86,7 @@ class WeChatResponseService extends Module{
                 //建立绑定关系
                 if( $supperObj ){
                     $ret = $uServ->bindRel( $supperObj,  $uObj );
-                    yii::error( json_encode( $ret ) );
+                    yii::error( "绑定结果：".json_encode( $ret ) );
                     if( $ret['isOk'] ){
                         //通知上线用户
                         $ret = WeChatService::getIns()->sendCsMsg([
@@ -116,6 +116,7 @@ class WeChatResponseService extends Module{
                         return false;
                     try{
                         $ret = $uServ->bindRel( $supperObj,  $uObj );
+                        yii::error( "绑定结果：".json_encode( $ret ) );
                         if( $ret['isOk'] ){
                             //通知上线用户
                             $ret = WeChatService::getIns()->sendCsMsg([
@@ -126,9 +127,7 @@ class WeChatResponseService extends Module{
                                 ]
                             ]);
                             yii::error( '通知信息 :'.json_encode( $ret ) );
-                         }else{
-                            yii::error( '绑定失败 :'.$ret['msg'] );
-                         }
+                        }
                     } catch (Exception $e) {
                         yii::error( $e->getMessage() );
                     }

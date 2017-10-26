@@ -5,6 +5,9 @@ use yii\web\Controller;
 use yii;
 use yii\web\Response;
 use common\models\MgUsers;
+use common\components\WeixinLoginBehavior;
+use common\components\CommonResponse;
+use common\service\users\UserService;
 
 
 /**
@@ -13,6 +16,20 @@ use common\models\MgUsers;
 class ApiController extends Controller
 {
     public $enableCsrfValidation = false;
+    public $open_id = '';
+    public $user_data = [];
+    
+    public function behaviors(){
+        return [
+            'access' => [
+                'class' => WeixinLoginBehavior::className(),
+                'actions' => [
+                    'upgrade-level'
+                ],
+            ]
+        ];
+    }
+
     //获取代理推广图片二维码
     public function actionGetQrPic(){
         $proxyId = yii::$app->request->get('pid');
@@ -47,5 +64,23 @@ class ApiController extends Controller
         }
         //输出图片
         ImagePng( $QR );
+    }
+    
+    //提升用户等级
+    public function actionUpgradeLevel(){
+        if( ($fid = yii::$app->request->get('fid') ) != true  )
+            CommonResponse::end(['isOk'=>'0','msg'=>'好友信息错误']);
+        $uObj = MgUsers::findOne( ['open_id'=>$this->open_id ] );
+        //判断是否为自己的好友
+        $friendObj = MgUsers::findOne( ['id'=>$fid] );
+        $rels = explode("-",$friendObj->user_rels);
+        $pid = array_pop( $rels );
+        if( $pid != $uObj->id )
+            CommonResponse::end(['isOk'=>'0','msg'=>'好友信息错误.']);
+        $ret = UserService::getInstance()->upgradeLevel( $uObj, $friendObj ,[
+            'ratio'=> yii::$app->request->get('ratio'),
+            'role' => yii::$app->request->get('role')
+        ]);
+        CommonResponse::end($ret);
     }
 }

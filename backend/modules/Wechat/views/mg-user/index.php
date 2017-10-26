@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="form-group col-md-3">
             <label class="control-label"  >角色信息:</label>
-            <?php echo Html::dropDownList('is_bd',yii::$app->request->get('is_bd',""),MgUsers::$role_msg,['class'=>'form-control','prompt' => '全部']);?>
+            <?php echo Html::dropDownList('user_role',yii::$app->request->get('user_role',""),MgUsers::$role_desc,['class'=>'form-control','prompt' => '全部']);?>
         </div>
         <button  type="submit" class="btn btn-success" style="margin-bottom:15px; float:right">搜索</button>
     <?= Html::endForm() ?>
@@ -59,17 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'nickname',
-            ['label' => '订单渠道','value' => function($data){
+            ['label' => '是否关注','value' => function($data){
                 return $data::$status_msg[$data->status];
             }],
             //'open_id',
             //'union_id',
             //'passwd', 
             ['label' => '角色','value' => function($data){
-                return $data::$role_msg[$data->is_bd];
+                return $data::$role_desc[$data->user_role];
             }],
             // 'mobile',
-            'user_proxy_rels',
+            //'user_proxy_rels',
             // 'update_time',
             'user_rels',
             [

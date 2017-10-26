@@ -10,7 +10,7 @@ use common\service\users\UserService;
                 <span class="nickname"><?= StringHelp::truncateUtf8String($user['nickname'], 6); ?></span>
                 <?php if( $user['is_bd'] ){ ?>
                     <span class="type_wrp" style=" margin-left: 5px; ">  <a href="javascript:;" class="icon_proxy_label" ><?= UserService::getInstance()->getProxyStatus($user)?></a> </span>
-                <?php }?>                                                                                                                                 
+                <?php }?>                                                                                                                                
                 <p class="icon-box__desc" style=" margin-top: 10px;">加入时间：<?=date("Y-m-d",$user['register_time']) ?></p>
             </div>
         </div>
@@ -38,14 +38,6 @@ use common\service\users\UserService;
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <?php if( UserService::getInstance()->checkIsProxy( $user ) ):?>
-                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-proxy">
-                    <div class="weui-cell__bd">
-                        <p>我的代理</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-                <?php endif;?>
                 <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/my-wallet">
                     <div class="weui-cell__bd">
                         <p>提现管理</p>
@@ -59,15 +51,9 @@ use common\service\users\UserService;
                     <div class="weui-cell__ft"></div>
                 </a>
                 <?php if( UserService::getInstance()->checkIsProxy( $user ) ):?>
-                <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-proxy">
-                    <div class="weui-cell__bd">
-                        <p>我的代理链接</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
                  <a class="weui-cell weui-cell_access js_item" data-id="badge" href="/Wechat/default/share-page?id=<?=$user['id'] ?>">
                     <div class="weui-cell__bd">
-                        <p>我的游戏链接</p>
+                        <p>我的邀请链接</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>

@@ -24,7 +24,7 @@ class WechatResponseController extends Controller
         //检测sign
         //响应用户请求
         try{
-	    $response = ( new WeChatResponseService("wechat") )->run( ArrayHelper::getValue( $GLOBALS, "HTTP_RAW_POST_DATA", "" ) );
+	        $response = ( new WeChatResponseService("wechat") )->run( ArrayHelper::getValue( $GLOBALS, "HTTP_RAW_POST_DATA", "" ) );
             echo $response->getResp();
         }catch ( Exception $e){
             yii::error($e->getMessage(),"errors");

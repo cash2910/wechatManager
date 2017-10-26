@@ -19,6 +19,10 @@ class WeixinLoginBehavior extends ActionFilter{
             return true;
         $token = WeixinWeb::getInstance()->getClient()->getAccessToken();
         if( !$token ){
+            if (Yii::$app->request->isAjax) {
+                // request is ajax request
+                CommonResponse::end(['isOk'=>0,'msg'=>'用户信息错误']);
+            }
             yii::$app->session['ret_url'] =  yii::$app->request->url ;
             $url =  Yii::$app->urlManager->createAbsoluteUrl(['/Wechat','r_url'=> yii::$app->request->url  ] ); 
             $clientObj = WeixinWeb::getInstance()->getClient();

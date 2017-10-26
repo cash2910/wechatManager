@@ -22,14 +22,27 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $proxy_pid
  * @property string $user_proxy_rels
  * @property string $rebate_ratio
+ * @property integer $user_role
  */
 class MgUsers extends \yii\db\ActiveRecord
 {
+    //订阅状态
     const IS_SUBSCRIPT = 1;
     const NOT_SUBSCRIPT = 2;
     
     const IS_BD = 1;
     const IS_PLAYER = 0;
+    
+    //角色状态
+    const PLAYER_USER = 0;
+    const MANAGER_USER = 1;
+    const BD_USER = 2;
+    
+    static public $role_desc=[
+        self::PLAYER_USER     =>'玩家',
+        self::MANAGER_USER =>'管理员',
+        self::BD_USER =>'推广员',
+    ];
     
     static public $role_msg=[
         self::IS_BD     =>'代理',
@@ -66,7 +79,7 @@ class MgUsers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'is_bd', 'register_time', 'update_time','proxy_pid'], 'integer'],
+            [['status', 'is_bd', 'register_time', 'update_time','proxy_pid','user_role'], 'integer'],
             [['nickname'], 'string', 'max' => 30],
             [['rebate_ratio'],'number','max'=>100,'min'=>30],
             [['user_rels','user_proxy_rels'],'string','max'=>150],
@@ -96,6 +109,7 @@ class MgUsers extends \yii\db\ActiveRecord
             'proxy_pid'=>'上级代理Id',
             'user_proxy_rels' => '代理层级',
             'rebate_ratio' => '返利比例',
+            'user_role' => '用户类型'
         ];
     }
 }

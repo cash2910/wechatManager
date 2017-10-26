@@ -252,6 +252,7 @@ class DefaultController extends Controller
         if( $pid != $mgInfo->id )
             $this->_404('好友不存在');
         return $this->render('friend_info', [
+            'uObj'=>$mgInfo,
             'fObj'=> $friendObj,
         ]);
     }
