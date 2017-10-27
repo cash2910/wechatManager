@@ -129,8 +129,8 @@ class MenuController extends Controller
                     'name'=>'成为代理',
                     'sub_button'=>[[
                         'name'=>'游戏推广',
-                        'type'=>'view',
-                        'url' => 'http://wxhz.menguanol.net/Wechat/default/share-page'
+                        'type'=>'click',
+                        'key'=>'MY_SHARE_LINK',
                     ],[
                         'name'=>'进入后台',
                         'type'=>'view',
