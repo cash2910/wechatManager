@@ -1,7 +1,8 @@
 # yii console command
 /yii
 /frontend/web/images/proxys/*.png
-
+/common/config/*.php
+/common/components/wxpay/WxPayConfig.php
 # phpstorm project files
 .idea
 
