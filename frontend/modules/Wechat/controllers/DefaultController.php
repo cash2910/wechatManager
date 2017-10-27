@@ -65,7 +65,7 @@ class DefaultController extends Controller
     {
         //判断链接有效性
         $proxyId =  Yii::$app->request->get('id');
-        $proxyObj = MgUsers::findOne( ['id'=>$proxyId,'is_bd'=> MgUsers::IS_BD ] );
+        $proxyObj = MgUsers::findOne( ['id'=>$proxyId ] );
         if( !$proxyObj )
             $this->_404('代理链接错误');
         $gObj = MgGames::findOne(['id'=>yii::$app->request->get('gid', 1)]);
@@ -75,10 +75,7 @@ class DefaultController extends Controller
         $uObj = MgUsers::findOne([
             'open_id'=>$this->open_id,
             'status'=>MgUsers::IS_SUBSCRIPT,
-            //'is_bd'=> MgUsers::IS_BD
         ]);
-        if( $uObj && ($uObj->is_bd != MgUsers::IS_BD) )
-            $this->_404('您还不是推广员请联系您的代理设置');
         //判断是否为本人访问
         $owner = false;
         if( $uObj && ( $uObj->id == Yii::$app->request->get('id') ) )
