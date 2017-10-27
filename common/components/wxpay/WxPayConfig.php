@@ -26,10 +26,10 @@ class WxPayConfig
             'AppSecret'=>'4be0b3d8ff64babcb1559c6f091e092b',
             'MCHID' =>'1483656542', 
 	 */
-	const APPID = 'wx504fbccb58b2f158';
-	const MCHID = '1487929932';
+	const APPID = 'wx33a109a15b3f3302';
+	const MCHID = '1480737122';
 	const KEY = 'e10adc3949ba59abbe56e057f20f883e';
-	const APPSECRET = '5822c1d4ac5a010d631ce8fb9905bfc9';
+	const APPSECRET = '7c3ae345f52e87945cf655c1f24ad1e7';
 	
 	//=======【证书路径设置】=====================================
 	/**
