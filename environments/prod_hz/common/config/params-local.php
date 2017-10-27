@@ -17,9 +17,9 @@ return [
     //'AppSecret'=>'baf231fd4587f8370c144577f956a7e6',
     //'MCHID' =>'1485129652',
     
-    'DEFAULT_USER'=>94, //默认最终用户ID
+    'DEFAULT_USER'=>302, //默认最终用户ID
 	
-    'WEIXIN_ID' =>'renren_mj',   
+    'WEIXIN_ID' =>'hlahqipai',
     'my_index'=>'http://wxhz.menguanol.net/Wechat/default/my-index',
     //游戏地址
     'GAME_URL'=>'http://116.62.113.199:9321',
