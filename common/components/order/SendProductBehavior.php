@@ -14,7 +14,7 @@ use common\models\MgGameGoods;
 class SendProductBehavior extends Behavior{
 
     static public $gameSenderMap = [
-        2=>'common\components\game\StoneCd',
+        4=>'common\components\game\StoneCd',
     ];
     /**
      * 1、先根据uid 查找用户用户的union_id 
