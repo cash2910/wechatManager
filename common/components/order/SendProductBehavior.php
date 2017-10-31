@@ -23,7 +23,6 @@ class SendProductBehavior extends Behavior{
      * @param MgOrderList $order_obj
      */
     public function sendPackage( MgOrderList $order_obj ){
-        
         try{
             $uInfo = MgUsers::findOne(['id'=>$order_obj->user_id]);
             $gInfo = MgGameGoods::findOne(['id'=>$order_obj->entity_id]);
@@ -31,7 +30,8 @@ class SendProductBehavior extends Behavior{
                 throw new \Exception("找不到用户 uid:{$order_obj->user_id}");
             $union_id = $uInfo->union_id;
             if( isset( $order_obj->game_id, self::$gameSenderMap)  ){
-                $stoneCom = new self::$gameSenderMapp[$order_obj->game_id];
+                $class = new \ReflectionClass( self::$gameSenderMap[$order_obj->game_id] );
+                $stoneCom = $class->newInstanceArgs();
             }else{
                 $stoneCom = Stone::getInstance();
             }

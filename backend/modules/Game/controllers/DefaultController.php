@@ -3,11 +3,8 @@
 namespace backend\modules\Game\controllers;
 
 use yii\web\Controller;
-use common\components\order\RebateBehavior;
 use common\models\MgOrderList;
-use common\service\users\UserService;
-use common\models\MgUsers;
-use yii\base\Object;
+use common\components\order\SendProductBehavior;
 
 /**
  * Default controller for the `Game` module
@@ -32,7 +29,8 @@ class DefaultController extends Controller
       //  $proxys = UserService::getInstance()->getSubProxy( $uObj );
       //  $pTree = UserService::getInstance()->getProxyTree( $proxys, 94 );
       
-        $be = new RebateBehavior();
-        $ret =  $be->doBalance( MgOrderList::findOne(['order_sn'=>'2017071409015694219'] ) );
+        $be = new SendProductBehavior();
+        $ret =  $be->sendPackage( MgOrderList::findOne(['order_sn'=>'2017071409015694219'] ) );
+        var_dump( $ret );
     }
 }
