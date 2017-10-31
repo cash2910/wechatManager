@@ -22,7 +22,7 @@ class StoneCd extends BaseService{
         $data = [
             'acc_type'=> "4",
             'union_id'=>$union_id,
-            'game_id'=>'scmj'
+            'game_id'=>'hzmj'
         ];
         $url = yii::$app->params['GAME_URL1'].'/cmd?cmd=op_getuserid&contents='. json_encode( $data  );
         yii::error( "获取游戏用户信息URL: $url" );
