@@ -23,6 +23,7 @@ return [
     'my_index'=>'http://wxhz.menguanol.net/Wechat/default/my-index',
     //游戏地址
     'GAME_URL'=>'backend.ahhzxx.yx28.com:9081',
+    'GAME_URL1'=>'118.31.40.14:9081',
     'CERT_PATH' => '/web/cert/',
     
     'notify_tpl'=>'-o3QiQSC4qRyl2NtPwi9_nSUwzFr6VG431khmmDcKew'

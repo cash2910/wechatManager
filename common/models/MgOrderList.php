@@ -16,6 +16,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $status
  * @property integer $channel
  * @property integer $pay_type
+ * @property integer $game_id
  * @property integer $entity_id
  * @property string $pay_sn
  * @property string $add_time

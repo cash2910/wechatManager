@@ -13,6 +13,9 @@ use common\models\MgGameGoods;
  */
 class SendProductBehavior extends Behavior{
 
+    static public $gameSenderMap = [
+        2=>'common\components\game\StoneCd',
+    ];
     /**
      * 1、先根据uid 查找用户用户的union_id 
      * 2、在从游戏获取union_id对应的用户游戏内id
@@ -27,9 +30,14 @@ class SendProductBehavior extends Behavior{
             if( !$uInfo )
                 throw new \Exception("找不到用户 uid:{$order_obj->user_id}");
             $union_id = $uInfo->union_id;
-            $uid = Stone::getInstance()->getUserId( $union_id );
+            if( isset( $order_obj->game_id, self::$gameSenderMap)  ){
+                $stoneCom = new self::$gameSenderMapp[$order_obj->game_id];
+            }else{
+                $stoneCom = Stone::getInstance();
+            }
+            $uid = $stoneCom->getUserId( $union_id );
             yii::error( "用户游戏uid:{$uid}");
-            $ret = Stone::getInstance()->addStone( $uid, $gInfo->score );
+            $ret = $stoneCom->addStone( $uid, $gInfo->score );
             
         }catch ( \Exception $e ){
             //var_dump( $e->getMessage() );

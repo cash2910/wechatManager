@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'channel',
             'pay_type',
+            'game_id',
             'entity_id',
             'pay_sn',
             'add_time',
