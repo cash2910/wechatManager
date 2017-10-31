@@ -113,10 +113,13 @@ class OrderController extends Controller
     public function NotifyCallBack( $result ){
         
         $order_sn = $result['out_trade_no'];
-        $orderObj = MgOrderList::findOne([ 'order_sn'=> $order_sn, 'pay_sn'=>" " ]);
+        $orderObj = MgOrderList::findOne([ 'order_sn'=> $order_sn ]);
         if( !$orderObj ){
             yii::error( "未找到订单信息：".json_encode($result));
-            return false;            
+            return false;
+        }
+        if( !empty( $orderObj->pay_sn) ){
+            return true;
         }
         $ret = OrderService::getInstance()->payOrder( $orderObj , $result );
         //yii::error(json_encode($result));
