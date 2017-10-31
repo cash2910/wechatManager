@@ -7,6 +7,7 @@ use common\models\MgOrderList;
 use common\models\MgUsers;
 use common\components\game\Stone;
 use common\models\MgGameGoods;
+use yii\helpers\ArrayHelper;
 /**
 
  * @param MgOrderList $order_obj
@@ -29,7 +30,7 @@ class SendProductBehavior extends Behavior{
             if( !$uInfo )
                 throw new \Exception("找不到用户 uid:{$order_obj->user_id}");
             $union_id = $uInfo->union_id;
-            if( isset( $order_obj->game_id, self::$gameSenderMap)  ){
+            if( !empty( ArrayHelper::getValue( self::$gameSenderMap , $order_obj->game_id ) ) ){
                 $class = new \ReflectionClass( self::$gameSenderMap[$order_obj->game_id] );
                 $stoneCom = $class->newInstanceArgs();
             }else{
