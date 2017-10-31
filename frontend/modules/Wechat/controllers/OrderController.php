@@ -92,9 +92,7 @@ class OrderController extends Controller
         
         $msg = 'OK';
         $ret = \WxpayApi::notify( array($this, 'NotifyCallBack'), $msg );
-        if( !$ret ){
-            yii::error( $msg );
-        }
+        yii::error( $msg );
         $reply = new \WxPayNotify();
         if( $ret  == false){
 			$reply->SetReturn_code("FAIL");
