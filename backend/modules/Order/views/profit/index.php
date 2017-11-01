@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'user_id',
             ['label' => '用户昵称','value' => function($data) use ($uMap){
-                return $uMap[$data->user_id];
+                return ArrayHelper::getValue($uMap, $data->user_id);
             }],
             'balance',
             'free_balance',
