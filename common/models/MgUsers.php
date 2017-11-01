@@ -81,7 +81,7 @@ class MgUsers extends \yii\db\ActiveRecord
         return [
             [['status', 'is_bd', 'register_time', 'update_time','proxy_pid','user_role'], 'integer'],
             [['nickname'], 'string', 'max' => 30],
-            [['rebate_ratio'],'number','max'=>100,'min'=>30],
+            [['rebate_ratio'],'number','max'=>100],
             [['user_rels','user_proxy_rels'],'string','max'=>150],
             [['user_logo'],'string','max'=>200],
             [['open_id','union_id'], 'string', 'max' => 60],
