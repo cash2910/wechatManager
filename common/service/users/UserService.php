@@ -364,6 +364,7 @@ class UserService extends BaseService implements UserInterface
                 break;
             case MgUsers::BD_USER:
                 $fObj->user_role = MgUsers::BD_USER;
+                $fObj->rebate_ratio = 30;
             case MgUsers::MANAGER_USER:
             default:
                 if( !empty( $ratio ) ){
