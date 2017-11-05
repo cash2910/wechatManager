@@ -57,7 +57,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     	// 分享到朋友圈
     	wx.onMenuShareTimeline({
     		title: '<?php echo $roomInfo['Title'];?>', // 分享标题
-    	    link: document.location.href, // 房间链接
+    	    link:  '<?php echo $roomUrl?>', // 房间链接
     	    imgUrl: '<?php echo Yii::$app->urlManager->createAbsoluteUrl('/images/mj_wx_logo.png'); ?>', // 分享图标
     	    success: function () { 
     	        // 用户确认分享后执行的回调函数

@@ -405,6 +405,12 @@ class DefaultController extends Controller
             $this->_404('房间信息错误');
         }
         $roomUrl = "https://asm1ur.mlinks.cc/Ada0?roomid={$roomId}";// 房间链接
+        
+        //不是微信打开则跳转启动页
+        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') === false ) {
+            $this->redirect($roomUrl);
+        }
+        
         return $this->renderPartial('room_page',[
             'gInfo'=> $gObj,
             'uInfo'=> $uObj,
