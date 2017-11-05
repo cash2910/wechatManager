@@ -10,6 +10,8 @@ use common\models\MgUserProxyRel;
 use yii;
 use yii\helpers\ArrayHelper;
 use common\models\MgUserAccount;
+use yii\base\Object;
+use common\service\weixin\WeChatService;
 
 
 class UserService extends BaseService implements UserInterface
@@ -341,6 +343,7 @@ class UserService extends BaseService implements UserInterface
 
         $ratio = ArrayHelper::getValue( $data, 'ratio');
         $role  = ArrayHelper::getValue( $data, 'role');
+        $msg = '';
         $params = [
             'isOk'=>1,
             'msg'=>'更新成功'
@@ -361,11 +364,12 @@ class UserService extends BaseService implements UserInterface
                 }
                 $fObj->user_role = MgUsers::MANAGER_USER;
                 $fObj->rebate_ratio = 70;
+                $msg =  "恭喜! 您被设置为管理员 ";
                 break;
             case MgUsers::BD_USER:
                 $fObj->user_role = MgUsers::BD_USER;
                 $fObj->rebate_ratio = 30;
-            case MgUsers::MANAGER_USER:
+                $msg =  "恭喜! 您被设置为推广员";
             default:
                 if( !empty( $ratio ) ){
                     if( $ratio > $uObj->rebate_ratio ){
@@ -373,11 +377,21 @@ class UserService extends BaseService implements UserInterface
                         $params['msg'] = "比例不能超过自身返利额度{$uObj->rebate_ratio}%";
                         return $params;
                     }
+                    $msg .= " 您的返利比例被设置为{$ratio}";
                     $fObj->rebate_ratio = $ratio;
                 }
                 break;
         }
         $ret = $fObj->save();
+        if( $ret && !empty( $msg ) ){
+            $res = WeChatService::getIns()->sendCsMsg([
+                        'touser'=> $fObj->open_id ,
+                        'msgtype'=>'text',
+                        'text'=>[
+                            'content'=> $msg,
+                        ]
+                   ]);
+        }
         return $params;
     }
     

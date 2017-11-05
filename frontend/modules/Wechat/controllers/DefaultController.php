@@ -400,9 +400,15 @@ class DefaultController extends Controller
             $this->_404('信息错误');
         
         $roomInfo = json_decode( yii::$app->request->get('data') ,true );
+        $roomId = ArrayHelper::getValue($roomInfo, 'Room_id');
+        if( empty( $roomId ) ){
+            $this->_404('房间信息错误');
+        }
+        $roomUrl = "https://asm1ur.mlinks.cc/Ada0?roomid={$roomId}";// 房间链接
         return $this->renderPartial('room_page',[
             'gInfo'=> $gObj,
             'uInfo'=> $uObj,
+            'roomUrl'=>$roomUrl,
             'roomInfo'=> $roomInfo
         ]);
     }
