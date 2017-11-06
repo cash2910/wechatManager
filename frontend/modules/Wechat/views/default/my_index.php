@@ -11,7 +11,7 @@ use common\models\MgUsers;
                 <span class="nickname"><?= StringHelp::truncateUtf8String($user['nickname'], 6); ?></span>
                 <span class="type_wrp" style=" margin-left: 5px; ">  <a href="javascript:;" class="icon_proxy_label" ><?php echo MgUsers::$role_desc[$user['user_role']]?> </a> </span>
                 <?php if( $user['user_role'] == MgUsers::BD_USER ):?>
-                <span class="type_wrp" style=" margin-left: 5px; "> (返利比例: <?php echo (int)$user['rebate_ratio'];?>%)</span>
+                <span class="type_wrp" style=" margin-left: 5px; "> (返利: <?php echo (int)$user['rebate_ratio'];?>%)</span>
                 <?php endif;?>
                 <p class="icon-box__desc" style=" margin-top: 10px;">加入时间：<?=date("Y-m-d",$user['register_time']) ?></p>
             </div>
