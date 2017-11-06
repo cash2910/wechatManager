@@ -125,6 +125,7 @@ class UserService extends BaseService implements UserInterface
             switch( $touObj->user_role ){
                 case MgUsers::MANAGER_USER:
                     $uObj->user_role = MgUsers::BD_USER;
+                    $uObj->rebate_ratio = 30;
                     break;
                 case MgUsers::BD_USER:
                 case MgUsers::PLAYER_USER:
@@ -394,6 +395,19 @@ class UserService extends BaseService implements UserInterface
         }
         return $params;
     }
+    
+    /**
+     * 获取用户的直接下级 用户uid
+     */
+    public function getSubIds( MgUsers $uObj  ){
+        $ret = [];
+        $res = MgUserRel::findAll(['user_id'=>$uObj->id]);
+        if( $res ){
+            $ret = ArrayHelper::getColumn($res, 'sub_user_id');
+        }
+        return $ret;
+    }
+    
     
 }
 

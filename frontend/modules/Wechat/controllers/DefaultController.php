@@ -248,9 +248,34 @@ class DefaultController extends Controller
         $pid = array_pop( $rels );
         if( $pid != $mgInfo->id )
             $this->_404('好友不存在');
+        //获取推广员返利流水记录  先获取最近30天的返利记录，然后匹配出 今日、最近7天 、最近30天的记录
+        $rebateInfo = [
+            'today'=>0,
+            '7day' =>0,
+            '30day'=>0
+        ];
+        if( $friendObj->user_role == MgUsers::BD_USER ){
+            //30天前
+            $day_30 = strtotime("-30 day");
+            $day_7 = strtotime("-7 day");
+            $day_1 =  strtotime(date('Y-m-d'));
+            $cur = $_SERVER['REQUEST_TIME'];
+            $rList = MgUserAccountLog::find()->andWhere(['between','add_time', $day_30, $cur ])->all();
+            foreach ( $rList as $alog ){
+                if( $alog->add_time > $day_1 ){
+                    $rebateInfo['today'] += $alog->order_num;
+                }
+                if( $alog->add_time > $day_7 ){
+                    $rebateInfo['7day'] += $alog->order_num;
+                }
+                $rebateInfo['30day'] += $alog->order_num;
+            }
+        }
+        
         return $this->render('friend_info', [
             'uObj'=>$mgInfo,
             'fObj'=> $friendObj,
+            'rebate_info'=>$rebateInfo
         ]);
     }
     
@@ -420,34 +445,62 @@ class DefaultController extends Controller
     }
     
     
-    //我的提现
+    //好友充值记录
     public function actionFriendsCharge()
     {
         $this->title="好友充值";
         $uObj = MgUsers::findOne(['open_id'=>$this->open_id]);
         $uList = UserService::getInstance()->getUserFriend( $uObj );
+        $uMap = [];
         $uids = [];
         foreach ($uList as $_uObj ){
            $uids[] = $_uObj->id;
         }
-        //获取代理uid
-        $pList = UserService::getInstance()->getSubProxy( $uObj );
-        foreach ( $pList as $pObj ){
-           $uids[] = $pObj->id;
-        }
-        $uids = array_unique( $uids );
         
-        $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
         $sum = 0.00;
-        if( $orderList ){
+        $orderList = [];
+        $info = [
+            'subUser'=> 0,
+            'subBd'=> 0,
+            'subUserCharge'=> 0.00,
+            'subBdCharge'=> 0.00
+        ];
+        //获取用户直接下级
+        if( !empty( $uids ) ){
+            $uMap = ArrayHelper::index(  $uList , 'id' );
+            $subUser = [];
+            $subBd = [];
+            $subUids = UserService::getInstance()->getSubIds( $uObj );
+            $orderList = OrderService::getInstance()->getPaymentListByUids( $uids );
+            foreach ( $subUids as $_uid ){
+                $_usObj  = ArrayHelper::getValue($uMap, $_uid);
+                if( !$_usObj )
+                    continue;
+                if( $_usObj->user_role == MgUsers::BD_USER ){
+                    $info['subBd'] += 1;
+                    $subBd[] = $_uid;
+                }elseif( $_usObj->user_role == MgUsers::PLAYER_USER ){
+                    $info['subUser'] += 1;
+                    $subUser[] = $_uid;
+                }
+            }
+            //获取今日的两类用户订单
+            $day_1 =  strtotime(date('Y-m-d'));
             foreach ($orderList as $order ){
-               $sum += $order->order_num;
+                if( ( $order->add_time > $day_1 ) && in_array( $order->user_id,  $subUser)  ){
+                    $info['subUserCharge'] += $order->order_num;
+                }
+                if( ( $order->add_time > $day_1 ) && in_array( $order->user_id,  $subBd)  ){
+                    $info['subBdCharge'] += $order->order_num;
+                }
+                $sum += $order->order_num;
             }
         }
         return $this->render('friend_charge_list',[
             'order_list'=> $orderList,
             'sum' => $sum,
-            'user_map' => ArrayHelper::map( array_merge( $uList, $pList) , 'id', 'nickname')
+            'user_map' => $uMap,
+            'info' => $info
         ]);
     }
     

@@ -10,7 +10,7 @@ use common\models\MgUsers;
         <div class="weui-cell">
             <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                <a href="/Wechat/default/friend-info?id=<?=$sub['id'] ?>"><img src="<?=$sub['user_logo'] ?>" style="width: 50px;display: block"></a>
-               <!--  <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>  -->
+                 <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;"><?php echo MgUsers::$role_desc[$sub['user_role']]?></span> 
             </div>
             <div class="weui-cell__bd">
                  <a href="/Wechat/default/friend-info?id=<?=$sub['id'] ?>"><p><?=$sub['nickname'] ?></p></a>

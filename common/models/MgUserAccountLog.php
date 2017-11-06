@@ -13,6 +13,7 @@ use Yii;
  * @property integer $c_type
  * @property string $content
  * @property integer $type
+ * @property string $order_num
  * @property string $add_time
  */
 class MgUserAccountLog extends \yii\db\ActiveRecord
@@ -41,7 +42,7 @@ class MgUserAccountLog extends \yii\db\ActiveRecord
         return [
             [['user_id', 'num', 'add_time'], 'required'],
             [['user_id', 'c_type', 'type'], 'integer'],
-            [['num'], 'number'],
+            [['num','order_num'], 'number'],
             [['add_time'], 'safe'],
             [['content'], 'string', 'max' => 200],
         ];
@@ -59,6 +60,7 @@ class MgUserAccountLog extends \yii\db\ActiveRecord
             'c_type' => '详情',
             'content' => '描述',
             'type' => '类型',
+            'order_num' => '订单金额',
             'add_time' => '添加时间',
         ];
     }

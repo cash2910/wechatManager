@@ -88,7 +88,7 @@ class RebateBehavior extends Behavior{
             $r = $u->save();
             if( !$r )
                 throw new \Exception( "返利error:".json_encode( $u->getErrors() ) );
-            $infos[] = [$d['uid'],  $d['refund'] , 1, $t , "返利订单：{$order_obj->order_sn}, 返利比例{$d['ratio']}" ];
+            $infos[] = [$d['uid'],  $d['refund'] , 1, $t , "返利订单：{$order_obj->order_sn}, 返利比例{$d['ratio']}", $order_obj->order_num  ];
             //通知用户
             $uInfo = MgUserRel::findOne(['user_id'=>$uid]);
             if( $uInfo ){
@@ -102,7 +102,7 @@ class RebateBehavior extends Behavior{
             }
         }
         $ret = yii::$app->db->createCommand()->batchInsert( MgUserAccountLog::tableName(), [
-            'user_id','num','c_type', 'add_time','content'
+            'user_id','num','c_type', 'add_time','content', 'order_num'
         ], $infos )->execute();
         return $ret;
     }
