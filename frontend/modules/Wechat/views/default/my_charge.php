@@ -17,7 +17,7 @@ use common\models\MgGames;
             </div>
             <div class="weui-cell__bd">
                 <?php 
-                    $data = MgGames::find()->all();
+                    $data = MgGames::find()->where(['status' => MgGames::IS_ONLINE])->all();
                     echo Html::dropDownList('select2', yii::$app->request->get('game_id', 1), ArrayHelper::map( $data,'id', 'title'), ['class' => 'weui-select game_sel', 'prompt' => '请选择游戏'] );
                 ?>
             </div>
