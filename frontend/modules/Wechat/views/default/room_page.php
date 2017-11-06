@@ -13,13 +13,7 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
     <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
     <script  type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<script type="text/javascript">
-	window.onload = function(){
-        if(isWeiXin()){
-            var tip = document.getElementById("tip");
-    		tip.style.display = 'block';
-            //tip[0].innerHTML = window.navigator.userAgent;
-        }
-    }
+
     $().ready(function () {
             $("#tip").click(function () {
                 $(this).hide();
