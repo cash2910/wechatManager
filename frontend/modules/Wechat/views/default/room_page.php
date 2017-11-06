@@ -153,7 +153,9 @@ $signPackage = JSSDK::getInstance( Yii::$app->params['AppId'], Yii::$app->params
 </div>
 <script>
 $("#open_game").click(function(){
-	$("#tip").show();
+	var roomUrl = '<?php echo $roomUrl;?>';
+	location.href = roomUrl;
+	//$("#tip").show();
 });
 </script>
 <div id="tip" style="display:none">
