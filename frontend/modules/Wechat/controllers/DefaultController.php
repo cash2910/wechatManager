@@ -38,7 +38,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => WeixinLoginBehavior::className(),
                 'actions' => [
-                    'my-index','my-friend','my-order','my-charge','my-wallet', 'input-money','game-page' ,
+                    'my-index','my-friend','my-order','my-charge','my-wallet', 'input-money','game-page' , 'game-share-page',
                     'my-rebates' , 'share-page', 'friends-charge','room-page','friend-info','share-proxy','show-proxy-link','bind-proxy',
                     'my-proxy','proxy-info','change-ratio'
                 ],
@@ -189,6 +189,29 @@ class DefaultController extends Controller
         return $this->renderPartial('game_page',[
             'gInfo'=> $gObj
         ]);
+    }
+    
+    /**
+     * 游戏下载页
+     */
+    public function actionGameSharePage()
+    {
+        $uObj = MgUsers::findOne(['union_id'=>yii::$app->request->get('union_id')]);
+        if( !$uObj ){
+            return $this->redirect(['/Wechat/default/share-page','id'=>yii::$app->params['DEFAULT_USER']]);
+        }
+        $viewUser = MgUsers::findOne( [ 'open_id'=>$this->open_id, 'status'=>MgUsers::IS_SUBSCRIPT ] );
+        if( !$viewUser ){
+            return $this->redirect(['/Wechat/default/share-page','id'=>$uObj->id]);
+        }
+        $gObj = MgGames::findOne(['id'=>yii::$app->request->get('id', 4)]);
+        if( !$gObj )
+            $this->_404('信息错误');
+        
+        $shareUrl = "https://asm1ur.mlinks.cc/Ada0";// 房间链接
+        
+        return $this->redirect( $shareUrl );
+      
     }
     
     /**
